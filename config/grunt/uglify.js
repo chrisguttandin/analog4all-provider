@@ -6,6 +6,9 @@ module.exports = {
             'build/script.js': [
                 'app/scripts/bundle.js'
             ]
+        },
+        options: {
+            mangle: false
         }
     }
 };
