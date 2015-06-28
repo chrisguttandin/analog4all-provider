@@ -3,6 +3,7 @@
 module.exports = {
     default: {
         options: {
+            dist: 'build'
         }
     }
 };
