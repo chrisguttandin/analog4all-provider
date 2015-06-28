@@ -17,7 +17,7 @@
     "browserify": "^10.2.4",
     "midi-player": "0.0.0"
   },
-  "description": "'This is the provider for analog4all.'",
+  "description": "This is the provider for analog4all.",
   "devDependencies": {
     "browserify-shim": "^3.8.9",
     "grunt": "^0.4.5",
