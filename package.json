@@ -34,9 +34,15 @@
     "grunt-shell": "^1.1.2",
     "load-grunt-config": "^0.17.1"
   },
+  "homepage": "http://chrisguttandin.github.io/analog4all-provider/",
   "license": "MIT",
   "main": "app/index.html",
   "name": "analog4all-provider",
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisguttandin/analog4all-provider.git"
+  },
   "scripts": {
     "test": "grunt test"
   },
