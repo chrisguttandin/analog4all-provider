@@ -15,7 +15,7 @@
     "babelify": "^6.1.2",
     "brfs-htmlmin": "^1.0.1",
     "browserify": "^10.2.4",
-    "midi-player": "0.0.0"
+    "midi-player": "0.0.1"
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
