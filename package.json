@@ -11,7 +11,7 @@
     "angular": "global:angular"
   },
   "dependencies": {
-    "angular": "^1.4.1",
+    "angular": "^1.4.2",
     "babelify": "^6.1.2",
     "brfs-htmlmin": "^1.0.1",
     "browserify": "^10.2.4",
@@ -32,7 +32,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-replace": "^0.9.2",
     "grunt-shell": "^1.1.2",
-    "load-grunt-config": "^0.17.1"
+    "load-grunt-config": "^0.17.2"
   },
   "homepage": "http://chrisguttandin.github.io/analog4all-provider/",
   "license": "MIT",
