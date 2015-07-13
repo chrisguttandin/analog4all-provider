@@ -3,6 +3,7 @@
 module.exports = {
     build: [
         'clean',
+        'copy',
         'js',
         'htmlmin',
         'replace',
