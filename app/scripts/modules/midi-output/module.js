@@ -10,6 +10,6 @@ module.exports = angular
 
     .constant('scale', scale)
 
-    .controller('MidiOutputController', ['scale', '$scope', MidiOutputController])
+    .controller('MidiOutputController', ['recordingService', 'registeringService', 'scale', '$scope', 'sendingService', MidiOutputController])
 
     .directive('midiOutput', midiOutput);
