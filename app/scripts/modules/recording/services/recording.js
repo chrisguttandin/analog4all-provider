@@ -12,7 +12,7 @@ module.exports = class Recording {
         this._userMediaService = userMediaService;
     }
 
-    _detectSilence (done) {
+    _detectSilence (done, attempt) {
         var dataArray,
             fftSize,
             i,
@@ -26,10 +26,10 @@ module.exports = class Recording {
             sum += Math.abs(dataArray[i]);
         }
 
-        if (sum < 1) {
+        if (sum < Math.pow(attempt, 2) / 1000) {
             done();
         } else {
-            workerTimers.setTimeout(() => this._detectSilence(done), 100);
+            workerTimers.setTimeout(() => this._detectSilence(done, attempt + 1), 100);
         }
     }
 
@@ -56,7 +56,7 @@ module.exports = class Recording {
     }
 
     _waitForSilence (resolve) {
-        return new Promise((resolve, reject) => this._detectSilence(resolve));
+        return new Promise((resolve, reject) => this._detectSilence(resolve, 0));
     }
 
     _wireInput (mediaStream) {
