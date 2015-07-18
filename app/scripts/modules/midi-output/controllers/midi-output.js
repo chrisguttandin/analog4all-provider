@@ -1,6 +1,7 @@
 'use strict';
 
-var midiJsonParser = require('midi-json-parser'),
+var Recorder = require('recorderjs'),
+    midiJsonParser = require('midi-json-parser'),
     MidiPlayer = require('midi-player').MidiPlayer;
 
 class MidiOutputController {

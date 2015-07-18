@@ -1,6 +1,7 @@
 'use strict';
 
-var workerTimers = require('worker-timers');
+var Recorder = require('recorderjs'),
+    workerTimers = require('worker-timers');
 
 module.exports = class Recording {
 
@@ -66,9 +67,7 @@ module.exports = class Recording {
         input.connect(this._analyser);
         this._analyser.connect(this._audioContext.destination);
 
-        this._recorder = new Recorder(this._analyser, {
-            workerPath: 'scripts/recorder-worker.js'
-        });
+        this._recorder = new Recorder(this._analyser);
 
         this._recorder.record();
     }

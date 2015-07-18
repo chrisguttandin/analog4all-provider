@@ -17,6 +17,7 @@
     "browserify": "^10.2.6",
     "midi-json-parser": "^0.1.0",
     "midi-player": "0.0.3",
+    "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git",
     "worker-timers": "0.0.2"
   },
   "description": "This is the provider for analog4all.",
@@ -28,7 +29,6 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-connect": "^0.10.1",
-    "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-htmlmin": "^0.4.0",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
