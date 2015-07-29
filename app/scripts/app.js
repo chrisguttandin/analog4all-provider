@@ -7,6 +7,7 @@ var angular = require('angular'),
     instruments = require('./modules/instruments/module.js'),
     midiOutput = require('./modules/midi-output/module.js'),
     midiOutputs = require('./modules/midi-outputs/module.js'),
+    readFileSync = require('fs').readFileSync,
     recording = require('./modules/recording/module.js'),
     registeringService = require('./services/registering.js'),
     sendingService = require('./services/sending.js'),
@@ -28,7 +29,11 @@ module.exports = angular
         $routeProvider
             .when('/devices', {
                 controller: function () {},
-                template: '<p ng-if="!(browser.isSupported)">Sorry, your browser is not supported. :-(</p><midi-outputs ng-if="browser.isSupported"></midi-outputs>',
+                template: readFileSync(__dirname + '/../views/devices.html', 'utf8')
+            })
+            .when('/devices/:deviceId', {
+                controller: function () {},
+                template: readFileSync(__dirname + '/../views/device.html', 'utf8')
             })
             .otherwise({
                 redirectTo: '/devices'

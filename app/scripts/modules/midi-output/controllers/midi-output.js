@@ -7,6 +7,7 @@ var Recorder = require('recorderjs'),
 class MidiOutputController {
 
     constructor (recordingService, registeringService, scale, $scope, sendingService) {
+        this.id = this.device.id;
         this._instrument = null;
         this.name = this.device.name;
         this.playState = 'stopped';
