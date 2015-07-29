@@ -13,16 +13,16 @@
   "dependencies": {
     "angular": "^1.4.3",
     "babelify": "^6.1.3",
-    "brfs-htmlmin": "^1.0.1",
-    "browserify": "^10.2.6",
+    "brfs-htmlmin": "^2.0.0",
+    "browserify": "^11.0.1",
     "midi-json-parser": "^0.1.0",
     "midi-player": "0.0.3",
     "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git",
-    "worker-timers": "0.0.2"
+    "worker-timers": "^0.1.0"
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
-    "browserify-shim": "^3.8.9",
+    "browserify-shim": "^3.8.10",
     "grunt": "^0.4.5",
     "grunt-browserify": "^3.8.0",
     "grunt-build-gh-pages": "^1.0.4",
