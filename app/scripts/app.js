@@ -1,6 +1,7 @@
 'use strict';
 
 var angular = require('angular'),
+    angularRoute = require('angular-route'),
     browser = require('./modules/browser/module.js'),
     contenteditable = require('./modules/contenteditable/module.js'),
     instruments = require('./modules/instruments/module.js'),
@@ -13,6 +14,7 @@ var angular = require('angular'),
 
 module.exports = angular
     .module('provider', [
+        angularRoute,
         browser.name,
         contenteditable.name,
         instruments.name,
@@ -21,6 +23,17 @@ module.exports = angular
         recording.name,
         userMedia.name
     ])
+
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider
+            .when('/devices', {
+                controller: function () {},
+                template: '<p ng-if="!(browser.isSupported)">Sorry, your browser is not supported. :-(</p><midi-outputs ng-if="browser.isSupported"></midi-outputs>',
+            })
+            .otherwise({
+                redirectTo: '/devices'
+            });
+     }])
 
     .service('registeringService', ['instrumentsService', 'userMediaService', registeringService])
     .service('sendingService', sendingService);
