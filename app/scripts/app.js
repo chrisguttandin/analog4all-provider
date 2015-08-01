@@ -38,7 +38,7 @@ module.exports = angular
             .otherwise({
                 redirectTo: '/devices'
             });
-     }])
+    }])
 
     .service('registeringService', ['instrumentsService', 'userMediaService', registeringService])
     .service('sendingService', sendingService);
