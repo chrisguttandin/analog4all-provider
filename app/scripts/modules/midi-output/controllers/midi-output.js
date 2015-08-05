@@ -6,7 +6,9 @@ var Recorder = require('recorderjs'),
 
 class MidiOutputController {
 
-    constructor (recordingService, registeringService, scale, $scope, sendingService) {
+    constructor (fileReceivingService, fileSendingService, recordingService, registeringService, scale, $scope) {
+        this._fileReceivingService = fileReceivingService;
+        this._fileSendingService = fileSendingService;
         this.id = this.device.id;
         this._instrument = null;
         this.name = this.device.name;
@@ -16,7 +18,6 @@ class MidiOutputController {
         this.registerState = 'unregistered';
         this._scale = scale;
         this._$scope = $scope;
-        this._sendingService = sendingService;
     }
 
     deregister () {
@@ -47,42 +48,55 @@ class MidiOutputController {
 
                 this._$scope.$evalAsync();
 
-                context.connection.on('channel', (channel) => {
-                    channel.onmessage = (event) => {
-                        midiJsonParser
-                            .parseArrayBuffer(event.data)
-                            .then((midiFile) => {
-                                this.playState = 'playing';
-                                this._$scope.$evalAsync();
-
-                                this._recordingService
-                                    .start()
-                                    .then(() => {
-                                        var midiPlayer = new MidiPlayer({
-                                                json: midiFile,
-                                                midiOutput: this.device
-                                            });
-
-                                        midiPlayer.play();
-
-                                        midiPlayer.on('ended', () => this._recordingService
-                                            .stop()
-                                            .then((blob) => {
-                                                this._sendingService.send(blob, channel);
-
-                                                this.playState = 'stopped';
-                                                this._$scope.$evalAsync();
-                                            }));
-                                    });
-                            });
-                    };
-                });
+                context.connection.on('channel', ::this._render);
             })
             .catch((err) => {
                 this.registerState = 'unregistered';
 
                 this._$scope.$evalAsync();
             });
+    }
+
+    async _render (channelBroker) {
+        var arrayBuffer,
+            midiFile;
+
+        try {
+            arrayBuffer = await this._fileReceivingService.receive(channelBroker);
+        } catch (err) {
+            // @todo
+
+            return;
+        }
+
+        try {
+            midiFile = await midiJsonParser.parseArrayBuffer(arrayBuffer);
+        } catch (err) {
+            // @todo
+
+            return;
+        }
+
+        this.playState = 'playing';
+        this._$scope.$evalAsync();
+
+        await this._recordingService.start();
+
+        var midiPlayer = new MidiPlayer({
+                json: midiFile,
+                midiOutput: this.device
+            });
+
+        midiPlayer.play();
+
+        midiPlayer.on('ended', () => this._recordingService
+            .stop()
+            .then((waveFile) => {
+                this._fileSendingService.send(channelBroker, new Blob([waveFile]));
+
+                this.playState = 'stopped';
+                this._$scope.$evalAsync();
+            }));
     }
 
     test () {

@@ -5,7 +5,15 @@
   },
   "browserify": {
     "transform": [
-      "babelify",
+      [
+        "babelify",
+        {
+          "optional": [
+            "runtime"
+          ],
+          "stage": 0
+        }
+      ],
       "browserify-shim",
       "brfs-htmlmin"
     ]
@@ -16,6 +24,7 @@
   "dependencies": {
     "angular": "^1.4.3",
     "angular-route": "^1.4.3",
+    "babel-runtime": "^5.8.20",
     "babelify": "^6.1.3",
     "brfs-htmlmin": "^2.0.0",
     "browserify": "^11.0.1",

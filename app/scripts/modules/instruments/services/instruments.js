@@ -4,13 +4,15 @@ var EventEmitter = require('events').EventEmitter;
 
 class Instruments {
 
-    constructor ($http) {
+    constructor (channelBrokerFactoryService, $http) {
+        this._channelBrokerFactoryService = channelBrokerFactoryService;
         this._$http = $http;
     }
 
     connect (instrument) {
         return new Promise((resolve, reject) => {
-            var connection = new EventEmitter(),
+            var channelBrokerFactoryService = this._channelBrokerFactoryService,
+                connection = new EventEmitter(),
                 generators = new Map(),
                 socket = new WebSocket('ws://analog4all-registry.elasticbeanstalk.com/instruments/' + instrument.id);
 
@@ -74,7 +76,9 @@ class Instruments {
                             generators.delete(generator.id);
                         });
 
-                        connection.emit('channel', dataChannel);
+                        connection.emit('channel', channelBrokerFactoryService.create({
+                            channel: dataChannel
+                        }));
                     };
 
                     // @todo peerConnection.onerror
