@@ -8,9 +8,16 @@ class ChannelBroker {
         this._channel = channel;
         this._errorHandlers = new Set();
         this._messageHandlers = new Set();
+        // A set can contain only unique values. The usage of an array allows the queue to contain
+        // the same message multiple times.
+        this._queue = [];
 
         channel.addEventListener('error', (errorEvent) => this._callErrorHandlers(errorEvent));
         channel.addEventListener('message', (messageEvent) => this._callMessageHandlers(messageEvent));
+
+        if (channel.readyState === 0) {
+            channel.addEventListener('open', ::this._sendQueue);
+        }
     }
 
     addErrorHandler (handler) {
@@ -74,7 +81,17 @@ class ChannelBroker {
         throw new Error();
     }
 
+    async _parseMessage (message) {
+        return (new Response(message)).json();
+    }
+
     send (message) {
+        if (this._channel.readyState === 0) {
+            this._queue.push(message);
+
+            return;
+        }
+
         if (typeof message === 'object' &&
                 !(message instanceof ArrayBuffer) &&
                 // !(message instanceof ArrayBufferView) &&
@@ -85,8 +102,10 @@ class ChannelBroker {
         this._channel.send(message);
     }
 
-    async _parseMessage (message) {
-        return (new Response(message)).json();
+    _sendQueue () {
+        while (this._queue.length > 0) {
+            this.send(this._queue.shift());
+        }
     }
 
 }
