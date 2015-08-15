@@ -15,7 +15,7 @@ class ChannelBroker {
         channel.addEventListener('error', (errorEvent) => this._callErrorHandlers(errorEvent));
         channel.addEventListener('message', (messageEvent) => this._callMessageHandlers(messageEvent));
 
-        if (channel.readyState === 0) {
+        if (channel.readyState === 0) { // 'connecting'
             channel.addEventListener('open', ::this._sendQueue);
         }
     }
@@ -86,7 +86,7 @@ class ChannelBroker {
     }
 
     send (message) {
-        if (this._channel.readyState === 0) {
+        if (this._channel.readyState === 0) { // 'connecting'
             this._queue.push(message);
 
             return;
