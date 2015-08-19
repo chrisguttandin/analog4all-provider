@@ -11,9 +11,11 @@ class InstrumentsServiceProvider {
      */
     get isSupported () {
         if ('WebSocket' in window && 'webkitRTCPeerConnection' in window) {
-            let peerConnection = new webkitRTCPeerConnection({
+            /* eslint-disable indent */
+            let peerConnection = new webkitRTCPeerConnection({ // eslint-disable-line new-cap, no-undef
                     iceServers: [{ url: 'stun:0' }]
                 });
+            /* eslint-enable indent */
 
             return 'createDataChannel' in peerConnection;
         }

@@ -34,7 +34,7 @@ module.exports = class Recording {
     }
 
     _exportAudio () {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             this._recorder.stop();
             this._recorder.exportWAV((blob) => {
                 this._recorder.clear();
@@ -55,8 +55,8 @@ module.exports = class Recording {
             .then(this._exportAudio.bind(this));
     }
 
-    _waitForSilence (resolve) {
-        return new Promise((resolve, reject) => this._detectSilence(resolve, 0));
+    _waitForSilence () {
+        return new Promise((resolve) => this._detectSilence(resolve, 0));
     }
 
     _wireInput (mediaStream) {

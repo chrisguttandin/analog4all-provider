@@ -7,16 +7,14 @@ class PeerConnectingService {
     }
 
     connect (channelBroker) {
-        var errorSubscription,
-            messageSubscription,
-            peerConnector;
+        /* eslint-disable indent */
+        var peerConnector = this._peerConnectorFactoryService.create({
+                channelBroker: channelBroker
+            });
+        /* eslint-enable indent */
 
-        peerConnector = this._peerConnectorFactoryService.create({
-            channelBroker: channelBroker
-        });
-
-        errorSubscription = channelBroker.addErrorHandler(::peerConnector.fail);
-        messageSubscription = channelBroker.addMessageHandler(::peerConnector.handle);
+        channelBroker.addErrorHandler(::peerConnector.fail);
+        channelBroker.addMessageHandler(::peerConnector.handle);
 
         return peerConnector;
     }

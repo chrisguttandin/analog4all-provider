@@ -30,7 +30,7 @@ class MidiOutputController {
 
                 this._$scope.$evalAsync();
             })
-            .catch((err) => {
+            .catch(() => {
                 this.registerState = 'registered';
 
                 this._$scope.$evalAsync();
@@ -50,7 +50,7 @@ class MidiOutputController {
 
                 context.connection.on('channel', ::this._render);
             })
-            .catch((err) => {
+            .catch(() => {
                 this.registerState = 'unregistered';
 
                 this._$scope.$evalAsync();
@@ -59,7 +59,8 @@ class MidiOutputController {
 
     async _render (channelBroker) {
         var arrayBuffer,
-            midiFile;
+            midiFile,
+            midiPlayer;
 
         try {
             arrayBuffer = await this._fileReceivingService.receive(channelBroker);
@@ -82,10 +83,10 @@ class MidiOutputController {
 
         await this._recordingService.start();
 
-        var midiPlayer = new MidiPlayer({
-                json: midiFile,
-                midiOutput: this.device
-            });
+        midiPlayer = new MidiPlayer({
+            json: midiFile,
+            midiOutput: this.device
+        });
 
         midiPlayer.play();
 
@@ -105,10 +106,12 @@ class MidiOutputController {
         this._recordingService
             .start()
             .then(() => {
+                /* eslint-disable indent */
                 var midiPlayer = new MidiPlayer({
                         json: this._scale,
                         midiOutput: this.device
                     });
+                /* eslint-enable indent */
 
                 midiPlayer.play();
 
