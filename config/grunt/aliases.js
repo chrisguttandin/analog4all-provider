@@ -12,6 +12,9 @@ module.exports = {
     js: [
         'browserify'
     ],
+    lint: [
+        'eslint'
+    ],
     preview: [
         'js',
         'connect',
