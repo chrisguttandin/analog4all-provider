@@ -12,6 +12,8 @@ var angular = require('angular'),
     instruments = require('./modules/instruments/module.js'),
     midiOutput = require('./modules/midi-output/module.js'),
     midiOutputs = require('./modules/midi-outputs/module.js'),
+    peerConnectingService = require('./services/peer-connecting.js'),
+    peerConnectorFactoryService = require('./services/peer-connector-factory.js'),
     readFileSync = require('fs').readFileSync,
     recording = require('./modules/recording/module.js'),
     registeringService = require('./services/registering.js'),
@@ -49,4 +51,6 @@ module.exports = angular
     .service('fileReceivingService', ['fileReceiverFactoryService', fileReceivingService])
     .service('fileSenderFactoryService', [fileSenderFactoryService])
     .service('fileSendingService', ['fileSenderFactoryService', fileSendingService])
+    .service('peerConnectingService', ['peerConnectorFactoryService', peerConnectingService])
+    .service('peerConnectorFactoryService', ['channelBrokerFactoryService', peerConnectorFactoryService])
     .service('registeringService', ['instrumentsService', 'userMediaService', registeringService]);

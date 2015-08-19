@@ -22,8 +22,8 @@ class InstrumentsServiceProvider {
     }
 
     get $get () {
-        return ['channelBrokerFactoryService', '$http', function (channelBrokerFactoryService, $http) {
-            return new InstrumentsService(channelBrokerFactoryService, $http);
+        return ['channelBrokerFactoryService', '$http', 'peerConnectingService', function (channelBrokerFactoryService, $http, peerConnectingService) {
+            return new InstrumentsService(channelBrokerFactoryService, $http, peerConnectingService);
         }];
     }
 
