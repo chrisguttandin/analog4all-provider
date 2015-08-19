@@ -14,6 +14,12 @@ class UserMediaService {
                 } else {
                     window.navigator.webkitGetUserMedia({
                         audio: true
+                        // @todo request the same device again
+                        // audio: {
+                        //     optional: [{
+                        //         sourceId: deviceId
+                        //     }]
+                        // }
                     }, (mediaStream) => {
                         this._mediaStream = mediaStream;
 
