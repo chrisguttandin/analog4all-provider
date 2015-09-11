@@ -12,7 +12,7 @@ module.exports = angular
         userMedia.name
     ])
 
-    .config(['$provide', 'instrumentsServiceProvider', 'userMediaServiceProvider', function ($provide, instrumentsServiceProvider, userMediaServiceProvider) {
+    .config(['instrumentsServiceProvider', '$provide', 'userMediaServiceProvider', function (instrumentsServiceProvider, $provide, userMediaServiceProvider) {
         $provide.constant('isSupported', (instrumentsServiceProvider.isSupported && userMediaServiceProvider.isSupported));
     }])
 
