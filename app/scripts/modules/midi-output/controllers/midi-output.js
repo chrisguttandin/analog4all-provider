@@ -25,16 +25,9 @@ class MidiOutputController {
 
         this._registeringService
             .deregister(this._instrument)
-            .then(() => {
-                this._instrument = null;
-
-                this._$scope.$evalAsync();
-            })
-            .catch(() => {
-                this.registerState = 'registered';
-
-                this._$scope.$evalAsync();
-            });
+            .then(() => this._instrument = null)
+            .catch(() => this.registerState = 'registered')
+            .then(() => this._$scope.$evalAsync());
     }
 
     register () {
@@ -46,15 +39,10 @@ class MidiOutputController {
                 this._instrument = context.instrument;
                 this.registerState = 'registered';
 
-                this._$scope.$evalAsync();
-
                 context.connection.on('channel', ::this._render);
             })
-            .catch(() => {
-                this.registerState = 'unregistered';
-
-                this._$scope.$evalAsync();
-            });
+            .catch(() => this.registerState = 'unregistered')
+            .then(() => this._$scope.$evalAsync());
     }
 
     async _render (channelBroker) {
