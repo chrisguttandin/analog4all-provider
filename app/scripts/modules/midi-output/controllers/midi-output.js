@@ -101,8 +101,6 @@ class MidiOutputController {
                     });
                 /* eslint-enable indent */
 
-                midiPlayer.play();
-
                 midiPlayer.on('ended', () => this._recordingService
                     .stop()
                     .then((blob) => {
@@ -111,6 +109,8 @@ class MidiOutputController {
                         this.playState = 'stopped';
                         this._$scope.$evalAsync();
                     }));
+
+                midiPlayer.play();
             });
     }
 
