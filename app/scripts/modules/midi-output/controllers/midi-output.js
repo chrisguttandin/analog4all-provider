@@ -6,11 +6,12 @@ var Recorder = require('recorderjs'),
 
 class MidiOutputController {
 
-    constructor (fileReceivingService, fileSendingService, recordingService, registeringService, scale, $scope) {
+    constructor (fileReceivingService, fileSendingService, middleC, recordingService, registeringService, scale, $scope) {
         this._fileReceivingService = fileReceivingService;
         this._fileSendingService = fileSendingService;
         this.id = this.device.id;
         this._instrument = null;
+        this._middleC = middleC;
         this.name = this.device.name;
         this.playState = 'stopped';
         this._recordingService = recordingService;
@@ -86,6 +87,32 @@ class MidiOutputController {
                 this.playState = 'stopped';
                 this._$scope.$evalAsync();
             }));
+    }
+
+    sample () {
+        this.playState = 'playing';
+
+        this._recordingService
+            .start()
+            .then(() => {
+                /* eslint-disable indent */
+                var midiPlayer = new MidiPlayer({
+                        json: this._middleC,
+                        midiOutput: this.device
+                    });
+                /* eslint-enable indent */
+
+                midiPlayer.on('ended', () => this._recordingService
+                    .stop()
+                    .then((blob) => {
+                        // Recorder.forceDownload(blob, 'test.wav');
+
+                        this.playState = 'stopped';
+                        this._$scope.$evalAsync();
+                    }));
+
+                midiPlayer.play();
+            });
     }
 
     test () {

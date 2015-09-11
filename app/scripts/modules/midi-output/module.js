@@ -1,6 +1,7 @@
 'use strict';
 
 var angular = require('angular'),
+    middleC = require('./middle-c.json'),
     midiOutput = require('./directives/midi-output.js'),
     MidiOutputController = require('./controllers/midi-output.js'),
     scale = require('./scale.json');
@@ -8,8 +9,9 @@ var angular = require('angular'),
 module.exports = angular
     .module('midiOutput', [])
 
+    .constant('middleC', middleC)
     .constant('scale', scale)
 
-    .controller('MidiOutputController', ['fileReceivingService', 'fileSendingService', 'recordingService', 'registeringService', 'scale', '$scope', MidiOutputController])
+    .controller('MidiOutputController', ['fileReceivingService', 'fileSendingService', 'middleC', 'recordingService', 'registeringService', 'scale', '$scope', MidiOutputController])
 
     .directive('midiOutput', midiOutput);
