@@ -46,6 +46,19 @@ class Instruments {
         });
     }
 
+    update (id, delta) {
+        return new Promise((resolve, reject) => {
+            this._$http
+                .patch('http://analog4all-registry.elasticbeanstalk.com/instruments/' + id, delta)
+                .success(() => resolve())
+                .error((delta, status, headers, config) => {
+                    console.log('error while patching an instrument', delta, status, headers, config);
+
+                    reject();
+                });
+        });
+    }
+
 }
 
 module.exports = Instruments;

@@ -36,7 +36,7 @@
                 }
             }, {
                 "channel": 0,
-                "delta": 1920,
+                "delta": 960,
                 "noteOff": {
                     "noteNumber": 60,
                     "velocity": 100

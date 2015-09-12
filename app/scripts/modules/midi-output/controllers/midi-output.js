@@ -6,11 +6,12 @@ var Recorder = require('recorderjs'),
 
 class MidiOutputController {
 
-    constructor (fileReceivingService, fileSendingService, middleC, recordingService, registeringService, scale, $scope) {
+    constructor (fileReceivingService, fileSendingService, instrumentsService, middleC, recordingService, registeringService, scale, $scope) {
         this._fileReceivingService = fileReceivingService;
         this._fileSendingService = fileSendingService;
         this.id = this.device.id;
         this._instrument = null;
+        this._instrumentsService = instrumentsService;
         this._middleC = middleC;
         this.name = this.device.name;
         this.playState = 'stopped';
@@ -93,7 +94,7 @@ class MidiOutputController {
         this.playState = 'playing';
 
         this._recordingService
-            .start()
+            .start(1)
             .then(() => {
                 /* eslint-disable indent */
                 var midiPlayer = new MidiPlayer({
@@ -105,10 +106,20 @@ class MidiOutputController {
                 midiPlayer.on('ended', () => this._recordingService
                     .stop()
                     .then((blob) => {
-                        // Recorder.forceDownload(blob, 'test.wav');
+                        var reader = new FileReader();
 
-                        this.playState = 'stopped';
-                        this._$scope.$evalAsync();
+                        reader.onloadend = () => {
+                            this._instrumentsService
+                                .update(this._instrument.id, {
+                                    sample: btoa(reader.result)
+                                })
+                                .then(() => {
+                                    this.playState = 'stopped';
+                                    this._$scope.$evalAsync();
+                                });
+                        };
+
+                        reader.readAsBinaryString(blob);
                     }));
 
                 midiPlayer.play();

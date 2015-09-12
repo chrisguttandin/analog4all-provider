@@ -12,6 +12,6 @@ module.exports = angular
     .constant('middleC', middleC)
     .constant('scale', scale)
 
-    .controller('MidiOutputController', ['fileReceivingService', 'fileSendingService', 'middleC', 'recordingService', 'registeringService', 'scale', '$scope', MidiOutputController])
+    .controller('MidiOutputController', ['fileReceivingService', 'fileSendingService', 'instrumentsService', 'middleC', 'recordingService', 'registeringService', 'scale', '$scope', MidiOutputController])
 
     .directive('midiOutput', midiOutput);

@@ -44,10 +44,10 @@ module.exports = class Recording {
         });
     }
 
-    start () {
+    start (channels = 2) {
         return this._userMediaService
             .getAudioOnlyMediaStream()
-            .then((mediaStream) => this._wireInput(mediaStream));
+            .then((mediaStream) => this._wireInput(mediaStream, channels));
     }
 
     stop () {
@@ -59,7 +59,7 @@ module.exports = class Recording {
         return new Promise((resolve) => this._detectSilence(resolve, 0));
     }
 
-    _wireInput (mediaStream) {
+    _wireInput (mediaStream, channels) {
         var input = this._audioContext.createMediaStreamSource(mediaStream);
 
         this._analyser = this._audioContext.createAnalyser();
@@ -67,7 +67,9 @@ module.exports = class Recording {
         input.connect(this._analyser);
         this._analyser.connect(this._audioContext.destination);
 
-        this._recorder = new Recorder(this._analyser);
+        this._recorder = new Recorder(this._analyser, {
+            numChannels: channels
+        });
 
         this._recorder.record();
     }
