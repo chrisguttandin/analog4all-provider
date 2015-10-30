@@ -1,2 +1,3 @@
-<h2>Currently available instruments</h2>
+<h2 ng-if="midiOutputs.devices.length === 0">There is currently no instrument connected</h2>
+<h2 ng-if="midiOutputs.devices.length > 0">Currently connected instruments</h2>
 <midi-output device="device" ng-repeat="device in midiOutputs.devices track by device.id"></midi-output>
