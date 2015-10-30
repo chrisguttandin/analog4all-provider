@@ -17,6 +17,7 @@ var angular = require('angular'),
     readFileSync = require('fs').readFileSync,
     recording = require('./modules/recording/module.js'),
     registeringService = require('./services/registering.js'),
+    samples = require('./modules/samples/module.js'),
     userMedia = require('./modules/user-media/module.js');
 
 module.exports = angular
@@ -28,6 +29,7 @@ module.exports = angular
         midiOutput.name,
         midiOutputs.name,
         recording.name,
+        samples.name,
         userMedia.name
     ])
 

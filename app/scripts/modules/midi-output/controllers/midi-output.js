@@ -6,7 +6,7 @@ var Recorder = require('recorderjs'),
 
 class MidiOutputController {
 
-    constructor (fileReceivingService, fileSendingService, instrumentsService, middleC, recordingService, registeringService, scale, $scope) {
+    constructor (fileReceivingService, fileSendingService, instrumentsService, middleC, recordingService, registeringService, samplesService, scale, $scope) {
         this._fileReceivingService = fileReceivingService;
         this._fileSendingService = fileSendingService;
         this.id = this.device.id;
@@ -18,6 +18,7 @@ class MidiOutputController {
         this._recordingService = recordingService;
         this._registeringService = registeringService;
         this.registerState = 'unregistered';
+        this._samplesService = samplesService;
         this._scale = scale;
         this._$scope = $scope;
     }
@@ -105,21 +106,19 @@ class MidiOutputController {
 
                 midiPlayer.on('ended', () => this._recordingService
                     .stop()
-                    .then((blob) => {
-                        var reader = new FileReader();
-
-                        reader.onloadend = () => {
-                            this._instrumentsService
-                                .update(this._instrument.id, {
-                                    sample: btoa(reader.result)
-                                })
-                                .then(() => {
-                                    this.playState = 'stopped';
-                                    this._$scope.$evalAsync();
-                                });
-                        };
-
-                        reader.readAsBinaryString(blob);
+                    .then((blob) => this._samplesService
+                        .create({
+                            file: blob
+                        }))
+                    .then((sample) => this._instrumentsService
+                        .update(this._instrument.id, {
+                            sample: {
+                                id: sample.id
+                            }
+                        }))
+                    .then(() => {
+                        this.playState = 'stopped';
+                        this._$scope.$evalAsync();
                     }));
 
                 midiPlayer.play();
