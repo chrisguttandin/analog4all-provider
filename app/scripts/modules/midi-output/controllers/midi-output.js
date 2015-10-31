@@ -69,6 +69,25 @@ class MidiOutputController {
             return;
         }
 
+        midiFile.tracks = midiFile.tracks.map((events) => {
+            var delta = 0,
+                allowedEvents = [];
+
+            for (let i = 0, length = events.length; i < length; i += 1) {
+                let event = events[i];
+
+                if (event.endOfTrack || event.noteOff || event.noteOn || event.setTempo || event.timeSignature || event.trackName) {
+                    event.delta = event.delta + delta;
+                    allowedEvents.push(event);
+                    delta = 0;
+                } else {
+                    delta += event.delta;
+                }
+            }
+
+            return allowedEvents;
+        });
+
         this.playState = 'playing';
         this._$scope.$evalAsync();
 
