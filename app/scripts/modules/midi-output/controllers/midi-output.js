@@ -1,8 +1,8 @@
 'use strict';
 
-var Recorder = require('recorderjs'),
-    midiJsonParser = require('midi-json-parser'),
-    MidiPlayer = require('midi-player').MidiPlayer;
+var midiJsonParser = require('midi-json-parser'),
+    MidiPlayer = require('midi-player').MidiPlayer,
+    Recorder = require('recorderjs');
 
 class MidiOutputController {
 
@@ -70,8 +70,8 @@ class MidiOutputController {
         }
 
         midiFile.tracks = midiFile.tracks.map((events) => {
-            var delta = 0,
-                allowedEvents = [];
+            var allowedEvents = [],
+                delta = 0;
 
             for (let i = 0, length = events.length; i < length; i += 1) {
                 let event = events[i];
