@@ -6,7 +6,7 @@ module.exports = {
             base: './app',
             hostname: 'localhost',
             livereload: true,
-            port: 9966
+            port: 8833
         }
     }
 };
