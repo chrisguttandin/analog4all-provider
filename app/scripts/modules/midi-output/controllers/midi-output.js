@@ -9,18 +9,21 @@ class MidiOutputController {
     constructor (fileReceivingService, fileSendingService, instrumentsService, middleC, recordingService, registeringService, samplesService, scale, $scope) {
         this._fileReceivingService = fileReceivingService;
         this._fileSendingService = fileSendingService;
-        this.id = this.device.id;
-        this._instrument = null;
         this._instrumentsService = instrumentsService;
         this._middleC = middleC;
-        this.name = this.device.name;
-        this.playState = 'stopped';
         this._recordingService = recordingService;
         this._registeringService = registeringService;
-        this.registerState = 'unregistered';
         this._samplesService = samplesService;
         this._scale = scale;
         this._$scope = $scope;
+    }
+
+    $onInit () {
+        this.id = this.device.id;
+        this._instrument = null;
+        this.name = this.device.name;
+        this.playState = 'stopped';
+        this.registerState = 'unregistered';
     }
 
     deregister () {
