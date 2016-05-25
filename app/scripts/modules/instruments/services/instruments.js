@@ -1,5 +1,3 @@
-'use strict';
-
 class Instruments {
 
     constructor (channelBrokerFactoryService, $http, peerConnectingService) {
@@ -26,7 +24,7 @@ class Instruments {
                 .post('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments', data)
                 .success((data) => resolve(data))
                 .error((data, status, headers, config) => {
-                    console.log('error while creating an instrument', data, status, headers, config);
+                    console.log('error while creating an instrument', data, status, headers, config); // eslint-disable-line no-console
 
                     reject();
                 });
@@ -39,7 +37,7 @@ class Instruments {
                 .delete('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + id)
                 .success(() => resolve())
                 .error((data, status, headers, config) => {
-                    console.log('error while deleting an instrument', data, status, headers, config);
+                    console.log('error while deleting an instrument', data, status, headers, config); // eslint-disable-line no-console
 
                     reject();
                 });
@@ -52,7 +50,7 @@ class Instruments {
                 .patch('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/instruments/' + id, delta)
                 .success(() => resolve())
                 .error((delta, status, headers, config) => {
-                    console.log('error while patching an instrument', delta, status, headers, config);
+                    console.log('error while patching an instrument', delta, status, headers, config); // eslint-disable-line no-console
 
                     reject();
                 });

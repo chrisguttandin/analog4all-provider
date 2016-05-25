@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     userMediaServiceProvider = require('./providers/user-media.js');
 

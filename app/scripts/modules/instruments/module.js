@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     instrumentsServiceProvider = require('./providers/instruments.js');
 

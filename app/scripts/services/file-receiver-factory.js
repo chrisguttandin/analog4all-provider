@@ -1,5 +1,3 @@
-'use strict';
-
 var EventEmitter = require('events').EventEmitter;
 
 class FileReceiver extends EventEmitter {

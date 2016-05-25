@@ -1,5 +1,3 @@
-'use strict';
-
 class Instruments {
 
     constructor ($http) {
@@ -34,7 +32,7 @@ class Instruments {
                     request.send(formData);
                 })
                 .error((data, status, headers, config) => {
-                    console.log('error while creating an sample', data, status, headers, config);
+                    console.log('error while creating an sample', data, status, headers, config); // eslint-disable-line no-console
 
                     reject();
                 });

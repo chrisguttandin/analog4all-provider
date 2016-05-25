@@ -1,5 +1,3 @@
-'use strict';
-
 var EventEmitter = require('events').EventEmitter;
 
 const CHUNK_SIZE = 1024;

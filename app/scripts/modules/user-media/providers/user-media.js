@@ -1,5 +1,3 @@
-'use strict';
-
 var UserMediaService = require('../services/user-media.js');
 
 class UserMediaServiceProvider {

@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     samplesService = require('./services/samples.js');
 

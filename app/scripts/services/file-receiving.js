@@ -1,5 +1,3 @@
-'use strict';
-
 class FileReceivingService {
 
     constructor (fileReceiverFactoryService) {
@@ -12,7 +10,7 @@ class FileReceivingService {
             messageSubscription;
 
         fileReceiver = this._fileReceiverFactoryService.create({
-            channelBroker: channelBroker
+            channelBroker
         });
 
         errorSubscription = channelBroker.addErrorHandler(::fileReceiver.fail);

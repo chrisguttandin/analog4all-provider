@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     recordingService = require('./services/recording.js');
 

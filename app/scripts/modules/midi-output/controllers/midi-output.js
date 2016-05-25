@@ -1,5 +1,3 @@
-'use strict';
-
 var midiJsonParser = require('midi-json-parser'),
     MidiPlayer = require('midi-player').MidiPlayer,
     Recorder = require('recorderjs');
@@ -60,7 +58,6 @@ class MidiOutputController {
             arrayBuffer = await this._fileReceivingService.receive(channelBroker);
         } catch (err) {
             // @todo
-
             return;
         }
 
@@ -68,7 +65,6 @@ class MidiOutputController {
             midiFile = await midiJsonParser.parseArrayBuffer(arrayBuffer);
         } catch (err) {
             // @todo
-
             return;
         }
 

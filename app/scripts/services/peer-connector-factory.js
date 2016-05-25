@@ -1,5 +1,3 @@
-'use strict';
-
 var EventEmitter = require('events').EventEmitter;
 
 /* eslint-disable indent */
@@ -61,8 +59,8 @@ class PeerConnector extends EventEmitter {
             });
 
             this._generators.set(generator.id, {
-                generator: generator,
-                peerConnection: peerConnection
+                generator,
+                peerConnection
             });
 
             dataChannel.onerror = () => {

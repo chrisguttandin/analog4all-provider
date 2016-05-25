@@ -1,7 +1,4 @@
-'use strict';
-
 function inject ($parse) {
-
     return function compile (element, attrs) {
         var fn = $parse(attrs.ngBind + ' = value', null, true);
 

@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     angularRoute = require('angular-route'),
     browser = require('./modules/browser/module.js'),
@@ -36,11 +34,11 @@ module.exports = angular
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/devices', {
-                controller: function () {},
+                controller () {},
                 template: readFileSync(__dirname + '/../views/devices.html', 'utf8')
             })
             .when('/devices/:deviceId', {
-                controller: function () {},
+                controller () {},
                 template: readFileSync(__dirname + '/../views/device.html', 'utf8')
             })
             .otherwise({

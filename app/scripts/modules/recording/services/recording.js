@@ -1,5 +1,3 @@
-'use strict';
-
 var Recorder = require('recorderjs'),
     workerTimers = require('worker-timers');
 

@@ -1,5 +1,3 @@
-'use strict';
-
 class RegisteringService {
 
     constructor (instrumentsService, userMediaService) {
@@ -17,7 +15,7 @@ class RegisteringService {
         return this._userMediaService
             .getAudioOnlyMediaStream() // to make sure the user granted access
             .then(() => this._instrumentsService.create({
-                name: name
+                name
             }))
             .then((instrument) => {
                 context.instrument = instrument;

@@ -1,5 +1,3 @@
-'use strict';
-
 class PeerConnectingService {
 
     constructor (peerConnectorFactoryService) {
@@ -9,7 +7,7 @@ class PeerConnectingService {
     connect (channelBroker) {
         /* eslint-disable indent */
         var peerConnector = this._peerConnectorFactoryService.create({
-                channelBroker: channelBroker
+                channelBroker
             });
         /* eslint-enable indent */
 

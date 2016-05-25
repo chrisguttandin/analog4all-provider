@@ -1,5 +1,3 @@
-'use strict';
-
 var InstrumentsService = require('../services/instruments.js');
 
 class InstrumentsServiceProvider {

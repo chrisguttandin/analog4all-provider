@@ -1,5 +1,3 @@
-'use strict';
-
 class ChannelBroker {
 
     constructor (options) {

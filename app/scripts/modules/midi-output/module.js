@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     middleC = require('./middle-c.json'),
     midiOutput = require('./directives/midi-output.js'),

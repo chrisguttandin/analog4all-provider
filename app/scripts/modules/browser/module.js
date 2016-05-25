@@ -1,5 +1,3 @@
-'use strict';
-
 var angular = require('angular'),
     browser = require('./directives/browser.js'),
     BrowserController = require('./controllers/browser.js'),
