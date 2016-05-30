@@ -34,11 +34,11 @@ module.exports = angular
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/devices', {
-                controller () {},
+                controller: class DevicesController {},
                 template: readFileSync(__dirname + '/../views/devices.html', 'utf8')
             })
             .when('/devices/:deviceId', {
-                controller () {},
+                controller: class DeviceController {},
                 template: readFileSync(__dirname + '/../views/device.html', 'utf8')
             })
             .otherwise({
