@@ -1,32 +1,40 @@
 class FileReceivingService {
 
-    constructor (fileReceiverFactoryService) {
-        this._fileReceiverFactoryService = fileReceiverFactoryService;
-    }
+    receive (dataChannelSubject) {
+        return new Promise((resolve, reject) => {
+            var buffer,
+                byteIndex,
+                dataChannelSubscription;
 
-    receive (channelBroker) {
-        var errorSubscription,
-            fileReceiver,
-            messageSubscription;
+            byteIndex = 0;
 
-        fileReceiver = this._fileReceiverFactoryService.create({
-            channelBroker
-        });
+            dataChannelSubscription = dataChannelSubject
+                .subscribe({
+                    complete () {
+                        reject();
+                    },
+                    error (err) {
+                        reject(err);
+                    },
+                    next (message) {
+                        if (message.type === 'bof') {
+                            buffer = new ArrayBuffer(message.byteLength);
+                        } else if (message.type === 'eof') {
+                            dataChannelSubscription.unsubscribe();
 
-        errorSubscription = channelBroker.addErrorHandler(::fileReceiver.fail);
-        messageSubscription = channelBroker.addMessageHandler(::fileReceiver.receive);
+                            resolve(buffer);
+                        } else {
+                            let destination = new Uint8Array(buffer),
+                                source = atob(message);
 
-        return new Promise(function (resolve, reject) {
-            fileReceiver.on('done', function (err, file) {
-                errorSubscription.cancel();
-                messageSubscription.cancel();
+                            for (let i = byteIndex, length = byteIndex + source.length; i < length; i += 1) {
+                                destination[i] = source.charCodeAt(i - byteIndex);
+                            }
 
-                if (err === null) {
-                    resolve(file);
-                } else {
-                    reject(err);
-                }
-            });
+                            byteIndex += source.length;
+                        }
+                    }
+                });
         });
     }
 

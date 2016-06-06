@@ -1,20 +1,91 @@
+var filter = require('rxjs/operator/filter').filter,
+    Observable = require('rxjs/Observable').Observable;
+
+/* eslint-disable indent */
+const ICE_SERVERS = [{
+          url: 'stun:stun.l.google.com:19302'
+      }, {
+          url: 'stun:stun1.l.google.com:19302'
+      }, {
+          url: 'stun:stun2.l.google.com:19302'
+      }, {
+          url: 'stun:stun3.l.google.com:19302'
+      }, {
+          url: 'stun:stun4.l.google.com:19302'
+      }];
+/* eslint-enable indent */
+
 class PeerConnectingService {
 
-    constructor (peerConnectorFactoryService) {
-        this._peerConnectorFactoryService = peerConnectorFactoryService;
-    }
+    connect (webSocketSubject) {
+        return new Observable((observer) => {
+            webSocketSubject
+                ::filter((message) => (message.type === 'request' && message.generator !== undefined))
+                .subscribe({
+                    complete () {
+                        observer.complete();
+                    },
+                    next ({ generator }) {
+                        var candidateChannel,
+                            candidateChannelSubscription,
+                            dataChannel,
+                            descriptionChannel,
+                            descriptionChannelSubscription,
+                            peerConnection;
 
-    connect (channelBroker) {
-        /* eslint-disable indent */
-        var peerConnector = this._peerConnectorFactoryService.create({
-                channelBroker
-            });
-        /* eslint-enable indent */
+                        peerConnection = new webkitRTCPeerConnection({ // eslint-disable-line new-cap, no-undef
+                            iceServers: ICE_SERVERS
+                        });
 
-        channelBroker.addErrorHandler(::peerConnector.fail);
-        channelBroker.addMessageHandler(::peerConnector.handle);
+                        dataChannel = peerConnection.createDataChannel('channel-x', {
+                            ordered: true
+                        });
 
-        return peerConnector;
+                        dataChannel.onopen = () => {
+                            candidateChannelSubscription.unsubscribe();
+                            descriptionChannelSubscription.unsubscribe();
+
+                            observer.next(dataChannel);
+                        };
+
+                        candidateChannel = webSocketSubject
+                            .mask({ generator, type: 'candidate' })
+
+                        descriptionChannel = webSocketSubject
+                            .mask({ generator, type: 'description' })
+
+                        candidateChannelSubscription = candidateChannel
+                            .subscribe({
+                                next ({ candidate }) {
+                                    peerConnection.addIceCandidate(new RTCIceCandidate(candidate), () => {}, () => {
+                                        // shit happens
+                                    });
+                                }
+                            });
+
+                        descriptionChannelSubscription = descriptionChannel
+                            .subscribe({
+                                next ({ description }) {
+                                    peerConnection.setRemoteDescription(new RTCSessionDescription(description));
+                                }
+                            });
+
+                        peerConnection.onicecandidate = ({ candidate }) => {
+                            if (candidate) {
+                                candidateChannel.send({ candidate: candidate.toJSON() });
+                            }
+                        };
+
+                        peerConnection.createOffer((description) => {
+                            peerConnection.setLocalDescription(description);
+
+                            descriptionChannel.send({ description: description.toJSON() });
+                        }, () => {
+                            // shit happens
+                        });
+                    }
+                });
+        });
     }
 
 }

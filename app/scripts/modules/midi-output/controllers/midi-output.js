@@ -1,6 +1,7 @@
 var midiJsonParser = require('midi-json-parser'),
     MidiPlayer = require('midi-player').MidiPlayer,
-    Recorder = require('recorderjs');
+    Recorder = require('recorderjs'),
+    wrap = require('rxjs-broker').wrap;
 
 class MidiOutputController {
 
@@ -39,23 +40,26 @@ class MidiOutputController {
 
         this._registeringService
             .register(this.name)
-            .then((context) => {
-                this._instrument = context.instrument;
+            .then(({ connection, instrument }) => {
+                this._instrument = instrument;
                 this.registerState = 'registered';
 
-                context.connection.on('channel', ::this._render);
+                connection
+                    .subscribe({
+                        next: (dataChannel) => this._render(wrap(dataChannel))
+                    });
             })
             .catch(() => this.registerState = 'unregistered')
             .then(() => this._$scope.$evalAsync());
     }
 
-    async _render (channelBroker) {
+    async _render (dataChannelSubject) {
         var arrayBuffer,
             midiFile,
             midiPlayer;
 
         try {
-            arrayBuffer = await this._fileReceivingService.receive(channelBroker);
+            arrayBuffer = await this._fileReceivingService.receive(dataChannelSubject);
         } catch (err) {
             // @todo
             return;
@@ -102,7 +106,7 @@ class MidiOutputController {
         midiPlayer.on('ended', () => this._recordingService
             .stop()
             .then((waveFile) => {
-                this._fileSendingService.send(channelBroker, new Blob([waveFile]));
+                this._fileSendingService.send(dataChannelSubject, new Blob([waveFile]));
 
                 this.playState = 'stopped';
                 this._$scope.$evalAsync();

@@ -1,33 +1,47 @@
+const CHUNK_SIZE = 1024;
+
 class FileSendingService {
 
-    constructor (fileSenderFactoryService) {
-        this._fileSenderFactoryService = fileSenderFactoryService;
-    }
+    send (dataChannelSubject, file) {
+        return new Promise((resolve, reject) => {
+            var fileReader = new FileReader();
 
-    send (channelBroker, file) {
-        var errorSubscription,
-            fileSender,
-            messageSubscription;
+            fileReader.onerror = () => reject(fileReader.error);
 
-        fileSender = this._fileSenderFactoryService.create({
-            channelBroker,
-            file
-        });
+            fileReader.onload = async () => {
+                var buffer = fileReader.result,
+                    byteIndex = 0,
+                    byteLength;
 
-        errorSubscription = channelBroker.addErrorHandler(::fileSender.fail);
-        messageSubscription = channelBroker.addMessageHandler(::fileSender.drain);
+                byteLength = buffer.byteLength;
 
-        return new Promise(function (resolve, reject) {
-            fileSender.on('done', function (err) {
-                errorSubscription.cancel();
-                messageSubscription.cancel();
+                await dataChannelSubject.send({
+                    byteLength,
+                    type: 'bof'
+                });
 
-                if (err === null) {
-                    resolve();
-                } else {
-                    reject(err);
+                while (byteIndex + CHUNK_SIZE < byteLength) {
+                    let slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
+
+                    await dataChannelSubject.send(btoa(String.fromCharCode.apply(null, new Uint8Array(slice))));
+
+                    byteIndex += CHUNK_SIZE;
                 }
-            });
+
+                if (byteIndex < byteLength) {
+                    let slice = buffer.slice(byteIndex);
+
+                    await dataChannelSubject.send(btoa(String.fromCharCode.apply(null, new Uint8Array(slice))));
+                }
+
+                await dataChannelSubject.send({
+                    type: 'eof'
+                });
+
+                resolve();
+            }
+
+            fileReader.readAsArrayBuffer(file);
         });
     }
 
