@@ -18,9 +18,7 @@ class MidiOutputController {
     }
 
     $onInit () {
-        this.id = this.device.id;
         this._instrument = null;
-        this.name = this.device.name;
         this.playState = 'stopped';
         this.registerState = 'unregistered';
     }
@@ -39,7 +37,7 @@ class MidiOutputController {
         this.registerState = 'registering';
 
         this._registeringService
-            .register(this.name)
+            .register(this.device.name)
             .then(({ connection, instrument }) => {
                 this._instrument = instrument;
                 this.registerState = 'registered';

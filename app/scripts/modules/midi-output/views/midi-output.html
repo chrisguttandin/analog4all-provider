@@ -3,8 +3,8 @@
 <button ng-click="midiOutput.register()" ng-disabled="midiOutput.registerState == 'registering'" ng-if="midiOutput.registerState != 'registered'">register device</button>
 <button ng-click="midiOutput.deregister()" ng-if="midiOutput.registerState == 'registered'">deregister device</button>
 <h3 ng-if="midiOutput.registerState == 'registered'">
-    <a href="#/devices/{{midiOutput.id}}" ng-bind="midiOutput.name"></a>
+    <a href="#/devices/{{ midiOutput.device.id }}" ng-bind="midiOutput.device.name"></a>
 </h3>
 <h3 ng-if="midiOutput.registerState != 'registered'">
-    <span contenteditable ng-bind="midiOutput.name"></span>
+    <span contenteditable ng-bind="midiOutput.device.name"></span>
 </h3>
