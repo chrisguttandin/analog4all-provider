@@ -1,17 +1,18 @@
-var midiJsonParser = require('midi-json-parser'),
+var concatMap = require('rxjs/operator/concatMap').concatMap,
     MidiPlayer = require('midi-player').MidiPlayer,
     Recorder = require('recorderjs'),
     wrap = require('rxjs-broker').wrap;
 
 class MidiOutputController {
 
-    constructor (fileReceivingService, fileSendingService, instrumentsService, middleC, recordingService, registeringService, samplesService, scale, $scope) {
+    constructor (fileReceivingService, fileSendingService, instrumentsService, middleC, recordingService, registeringService, renderingService, samplesService, scale, $scope) {
         this._fileReceivingService = fileReceivingService;
         this._fileSendingService = fileSendingService;
         this._instrumentsService = instrumentsService;
         this._middleC = middleC;
         this._recordingService = recordingService;
         this._registeringService = registeringService;
+        this._renderingService = renderingService;
         this._samplesService = samplesService;
         this._scale = scale;
         this._$scope = $scope;
@@ -43,72 +44,19 @@ class MidiOutputController {
                 this.registerState = 'registered';
 
                 connection
+                    ::concatMap(async (dataChannel) => {
+                        await this._renderingService.render(wrap(dataChannel), this.device);
+
+                        return dataChannel;
+                    })
                     .subscribe({
-                        next: (dataChannel) => this._render(wrap(dataChannel))
+                        next (dataChannel) {
+                            dataChannel.close();
+                        }
                     });
             })
             .catch(() => this.registerState = 'unregistered')
             .then(() => this._$scope.$evalAsync());
-    }
-
-    async _render (dataChannelSubject) {
-        var arrayBuffer,
-            midiFile,
-            midiPlayer;
-
-        try {
-            arrayBuffer = await this._fileReceivingService.receive(dataChannelSubject);
-        } catch (err) {
-            // @todo
-            return;
-        }
-
-        try {
-            midiFile = await midiJsonParser.parseArrayBuffer(arrayBuffer);
-        } catch (err) {
-            // @todo
-            return;
-        }
-
-        midiFile.tracks = midiFile.tracks.map((events) => {
-            var allowedEvents = [],
-                delta = 0;
-
-            for (let i = 0, length = events.length; i < length; i += 1) {
-                let event = events[i];
-
-                if (event.endOfTrack || event.noteOff || event.noteOn || event.setTempo || event.timeSignature || event.trackName) {
-                    event.delta = event.delta + delta;
-                    allowedEvents.push(event);
-                    delta = 0;
-                } else {
-                    delta += event.delta;
-                }
-            }
-
-            return allowedEvents;
-        });
-
-        this.playState = 'playing';
-        this._$scope.$evalAsync();
-
-        await this._recordingService.start();
-
-        midiPlayer = new MidiPlayer({
-            json: midiFile,
-            midiOutput: this.device
-        });
-
-        midiPlayer.play();
-
-        midiPlayer.on('ended', () => this._recordingService
-            .stop()
-            .then((waveFile) => {
-                this._fileSendingService.send(dataChannelSubject, new Blob([waveFile]));
-
-                this.playState = 'stopped';
-                this._$scope.$evalAsync();
-            }));
     }
 
     sample () {
