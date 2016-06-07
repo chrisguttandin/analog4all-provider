@@ -1,6 +1,6 @@
 const CHUNK_SIZE = 1024;
 
-class FileSendingService {
+export class FileSendingService {
 
     send (dataChannelSubject, file) {
         return new Promise((resolve, reject) => {
@@ -46,5 +46,3 @@ class FileSendingService {
     }
 
 }
-
-module.exports = FileSendingService;

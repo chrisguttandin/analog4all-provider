@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-module.exports = {
+export const provider = {
     controller: 'ProviderController as vm',
     template: fs.readFileSync(__dirname + '/../views/provider.html', 'utf8')
 };

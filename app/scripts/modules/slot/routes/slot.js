@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-module.exports = {
+export const slot = {
     controller: 'SlotController as vm',
     resolve: {
         device: [ 'devicesService', '$route', (devicesService, $route) => devicesService

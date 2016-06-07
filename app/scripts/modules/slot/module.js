@@ -1,9 +1,9 @@
-var angular = require('angular'),
-    angularRoute = require('angular-route'),
-    slot = require('./routes/slot.js'),
-    SlotController = require('./controllers/slot.js');
+import { SlotController } from './controllers/slot';
+import angular from 'angular';
+import angularRoute from 'angular-route';
+import { slot } from './routes/slot';
 
-module.exports = angular
+export default angular
     .module('slot', [
         angularRoute
     ])

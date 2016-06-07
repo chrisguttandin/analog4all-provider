@@ -1,5 +1,5 @@
-var filter = require('rxjs/operator/filter').filter,
-    Observable = require('rxjs/Observable').Observable;
+import { Observable } from 'rxjs/Observable';
+import { filter } from 'rxjs/operator/filter';
 
 /* eslint-disable indent */
 const ICE_SERVERS = [{
@@ -15,7 +15,7 @@ const ICE_SERVERS = [{
       }];
 /* eslint-enable indent */
 
-class PeerConnectingService {
+export class PeerConnectingService {
 
     connect (webSocketSubject) {
         return new Observable((observer) => {
@@ -89,5 +89,3 @@ class PeerConnectingService {
     }
 
 }
-
-module.exports = PeerConnectingService;

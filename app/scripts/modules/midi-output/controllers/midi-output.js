@@ -1,9 +1,9 @@
-var concatMap = require('rxjs/operator/concatMap').concatMap,
-    MidiPlayer = require('midi-player').MidiPlayer,
-    Recorder = require('recorderjs'),
-    wrap = require('rxjs-broker').wrap;
+import { MidiPlayer } from 'midi-player';
+import Recorder from 'recorderjs';
+import { concatMap } from 'rxjs/operator/concatMap';
+import { wrap } from 'rxjs-broker';
 
-class MidiOutputController {
+export class MidiOutputController {
 
     constructor (fileReceivingService, fileSendingService, instrumentsService, middleC, recordingService, registeringService, renderingService, samplesService, scale, $scope) {
         this._fileReceivingService = fileReceivingService;
@@ -120,5 +120,3 @@ class MidiOutputController {
     }
 
 }
-
-module.exports = MidiOutputController;

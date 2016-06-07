@@ -1,4 +1,4 @@
-class UserMediaService {
+export class UserMediaService {
 
     constructor () {
         this._mediaStream = null;
@@ -34,11 +34,9 @@ class UserMediaService {
                     reject();
                 }
             });
-        } else {
-            return Promise.resolve(this._mediaStream);
         }
+
+        return Promise.resolve(this._mediaStream);
     }
 
 }
-
-module.exports = UserMediaService;

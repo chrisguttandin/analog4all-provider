@@ -1,11 +1,11 @@
-var angular = require('angular'),
-    browser = require('../browser/module.js'),
-    localRegistry = require('../local-registry/module.js'),
-    provider = require('./components/provider.js'),
-    ProviderController = require('./controllers/provider.js'),
-    slot = require('../slot/module.js');
+import { ProviderController } from './controllers/provider';
+import angular from 'angular';
+import browser from '../browser/module';
+import localRegistry from '../local-registry/module';
+import { provider } from './components/provider';
+import slot from '../slot/module';
 
-module.exports = angular
+export default angular
     .module('provider', [
         browser.name,
         localRegistry.name,

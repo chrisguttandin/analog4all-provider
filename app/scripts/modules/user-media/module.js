@@ -1,7 +1,7 @@
-var angular = require('angular'),
-    userMediaService = require('./services/user-media.js');
+import { UserMediaService } from './services/user-media';
+import angular from 'angular';
 
-module.exports = angular
+export default angular
     .module('user-media', [])
 
-    .service('userMediaService', [ userMediaService ]);
+    .service('userMediaService', [ UserMediaService ]);

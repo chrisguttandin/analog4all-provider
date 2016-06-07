@@ -1,7 +1,7 @@
-var midiJsonParser = require('midi-json-parser'),
-    MidiPlayer = require('midi-player').MidiPlayer;
+import { MidiPlayer } from 'midi-player';
+import { parseArrayBuffer } from 'midi-json-parser';
 
-class RenderingService {
+export class RenderingService {
 
     constructor (fileReceivingService, fileSendingService, recordingService, waitingService) {
         this._fileReceivingService = fileReceivingService;
@@ -17,7 +17,7 @@ class RenderingService {
         await this._waitingService.wait(dataChannelSubject);
 
         arrayBuffer = await this._fileReceivingService.receive(dataChannelSubject);
-        json = await midiJsonParser.parseArrayBuffer(arrayBuffer);
+        json = await parseArrayBuffer(arrayBuffer);
 
         json.tracks = json.tracks.map((events) => {
             var allowedEvents = [],
@@ -58,5 +58,3 @@ class RenderingService {
     }
 
 }
-
-module.exports = RenderingService;

@@ -1,7 +1,7 @@
-var angular = require('angular'),
-    samplesService = require('./services/samples.js');
+import { SamplesService } from './services/samples';
+import angular from 'angular';
 
-module.exports = angular
+export default angular
     .module('samples', [])
 
-    .service('samplesService', ['$http', samplesService]);
+    .service('samplesService', [ '$http', SamplesService ]);

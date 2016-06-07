@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-module.exports = {
+export const localRegistry = {
     controller: 'LocalRegistryController as vm',
     resolve: {
         devices: [ 'devicesService', (devicesService) => devicesService.fetch() ]

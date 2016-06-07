@@ -16,7 +16,7 @@ function inject ($parse) {
     };
 }
 
-module.exports = function ($parse) {
+export const contenteditable = ($parse) => {
     return {
         compile: inject($parse),
         restrict: 'A'

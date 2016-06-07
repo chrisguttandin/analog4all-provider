@@ -1,7 +1,7 @@
-var angular = require('angular'),
-    devicesService = require('./services/devices.js');
+import { DevicesService } from './services/devices';
+import angular from 'angular';
 
-module.exports = angular
+export default angular
     .module('devices', [])
 
-    .service('devicesService', devicesService);
+    .service('devicesService', [ DevicesService ]);

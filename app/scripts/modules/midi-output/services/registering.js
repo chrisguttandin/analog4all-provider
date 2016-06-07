@@ -1,4 +1,4 @@
-class RegisteringService {
+export class RegisteringService {
 
     constructor (instrumentsService, userMediaService) {
         this._instrumentsService = instrumentsService;
@@ -37,5 +37,3 @@ class RegisteringService {
     }
 
 }
-
-module.exports = RegisteringService;

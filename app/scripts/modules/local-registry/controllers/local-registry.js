@@ -1,4 +1,4 @@
-class LocalRegistryController {
+export class LocalRegistryController {
 
     constructor (devices, devicesService, $scope) {
         this.devices = devices;
@@ -17,5 +17,3 @@ class LocalRegistryController {
     }
 
 }
-
-module.exports = LocalRegistryController;

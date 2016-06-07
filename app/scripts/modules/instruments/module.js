@@ -1,9 +1,9 @@
-var angular = require('angular'),
-    instrumentsService = require('./services/instruments.js'),
-    peerConnectingService = require('./services/peer-connecting.js');
+import { InstrumentsService } from './services/instruments';
+import { PeerConnectingService } from './services/peer-connecting';
+import angular from 'angular';
 
-module.exports = angular
+export default angular
     .module('instruments', [])
 
-    .service('instrumentsService', [ '$http', 'peerConnectingService', instrumentsService ])
-    .service('peerConnectingService', [ peerConnectingService ]);
+    .service('instrumentsService', [ '$http', 'peerConnectingService', InstrumentsService ])
+    .service('peerConnectingService', [ PeerConnectingService ]);

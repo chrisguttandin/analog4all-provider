@@ -1,4 +1,4 @@
-class DevicesService {
+export class DevicesService {
 
     constructor () {
         this._midiAccess = null;
@@ -47,5 +47,3 @@ class DevicesService {
     }
 
 }
-
-module.exports = DevicesService;

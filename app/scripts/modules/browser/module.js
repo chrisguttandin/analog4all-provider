@@ -1,12 +1,12 @@
-var angular = require('angular'),
-    browserService = require('./services/browser.js'),
-    instruments = require('../instruments/module.js'),
-    userMedia = require('../user-media/module.js');
+import { BrowserService } from './services/browser';
+import angular from 'angular';
+import instruments from '../instruments/module';
+import userMedia from '../user-media/module';
 
-module.exports = angular
+export default angular
     .module('browser', [
         instruments.name,
         userMedia.name
     ])
 
-    .service('browserService', [ 'instrumentsService', 'userMediaService', browserService ]);
+    .service('browserService', [ 'instrumentsService', 'userMediaService', BrowserService ]);

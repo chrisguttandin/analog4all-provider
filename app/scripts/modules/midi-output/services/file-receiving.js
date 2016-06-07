@@ -1,4 +1,4 @@
-class FileReceivingService {
+export class FileReceivingService {
 
     receive (dataChannelSubject) {
         return new Promise((resolve, reject) => {
@@ -39,5 +39,3 @@ class FileReceivingService {
     }
 
 }
-
-module.exports = FileReceivingService;

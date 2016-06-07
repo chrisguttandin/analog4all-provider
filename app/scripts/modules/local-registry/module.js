@@ -1,11 +1,11 @@
-var angular = require('angular'),
-    angularRoute = require('angular-route'),
-    devices = require('../devices/module.js'),
-    localRegistry = require('./routes/local-registry.js'),
-    LocalRegistryController = require('./controllers/local-registry.js'),
-    midiOutput = require('../midi-output/module.js');
+import { LocalRegistryController } from './controllers/local-registry';
+import angular from 'angular';
+import angularRoute from 'angular-route';
+import devices from '../devices/module';
+import { localRegistry } from './routes/local-registry';
+import midiOutput from '../midi-output/module';
 
-module.exports = angular
+export default angular
     .module('localRegistry', [
         angularRoute,
         devices.name,

@@ -1,10 +1,10 @@
-var angular = require('angular'),
-    recordingService = require('./services/recording.js'),
-    userMedia = require('../user-media/module.js');
+import { RecordingService } from './services/recording';
+import angular from 'angular';
+import userMedia from '../user-media/module';
 
-module.exports = angular
+export default angular
     .module('recordingService', [
         userMedia.name
     ])
 
-    .service('recordingService', [ 'userMediaService', recordingService ]);
+    .service('recordingService', [ 'userMediaService', RecordingService ]);

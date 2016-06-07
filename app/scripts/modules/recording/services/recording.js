@@ -1,7 +1,7 @@
-var Recorder = require('recorderjs'),
-    workerTimers = require('worker-timers');
+import Recorder from 'recorderjs';
+import { setTimeout } from 'worker-timers';
 
-module.exports = class Recording {
+export class RecordingService {
 
     constructor (userMediaService) {
         this._analyser = null;
@@ -27,7 +27,7 @@ module.exports = class Recording {
         if (sum < Math.pow(attempt, 2) / 1000) {
             done();
         } else {
-            workerTimers.setTimeout(() => this._detectSilence(done, attempt + 1), 100);
+            setTimeout(() => this._detectSilence(done, attempt + 1), 100);
         }
     }
 
@@ -72,4 +72,4 @@ module.exports = class Recording {
         this._recorder.record();
     }
 
-};
+}

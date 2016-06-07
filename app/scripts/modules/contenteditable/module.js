@@ -1,7 +1,7 @@
-var angular = require('angular'),
-    contenteditable = require('./directives/contenteditable.js');
+import angular from 'angular';
+import { contenteditable } from './directives/contenteditable';
 
-module.exports = angular
+export default angular
     .module('contenteditable', [])
 
     .directive('contenteditable', ['$parse', contenteditable]);
