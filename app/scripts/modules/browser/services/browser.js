@@ -1,4 +1,4 @@
-class BrowserController {
+class Browser {
 
     constructor (isSupported) {
         this.isSupported = isSupported;
@@ -6,4 +6,4 @@ class BrowserController {
 
 }
 
-module.exports = BrowserController;
+module.exports = Browser;
