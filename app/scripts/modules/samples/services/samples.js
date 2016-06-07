@@ -9,7 +9,7 @@ class Instruments {
 
         return new Promise((resolve, reject) => {
             this._$http
-                .post('http://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples')
+                .post('https://analog4all-registry.eu-west-1.elasticbeanstalk.com/samples')
                 .success((data) => {
                     var formData,
                         request;
