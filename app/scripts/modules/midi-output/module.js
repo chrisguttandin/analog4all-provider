@@ -1,6 +1,6 @@
 var angular = require('angular'),
     middleC = require('./middle-c.json'),
-    midiOutput = require('./directives/midi-output.js'),
+    midiOutput = require('./components/midi-output.js'),
     MidiOutputController = require('./controllers/midi-output.js'),
     renderingService = require('./services/rendering.js'),
     scale = require('./scale.json'),
@@ -12,9 +12,9 @@ module.exports = angular
     .constant('middleC', middleC)
     .constant('scale', scale)
 
-    .controller('MidiOutputController', ['fileReceivingService', 'fileSendingService', 'instrumentsService', 'middleC', 'recordingService', 'registeringService', 'renderingService', 'samplesService', 'scale', '$scope', MidiOutputController])
+    .component('midiOutput', midiOutput)
 
-    .directive('midiOutput', midiOutput)
+    .controller('MidiOutputController', ['fileReceivingService', 'fileSendingService', 'instrumentsService', 'middleC', 'recordingService', 'registeringService', 'renderingService', 'samplesService', 'scale', '$scope', MidiOutputController])
 
     .service('renderingService', [ 'fileReceivingService', 'fileSendingService', 'recordingService', 'waitingService', renderingService ])
     .service('waitingService', [ waitingService ]);
