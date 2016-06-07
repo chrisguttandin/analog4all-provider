@@ -1,10 +1,9 @@
 var angular = require('angular'),
-    instrumentsServiceProvider = require('./providers/instruments.js'),
+    instrumentsService = require('./services/instruments.js'),
     peerConnectingService = require('./services/peer-connecting.js');
 
 module.exports = angular
     .module('instruments', [])
 
-    .provider('instrumentsService', instrumentsServiceProvider)
-
+    .service('instrumentsService', [ '$http', 'peerConnectingService', instrumentsService ])
     .service('peerConnectingService', [ peerConnectingService ]);
