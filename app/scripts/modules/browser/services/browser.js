@@ -1,7 +1,7 @@
 class Browser {
 
-    constructor (isSupported) {
-        this.isSupported = isSupported;
+    constructor (isSupported, userMediaService) {
+        this.isSupported = isSupported && userMediaService.isSupported;
     }
 
 }

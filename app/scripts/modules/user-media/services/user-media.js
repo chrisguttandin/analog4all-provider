@@ -4,12 +4,19 @@ class UserMediaService {
         this._mediaStream = null;
     }
 
+    /**
+     * This property is true if the browser supports all the required APIs to use the
+     * UserMediaService. The code is roughly copied from [Modernizr's feature detection tests]
+     * {@link https://github.com/Modernizr/Modernizr/blob/master/feature-detects/}
+     */
+    get isSupported () {
+        return ('navigator' in window && 'webkitGetUserMedia' in window.navigator);
+    }
+
     getAudioOnlyMediaStream () {
         if (this._mediaStream === null) {
             return new Promise((resolve, reject) => {
-                if (!(window.navigator) || !(window.navigator.webkitGetUserMedia)) {
-                    reject();
-                } else {
+                if (this.isSupported) {
                     window.navigator.webkitGetUserMedia({
                         audio: true
                         // @todo request the same device again
@@ -23,6 +30,8 @@ class UserMediaService {
 
                         resolve(mediaStream);
                     }, reject);
+                } else {
+                    reject();
                 }
             });
         } else {
