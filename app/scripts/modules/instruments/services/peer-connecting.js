@@ -57,16 +57,22 @@ export class PeerConnectingService {
                         candidateChannelSubscription = candidateChannel
                             .subscribe({
                                 next ({ candidate }) {
-                                    peerConnection.addIceCandidate(new RTCIceCandidate(candidate), () => {}, () => {
-                                        // shit happens
-                                    });
+                                    peerConnection
+                                        .addIceCandidate(new RTCIceCandidate(candidate))
+                                        .catch(() => {
+                                            // shit happens
+                                        });
                                 }
                             });
 
                         descriptionChannelSubscription = descriptionChannel
                             .subscribe({
                                 next ({ description }) {
-                                    peerConnection.setRemoteDescription(new RTCSessionDescription(description));
+                                    peerConnection
+                                        .setRemoteDescription(new RTCSessionDescription(description))
+                                        .catch(() => {
+                                            // shit happens
+                                        });
                                 }
                             });
 
@@ -76,13 +82,20 @@ export class PeerConnectingService {
                             }
                         };
 
-                        peerConnection.createOffer((description) => {
-                            peerConnection.setLocalDescription(description);
+                        peerConnection
+                            .createOffer()
+                            .then((description) => {
+                                peerConnection
+                                    .setLocalDescription(description)
+                                    .catch(() => {
+                                        // shit happens
+                                    });
 
-                            descriptionChannel.send({ description: description.toJSON() });
-                        }, () => {
-                            // shit happens
-                        });
+                                descriptionChannel.send({ description: description.toJSON() });
+                            })
+                            .catch(() => {
+                                // shit happens
+                            });
                     }
                 });
         });
