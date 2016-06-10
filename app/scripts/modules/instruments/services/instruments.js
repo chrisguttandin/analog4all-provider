@@ -16,7 +16,7 @@ export class InstrumentsService {
         if ('WebSocket' in window && 'webkitRTCPeerConnection' in window) {
             /* eslint-disable indent */
             let peerConnection = new webkitRTCPeerConnection({ // eslint-disable-line new-cap, no-undef
-                    iceServers: [{ url: 'stun:0' }]
+                    iceServers: [ { urls: 'stun:0' } ]
                 });
             /* eslint-enable indent */
 
