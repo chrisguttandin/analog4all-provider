@@ -22,6 +22,9 @@
   "browserify-shim": {
     "angular": "global:angular"
   },
+  "bugs": {
+    "url": "https://github.com/chrisguttandin/analog4all-provider/issues"
+  },
   "dependencies": {
     "angular": "^1.5.7",
     "angular-route": "^1.5.7",
