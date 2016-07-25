@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
-    "angular-route": "^1.5.7",
+    "angular-route": "^1.5.8",
     "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
     "babel-plugin-transform-function-bind": "^6.8.0",
