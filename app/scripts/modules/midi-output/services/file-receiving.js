@@ -1,6 +1,6 @@
 export class FileReceivingService {
 
-    receive (dataChannelSubject) {
+    receive (dataChannelSubject) { // eslint-disable-line class-methods-use-this
         return new Promise((resolve, reject) => {
             var buffer,
                 byteIndex,

@@ -12,8 +12,9 @@ export class RegisteringService {
     register (name) {
         var context = {};
 
+        // Get the mediaStream first to make sure the user granted access.
         return this._userMediaService
-            .getAudioOnlyMediaStream() // to make sure the user granted access
+            .getAudioOnlyMediaStream()
             .then(() => this._instrumentsService.create({
                 name
             }))

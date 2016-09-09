@@ -6,7 +6,7 @@ import { first } from 'rxjs/operator/first';
  */
 export class WaitingService {
 
-    wait (dataChannelSubject) {
+    wait (dataChannelSubject) { // eslint-disable-line class-methods-use-this
         return new Promise((resolve, reject) => {
             var waitingChannel = dataChannelSubject.mask({ type: 'waiting' }),
                 waitingChannelSubscription;

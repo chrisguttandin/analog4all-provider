@@ -44,7 +44,7 @@
   "description": "This is the provider for analog4all.",
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "eslint-config-holy-grail": "^8.0.0",
+    "eslint-config-holy-grail": "^9.0.0",
     "grunt": "^1.0.1",
     "grunt-browserify": "^5.0.0",
     "grunt-build-gh-pages": "^1.0.5",
