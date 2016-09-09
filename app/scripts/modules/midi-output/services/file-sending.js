@@ -2,7 +2,7 @@ const CHUNK_SIZE = 1024;
 
 export class FileSendingService {
 
-    send (dataChannelSubject, file) {
+    send (dataChannelSubject, file) { // eslint-disable-line class-methods-use-this
         return new Promise((resolve, reject) => {
             var fileReader = new FileReader();
 

@@ -13,7 +13,7 @@ const ICE_SERVERS = [ { urls: [
 
 export class PeerConnectingService {
 
-    connect (webSocketSubject) {
+    connect (webSocketSubject) { // eslint-disable-line class-methods-use-this
         return new Observable((observer) => {
             webSocketSubject
                 ::filter((message) => (message.type === 'request' && message.generator !== undefined))

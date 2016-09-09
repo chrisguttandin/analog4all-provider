@@ -12,7 +12,7 @@ export class InstrumentsService {
      * InstrumentsService. The code is roughly copied from [Modernizr's feature detection tests]
      * {@link https://github.com/Modernizr/Modernizr/blob/master/feature-detects/}
      */
-    get isSupported () {
+    get isSupported () { // eslint-disable-line class-methods-use-this
         if ('WebSocket' in window && 'webkitRTCPeerConnection' in window) {
             /* eslint-disable indent */
             let peerConnection = new webkitRTCPeerConnection({ // eslint-disable-line new-cap, no-undef

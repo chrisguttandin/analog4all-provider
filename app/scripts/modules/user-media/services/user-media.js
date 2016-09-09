@@ -9,7 +9,7 @@ export class UserMediaService {
      * UserMediaService. The code is roughly copied from [Modernizr's feature detection tests]
      * {@link https://github.com/Modernizr/Modernizr/blob/master/feature-detects/}
      */
-    get isSupported () {
+    get isSupported () { // eslint-disable-line class-methods-use-this
         return ('navigator' in window && 'webkitGetUserMedia' in window.navigator);
     }
 
