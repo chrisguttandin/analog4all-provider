@@ -39,7 +39,7 @@
     "midi-player": "0.0.12",
     "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git",
     "rxjs-broker": "^0.2.3",
-    "worker-timers": "^1.0.1"
+    "worker-timers": "^1.0.2"
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
