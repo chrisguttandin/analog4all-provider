@@ -39,7 +39,7 @@ export class FileSendingService {
                 });
 
                 resolve();
-            }
+            };
 
             fileReader.readAsArrayBuffer(file);
         });

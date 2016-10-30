@@ -6,7 +6,7 @@ function inject ($parse) {
             element.on('input', function (event) {
                 event.preventDefault();
 
-                scope.$evalAsync(function() {
+                scope.$evalAsync(function () {
                     fn(scope, {
                         value: element[0].textContent
                     });

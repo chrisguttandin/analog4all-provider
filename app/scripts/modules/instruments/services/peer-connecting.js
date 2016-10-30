@@ -45,10 +45,10 @@ export class PeerConnectingService {
                         };
 
                         candidateChannel = webSocketSubject
-                            .mask({ generator, type: 'candidate' })
+                            .mask({ generator, type: 'candidate' });
 
                         descriptionChannel = webSocketSubject
-                            .mask({ generator, type: 'description' })
+                            .mask({ generator, type: 'description' });
 
                         candidateChannelSubscription = candidateChannel
                             .subscribe({

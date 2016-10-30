@@ -5,7 +5,7 @@ import provider from './modules/provider/module';
 export const app = angular
     .module('app', [
         angularRoute,
-        provider.name,
+        provider.name
     ])
 
     .config([ '$routeProvider', ($routeProvider) => $routeProvider.otherwise({ redirectTo: '/devices' }) ]);
