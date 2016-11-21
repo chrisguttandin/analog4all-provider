@@ -36,7 +36,7 @@
     "browserify": "^13.1.1",
     "browserify-shim": "^3.8.12",
     "midi-json-parser": "^1.0.1",
-    "midi-player": "0.0.13",
+    "midi-player": "0.0.14",
     "recorderjs": "git+https://github.com/chrisguttandin/Recorderjs.git",
     "rxjs-broker": "^0.2.3",
     "worker-timers": "^3.0.0"
