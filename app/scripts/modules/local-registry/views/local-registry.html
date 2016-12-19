@@ -1,7 +1,0 @@
-<h2 ng-if="vm.devices.length === 0">There is currently no instrument connected</h2>
-<h2 ng-if="vm.devices.length > 0">Currently connected instruments</h2>
-<ul>
-    <li ng-repeat="device in vm.devices track by device.id">
-        <midi-output device="device"></midi-output>
-    </li>
-</ul>

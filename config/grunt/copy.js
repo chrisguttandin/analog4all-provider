@@ -1,11 +1,31 @@
-'use strict';
-
 module.exports = {
-    default: {
+    404: {
         files: [
             {
-                dest: 'build/script.js',
-                src: 'app/scripts/bundle.js'
+                cwd: 'src/',
+                dest: 'build/',
+                expand: true,
+                src: [ '404.html' ]
+            }
+        ]
+    },
+    scripts: {
+        files: [
+            {
+                cwd: 'build/',
+                dest: 'build/scripts/',
+                expand: true,
+                src: [ '**/*.js' ]
+            }
+        ]
+    },
+    styles: {
+        files: [
+            {
+                cwd: 'build/',
+                dest: 'build/styles/',
+                expand: true,
+                src: [ '**/*.css' ]
             }
         ]
     }

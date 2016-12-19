@@ -1,0 +1,8 @@
+{
+    "directives": {
+        "connect-src": "'self'",
+        "default-src": "'none'",
+        "script-src": [ "'self'", "'unsafe-eval'" ],
+        "style-src": [ "'self'", "'unsafe-inline'" ]
+    }
+}

@@ -1,4 +1,4 @@
 *.DS_Store
-app/scripts/bundle.js
-build/
+.tscache
+build/**
 node_modules/

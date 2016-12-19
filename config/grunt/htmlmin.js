@@ -1,16 +1,13 @@
-'use strict';
-
 module.exports = {
-    html: {
-        files: [{
-            cwd: 'app/',
+    default: {
+        files: [ {
+            cwd: 'build/',
             dest: 'build/',
             expand: true,
-            src: [
-                'index.html'
-            ]
-        }],
+            src: [ '**/*.html' ]
+        } ],
         options: {
+            caseSensitive: true,
             collapseBooleanAttributes: true,
             collapseWhitespace: true,
             removeComments: true

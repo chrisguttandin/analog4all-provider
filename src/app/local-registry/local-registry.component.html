@@ -1,0 +1,7 @@
+<h2 *ngIf="(midiOutputsLength$ | async) === 0">There is currently no instrument connected via MIDI</h2>
+<h2 *ngIf="(midiOutputsLength$ | async) > 0">Currently connected instruments MIDI</h2>
+<ul>
+    <li *ngFor="let midiOutput of midiOutputs$ | async">
+        <anp-midi-connection [midiOutput]="midiOutput"></anp-midi-connection>
+    </li>
+</ul>

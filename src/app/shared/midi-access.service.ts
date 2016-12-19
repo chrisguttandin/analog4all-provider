@@ -1,0 +1,38 @@
+import { Inject, Injectable } from '@angular/core';
+import { WindowService } from './window.service';
+
+@Injectable()
+export class MidiAccessService {
+
+    private _midiAccess: WebMidi.MIDIAccess;
+
+    private _window;
+
+    constructor (windowService: WindowService) {
+        this._midiAccess = null;
+        this._window = windowService.nativeWindow;
+    }
+
+    /**
+     * This property is true if the browser supports all the required APIs to use the
+     * MidiAccessService.
+     */
+    get isSupported () {
+        return ('navigator' in this._window && 'requestMIDIAccess' in this._window.navigator);
+    }
+
+    public request (): Promise<WebMidi.MIDIAccess> {
+        if (this._midiAccess !== null) {
+            return Promise.resolve(this._midiAccess);
+        }
+
+        if (this.isSupported) {
+            return this._window.navigator
+                .requestMIDIAccess()
+                .then((midiAccess) => this._midiAccess = midiAccess);
+        }
+
+        return Promise.reject(new Error('The Web MIDI API is not supported by the current browser.'));
+    }
+
+}

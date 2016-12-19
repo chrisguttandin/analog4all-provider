@@ -1,0 +1,41 @@
+:host {
+    display: block;
+}
+
+label,
+select {
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    line-height: 20px;
+    padding: 5px;
+}
+
+label {
+    background-color: #DDD;
+    width: 30%;
+}
+
+select {
+    -webkit-appearance: none;
+    background-color: #FFF;
+    border-radius: 0;
+    border: none;
+    outline: none;
+    width: 70%;
+}
+
+p {
+    clear: both;
+    color: #666;
+    padding: 5px;
+}
+
+@media (max-width: 500px) {
+
+    label,
+    select {
+        width: 100%;
+    }
+
+}
