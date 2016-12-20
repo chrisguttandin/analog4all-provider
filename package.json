@@ -8,7 +8,7 @@
     "@angular/compiler": "2.2.1",
     "@angular/core": "2.2.1",
     "@angular/forms": "2.2.1",
-    "@angular/http": "2.2.1",
+    "@angular/http": "2.4.0",
     "@angular/platform-browser": "2.2.1",
     "@angular/platform-browser-dynamic": "2.2.1",
     "@ngrx/core": "^1.2.0",
