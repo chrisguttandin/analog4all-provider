@@ -60,7 +60,7 @@
     "stylelint": "^7.6.0",
     "ts-node": "^1.6.0",
     "tslint": "^4.0.2",
-    "tslint-config-holy-grail": "^4.0.0",
+    "tslint-config-holy-grail": "^5.0.0",
     "typescript": "~2.0.10"
   },
   "homepage": "https://chrisguttandin.github.io/analog4all-provider/",
