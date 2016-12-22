@@ -16,7 +16,7 @@ export class RenderingService {
         private _waitingService: WaitingService
     ) { }
 
-    public render (dataChannelSubject, midiOutput) {
+    public render (dataChannelSubject, midiOutput, sourceId) {
         return this._waitingService
             .wait(dataChannelSubject)
             .then(() => {
@@ -59,7 +59,7 @@ export class RenderingService {
                     });
 
                 return this._recordingService
-                    .start()
+                    .start(sourceId)
                     .then(() => midiJson);
             })
             .then((midiJson) => midiPlayerFactory

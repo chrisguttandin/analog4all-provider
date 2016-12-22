@@ -137,7 +137,7 @@ export class MidiConnectionComponent implements OnInit {
                             });
 
                         connection
-                            .concatMap((dataChannel) => this._renderingService.render(wrap(dataChannel), this.midiOutput))
+                            .concatMap((dataChannel) => this._renderingService.render(wrap(dataChannel), this.midiOutput, sourceId))
                             .subscribe(() => { // tslint:disable-line:no-empty
                                 // @todo
                             });
