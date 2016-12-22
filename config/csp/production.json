@@ -1,7 +1,7 @@
 {
     "directives": {
         "child-src": "blob:",
-        "connect-src": "'self'",
+        "connect-src": [ "'self'", "https://analog4all-registry.eu-west-1.elasticbeanstalk.com" ],
         "default-src": "'none'",
         "script-src": [ "'self'", "'unsafe-eval'" ],
         "style-src": [ "'self'", "'unsafe-inline'" ]
