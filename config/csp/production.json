@@ -1,5 +1,6 @@
 {
     "directives": {
+        "child-src": "blob:",
         "connect-src": "'self'",
         "default-src": "'none'",
         "script-src": [ "'self'", "'unsafe-eval'" ],
