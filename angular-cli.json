@@ -2,7 +2,9 @@
     "addons": [],
     "apps": [
         {
-            "assets": "assets",
+            "assets": [
+                "assets"
+            ],
             "environments": {
                 "dev": "environments/environment.ts",
                 "prod": "environments/environment.prod.ts",
@@ -46,7 +48,7 @@
     "packages": [],
     "project": {
         "name": "analog4all-provider",
-        "version": "1.0.0-beta.22-1"
+        "version": "1.0.0-beta.24"
     },
     "test": {
         "karma": {

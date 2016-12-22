@@ -2,7 +2,8 @@ import { Action, ActionReducer } from '@ngrx/store';
 
 export const UPDATE_MIDI_OUTPUTS = 'UPDATE_MIDI_OUTPUTS';
 
-const midiOutputsReducer: ActionReducer<WebMidi.MIDIOutput[]> = (state = [], action: Action) => {
+// @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
+export function midiOutputsReducer (state = [], action: Action): WebMidi.MIDIOutput[] {
     switch (action.type) {
         case UPDATE_MIDI_OUTPUTS:
             const remainingOutputs = state
@@ -15,7 +16,4 @@ const midiOutputsReducer: ActionReducer<WebMidi.MIDIOutput[]> = (state = [], act
         default:
             return state;
     }
-};
-
-// @todo This separate export was necessary to enable AoT with TypeScript 2.0.X.
-export { midiOutputsReducer };
+}

@@ -4,13 +4,14 @@
     "url": "https://github.com/chrisguttandin/analog4all-provider/issues"
   },
   "dependencies": {
-    "@angular/common": "2.2.1",
-    "@angular/compiler": "2.2.1",
-    "@angular/core": "2.2.1",
-    "@angular/forms": "2.2.1",
-    "@angular/http": "2.2.1",
-    "@angular/platform-browser": "2.2.1",
-    "@angular/platform-browser-dynamic": "2.2.1",
+    "@angular/common": "^2.3.1",
+    "@angular/compiler": "^2.3.1",
+    "@angular/core": "^2.3.1",
+    "@angular/forms": "^2.3.1",
+    "@angular/http": "^2.3.1",
+    "@angular/platform-browser": "^2.3.1",
+    "@angular/platform-browser-dynamic": "^2.3.1",
+    "@angular/router": "^3.3.1",
     "@ngrx/core": "^1.2.0",
     "@ngrx/store": "^2.2.1",
     "core-js": "^2.4.1",
@@ -18,18 +19,18 @@
     "extendable-media-recorder-wav-encoder": "0.0.4",
     "midi-json-parser": "^2.0.0",
     "midi-player": "^1.0.0",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "^5.0.1",
     "rxjs-broker": "^1.0.0",
-    "zone.js": "^0.6.23"
+    "zone.js": "^0.7.2"
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
-    "@angular/compiler-cli": "2.2.1",
+    "@angular/compiler-cli": "^2.3.1",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
     "@types/webmidi": "0.0.30",
     "@types/webrtc": "0.0.21",
-    "angular-cli": "1.0.0-beta.22-1",
+    "angular-cli": "1.0.0-beta.24",
     "content-security-policy-builder": "^1.1.0",
     "eslint-config-holy-grail": "^14.0.0",
     "grunt": "^1.0.1",
@@ -56,11 +57,11 @@
     "karma-jasmine": "^1.0.2",
     "karma-sauce-launcher": "^1.1.0",
     "load-grunt-config": "^0.19.2",
-    "protractor": "^4.0.10",
+    "protractor": "~4.0.13",
     "stylelint": "^7.6.0",
     "ts-node": "^1.6.0",
     "tslint": "^4.0.2",
-    "tslint-config-holy-grail": "^4.0.0",
+    "tslint-config-holy-grail": "^5.0.0",
     "typescript": "~2.0.10"
   },
   "homepage": "https://chrisguttandin.github.io/analog4all-provider/",
@@ -75,7 +76,7 @@
   "scripts": {
     "e2e": "protractor",
     "precommit": "grunt lint",
-    "pree2e": "webdriver-manager update",
+    "pree2e": "webdriver-manager update --standalone false --gecko false",
     "test": "grunt lint && grunt test"
   },
   "version": "2.0.0"

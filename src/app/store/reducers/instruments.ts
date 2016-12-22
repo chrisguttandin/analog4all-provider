@@ -29,7 +29,8 @@ const updateInstrument = (instruments, instrument) => {
     ];
 };
 
-const instrumentsReducer: ActionReducer<IInstrument[]> = (state = [], action: Action) => {
+// @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
+export function instrumentsReducer (state = [], action: Action): IInstrument[] {
     switch (action.type) {
         case ADD_INSTRUMENT:
             return [ ...state, action.payload ];
@@ -40,7 +41,4 @@ const instrumentsReducer: ActionReducer<IInstrument[]> = (state = [], action: Ac
         default:
             return state;
     }
-};
-
-// @todo This separate export was necessary to enable AoT with TypeScript 2.0.X.
-export { instrumentsReducer };
+}

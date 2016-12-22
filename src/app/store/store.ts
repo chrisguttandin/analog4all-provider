@@ -14,11 +14,8 @@ export interface IAppState {
 
 };
 
-const appReducer: { [key: string]: ActionReducer<any> } = {
+export const appReducer: { [key: string]: ActionReducer<any> } = {
     instruments: instrumentsReducer,
     midiConnections: midiConnectionsReducer,
     midiOutputs: midiOutputsReducer
 };
-
-// @todo This separate export was necessary to enable AoT with TypeScript 2.0.X.
-export { appReducer };

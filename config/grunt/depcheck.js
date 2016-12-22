@@ -3,6 +3,7 @@ module.exports = {
         options: {
             failOnUnusedDeps: true,
             ignoreMatches: [
+                '@angular/router',
                 '@angular/compiler-cli',
                 '@types/*',
                 'angular-cli',

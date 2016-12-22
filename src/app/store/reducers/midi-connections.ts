@@ -18,7 +18,8 @@ const updateMidiConnection = (midiConnections, midiConnection) => {
     ];
 };
 
-const midiConnectionsReducer: ActionReducer<IMidiConnection[]> = (state = [], action: Action) => {
+// @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
+export function midiConnectionsReducer (state = [], action: Action): IMidiConnection[] {
     switch (action.type) {
         case ADD_MIDI_CONNECTION:
             return [ ...state, action.payload ];
@@ -27,7 +28,4 @@ const midiConnectionsReducer: ActionReducer<IMidiConnection[]> = (state = [], ac
         default:
             return state;
     }
-};
-
-// @todo This separate export was necessary to enable AoT with TypeScript 2.0.X.
-export { midiConnectionsReducer };
+}
