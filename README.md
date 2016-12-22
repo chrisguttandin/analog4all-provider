@@ -5,4 +5,4 @@
 [![tests](https://img.shields.io/travis/chrisguttandin/analog4all-provider/master.svg?style=flat-square)](https://travis-ci.org/chrisguttandin/analog4all-provider)
 [![dependencies](https://img.shields.io/david/chrisguttandin/analog4all-provider.svg?style=flat-square)](https://www.npmjs.com/package/analog4all-provider)
 
-To view the side just navigate to: [http://chrisguttandin.github.io/analog4all-provider](http://chrisguttandin.github.io/analog4all-provider).
+To view the side just navigate to: [https://chrisguttandin.github.io/analog4all-provider](https://chrisguttandin.github.io/analog4all-provider).
