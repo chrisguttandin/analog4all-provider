@@ -4,7 +4,7 @@
     "url": "https://github.com/chrisguttandin/analog4all-provider/issues"
   },
   "dependencies": {
-    "@angular/common": "2.2.1",
+    "@angular/common": "2.4.1",
     "@angular/compiler": "2.2.1",
     "@angular/core": "2.2.1",
     "@angular/forms": "2.2.1",
