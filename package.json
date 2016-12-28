@@ -26,7 +26,7 @@
   "description": "This is the provider for analog4all.",
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
-    "@types/jasmine": "2.5.38",
+    "@types/jasmine": "2.5.39",
     "@types/node": "^6.0.42",
     "@types/webmidi": "0.0.30",
     "@types/webrtc": "0.0.21",
