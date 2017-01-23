@@ -1,5 +1,4 @@
 {
-    "addons": [],
     "apps": [
         {
             "assets": [
@@ -45,10 +44,9 @@
             "config": "./config/protractor/e2e.js"
         }
     },
-    "packages": [],
     "project": {
         "name": "analog4all-provider",
-        "version": "1.0.0-beta.24"
+        "version": "1.0.0-beta.26"
     },
     "test": {
         "karma": {
