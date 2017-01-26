@@ -44,7 +44,7 @@ export class InstrumentsService {
     public delete (instrument: IInstrument): Observable<null> {
         return this._http
             .delete(`https${ this._endpoint }instruments/${ instrument.id }`)
-            .map((response) => null)
+            .map(() => null)
             .do(() => this._store.dispatch({ payload: instrument, type: DELETE_INSTRUMENT }))
             .catch((response) => Observable.throw(new ResponseError(response)));
     }
@@ -59,7 +59,7 @@ export class InstrumentsService {
     public update (id: string, delta): Observable<null> {
         return this._http
             .patch(`https${ this._endpoint }instruments/${ id }`, delta)
-            .map((response) => null)
+            .map(() => null)
             .do(() => this._store.dispatch({ payload: Object.assign({}, delta, { id }), type: UPDATE_INSTRUMENT }))
             .catch((response) => Observable.throw(new ResponseError(response)));
     }
