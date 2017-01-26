@@ -9,7 +9,6 @@ module.exports = {
         'sh:build',
         'copy:404',
         'htmlmin',
-        'replace:source-maps',
         'replace:inline',
         'replace:chunks',
         'replace:csp-production',

@@ -92,23 +92,6 @@ module.exports = {
             } ]
         }
     },
-    'source-maps': {
-        files: {
-            './': [
-                'build/*.css',
-                'build/*.js'
-            ]
-        },
-        options: {
-            patterns: [ {
-                match: /[\n\r]+\/\/#\ssourceMappingURL=.*/gm,
-                replacement: ''
-            }, {
-                match: /[\n\r]+\/\*#\ssourceMappingURL=.*/gm,
-                replacement: ''
-            } ]
-        }
-    },
     'styles': {
         files: {
             './': [
