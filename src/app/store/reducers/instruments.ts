@@ -6,7 +6,7 @@ export const DELETE_INSTRUMENT = 'DELETE_INSTRUMENT';
 export const UPDATE_INSTRUMENT = 'UPDATE_INSTRUMENT';
 
 const deleteInstrument = (instruments, instrument) => {
-    const index = instruments.findIndex(({ id }) => id === instrument);
+    const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index === -1) {
         return instruments;
