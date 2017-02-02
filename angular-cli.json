@@ -13,6 +13,7 @@
             "main": "main.ts",
             "mobile": false,
             "outDir": "build",
+            "polyfills": "polyfills.ts",
             "prefix": "anp",
             "root": "src",
             "scripts": [],
@@ -24,6 +25,7 @@
         }
     ],
     "defaults": {
+        "changeDetection": "OnPush",
         "inline": {
             "style": false,
             "template": false
@@ -46,7 +48,7 @@
     },
     "project": {
         "name": "analog4all-provider",
-        "version": "1.0.0-beta.26"
+        "version": "1.0.0-beta.28.3"
     },
     "test": {
         "karma": {

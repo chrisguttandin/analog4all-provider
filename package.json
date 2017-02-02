@@ -30,7 +30,7 @@
     "@types/node": "^6.0.42",
     "@types/webmidi": "0.0.30",
     "@types/webrtc": "0.0.21",
-    "angular-cli": "1.0.0-beta.26",
+    "angular-cli": "1.0.0-beta.28.3",
     "content-security-policy-builder": "^1.1.0",
     "eslint-config-holy-grail": "^15.0.0",
     "grunt": "^1.0.1",
