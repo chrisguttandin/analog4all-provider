@@ -62,7 +62,7 @@
     "stylelint": "^7.6.0",
     "ts-node": "^1.6.0",
     "tslint-config-holy-grail": "^5.0.0",
-    "typescript": "~2.0.10"
+    "typescript": "~2.1.6"
   },
   "homepage": "https://chrisguttandin.github.io/analog4all-provider/",
   "license": "MIT",
