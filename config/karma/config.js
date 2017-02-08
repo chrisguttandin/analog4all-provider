@@ -17,7 +17,7 @@ module.exports = (config) => {
         ],
 
         frameworks: [
-            'angular-cli',
+            '@angular/cli',
             'jasmine'
         ],
 
@@ -26,12 +26,12 @@ module.exports = (config) => {
         },
 
         plugins: [
-            'angular-cli/plugins/karma',
+            '@angular/cli/plugins/karma',
             'karma-*'
         ],
 
         preprocessors: {
-            './config/karma/test.ts': [ 'angular-cli' ]
+            './config/karma/test.ts': [ '@angular/cli' ]
         },
 
         remapIstanbulReporter: {
