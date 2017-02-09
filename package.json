@@ -60,7 +60,7 @@
     "load-grunt-config": "^0.19.2",
     "protractor": "~4.0.13",
     "stylelint": "^7.6.0",
-    "ts-node": "^1.6.0",
+    "ts-node": "^2.1.0",
     "tslint-config-holy-grail": "^5.0.0",
     "typescript": "~2.0.10"
   },
