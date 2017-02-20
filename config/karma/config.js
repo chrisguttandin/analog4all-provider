@@ -3,11 +3,20 @@ module.exports = (config) => {
     config.set({
 
         angularCli: {
-            config: './angular-cli.json',
+            config: './.angular-cli.json',
             environment: 'dev'
         },
 
         basePath: '../../',
+
+        client: {
+            clearContext: false
+        },
+
+        coverageIstanbulReporter: {
+            fixWebpackSourcePaths: true,
+            reports: [ 'html', 'lcovonly' ]
+        },
 
         files: [
             {
@@ -42,8 +51,8 @@ module.exports = (config) => {
         },
 
         reporters: config.angularCli && config.angularCli.codeCoverage
-            ? ['progress', 'karma-remap-istanbul']
-            : ['progress']
+            ? [ 'progress', 'coverage-istanbul' ]
+            : [ 'progress', 'kjhtml' ]
 
     });
 
