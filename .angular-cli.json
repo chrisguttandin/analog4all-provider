@@ -4,10 +4,10 @@
             "assets": [
                 "assets"
             ],
+            "environmentSource": "environments/environment.ts",
             "environments": {
                 "dev": "environments/environment.ts",
-                "prod": "environments/environment.prod.ts",
-                "source": "environments/environment.ts"
+                "prod": "environments/environment.prod.ts"
             },
             "index": "index.html",
             "main": "main.ts",
@@ -26,6 +26,7 @@
     ],
     "defaults": {
         "changeDetection": "OnPush",
+        "component": {},
         "inline": {
             "style": false,
             "template": false
@@ -48,8 +49,9 @@
     },
     "project": {
         "name": "analog4all-provider",
-        "version": "1.0.0-beta.30"
+        "version": "1.0.0-beta.32.3"
     },
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "test": {
         "karma": {
             "config": "./config/karma/config.js"

@@ -1,4 +1,4 @@
-const SpecReporter = require('jasmine-spec-reporter');
+const { SpecReporter } = require('jasmine-spec-reporter');
 const tsNode = require('ts-node');
 
 exports.config = {
@@ -28,7 +28,7 @@ exports.config = {
     },
 
     onPrepare () {
-        jasmine.getEnv().addReporter(new SpecReporter()); // eslint-disable-line no-undef
+        jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } })); // eslint-disable-line no-undef
     },
 
     specs: [
