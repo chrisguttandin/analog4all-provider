@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InstrumentsService, MidiAccessService, PeerConnectingService, UserMediaService } from './shared';
 
 @Component({
-    selector: 'anp-root',
+    selector: 'anp-app',
     styleUrls: [ './app.component.css' ],
     templateUrl: './app.component.html'
 })
