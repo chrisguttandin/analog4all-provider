@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class FileReceivingService {
 
-    public receive (dataChannelSubject) {
+    public receive (dataChannelSubject): Promise<ArrayBuffer> {
         return new Promise((resolve, reject) => {
             let buffer;
 
