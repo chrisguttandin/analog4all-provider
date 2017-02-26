@@ -7,9 +7,9 @@
     "experimentalDecorators": true,
     "lib": [ "dom", "es2016" ],
     "mapRoot": "./",
-    "module": "es2016",
+    "module": "es2015",
     "moduleResolution": "node",
-    "outDir": "../dist/out-tsc",
+    "outDir": "../build/out-tsc",
     "sourceMap": true,
     "target": "es5",
     "typeRoots": [
