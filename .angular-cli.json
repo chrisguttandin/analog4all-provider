@@ -49,7 +49,7 @@
     },
     "project": {
         "name": "analog4all-provider",
-        "version": "1.0.0-beta.32.3"
+        "version": "1.0.0-rc.0"
     },
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "test": {

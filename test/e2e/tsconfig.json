@@ -4,13 +4,12 @@
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "lib": [ "es2016" ],
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "../../build/out-tsc-e2e",
     "sourceMap": true,
-    "target": "es5",
-    "typeRoots": [
-      "../../node_modules/@types"
-    ]
+    "target": "es2015",
+    "types":[ "jasmine", "node" ]
   }
 }
