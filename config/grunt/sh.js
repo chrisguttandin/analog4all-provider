@@ -8,6 +8,9 @@ module.exports = {
     e2e: {
         cmd: 'ng e2e'
     },
+    lint: {
+        cmd: 'tslint -c config/tslint/src.json --project src/tsconfig.json --type-check src/**/*.ts'
+    },
     monitor: {
         cmd: 'ng serve --port 8833'
     },
