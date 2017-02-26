@@ -31,7 +31,8 @@ module.exports = {
         'eslint',
         'htmlhint',
         'postcss:lint',
-        'tslint',
+        // @todo Use grunt-lint again when it support the type-check option.
+        'sh:lint',
         'depcheck'
     ],
     'monitor': [
