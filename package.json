@@ -20,7 +20,7 @@
     "midi-json-parser": "^2.0.0",
     "midi-player": "^1.0.0",
     "rxjs": "^5.1.0",
-    "rxjs-broker": "^1.0.0",
+    "rxjs-broker": "^1.1.9",
     "zone.js": "^0.7.6"
   },
   "description": "This is the provider for analog4all.",
