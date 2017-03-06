@@ -33,8 +33,6 @@ exports.config = {
 
     specs: [
         '../../test/e2e/**/*.ts'
-    ],
-
-    useAllAngular2AppRoots: true
+    ]
 
 };

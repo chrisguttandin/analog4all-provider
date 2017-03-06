@@ -11,7 +11,6 @@
             },
             "index": "index.html",
             "main": "main.ts",
-            "mobile": false,
             "outDir": "build",
             "polyfills": "polyfills.ts",
             "prefix": "anp",
@@ -21,24 +20,34 @@
                 "styles/styles.css"
             ],
             "test": "../config/karma/test.ts",
+            "testTsconfig": "../test/unit/tsconfig.json",
             "tsconfig": "tsconfig.json"
         }
     ],
     "defaults": {
-        "changeDetection": "OnPush",
-        "component": {},
-        "inline": {
-            "style": false,
-            "template": false
+        "class": {
+            "spec": true
         },
-        "prefixInterfaces": false,
-        "spec": {
-            "class": false,
-            "component": true,
-            "directive": true,
-            "module": false,
-            "pipe": true,
-            "service": true
+        "component": {
+            "changeDetection": "OnPush",
+            "inlineStyle": false,
+            "inlineTemplate": false,
+            "spec": true
+        },
+        "directive": {
+            "spec": true
+        },
+        "module": {
+            "spec": true
+        },
+        "interface": {
+            "prefix": "I"
+        },
+        "pipe": {
+            "spec": true
+        },
+        "service": {
+            "spec": true
         },
         "styleExt": "css"
     },
@@ -48,8 +57,7 @@
         }
     },
     "project": {
-        "name": "analog4all-provider",
-        "version": "1.0.0-rc.0"
+        "name": "analog4all-provider"
     },
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "test": {
