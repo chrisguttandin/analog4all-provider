@@ -56,6 +56,18 @@
             "config": "./config/protractor/e2e.js"
         }
     },
+    "lint": [
+        {
+            "project": "src/tsconfig.json",
+            "tslintConfig": "config/tslint/src.json"
+        }, {
+            "project": "test/e2e/tsconfig.json",
+            "tslintConfig": "config/tslint/test.json"
+        }, {
+            "project": "test/unit/tsconfig.json",
+            "tslintConfig": "config/tslint/test.json"
+        }
+    ],
     "project": {
         "name": "analog4all-provider"
     },
