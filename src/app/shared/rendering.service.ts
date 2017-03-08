@@ -36,7 +36,9 @@ export class RenderingService {
 
                         let delta = 0;
 
-                        for (let i = 0, length = events.length; i < length; i += 1) {
+                        const length = events.length;
+
+                        for (let i = 0; i < length; i += 1) {
                             const event = events[i];
 
                             if (

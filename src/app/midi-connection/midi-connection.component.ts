@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { midiPlayerFactory } from 'midi-player';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { wrap } from 'rxjs-broker';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { IInstrument, IMidiConnection } from '../interfaces';
 import {
     AudioInputMediaDevicesService,

@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { connect, isSupported } from 'rxjs-broker';
+import { Observable } from 'rxjs/Observable';
 import { IInstrument } from '../interfaces';
 import { ADD_INSTRUMENT, DELETE_INSTRUMENT, IAppState, UPDATE_INSTRUMENT } from '../store';
 import { ENDPOINT } from './endpoint-token';

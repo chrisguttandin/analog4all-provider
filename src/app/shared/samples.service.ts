@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ResponseError } from './response-error';
 
 const ENDPOINT = 'analog4all-registry.eu-west-1.elasticbeanstalk.com/';

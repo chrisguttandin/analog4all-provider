@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { WindowService } from './window.service';
 
 const ICE_SERVERS = [ { urls: [

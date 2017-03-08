@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { InstrumentsService } from './instruments.service';
 import { UserMediaService } from './user-media.service';
 

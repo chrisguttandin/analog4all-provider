@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { IAppState, UPDATE_MIDI_OUTPUTS } from '../store';
 import { MidiAccessService } from './midi-access.service';
 

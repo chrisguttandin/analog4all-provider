@@ -36,7 +36,9 @@ export class FileReceivingService {
 
                             const source = atob(message);
 
-                            for (let i = byteIndex, length = byteIndex + source.length; i < length; i += 1) {
+                            const length = byteIndex + source.length;
+
+                            for (let i = byteIndex; i < length; i += 1) {
                                 destination[i] = source.charCodeAt(i - byteIndex);
                             }
 
