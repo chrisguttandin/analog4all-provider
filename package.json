@@ -28,7 +28,7 @@
     "@angular/cli": "1.0.0-rc.1",
     "@angular/compiler-cli": ">=4.0.0-beta <5.0.0",
     "@types/jasmine": "2.5.38",
-    "@types/node": "~6.0.60",
+    "@types/node": "~7.0.8",
     "@types/webmidi": "2.0.0",
     "@types/webrtc": "0.0.21",
     "content-security-policy-builder": "^1.1.0",
