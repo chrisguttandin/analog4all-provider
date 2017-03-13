@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { IMidiConnection } from '../interfaces';
 import { ADD_MIDI_CONNECTION, IAppState, UPDATE_MIDI_CONNECTION } from '../store';

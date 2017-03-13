@@ -1,6 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { midiPlayerFactory } from 'midi-player';
 import { wrap } from 'rxjs-broker';
+import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/toPromise';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { IInstrument, IMidiConnection } from '../interfaces';
