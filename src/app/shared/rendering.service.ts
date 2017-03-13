@@ -24,7 +24,7 @@ export class RenderingService {
 
                 return this._fileReceivingService.receive(dataChannelSubject);
             })
-            .then((arrayBuffer) => {
+            .then((arrayBuffer: ArrayBuffer) => {
                 console.log('parse');
 
                 return parseArrayBuffer(arrayBuffer);
