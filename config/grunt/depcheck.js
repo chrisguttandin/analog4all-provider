@@ -2,6 +2,9 @@ module.exports = {
     default: {
         options: {
             failOnUnusedDeps: true,
+            ignoreDirs: [
+                'build'
+            ],
             ignoreMatches: [
                 '@angular/router',
                 '@angular/cli',
