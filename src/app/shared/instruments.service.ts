@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { connect, isSupported } from 'rxjs-broker';
+import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
@@ -26,7 +26,7 @@ export class InstrumentsService {
         return isSupported;
     }
 
-    public connect ({ id }): Observable<RTCDataChannel> {
+    public connect ({ id }): Observable<IDataChannel> {
         const webSocketSubject = connect(`wss${ this._endpoint }instruments/${ id }`);
 
         return this._peerConnectingService.connect(webSocketSubject);

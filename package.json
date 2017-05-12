@@ -30,7 +30,6 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "@types/webmidi": "2.0.1",
-    "@types/webrtc": "0.0.21",
     "content-security-policy-builder": "^1.1.0",
     "eslint-config-holy-grail": "^17.0.0",
     "grunt": "^1.0.1",

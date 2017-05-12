@@ -12,8 +12,7 @@
     "sourceMap": true,
     "target": "es5",
     "types": [
-      "webmidi",
-      "webrtc"
+      "webmidi"
     ]
   }
 }
