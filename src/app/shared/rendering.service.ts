@@ -65,7 +65,7 @@ export class RenderingService {
                     .then(() => midiJson);
             })
             .then((midiJson) => midiPlayerFactory
-                .create({  json: midiJson, midiOutput })
+                .create({ json: midiJson, midiOutput })
                 .play())
             .then(() => {
                 console.log('stop');
