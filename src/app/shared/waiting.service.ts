@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/first';
 
 /**
  * This service sends a waiting message to the data channel. It waits for the data channel to emit a
