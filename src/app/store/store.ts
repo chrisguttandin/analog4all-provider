@@ -12,7 +12,7 @@ export interface IAppState {
 
     midiOutputs: WebMidi.MIDIOutput[];
 
-};
+}
 
 export const appReducer: { [key: string]: ActionReducer<any> } = {
     instruments: instrumentsReducer,

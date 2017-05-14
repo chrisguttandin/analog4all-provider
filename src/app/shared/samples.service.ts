@@ -24,7 +24,7 @@ export class SamplesService {
 
                 formData.append('acl', 'private');
                 formData.append('awsaccesskeyid', accessKeyId);
-                formData.append('key', id + '.wav');
+                formData.append('key', `${ id }.wav`);
                 formData.append('policy', policy);
                 formData.append('signature', signature);
                 formData.append('file', file);
