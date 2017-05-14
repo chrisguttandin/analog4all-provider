@@ -20,12 +20,12 @@ export class RenderingService {
         return this._waitingService
             .wait(dataChannelSubject)
             .then(() => {
-                console.log('receive');
+                // @todo console.log('receive');
 
                 return this._fileReceivingService.receive(dataChannelSubject);
             })
             .then((arrayBuffer: ArrayBuffer) => {
-                console.log('parse');
+                // @todo console.log('parse');
 
                 return parseArrayBuffer(arrayBuffer);
             })
@@ -68,17 +68,17 @@ export class RenderingService {
                 .create({ json: midiJson, midiOutput })
                 .play())
             .then(() => {
-                console.log('stop');
+                // @todo console.log('stop');
 
                 return this._recordingService.stop();
             })
             .then((arrayBuffer) => {
-                console.log('send');
+                // @todo console.log('send');
 
                 return this._fileSendingService.send(dataChannelSubject, new Blob([ arrayBuffer ]));
             })
             .then(() => {
-                console.log('done');
+                // @todo console.log('done');
 
                 dataChannelSubject.close();
             });

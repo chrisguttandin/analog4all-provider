@@ -4,7 +4,7 @@ export * from './endpoint-token';
 export * from './file-receiving.service';
 export * from './file-sending.service';
 export * from './instruments.service';
-export * from './middle-c-midi-json.service'
+export * from './middle-c-midi-json.service';
 export * from './midi-access.service';
 export * from './midi-connections.service';
 export * from './midi-outputs.service';
@@ -14,7 +14,7 @@ export * from './registering.service';
 export * from './rendering.service';
 export * from './response-error';
 export * from './samples.service';
-export * from './scale-midi-json.service'
+export * from './scale-midi-json.service';
 export * from './user-media.service';
 export * from './waiting.service';
 export * from './window.service';
