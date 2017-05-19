@@ -1,23 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import { Observable } from 'rxjs/Observable';
+import { ENDPOINT } from './endpoint-token';
 import { ResponseError } from './response-error';
-
-const ENDPOINT = 'analog4all-registry.eu-west-1.elasticbeanstalk.com/';
 
 @Injectable()
 export class SamplesService {
 
     constructor (
+        @Inject(ENDPOINT) private _endpoint,
         private _http: Http
     ) {}
 
     public create ({ file }) {
         return this._http
-            .post(`${ ENDPOINT }samples`, null)
+            .post(`https${ this._endpoint }samples`, null)
             .map((response) => response.json())
             .mergeMap(({ accessKeyId, created, id, modified, policy, signature, url }) => {
                 const formData = new FormData();
