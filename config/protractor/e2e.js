@@ -7,12 +7,6 @@ exports.config = {
 
     baseUrl: 'http://localhost:8833/',
 
-    beforeLaunch () {
-        tsNode.register({
-            project: 'test/e2e'
-        });
-    },
-
     capabilities: {
         browserName: 'chrome'
     },
@@ -28,6 +22,10 @@ exports.config = {
     },
 
     onPrepare () {
+        tsNode.register({
+            project: 'test/e2e'
+        });
+
         jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } })); // eslint-disable-line no-undef
     },
 

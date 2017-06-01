@@ -12,7 +12,7 @@ module.exports = {
         cmd: 'ng e2e'
     },
     lint: {
-        cmd: 'ng lint'
+        cmd: 'ng lint --type-check'
     },
     monitor: {
         cmd: 'ng serve --port 8833'
