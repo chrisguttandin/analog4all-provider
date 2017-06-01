@@ -14,7 +14,7 @@ module.exports = {
                 'eslint-config-holy-grail',
                 'grunt-*',
                 'husky',
-                'jasmine',
+                'jasmine-core',
                 'karma*',
                 'tslint-config-holy-grail',
                 'typescript',
