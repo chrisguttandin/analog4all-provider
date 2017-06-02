@@ -61,7 +61,7 @@
     "protractor": "~5.1.2",
     "stylelint": "^7.6.0",
     "ts-node": "~3.0.4",
-    "tslint-config-holy-grail": "~8.0.0",
+    "tslint-config-holy-grail": "~9.0.0",
     "typescript": "~2.3.3",
     "webpack-bundle-analyzer": "^2.3.1"
   },
