@@ -34,25 +34,25 @@ export class MidiConnectionComponent implements OnInit {
 
     public instrument$: Observable<IInstrument>;
 
-    private _instrumentChanges$: BehaviorSubject<IInstrument>;
-
     public instrumentName$: Observable<string>;
 
-    private _instrumentNameChanges$: BehaviorSubject<string>;
-
     public isRegistered$: Observable<boolean>;
-
-    private _middleCMidiJson;
 
     public midiConnection$: Observable<IMidiConnection>;
 
     @Input() public midiOutput: WebMidi.MIDIOutput;
 
-    private _scaleMidiJson;
-
     public sourceId$;
 
     public virtualInstrumentName$: Observable<string>;
+
+    private _instrumentChanges$: BehaviorSubject<IInstrument>;
+
+    private _instrumentNameChanges$: BehaviorSubject<string>;
+
+    private _middleCMidiJson;
+
+    private _scaleMidiJson;
 
     constructor(
         private _audioInputMediaDevicesService: AudioInputMediaDevicesService,
