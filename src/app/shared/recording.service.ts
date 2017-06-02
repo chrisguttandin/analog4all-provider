@@ -24,6 +24,27 @@ export class RecordingService {
         this._audioContext = new AudioContext();
     }
 
+    public start (sourceId) {
+        return this._userMediaService
+            .getAudioOnlyMediaStream(sourceId)
+            .then((mediaStream) => this._wireInput(mediaStream))
+            .then((mediaStream) => {
+                this._mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'audio/wav' });
+
+                this._mediaRecorder.start();
+            });
+    }
+
+    public stop () {
+        return this._waitForSilence()
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    this._mediaRecorder.addEventListener('dataavailable', ({ data }) => resolve(data));
+                    this._mediaRecorder.stop();
+                });
+            });
+    }
+
     private _detectSilence (currentTime, done, attempt) {
         const fftSize = this._analyserNode.fftSize;
 
@@ -54,27 +75,6 @@ export class RecordingService {
 
             setTimeout(() => this._detectSilence(currentTime, done, attempt + 1), tickLength * 1000);
         }
-    }
-
-    public start (sourceId) {
-        return this._userMediaService
-            .getAudioOnlyMediaStream(sourceId)
-            .then((mediaStream) => this._wireInput(mediaStream))
-            .then((mediaStream) => {
-                this._mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'audio/wav' });
-
-                this._mediaRecorder.start();
-            });
-    }
-
-    public stop () {
-        return this._waitForSilence()
-            .then(() => {
-                return new Promise((resolve, reject) => {
-                    this._mediaRecorder.addEventListener('dataavailable', ({ data }) => resolve(data));
-                    this._mediaRecorder.stop();
-                });
-            });
     }
 
     private _waitForSilence () {
