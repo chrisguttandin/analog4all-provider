@@ -29,7 +29,7 @@
     "@angular/compiler-cli": "^4.0.0",
     "@angular/language-service": "^4.0.0",
     "@types/jasmine": "2.5.45",
-    "@types/node": "~6.0.60",
+    "@types/node": "~7.0.29",
     "@types/webmidi": "2.0.1",
     "content-security-policy-builder": "^1.1.0",
     "eslint-config-holy-grail": "^17.0.0",
