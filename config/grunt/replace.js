@@ -1,7 +1,6 @@
 const cspBuilder = require('content-security-policy-builder');
 const crypto = require('crypto');
 const fs = require('fs');
-
 const cspProductionConfig = require('../csp/production');
 
 module.exports = {
@@ -29,9 +28,7 @@ module.exports = {
                 match: /<meta\shttp-equiv="content-security-policy">/,
                 replacement: () => {
                     const html = fs.readFileSync('build/index.html', 'utf-8');
-
                     const regex = /<script[^>]*?>([^<](.|[\n\r])*?)<\/script>/gm;
-
                     const scriptHashes = [];
 
                     let result = regex.exec(html);
@@ -54,7 +51,6 @@ module.exports = {
                                 : [ ...scriptHashes ]
                         })
                     });
-
                     const cspString = cspBuilder(cspConfig);
 
                     return `<meta content="${ cspString }" http-equiv="content-security-policy">`;
