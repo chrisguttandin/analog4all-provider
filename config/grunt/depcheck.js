@@ -11,6 +11,7 @@ module.exports = {
                 '@angular/compiler-cli',
                 '@angular/language-service',
                 '@types/*',
+                'axe-core',
                 'chromedriver',
                 'eslint-config-holy-grail',
                 'greenkeeper-lockfile',
