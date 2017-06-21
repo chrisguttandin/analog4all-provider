@@ -34,7 +34,7 @@
     "axe-core": "^2.3.1",
     "chromedriver": "^2.30.1",
     "content-security-policy-builder": "^1.1.0",
-    "eslint-config-holy-grail": "^18.0.0",
+    "eslint-config-holy-grail": "^18.1.0",
     "greenkeeper-lockfile": "^1.6.0",
     "grunt": "^1.0.1",
     "grunt-axe-webdriver": "0.0.4",
