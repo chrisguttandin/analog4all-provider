@@ -65,7 +65,7 @@
     "stylelint": "^7.11.1",
     "ts-node": "~3.0.4",
     "tslint-config-holy-grail": "^9.0.5",
-    "typescript": "~2.3.3",
+    "typescript": "~2.4.1",
     "webpack-bundle-analyzer": "^2.3.1"
   },
   "homepage": "https://chrisguttandin.github.io/analog4all-provider",
