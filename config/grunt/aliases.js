@@ -23,7 +23,8 @@ module.exports = {
         'copy:styles',
         'replace:styles',
         'clean:styles',
-        'gh-pages:deploy'
+        'gh-pages:deploy',
+        'sh:smoke'
     ],
     'deploy-on-version-updates': [
         'if:deploy'
