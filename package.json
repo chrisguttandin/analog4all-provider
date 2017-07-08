@@ -17,7 +17,7 @@
     "core-js": "^2.4.1",
     "extendable-media-recorder": "^1.0.10",
     "extendable-media-recorder-wav-encoder": "^1.0.17",
-    "midi-json-parser": "^4.0.0",
+    "midi-json-parser": "^4.0.2",
     "midi-player": "^2.0.9",
     "rxjs": "^5.4.2",
     "rxjs-broker": "^2.0.8",
