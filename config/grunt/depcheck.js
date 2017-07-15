@@ -19,6 +19,7 @@ module.exports = {
                 'husky',
                 'jasmine-core',
                 'karma*',
+                'tslint',
                 'tslint-config-holy-grail',
                 'typescript',
                 'webpack-bundle-analyzer'
