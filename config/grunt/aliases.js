@@ -3,7 +3,6 @@ module.exports = {
         'axe-webdriver'
     ],
     'analyze': [
-        'sh:build',
         'sh:analyze'
     ],
     'continuous': [
