@@ -4,7 +4,7 @@ import { appReducer } from './store';
 
 @NgModule({
     imports: [
-        NgRxStoreModule.provideStore(appReducer)
+        NgRxStoreModule.forRoot(appReducer)
     ]
 })
 export class StoreModule { }

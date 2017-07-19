@@ -1,10 +1,12 @@
 import { Action, ActionReducer } from '@ngrx/store';
 import { IMidiConnection } from '../../interfaces';
+import { IAddMidiConnectionAction, IUpdateMidiConnectionAction } from '../interfaces';
+import { TMidiConnectionAction } from '../types';
 
-export const ADD_MIDI_CONNECTION = 'ADD_MIDI_CONNECTION';
-export const UPDATE_MIDI_CONNECTION = 'UPDATE_MIDI_CONNECTION';
+export const ADD_MIDI_CONNECTION: IAddMidiConnectionAction['type'] = 'ADD_MIDI_CONNECTION';
+export const UPDATE_MIDI_CONNECTION: IUpdateMidiConnectionAction['type'] = 'UPDATE_MIDI_CONNECTION';
 
-const updateMidiConnection = (midiConnections, midiConnection) => {
+const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection: IMidiConnection) => {
     const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);
 
     if (index === -1) {
@@ -13,13 +15,13 @@ const updateMidiConnection = (midiConnections, midiConnection) => {
 
     return [
         ...midiConnections.slice(0, index),
-        Object.assign({}, midiConnections[index], midiConnection),
+        { ...midiConnections[index], midiConnection },
         ...midiConnections.slice(index + 1)
     ];
 };
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function midiConnectionsReducer (state = [], action: Action): IMidiConnection[] {
+export function midiConnectionsReducer (state: IMidiConnection[] = [], action: TMidiConnectionAction): IMidiConnection[] {
     switch (action.type) {
         case ADD_MIDI_CONNECTION:
             return [ ...state, action.payload ];

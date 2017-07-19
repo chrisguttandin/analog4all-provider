@@ -1,11 +1,13 @@
 import { Action, ActionReducer } from '@ngrx/store';
 import { IInstrument } from '../../interfaces';
+import { IAddInstrumentAction, IDeleteInstrumentAction, IUpdateInstrumentAction } from '../interfaces';
+import { TInstrumentAction } from '../types';
 
-export const ADD_INSTRUMENT = 'ADD_INSTRUMENT';
-export const DELETE_INSTRUMENT = 'DELETE_INSTRUMENT';
-export const UPDATE_INSTRUMENT = 'UPDATE_INSTRUMENT';
+export const ADD_INSTRUMENT: IAddInstrumentAction['type'] = 'ADD_INSTRUMENT';
+export const DELETE_INSTRUMENT: IDeleteInstrumentAction['type'] = 'DELETE_INSTRUMENT';
+export const UPDATE_INSTRUMENT: IUpdateInstrumentAction['type'] = 'UPDATE_INSTRUMENT';
 
-const deleteInstrument = (instruments, instrument) => {
+const deleteInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index === -1) {
@@ -15,7 +17,7 @@ const deleteInstrument = (instruments, instrument) => {
     return [ ...instruments.slice(0, index), ...instruments.slice(index + 1) ];
 };
 
-const updateInstrument = (instruments, instrument) => {
+const updateInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index === -1) {
@@ -24,13 +26,13 @@ const updateInstrument = (instruments, instrument) => {
 
     return [
         ...instruments.slice(0, index),
-        Object.assign({}, instruments[index], instrument),
+        { ...instruments[index], instrument },
         ...instruments.slice(index + 1)
     ];
 };
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function instrumentsReducer (state = [], action: Action): IInstrument[] {
+export function instrumentsReducer (state: IInstrument[] = [], action: TInstrumentAction): IInstrument[] {
     switch (action.type) {
         case ADD_INSTRUMENT:
             return [ ...state, action.payload ];
