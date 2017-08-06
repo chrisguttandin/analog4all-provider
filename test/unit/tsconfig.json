@@ -1,14 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "",
     "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": [ "dom", "es2016" ],
     "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "../../build/out-tsc/spec",
-    "sourceMap": true,
+    "outDir": "../../out-tsc/spec",
     "target": "es5",
     "types": [
       "jasmine",
@@ -16,6 +10,7 @@
       "webmidi"
     ]
   },
+  "extends": "../../node_modules/tsconfig-holy-grail/src/tsconfig-browser",
   "files": [
     "../../config/karma/test.ts"
   ],
