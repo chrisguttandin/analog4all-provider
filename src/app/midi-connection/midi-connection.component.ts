@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { IMidiFile } from 'midi-json-parser-worker';
 import { midiPlayerFactory } from 'midi-player';
 import { wrap } from 'rxjs-broker';
 import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/concatMap';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/take';
@@ -11,7 +13,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { IInstrument, IMidiConnection } from '../interfaces';
 import {
-    AudioInputMediaDevicesService,
     DownloadingService,
     InstrumentsService,
     MiddleCMidiJsonService,
@@ -42,20 +43,19 @@ export class MidiConnectionComponent implements OnInit {
 
     @Input() public midiOutput: WebMidi.MIDIOutput;
 
-    public sourceId$;
+    public sourceId$: Observable<string>;
 
     public virtualInstrumentName$: Observable<string>;
 
-    private _instrumentChanges$: BehaviorSubject<IInstrument>;
+    private _instrumentChanges$: BehaviorSubject<null | IInstrument>;
 
     private _instrumentNameChanges$: BehaviorSubject<string>;
 
-    private _middleCMidiJson;
+    private _middleCMidiJson: IMidiFile;
 
-    private _scaleMidiJson;
+    private _scaleMidiJson: IMidiFile;
 
     constructor(
-        private _audioInputMediaDevicesService: AudioInputMediaDevicesService,
         private _downloadingService: DownloadingService,
         private _instrumentsService: InstrumentsService,
         middleCMidiJsonService: MiddleCMidiJsonService,
@@ -121,7 +121,7 @@ export class MidiConnectionComponent implements OnInit {
         this.midiConnection$
             .take(1)
             .filter((midiConnection) => midiConnection === null)
-            .mergeMap((midiConnection) => this._midiConnectionsService.create({ midiOutputId: this.midiOutput.id }))
+            .mergeMap(() => this._midiConnectionsService.create({ midiOutputId: this.midiOutput.id }))
             .subscribe(() => { // tslint:disable-line:no-empty
                 // @todo Catch and handle errors.
             });
@@ -165,10 +165,10 @@ export class MidiConnectionComponent implements OnInit {
                         })
                         .play())
                     .then(() => this._recordingService.stop())
-                    .then((arrayBuffer) => this._samplesService
+                    .then((arrayBuffer: ArrayBuffer) => this._samplesService
                         .create({ file: new Blob([ arrayBuffer ]) })
                         .toPromise())
-                    .then((sample) => this.instrument$
+                    .then((sample: { id: string }) => this.instrument$
                         .take(1)
                         .mergeMap((instrument) => this._instrumentsService
                             .update(instrument.id, {
@@ -193,13 +193,13 @@ export class MidiConnectionComponent implements OnInit {
                         })
                         .play())
                     .then(() => this._recordingService.stop())
-                    .then((arrayBuffer) => this._downloadingService.download('sample.wav', arrayBuffer));
+                    .then((arrayBuffer: ArrayBuffer) => this._downloadingService.download('sample.wav', arrayBuffer));
             });
     }
 
-    public updateInstrumentName (name) {
+    public updateInstrumentName (name: string) {
         if (name.trim() === '') {
-            name = this.midiOutput.name;
+            name = (this.midiOutput.name === undefined) ? '' : this.midiOutput.name;
             this._instrumentNameChanges$.next('');
         } else {
             this._instrumentNameChanges$.next(name);
@@ -214,7 +214,7 @@ export class MidiConnectionComponent implements OnInit {
             });
     }
 
-    public updateSourceId (sourceId) {
+    public updateSourceId (sourceId: string) {
         this.midiConnection$
             .take(1)
             .filter((midiConnection) => (midiConnection !== null))

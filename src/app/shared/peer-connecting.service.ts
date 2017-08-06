@@ -1,6 +1,8 @@
-import { Inject, Injectable } from '@angular/core';
-import { IDataChannel } from 'rxjs-broker';
+import { Injectable } from '@angular/core';
+import { IDataChannel, IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { ICandidateSubjectEvent, IDescriptionSubjectEvent } from '../interfaces';
 import { WindowService } from './window.service';
 
 const ICE_SERVERS = [ { urls: [
@@ -14,7 +16,7 @@ const ICE_SERVERS = [ { urls: [
 @Injectable()
 export class PeerConnectingService {
 
-    private _window;
+    private _window: Window;
 
     constructor (windowService: WindowService) {
         this._window = windowService.nativeWindow;
@@ -36,15 +38,15 @@ export class PeerConnectingService {
         return false;
     }
 
-    public connect (webSocketSubject): Observable<IDataChannel> {
-        return Observable.create((observer) => {
+    public connect (webSocketSubject: IMaskableSubject<IStringifyableJsonObject>): Observable<IDataChannel> {
+        return Observable.create((observer: Observer<IDataChannel>) => {
             webSocketSubject
                 .filter(({ generator, type }) => (generator !== undefined && type === 'request'))
                 .subscribe({
                     complete () {
                         observer.complete();
                     },
-                    next ({ generator }) {
+                    next () {
                         const peerConnection = new RTCPeerConnection({
                             iceServers: ICE_SERVERS
                         });
@@ -55,21 +57,23 @@ export class PeerConnectingService {
                         });
 
                         const candidateSubject = webSocketSubject
-                            .mask({ generator, type: 'candidate' });
+                            .mask<ICandidateSubjectEvent>({ type: 'candidate' });
 
                         const descriptionSubject = webSocketSubject
-                            .mask({ generator, type: 'description' });
+                            .mask<IDescriptionSubjectEvent>({ type: 'description' });
 
                         const candidateSubjectSubscription = candidateSubject
                             .subscribe(({ candidate }) => peerConnection
-                                .addIceCandidate(new RTCIceCandidate(candidate))
+                                // @todo Remove casting again when possible.
+                                .addIceCandidate(new RTCIceCandidate(<any> candidate))
                                 .catch(() => {
                                     // Errors can be ignored.
                                 }));
 
                         const descriptionSubjectSubscription = descriptionSubject
                             .subscribe(({ description }) => peerConnection
-                                .setRemoteDescription(new RTCSessionDescription(description))
+                                // @todo Remove casting again when possible.
+                                .setRemoteDescription(new RTCSessionDescription(<any> description))
                                 .catch(() => {
                                     // @todo Handle this error and maybe request another description.
                                 }));

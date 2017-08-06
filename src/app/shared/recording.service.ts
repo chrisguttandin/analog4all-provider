@@ -12,40 +12,41 @@ const FADE_OUT_TICKS = 20;
 @Injectable()
 export class RecordingService {
 
-    private _analyserNode;
+    private _analyserNode: AnalyserNode;
 
-    private _audioContext;
+    private _audioContext: AudioContext;
 
-    private _gainNode;
+    private _gainNode: GainNode;
 
-    private _mediaRecorder;
+    // @todo Use IMediaRecorder once it is exported by extendable-media-recorder.
+    private _mediaRecorder: any;
 
     constructor (private _userMediaService: UserMediaService) {
         this._audioContext = new AudioContext();
     }
 
-    public start (sourceId) {
+    public start (sourceId: string) {
         return this._userMediaService
             .getAudioOnlyMediaStream(sourceId)
-            .then((mediaStream) => this._wireInput(mediaStream))
-            .then((mediaStream) => {
+            .then((mediaStream: MediaStream) => this._wireInput(mediaStream))
+            .then((mediaStream: MediaStream) => {
                 this._mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'audio/wav' });
 
                 this._mediaRecorder.start();
             });
     }
 
-    public stop () {
+    public stop (): Promise<ArrayBuffer> {
         return this._waitForSilence()
             .then(() => {
-                return new Promise((resolve, reject) => {
-                    this._mediaRecorder.addEventListener('dataavailable', ({ data }) => resolve(data));
+                return new Promise((resolve) => {
+                    this._mediaRecorder.addEventListener('dataavailable', ({ data }: any) => resolve(data));
                     this._mediaRecorder.stop();
                 });
             });
     }
 
-    private _detectSilence (currentTime, done, attempt) {
+    private _detectSilence (currentTime: number, done: Function, attempt: number) {
         const fftSize = this._analyserNode.fftSize;
 
         const tickLength = fftSize / this._audioContext.sampleRate;
@@ -81,13 +82,13 @@ export class RecordingService {
         return new Promise((resolve) => this._detectSilence(this._audioContext.currentTime, resolve, 0));
     }
 
-    private _wireInput (mediaStream) {
+    private _wireInput (mediaStream: MediaStream) {
         const mediaStreamAudioSourceNode = this._audioContext.createMediaStreamSource(mediaStream);
 
         this._gainNode = this._audioContext.createGain();
         this._analyserNode = this._audioContext.createAnalyser();
 
-        const mediaStreamAudioDestinationNode = this._audioContext.createMediaStreamDestination();
+        const mediaStreamAudioDestinationNode = (<any> this._audioContext).createMediaStreamDestination();
 
         mediaStreamAudioSourceNode
             .connect(this._gainNode)

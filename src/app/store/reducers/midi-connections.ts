@@ -1,4 +1,3 @@
-import { Action, ActionReducer } from '@ngrx/store';
 import { IMidiConnection } from '../../interfaces';
 import { IAddMidiConnectionAction, IUpdateMidiConnectionAction } from '../interfaces';
 import { TMidiConnectionAction } from '../types';

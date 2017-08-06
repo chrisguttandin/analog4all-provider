@@ -1,12 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { WindowService } from './window.service';
 
 @Injectable()
 export class MidiAccessService {
 
-    private _midiAccess: WebMidi.MIDIAccess;
+    private _midiAccess: null | WebMidi.MIDIAccess;
 
-    private _window;
+    private _window: Window;
 
     constructor (windowService: WindowService) {
         this._midiAccess = null;

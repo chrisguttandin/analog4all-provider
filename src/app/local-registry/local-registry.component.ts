@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { MidiOutputsService } from '../shared';
 
 @Component({
@@ -8,9 +9,9 @@ import { MidiOutputsService } from '../shared';
 })
 export class LocalRegistryComponent implements OnInit {
 
-    public midiOutputs$;
+    public midiOutputs$: Observable<WebMidi.MIDIOutput[]>;
 
-    public midiOutputsLength$;
+    public midiOutputsLength$: Observable<number>;
 
     constructor (private _midiOutputsService: MidiOutputsService) { }
 

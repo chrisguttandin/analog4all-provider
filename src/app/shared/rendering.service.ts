@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { parseArrayBuffer } from 'midi-json-parser';
+import { IMidiFile } from 'midi-json-parser-worker';
 import { midiPlayerFactory } from 'midi-player';
+import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';
 import { RecordingService } from './recording.service';
@@ -16,7 +18,7 @@ export class RenderingService {
         private _waitingService: WaitingService
     ) { }
 
-    public render (dataChannelSubject, midiOutput, sourceId) {
+    public render (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>, midiOutput: WebMidi.MIDIOutput, sourceId: string) {
         return this._waitingService
             .wait(dataChannelSubject)
             .then(() => {
@@ -29,7 +31,7 @@ export class RenderingService {
 
                 return parseArrayBuffer(arrayBuffer);
             })
-            .then((midiJson: any) => {
+            .then((midiJson: IMidiFile) => {
                 midiJson.tracks = midiJson.tracks
                     .map((events) => {
                         const allowedEvents = [];
@@ -42,12 +44,12 @@ export class RenderingService {
                             const event = events[i];
 
                             if (
-                                event.endOfTrack ||
-                                event.noteOff ||
-                                event.noteOn ||
-                                event.setTempo ||
-                                event.timeSignature ||
-                                event.trackName
+                                'endOfTrack' in event ||
+                                'noteOff' in event ||
+                                'noteOn' in event ||
+                                'setTempo' in event ||
+                                'timeSignature' in event ||
+                                'trackName' in event
                             ) {
                                 event.delta = event.delta + delta;
                                 allowedEvents.push(event);

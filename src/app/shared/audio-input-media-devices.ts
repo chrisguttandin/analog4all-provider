@@ -1,11 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { WindowService } from './window.service';
 
 @Injectable()
 export class AudioInputMediaDevicesService {
 
-    private _window;
+    private _window: Window;
 
     constructor (windowService: WindowService) {
         this._window = windowService.nativeWindow;
@@ -22,7 +23,7 @@ export class AudioInputMediaDevicesService {
     }
 
     public watch (): Observable<MediaDeviceInfo[]> {
-        return Observable.create((observer) => {
+        return Observable.create((observer: Observer<MediaDeviceInfo[]>) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
 
@@ -30,9 +31,9 @@ export class AudioInputMediaDevicesService {
 
                 const enumerateDevices = () => mediaDevices
                     .enumerateDevices()
-                    .then((mediaDeviceInfos) => {
+                    .then((mediaDeviceInfos: any) => {
                         if (!isUnsubscribed) {
-                            observer.next(mediaDeviceInfos.filter(({ kind }) => kind === 'audioinput'));
+                            observer.next(mediaDeviceInfos.filter(({ kind }: any) => kind === 'audioinput'));
                         }
                     });
 
@@ -48,9 +49,12 @@ export class AudioInputMediaDevicesService {
                         mediaDevices.removeEventListener('devicechange', onStateChangeListener);
                     }
                 };
-            } else {
-                observer.complete();
             }
+
+            observer.complete();
+
+            // @todo The return statement is necessary to keep TypeScript happy.
+            return;
         });
     }
 

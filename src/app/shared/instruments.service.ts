@@ -16,7 +16,7 @@ import { ResponseError } from './response-error';
 export class InstrumentsService {
 
     constructor (
-        @Inject(ENDPOINT) private _endpoint,
+        @Inject(ENDPOINT) private _endpoint: string,
         private _http: Http,
         private _peerConnectingService: PeerConnectingService,
         private _store: Store<IAppState>
@@ -26,13 +26,13 @@ export class InstrumentsService {
         return isSupported;
     }
 
-    public connect ({ id }): Observable<IDataChannel> {
+    public connect ({ id }: { id: string }): Observable<IDataChannel> {
         const webSocketSubject = connect(`wss${ this._endpoint }instruments/${ id }`);
 
         return this._peerConnectingService.connect(webSocketSubject);
     }
 
-    public create (instrument): Observable<IInstrument> {
+    public create (instrument: object): Observable<IInstrument> {
         const headers = new Headers();
 
         headers.set('Content-Type', 'application/json');
@@ -59,7 +59,7 @@ export class InstrumentsService {
             .map((instrument) => (instrument === undefined) ? null : instrument);
     }
 
-    public update (id: string, delta): Observable<null> {
+    public update (id: string, delta: object): Observable<null> {
         return this._http
             .patch(`https${ this._endpoint }instruments/${ id }`, delta)
             .map(() => null)

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 
 @Injectable()
 export class FileReceivingService {
 
-    public receive (dataChannelSubject): Promise<ArrayBuffer> {
+    public receive (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>): Promise<ArrayBuffer> {
         return new Promise((resolve, reject) => {
-            let buffer;
+            let buffer: ArrayBuffer;
 
             let byteIndex = 0;
 
@@ -26,7 +27,7 @@ export class FileReceivingService {
                         }
 
                         if (type === 'bof') {
-                            buffer = new ArrayBuffer(message.byteLength);
+                            buffer = new ArrayBuffer(<number> message.byteLength);
                         } else if (type === 'eof') {
                             dataChannelSubscription.unsubscribe();
 
@@ -34,7 +35,7 @@ export class FileReceivingService {
                         } else {
                             const destination = new Uint8Array(buffer);
 
-                            const source = atob(message);
+                            const source = atob(<any> message);
 
                             const length = byteIndex + source.length;
 

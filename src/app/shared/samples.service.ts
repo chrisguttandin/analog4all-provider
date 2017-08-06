@@ -11,11 +11,11 @@ import { ResponseError } from './response-error';
 export class SamplesService {
 
     constructor (
-        @Inject(ENDPOINT) private _endpoint,
+        @Inject(ENDPOINT) private _endpoint: string,
         private _http: Http
     ) {}
 
-    public create ({ file }) {
+    public create ({ file }: { file: Blob }) {
         return this._http
             .post(`https${ this._endpoint }samples`, null)
             .map((response) => response.json())

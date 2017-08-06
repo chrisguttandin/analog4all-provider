@@ -13,7 +13,7 @@ export class SourceIdSelectComponent implements OnInit {
 
     @Input() public sourceId: string;
 
-    @Output() public sourceIdChange: EventEmitter<{}>;
+    @Output() public sourceIdChange: EventEmitter<Event>;
 
     constructor (
         private _audioInputMediaDevicesService: AudioInputMediaDevicesService
@@ -25,7 +25,7 @@ export class SourceIdSelectComponent implements OnInit {
         this.audioInputs$ = this._audioInputMediaDevicesService.watch();
     }
 
-    public onChange (value) {
+    public onChange (value: Event) {
         this.sourceIdChange.emit(value);
     }
 

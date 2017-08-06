@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import 'rxjs/add/operator/first';
 
 /**
@@ -8,7 +9,7 @@ import 'rxjs/add/operator/first';
 @Injectable()
 export class WaitingService {
 
-    public wait (dataChannelSubject) {
+    public wait (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>) {
         return new Promise((resolve, reject) => {
             const waitingChannel = dataChannelSubject.mask({ type: 'waiting' });
 
@@ -29,7 +30,7 @@ export class WaitingService {
                     }
                 });
 
-            waitingChannel.next();
+            waitingChannel.next(undefined);
         });
     }
 

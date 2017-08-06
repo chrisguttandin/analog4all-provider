@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { IMidiFile } from 'midi-json-parser-worker';
 
 @Injectable()
 export class MiddleCMidiJsonService {
 
     get midiJson () {
-        return {
+        return <IMidiFile> {
             division: 480,
             format: 1,
             tracks: [

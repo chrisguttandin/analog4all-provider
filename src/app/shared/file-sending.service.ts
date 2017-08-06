@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 
 const CHUNK_SIZE = 1024;
 
 @Injectable()
 export class FileSendingService {
 
-    public send (dataChannelSubject, file) {
+    public send (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>, file: Blob) {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
 
@@ -26,7 +27,7 @@ export class FileSendingService {
                         while (byteIndex + CHUNK_SIZE < byteLength) {
                             const slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
 
-                            promise.then(() => dataChannelSubject.send(btoa(String.fromCharCode.apply(null, new Uint8Array(slice)))));
+                            promise.then(() => dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice)))));
 
                             byteIndex += CHUNK_SIZE;
                         }
@@ -34,7 +35,7 @@ export class FileSendingService {
                         if (byteIndex < byteLength) {
                             const slice = buffer.slice(byteIndex);
 
-                            promise.then(() => dataChannelSubject.send(btoa(String.fromCharCode.apply(null, new Uint8Array(slice)))));
+                            promise.then(() => dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice)))));
                         }
 
                         return promise;

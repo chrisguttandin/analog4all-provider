@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { IAppState, UPDATE_MIDI_OUTPUTS } from '../store';
 import { MidiAccessService } from './midi-access.service';
 
@@ -14,10 +15,10 @@ export class MidiOutputsService {
 
     public watch (): Observable<WebMidi.MIDIOutput[]> {
         return Observable
-            .create((observer) => {
-                let midiAccess: WebMidi.MIDIAccess = null;
+            .create((observer: Observer<WebMidi.MIDIOutput[]>) => {
+                let midiAccess: null | WebMidi.MIDIAccess = null;
 
-                let onStateChangeListener = null;
+                let onStateChangeListener: null | EventListener = null;
 
                 this._midiAccessService
                     .request()
@@ -26,7 +27,11 @@ export class MidiOutputsService {
 
                         observer.next(Array.from(midiAccess.outputs.values()));
 
-                        onStateChangeListener = () => observer.next(Array.from(midiAccess.outputs.values()));
+                        onStateChangeListener = () => {
+                            if (midiAccess !== null) {
+                                observer.next(Array.from(midiAccess.outputs.values()));
+                            }
+                        };
 
                         midiAccess.addEventListener('statechange', onStateChangeListener);
                     });
@@ -37,7 +42,7 @@ export class MidiOutputsService {
                     }
                 };
             })
-            .do((midiOutputs) => this._store.dispatch({ payload: midiOutputs, type: UPDATE_MIDI_OUTPUTS }));
+            .do((midiOutputs: WebMidi.MIDIOutput[]) => this._store.dispatch({ payload: midiOutputs, type: UPDATE_MIDI_OUTPUTS }));
     }
 
 }

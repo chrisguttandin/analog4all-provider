@@ -1,12 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { WindowService } from './window.service';
 
 @Injectable()
 export class UserMediaService {
 
-    private _mediaStream;
+    private _mediaStream: null | MediaStream;
 
-    private _window;
+    private _window: Window;
 
     constructor (windowService: WindowService) {
         this._mediaStream = null;
@@ -23,7 +23,7 @@ export class UserMediaService {
             'getUserMedia' in this._window.navigator.mediaDevices);
     }
 
-    public getAudioOnlyMediaStream (sourceId) {
+    public getAudioOnlyMediaStream (sourceId: string) {
         if (this._mediaStream !== null) {
             const audioTracks = this._mediaStream.getAudioTracks();
 

@@ -4,19 +4,19 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { IMidiConnection } from '../interfaces';
 import { ADD_MIDI_CONNECTION, IAppState, UPDATE_MIDI_CONNECTION } from '../store';
-import { MidiOutputsService } from './midi-outputs.service';
 
 @Injectable()
 export class MidiConnectionsService {
 
     constructor (
-        private _midiOutputsService: MidiOutputsService,
         private _store: Store<IAppState>
     ) { }
 
-    public create (midiConnection): Observable<IMidiConnection> {
-        return Observable.create((observer) => {
-            this._store.dispatch({ payload: Object.assign({ sourceId: 'default' }, midiConnection ), type: ADD_MIDI_CONNECTION });
+    public create (midiConnection: { midiOutputId: string }): Observable<IMidiConnection> {
+        return new Observable((observer) => {
+            midiConnection = Object.assign({ sourceId: 'default' }, midiConnection);
+
+            this._store.dispatch({ payload: midiConnection, type: ADD_MIDI_CONNECTION });
 
             observer.next(midiConnection);
             observer.complete();
@@ -30,8 +30,8 @@ export class MidiConnectionsService {
             .map((midiConnections) => (midiConnections === undefined) ? null : midiConnections);
     }
 
-    public update (midiOutputId: string, delta): Observable<null> {
-        return Observable.create((observer) => {
+    public update (midiOutputId: string, delta: object): Observable<null> {
+        return new Observable<null>((observer) => {
             this._store.dispatch({ payload: Object.assign({}, delta, { midiOutputId }), type: UPDATE_MIDI_CONNECTION });
 
             observer.next(null);

@@ -11,13 +11,13 @@ export class InstrumentNameInputComponent {
 
     @Input() public name: string;
 
-    @Output() public nameChange: EventEmitter<{}>;
+    @Output() public nameChange: EventEmitter<Event>;
 
     constructor () {
         this.nameChange = new EventEmitter();
     }
 
-    public onChange (value) {
+    public onChange (value: Event) {
         this.nameChange.emit(value);
     }
 
