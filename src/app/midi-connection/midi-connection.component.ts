@@ -55,7 +55,7 @@ export class MidiConnectionComponent implements OnInit {
 
     private _scaleMidiJson: IMidiFile;
 
-    constructor(
+    constructor (
         private _downloadingService: DownloadingService,
         private _instrumentsService: InstrumentsService,
         middleCMidiJsonService: MiddleCMidiJsonService,
