@@ -4,11 +4,11 @@ const IS_SMOKE_TEST = !!process.env.IS_SMOKE_TEST;
 
 export class HomePage {
 
-    public getHeadline() {
+    public getHeadline () {
         return element(by.css('anp-app h1')).getText();
     }
 
-    public navigateTo() {
+    public navigateTo () {
         return browser.get((IS_SMOKE_TEST) ? 'https://chrisguttandin.github.io/analog4all-provider' : '/');
     }
 
