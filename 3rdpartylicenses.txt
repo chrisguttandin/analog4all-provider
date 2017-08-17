@@ -20,9 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/core@4.3.4 MIT
+@angular/core@4.3.5 MIT
 
-@ngrx/store@4.0.2 MIT
+@ngrx/store@4.0.3 MIT
 The MIT License (MIT)
 
 Copyright (c) 2017 Brandon Roberts, Mike Ryan, Victor Savkin, Rob Wormald
@@ -46,9 +46,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-@angular/http@4.3.4 MIT
+@angular/http@4.3.5 MIT
 
-@angular/forms@4.3.4 MIT
+@angular/forms@4.3.5 MIT
 
 zone.js@0.8.16 MIT
 The MIT License
@@ -97,9 +97,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-@angular/platform-browser@4.3.4 MIT
+@angular/platform-browser@4.3.5 MIT
 
-@angular/common@4.3.4 MIT
+@angular/common@4.3.5 MIT
 
 css-loader@0.28.4 MIT
 Copyright JS Foundation and other contributors
