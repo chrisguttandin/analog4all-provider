@@ -21,6 +21,7 @@
     "midi-player": "^2.0.23",
     "rxjs": "^5.4.3",
     "rxjs-broker": "^2.0.20",
+    "tslib": "^1.7.1",
     "zone.js": "^0.8.17"
   },
   "description": "This is the provider for analog4all.",
