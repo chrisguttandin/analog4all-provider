@@ -8,7 +8,7 @@
     [sourceId]="sourceId$ | async"
     (sourceIdChange)="updateSourceId($event)"
 ></anp-source-id-select>
-<button (click)="register()" *ngIf="!(isRegistered$ | async)">register device</button>
+<button (click)="register()" *ngIf="isRegistered$ | async === false">register device</button>
 <button (click)="deregister()" *ngIf="isRegistered$ | async">deregister device</button>
 <button (click)="test()">test device by recording a scale</button>
 <button (click)="sample()" *ngIf="isRegistered$ | async">record a middle c (#60/C3)</button>

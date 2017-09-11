@@ -1,5 +1,7 @@
 <label>audio input:</label>
 <select [ngModel]="sourceId" (ngModelChange)="onChange($event)">
-    <option *ngFor="let audioInput of audioInputs$ | async" [ngValue]="audioInput.deviceId">{{ audioInput.label }}</option>
+    <!-- @todo Remove the tslint flag again when tslint can be update to version 5.7.0. -->
+    <!-- tslint:disable-next-line:angular-whitespace -->
+    <option *ngFor="let audioInput of audioInputs$ | async" [ngValue]="audioInput.deviceId">{{ audioInput.label }}</option>
 </select>
 <p>The selected audio input gets used to record the audio signal.</p>
