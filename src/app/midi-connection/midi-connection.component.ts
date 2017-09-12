@@ -198,17 +198,20 @@ export class MidiConnectionComponent implements OnInit {
     }
 
     public updateInstrumentName (name: string) {
+        let sanitizedName: string;
+
         if (name.trim() === '') {
-            name = (this.midiOutput.name === undefined) ? '' : this.midiOutput.name;
+            sanitizedName = (this.midiOutput.name === undefined) ? '' : this.midiOutput.name;
             this._instrumentNameChanges$.next('');
         } else {
+            sanitizedName = name;
             this._instrumentNameChanges$.next(name);
         }
 
         this.instrument$
             .take(1)
             .filter((instrument) => (instrument !== null))
-            .mergeMap(({ id }) => this._instrumentsService.update(id, { name }))
+            .mergeMap(({ id }) => this._instrumentsService.update(id, { name: sanitizedName }))
             .subscribe(() => { // tslint:disable-line:no-empty
                 // @todo
             });

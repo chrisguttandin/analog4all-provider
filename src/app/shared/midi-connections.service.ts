@@ -14,11 +14,11 @@ export class MidiConnectionsService {
 
     public create (midiConnection: { midiOutputId: string }): Observable<IMidiConnection> {
         return new Observable((observer) => {
-            midiConnection = Object.assign({ sourceId: 'default' }, midiConnection);
+            const mergedMidiConnection = Object.assign({ sourceId: 'default' }, midiConnection);
 
-            this._store.dispatch({ payload: midiConnection, type: ADD_MIDI_CONNECTION });
+            this._store.dispatch({ payload: mergedMidiConnection, type: ADD_MIDI_CONNECTION });
 
-            observer.next(midiConnection);
+            observer.next(mergedMidiConnection);
             observer.complete();
         });
     }
