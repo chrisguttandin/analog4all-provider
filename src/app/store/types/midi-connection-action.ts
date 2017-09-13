@@ -1,3 +1,3 @@
-import { IAddMidiConnectionAction, IUpdateMidiConnectionAction } from '../interfaces';
+import { IAddMidiConnectionAction, IUpdateMidiConnectionAction } from '../interfaces';
 
 export type TMidiConnectionAction = IAddMidiConnectionAction | IUpdateMidiConnectionAction;

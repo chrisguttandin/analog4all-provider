@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMidiFile } from 'midi-json-parser-worker';
+import { IMidiFile } from 'midi-json-parser-worker';
 
 @Injectable()
 export class MiddleCMidiJsonService {

@@ -4,7 +4,7 @@ import { WindowService } from './window.service';
 @Injectable()
 export class UserMediaService {
 
-    private _mediaStream: null | MediaStream;
+    private _mediaStream: null | MediaStream;
 
     private _window: Window;
 

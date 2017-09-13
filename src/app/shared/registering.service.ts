@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IDataChannel } from 'rxjs-broker';
-import { Observable } from 'rxjs/Observable';
-import { IInstrument } from '../interfaces';
+import { IDataChannel } from 'rxjs-broker';
+import { Observable } from 'rxjs/Observable';
+import { IInstrument } from '../interfaces';
 import { InstrumentsService } from './instruments.service';
 import { UserMediaService } from './user-media.service';
 

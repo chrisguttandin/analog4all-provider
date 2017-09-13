@@ -16,7 +16,7 @@ export class MidiOutputsService {
     public watch (): Observable<WebMidi.MIDIOutput[]> {
         return Observable
             .create((observer: Observer<WebMidi.MIDIOutput[]>) => {
-                let midiAccess: null | WebMidi.MIDIAccess = null;
+                let midiAccess: null | WebMidi.MIDIAccess = null;
 
                 let onStateChangeListener: null | EventListener = null;
 

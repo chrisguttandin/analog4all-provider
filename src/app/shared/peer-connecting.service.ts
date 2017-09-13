@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDataChannel, IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IDataChannel, IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { ICandidateSubjectEvent, IDescriptionSubjectEvent } from '../interfaces';
