@@ -33,7 +33,7 @@
     "@types/jasminewd2": "^2.0.3",
     "@types/node": "~6.0.60",
     "@types/webmidi": "2.0.2",
-    "axe-core": "^2.4.0",
+    "axe-core": "^2.4.1",
     "bundle-buddy": "^0.1.2",
     "content-security-policy-builder": "^1.1.0",
     "eslint": "^4.6.1",
