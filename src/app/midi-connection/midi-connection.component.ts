@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IMidiFile } from 'midi-json-parser-worker';
+import { IMidiFile } from 'midi-json-parser-worker';
 import { midiPlayerFactory } from 'midi-player';
 import { wrap } from 'rxjs-broker';
 import 'rxjs/add/observable/combineLatest';
@@ -47,7 +47,7 @@ export class MidiConnectionComponent implements OnInit {
 
     public virtualInstrumentName$: Observable<string>;
 
-    private _instrumentChanges$: BehaviorSubject<null | IInstrument>;
+    private _instrumentChanges$: BehaviorSubject<null | IInstrument>;
 
     private _instrumentNameChanges$: BehaviorSubject<string>;
 

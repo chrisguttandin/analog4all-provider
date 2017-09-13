@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InstrumentsService, MidiAccessService, PeerConnectingService, UserMediaService } from './shared';
+import { InstrumentsService, MidiAccessService, PeerConnectingService, UserMediaService } from './shared';
 
 @Component({
     selector: 'anp-app',

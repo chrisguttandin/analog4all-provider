@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { parseArrayBuffer } from 'midi-json-parser';
-import { IMidiFile } from 'midi-json-parser-worker';
+import { IMidiFile } from 'midi-json-parser-worker';
 import { midiPlayerFactory } from 'midi-player';
 import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import { FileReceivingService } from './file-receiving.service';
