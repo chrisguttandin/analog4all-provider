@@ -14,7 +14,7 @@
     "@angular/router": "^4.4.3",
     "@ngrx/store": "^4.0.3",
     "core-js": "^2.5.1",
-    "extendable-media-recorder": "^1.0.28",
+    "extendable-media-recorder": "^1.0.29",
     "extendable-media-recorder-wav-encoder": "^1.0.39",
     "midi-json-parser": "^4.0.11",
     "midi-json-parser-worker": "^2.1.5",
