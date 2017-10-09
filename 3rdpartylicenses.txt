@@ -20,7 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-webpack@3.5.6
+webpack@3.6.0
 MIT
 Copyright JS Foundation and other contributors
 
@@ -71,6 +71,10 @@ THE SOFTWARE.
 MIT
 MIT
 
+midi-json-parser@4.0.12
+MIT
+MIT
+
 @ngrx/store@4.0.3
 MIT
 The MIT License (MIT)
@@ -99,11 +103,27 @@ SOFTWARE.
 MIT
 MIT
 
+rxjs-broker@2.0.29
+MIT
+MIT
+
+extendable-media-recorder-wav-encoder@1.0.43
+MIT
+MIT
+
 @angular/forms@4.4.4
 MIT
 MIT
 
 @angular/platform-browser@4.4.4
+MIT
+MIT
+
+extendable-media-recorder@1.0.31
+MIT
+MIT
+
+midi-player@2.0.35
 MIT
 MIT
 
