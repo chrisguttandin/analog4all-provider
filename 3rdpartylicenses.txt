@@ -107,7 +107,7 @@ rxjs-broker@2.0.30
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.44
+extendable-media-recorder-wav-encoder@1.0.45
 MIT
 MIT
 
