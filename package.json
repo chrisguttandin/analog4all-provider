@@ -26,7 +26,7 @@
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
-    "@angular/cli": "^1.4.6",
+    "@angular/cli": "^1.4.7",
     "@angular/compiler-cli": "^4.4.4",
     "@angular/language-service": "^4.4.4",
     "@types/jasmine": "^2.6.0",
