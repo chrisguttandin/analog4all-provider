@@ -67,7 +67,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-@angular/core@4.4.4
+@angular/core@4.4.5
 MIT
 MIT
 
@@ -99,7 +99,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-@angular/http@4.4.4
+@angular/http@4.4.5
 MIT
 MIT
 
@@ -111,11 +111,11 @@ extendable-media-recorder-wav-encoder@1.0.45
 MIT
 MIT
 
-@angular/forms@4.4.4
+@angular/forms@4.4.5
 MIT
 MIT
 
-@angular/platform-browser@4.4.4
+@angular/platform-browser@4.4.5
 MIT
 MIT
 
@@ -127,6 +127,6 @@ midi-player@2.0.36
 MIT
 MIT
 
-@angular/common@4.4.4
+@angular/common@4.4.5
 MIT
 MIT
