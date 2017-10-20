@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IDataChannel, IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { filter } from 'rxjs/operators';
 import { ICandidateSubjectEvent, IDescriptionSubjectEvent } from '../interfaces';
 import { WindowService } from './window.service';
 
@@ -41,7 +42,9 @@ export class PeerConnectingService {
     public connect (webSocketSubject: IMaskableSubject<IStringifyableJsonObject>): Observable<IDataChannel> {
         return Observable.create((observer: Observer<IDataChannel>) => {
             webSocketSubject
-                .filter(({ generator, type }) => (generator !== undefined && type === 'request'))
+                .pipe(
+                    filter(({ generator, type }) => (generator !== undefined && type === 'request'))
+                )
                 .subscribe({
                     complete () {
                         observer.complete();

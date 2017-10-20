@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
-import 'rxjs/add/operator/first';
+import { first } from 'rxjs/operators';
 
 /**
  * This service sends a waiting message to the data channel. It waits for the data channel to emit a
@@ -14,7 +14,9 @@ export class WaitingService {
             const waitingChannel = dataChannelSubject.mask({ type: 'waiting' });
 
             const waitingChannelSubscription = waitingChannel
-                .first()
+                .pipe(
+                    first<any>()
+                )
                 .subscribe({
                     complete () {
                         reject(new Error('The underlying channel was closed before any value could be received.'));

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 import { MidiOutputsService } from '../shared';
 
 @Component({
@@ -20,7 +21,9 @@ export class LocalRegistryComponent implements OnInit {
             .watch();
 
         this.midiOutputsLength$ = this.midiOutputs$
-            .map((midiOutputs) => midiOutputs.length);
+            .pipe(
+                map<WebMidi.MIDIOutput[], number>((midiOutputs) => midiOutputs.length)
+            );
     }
 
 }
