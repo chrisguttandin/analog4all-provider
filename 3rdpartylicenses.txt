@@ -107,7 +107,7 @@ SOFTWARE.
 MIT
 MIT
 
-rxjs-broker@2.0.32
+rxjs-broker@2.1.1
 MIT
 MIT
 
