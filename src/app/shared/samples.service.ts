@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ENDPOINT } from './endpoint-token';
@@ -10,14 +10,13 @@ export class SamplesService {
 
     constructor (
         @Inject(ENDPOINT) private _endpoint: string,
-        private _http: Http
+        private _httpClient: HttpClient
     ) {}
 
     public create ({ file }: { file: Blob }) {
-        return this._http
+        return this._httpClient
             .post(`https${ this._endpoint }samples`, null)
             .pipe(
-                map<any, any>((response) => response.json()),
                 mergeMap(({ accessKeyId, created, id, modified, policy, signature, url }) => {
                     const formData = new FormData();
 
@@ -28,7 +27,7 @@ export class SamplesService {
                     formData.append('signature', signature);
                     formData.append('file', file);
 
-                    return this._http
+                    return this._httpClient
                         .post(url, formData)
                         .pipe(
                             map(() => ({ created, id, modified }))

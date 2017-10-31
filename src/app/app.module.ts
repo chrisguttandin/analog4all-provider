@@ -1,6 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { InstrumentNameInputComponent } from './instrument-name-input/instrument-name-input.component';
@@ -44,7 +44,7 @@ import { StoreModule } from './store';
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         StoreModule
     ],
     providers: [

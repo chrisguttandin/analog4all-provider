@@ -1,5 +1,5 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
@@ -15,7 +15,7 @@ export class InstrumentsService {
 
     constructor (
         @Inject(ENDPOINT) private _endpoint: string,
-        private _http: Http,
+        private _httpClient: HttpClient,
         private _peerConnectingService: PeerConnectingService,
         private _store: Store<IAppState>
     ) { }
@@ -31,21 +31,18 @@ export class InstrumentsService {
     }
 
     public create (instrument: object): Observable<IInstrument> {
-        const headers = new Headers();
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-        headers.set('Content-Type', 'application/json');
-
-        return this._http
+        return this._httpClient
             .post(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
             .pipe(
-                map<any, any>((response) => response.json()),
                 tap((nstrmnt) => this._store.dispatch({ payload: nstrmnt, type: ADD_INSTRUMENT })),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
 
     public delete (instrument: IInstrument): Observable<null> {
-        return this._http
+        return this._httpClient
             .delete(`https${ this._endpoint }instruments/${ instrument.id }`)
             .pipe(
                 map(() => null),
@@ -64,7 +61,7 @@ export class InstrumentsService {
     }
 
     public update (id: string, delta: object): Observable<null> {
-        return this._http
+        return this._httpClient
             .patch(`https${ this._endpoint }instruments/${ id }`, delta)
             .pipe(
                 map(() => null),
