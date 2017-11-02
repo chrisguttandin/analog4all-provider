@@ -10,7 +10,7 @@
     "@angular/forms": "^4.4.6",
     "@angular/platform-browser": "^4.4.6",
     "@angular/platform-browser-dynamic": "^4.4.6",
-    "@angular/router": "^4.4.6",
+    "@angular/router": "^5.0.0",
     "@ngrx/store": "^4.1.0",
     "core-js": "^2.5.1",
     "extendable-media-recorder": "^1.0.36",
