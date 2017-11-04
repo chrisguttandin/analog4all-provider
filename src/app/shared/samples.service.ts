@@ -17,7 +17,15 @@ export class SamplesService {
         return this._httpClient
             .post(`https${ this._endpoint }samples`, null)
             .pipe(
-                mergeMap(({ accessKeyId, created, id, modified, policy, signature, url }) => {
+                mergeMap(({ accessKeyId, created, id, modified, policy, signature, url }: {
+                    accessKeyId: string,
+                    created: number,
+                    id: string,
+                    modified: number,
+                    policy: string,
+                    signature: string,
+                    url: string
+                }) => {
                     const formData = new FormData();
 
                     formData.append('acl', 'private');

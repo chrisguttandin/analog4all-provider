@@ -1,3 +1,3 @@
-import { OpaqueToken } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
-export const ENDPOINT = new OpaqueToken('ENDPOINT');
+export const ENDPOINT = new InjectionToken('ENDPOINT');

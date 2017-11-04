@@ -39,7 +39,7 @@ export class RecordingService {
     public stop (): Promise<ArrayBuffer> {
         return this._waitForSilence()
             .then(() => {
-                return new Promise((resolve) => {
+                return new Promise<ArrayBuffer>((resolve) => {
                     this._mediaRecorder.addEventListener('dataavailable', ({ data }: any) => resolve(data));
                     this._mediaRecorder.stop();
                 });

@@ -27,7 +27,7 @@ export class RegisteringService {
             .then((instrument: { id: any }) => {
                 const connection = this._instrumentsService.connect(instrument);
 
-                return { connection, instrument };
+                return <{ connection: Observable<IDataChannel>, instrument: IInstrument }> { connection, instrument };
             });
     }
 

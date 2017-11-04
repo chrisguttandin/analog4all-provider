@@ -23,7 +23,7 @@ export class MidiConnectionsService {
         });
     }
 
-    public select (midiOutputId: string): Observable<IMidiConnection> {
+    public select (midiOutputId: string): Observable<null | IMidiConnection> {
         return this._store
             .select('midiConnections')
             .pipe(

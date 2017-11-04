@@ -29,13 +29,13 @@ export class MidiConnectionComponent implements OnInit {
 
     public audioInputs$: Observable<MediaDeviceInfo[]>;
 
-    public instrument$: Observable<IInstrument>;
+    public instrument$: Observable<null | IInstrument>;
 
     public instrumentName$: Observable<string>;
 
     public isRegistered$: Observable<boolean>;
 
-    public midiConnection$: Observable<IMidiConnection>;
+    public midiConnection$: Observable<null | IMidiConnection>;
 
     @Input() public midiOutput: WebMidi.MIDIOutput;
 
@@ -107,12 +107,18 @@ export class MidiConnectionComponent implements OnInit {
 
         this.sourceId$ = this.midiConnection$
             .pipe(
-                map<IMidiConnection, null | string>((midiConnection) => (midiConnection === null) ? null : midiConnection.sourceId)
+                map<IMidiConnection, null | string>((midiConnection) => (midiConnection === null) ? null : midiConnection.sourceId),
+                filter<string>((sourceId) => sourceId !== null)
+
             );
 
         this.virtualInstrumentName$ = this.instrumentName$
             .pipe(
-                map((instrumentName) => (instrumentName === '') ? this.midiOutput.name : instrumentName)
+                map((instrumentName) => (instrumentName !== '') ?
+                    instrumentName :
+                    (this.midiOutput.name === undefined) ?
+                        '' :
+                        this.midiOutput.name)
             );
 
         this.instrument$
@@ -146,7 +152,7 @@ export class MidiConnectionComponent implements OnInit {
             .subscribe(([ sourceId, instrumentName ]) => {
                 this._registeringService
                     .register(instrumentName, sourceId)
-                    .then(({ connection, instrument }) => {
+                    .then(({ connection, instrument }: { connection: Observable<IDataChannel>, instrument: IInstrument }) => {
                         this.midiConnection$
                             .pipe(
                                 take(1),
@@ -247,7 +253,7 @@ export class MidiConnectionComponent implements OnInit {
             .pipe(
                 take(1),
                 filter((midiConnection) => (midiConnection !== null)),
-                mergeMap(({ midiOutputId }) => this._midiConnectionsService.update(midiOutputId, { sourceId }))
+                mergeMap(({ midiOutputId }: IMidiConnection) => this._midiConnectionsService.update(midiOutputId, { sourceId }))
             )
             .subscribe(() => { // tslint:disable-line:no-empty
                 // @todo
