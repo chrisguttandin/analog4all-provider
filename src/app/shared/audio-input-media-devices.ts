@@ -23,7 +23,7 @@ export class AudioInputMediaDevicesService {
     }
 
     public watch (): Observable<MediaDeviceInfo[]> {
-        return Observable.create((observer: Observer<MediaDeviceInfo[]>) => {
+        return new Observable((observer: Observer<MediaDeviceInfo[]>) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
 

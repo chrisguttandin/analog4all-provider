@@ -40,7 +40,7 @@ export class PeerConnectingService {
     }
 
     public connect (webSocketSubject: IMaskableSubject<IStringifyableJsonObject>): Observable<IDataChannel> {
-        return Observable.create((observer: Observer<IDataChannel>) => {
+        return new Observable((observer: Observer<IDataChannel>) => {
             webSocketSubject
                 .pipe(
                     filter(({ generator, type }) => (generator !== undefined && type === 'request'))

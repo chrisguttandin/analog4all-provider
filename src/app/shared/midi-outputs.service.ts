@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import { tap } from 'rxjs/operators';
 import { IAppState, UPDATE_MIDI_OUTPUTS } from '../store';
 import { MidiAccessService } from './midi-access.service';
 
@@ -14,35 +15,36 @@ export class MidiOutputsService {
     ) { }
 
     public watch (): Observable<WebMidi.MIDIOutput[]> {
-        return Observable
-            .create((observer: Observer<WebMidi.MIDIOutput[]>) => {
-                let midiAccess: null | WebMidi.MIDIAccess = null;
+        return new Observable((observer: Observer<WebMidi.MIDIOutput[]>) => {
+            let midiAccess: null | WebMidi.MIDIAccess = null;
 
-                let onStateChangeListener: null | EventListener = null;
+            let onStateChangeListener: null | EventListener = null;
 
-                this._midiAccessService
-                    .request()
-                    .then((mdAccss) => {
-                        midiAccess = mdAccss;
+            this._midiAccessService
+                .request()
+                .then((mdAccss) => {
+                    midiAccess = mdAccss;
 
-                        observer.next(Array.from(midiAccess.outputs.values()));
+                    observer.next(Array.from(midiAccess.outputs.values()));
 
-                        onStateChangeListener = () => {
-                            if (midiAccess !== null) {
-                                observer.next(Array.from(midiAccess.outputs.values()));
-                            }
-                        };
+                    onStateChangeListener = () => {
+                        if (midiAccess !== null) {
+                            observer.next(Array.from(midiAccess.outputs.values()));
+                        }
+                    };
 
-                        midiAccess.addEventListener('statechange', onStateChangeListener);
-                    });
+                    midiAccess.addEventListener('statechange', onStateChangeListener);
+                });
 
-                return () => {
-                    if (midiAccess !== null && onStateChangeListener !== null) {
-                        midiAccess.removeEventListener('statechange', onStateChangeListener);
-                    }
-                };
-            })
-            .do((midiOutputs: WebMidi.MIDIOutput[]) => this._store.dispatch({ payload: midiOutputs, type: UPDATE_MIDI_OUTPUTS }));
+            return () => {
+                if (midiAccess !== null && onStateChangeListener !== null) {
+                    midiAccess.removeEventListener('statechange', onStateChangeListener);
+                }
+            };
+        })
+            .pipe(
+                tap((midiOutputs: WebMidi.MIDIOutput[]) => this._store.dispatch({ payload: midiOutputs, type: UPDATE_MIDI_OUTPUTS }))
+            );
     }
 
 }
