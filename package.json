@@ -11,7 +11,7 @@
     "@angular/platform-browser": "^5.0.1",
     "@angular/platform-browser-dynamic": "^5.0.1",
     "@angular/router": "^5.0.1",
-    "@ngrx/store": "^4.1.0",
+    "@ngrx/store": "^4.1.1",
     "core-js": "^2.5.1",
     "extendable-media-recorder": "^1.0.37",
     "extendable-media-recorder-wav-encoder": "^1.0.51",
