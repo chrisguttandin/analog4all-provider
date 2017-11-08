@@ -67,7 +67,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-@angular/forms@5.0.0
+@angular/forms@5.0.1
 MIT
 MIT
 
@@ -75,11 +75,11 @@ midi-json-parser@4.0.13
 MIT
 MIT
 
-@angular/common@5.0.0
+@angular/common@5.0.1
 MIT
 MIT
 
-@ngrx/store@4.1.0
+@ngrx/store@4.1.1
 MIT
 The MIT License (MIT)
 
@@ -103,26 +103,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-@angular/core@5.0.0
+@angular/core@5.0.1
 MIT
 MIT
 
-@angular/platform-browser@5.0.0
+@angular/platform-browser@5.0.1
 MIT
 MIT
 
-rxjs-broker@2.1.4
+rxjs-broker@2.1.5
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.51
+extendable-media-recorder-wav-encoder@1.0.52
 MIT
 MIT
 
-extendable-media-recorder@1.0.37
+extendable-media-recorder@1.0.38
 MIT
 MIT
 
-midi-player@2.0.43
+midi-player@2.0.44
 MIT
 MIT
