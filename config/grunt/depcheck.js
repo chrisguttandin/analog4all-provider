@@ -12,6 +12,7 @@ module.exports = {
                 '@angular/cli',
                 '@angular/compiler-cli',
                 '@angular/language-service',
+                '@sonarwhal/sonar',
                 '@types/*',
                 'axe-core',
                 'bundle-buddy',
