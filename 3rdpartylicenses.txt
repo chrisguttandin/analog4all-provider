@@ -71,7 +71,7 @@ THE SOFTWARE.
 MIT
 MIT
 
-midi-json-parser@4.0.13
+midi-json-parser@4.0.14
 MIT
 MIT
 
