@@ -71,7 +71,7 @@ THE SOFTWARE.
 MIT
 MIT
 
-midi-json-parser@4.0.15
+midi-json-parser@4.1.0
 MIT
 MIT
 
@@ -115,7 +115,7 @@ rxjs-broker@2.1.6
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.53
+extendable-media-recorder-wav-encoder@1.0.54
 MIT
 MIT
 
@@ -123,6 +123,6 @@ extendable-media-recorder@1.0.39
 MIT
 MIT
 
-midi-player@2.0.46
+midi-player@2.0.47
 MIT
 MIT
