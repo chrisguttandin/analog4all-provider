@@ -111,18 +111,18 @@ MIT
 MIT
 MIT
 
-rxjs-broker@2.1.6
+rxjs-broker@2.1.7
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.54
+extendable-media-recorder-wav-encoder@1.0.55
 MIT
 MIT
 
-extendable-media-recorder@1.0.39
+extendable-media-recorder@1.0.40
 MIT
 MIT
 
-midi-player@2.0.47
+midi-player@2.0.48
 MIT
 MIT
