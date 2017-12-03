@@ -30,7 +30,7 @@
     "@angular/language-service": "^5.0.5",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
-    "@types/node": "~6.0.60",
+    "@types/node": "~8.0.54",
     "@types/webmidi": "2.0.2",
     "axe-core": "^2.5.0",
     "bundle-buddy": "^0.2.1",
