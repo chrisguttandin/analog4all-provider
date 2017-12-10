@@ -1,4 +1,4 @@
-core-js@2.5.1
+core-js@2.5.2
 MIT
 Copyright (c) 2014-2017 Denis Pushkarev
 
@@ -115,18 +115,18 @@ MIT
 MIT
 MIT
 
-rxjs-broker@2.1.11
+rxjs-broker@2.1.12
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.60
+extendable-media-recorder-wav-encoder@1.0.61
 MIT
 MIT
 
-extendable-media-recorder@1.0.44
+extendable-media-recorder@1.0.45
 MIT
 MIT
 
-midi-player@2.0.55
+midi-player@2.0.56
 MIT
 MIT
