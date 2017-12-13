@@ -96,7 +96,7 @@ module.exports = {
         },
         options: {
             patterns: [ {
-                match: /<link\shref="(styles\.[a-z0-9]*\.bundle\.css)"\srel="stylesheet">/g,
+                match: /<link\shref="(styles\.[a-z0-9]*\.bundle\.css)"\srel="stylesheet"\/>/g,
                 replacement: (match, filename) => {
                     return `<link href="analog4all-provider/styles/${ filename }" rel="stylesheet">`;
                 }
