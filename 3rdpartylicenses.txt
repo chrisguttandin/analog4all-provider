@@ -71,7 +71,7 @@ fast-unique-numbers@1.1.2
 MIT
 MIT
 
-@angular/forms@5.1.0
+@angular/forms@5.1.1
 MIT
 MIT
 
@@ -79,7 +79,7 @@ midi-json-parser@4.1.5
 MIT
 MIT
 
-@angular/common@5.1.0
+@angular/common@5.1.1
 MIT
 MIT
 
@@ -107,26 +107,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-@angular/core@5.1.0
+@angular/core@5.1.1
 MIT
 MIT
 
-@angular/platform-browser@5.1.0
+@angular/platform-browser@5.1.1
 MIT
 MIT
 
-rxjs-broker@2.1.13
+rxjs-broker@2.1.14
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.62
+extendable-media-recorder-wav-encoder@1.0.63
 MIT
 MIT
 
-extendable-media-recorder@1.0.46
+extendable-media-recorder@1.0.47
 MIT
 MIT
 
-midi-player@2.0.57
+midi-player@2.0.58
 MIT
 MIT
