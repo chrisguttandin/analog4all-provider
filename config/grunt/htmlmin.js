@@ -4,7 +4,7 @@ module.exports = {
             cwd: 'build/',
             dest: 'build/',
             expand: true,
-            src: [ '**/*.html' ]
+            src: [ '**/!(index).html' ]
         } ],
         options: {
             caseSensitive: true,
