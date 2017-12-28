@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { parseArrayBuffer } from 'midi-json-parser';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { midiPlayerFactory } from 'midi-player';
-import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';
 import { RecordingService } from './recording.service';
@@ -18,7 +18,7 @@ export class RenderingService {
         private _waitingService: WaitingService
     ) { }
 
-    public render (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>, midiOutput: WebMidi.MIDIOutput, sourceId: string) {
+    public render (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, midiOutput: WebMidi.MIDIOutput, sourceId: string) {
         return this._waitingService
             .wait(dataChannelSubject)
             .then(() => {

@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
-import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IMaskableSubject, IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class FileReceivingService {
 
-    public receive (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>): Promise<ArrayBuffer> {
+    public receive (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<ArrayBuffer> {
         return new Promise((resolve, reject) => {
             let buffer: ArrayBuffer;
 
             let byteIndex = 0;
 
             const dataChannelSubscription = dataChannelSubject
+                .pipe(
+                    filter<TStringifyableJsonValue, IStringifyableJsonObject>((value): value is IStringifyableJsonObject => {
+                        return (typeof value === 'object' && !Array.isArray(value));
+                    })
+                )
                 .subscribe({
                     complete () {
                         reject();

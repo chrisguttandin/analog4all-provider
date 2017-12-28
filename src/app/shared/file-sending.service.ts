@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 
 const CHUNK_SIZE = 1024;
 
 @Injectable()
 export class FileSendingService {
 
-    public send (dataChannelSubject: IMaskableSubject<IStringifyableJsonObject>, file: Blob) {
+    public send (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, file: Blob) {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
 

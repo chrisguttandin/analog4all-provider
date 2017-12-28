@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDataChannel, IMaskableSubject, IStringifyableJsonObject } from 'rxjs-broker';
+import { IDataChannel, IMaskableSubject, IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { filter } from 'rxjs/operators';
@@ -39,10 +39,13 @@ export class PeerConnectingService {
         return false;
     }
 
-    public connect (webSocketSubject: IMaskableSubject<IStringifyableJsonObject>): Observable<IDataChannel> {
+    public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> {
         return new Observable((observer: Observer<IDataChannel>) => {
             webSocketSubject
                 .pipe(
+                    filter<TStringifyableJsonValue, IStringifyableJsonObject>((value): value is IStringifyableJsonObject => {
+                        return (typeof value === 'object' && !Array.isArray(value));
+                    }),
                     filter(({ generator, type }) => (generator !== undefined && type === 'request'))
                 )
                 .subscribe({
