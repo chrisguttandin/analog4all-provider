@@ -4,7 +4,10 @@
     "declaration": false,
     "noUnusedParameters": false,
     "outDir": "../out-tsc/app",
-    "target": "es5"
+    "target": "es5",
+    "types": [
+      "webmidi"
+    ]
   },
   "extends": "../node_modules/tsconfig-holy-grail/src/tsconfig-browser"
 }
