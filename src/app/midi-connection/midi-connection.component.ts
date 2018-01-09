@@ -71,12 +71,13 @@ export class MidiConnectionComponent implements OnInit {
     public deregister () {
         this.instrument$
             .pipe(
-                take<IInstrument>(1),
-                switchMap<IInstrument, null>((instrument) => this._registeringService.deregister(instrument)),
+                take(1),
+                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                switchMap((instrument) => this._registeringService.deregister(instrument)),
                 switchMap(() => this.midiConnection$),
-                take<IMidiConnection>(1),
-                mergeMap<IMidiConnection, null>
-                    ((midiConnection) => this._midiConnectionsService.update(midiConnection.midiOutputId, { instrumentId: undefined }))
+                take(1),
+                filter<IMidiConnection>((midiConnection): midiConnection is IMidiConnection => (midiConnection !== null)),
+                mergeMap((midiConnection) => this._midiConnectionsService.update(midiConnection.midiOutputId, { instrumentId: undefined }))
             )
             .subscribe(() => { // tslint:disable-line:no-empty
                 // @todo
@@ -109,7 +110,6 @@ export class MidiConnectionComponent implements OnInit {
             .pipe(
                 map<IMidiConnection, null | string>((midiConnection) => (midiConnection === null) ? null : midiConnection.sourceId),
                 filter<string>((sourceId) => sourceId !== null)
-
             );
 
         this.virtualInstrumentName$ = this.instrumentName$
@@ -123,7 +123,7 @@ export class MidiConnectionComponent implements OnInit {
 
         this.instrument$
             .pipe(
-                take<IInstrument>(1)
+                take(1)
             )
             .subscribe((instrument) => {
                 if (instrument === null) {
@@ -178,7 +178,7 @@ export class MidiConnectionComponent implements OnInit {
     public sample () {
         this.sourceId$
             .pipe(
-                take<string>(1)
+                take(1)
             )
             .subscribe((sourceId) => {
                 this._recordingService
@@ -195,7 +195,7 @@ export class MidiConnectionComponent implements OnInit {
                         .subscribe((sample) => resolve(sample))))
                     .then((sample: { id: string }) => new Promise((resolve) => this.instrument$
                         .pipe(
-                            take<IInstrument>(1),
+                            take(1),
                             mergeMap<IInstrument, null>((instrument) => this._instrumentsService
                                 .update(instrument.id, {
                                     sample: {
@@ -210,7 +210,7 @@ export class MidiConnectionComponent implements OnInit {
     public test () {
         this.sourceId$
             .pipe(
-                take<string>(1)
+                take(1)
             )
             .subscribe((sourceId) => {
                 this._recordingService
@@ -222,7 +222,7 @@ export class MidiConnectionComponent implements OnInit {
                         })
                         .play())
                     .then(() => this._recordingService.stop())
-                    .then((arrayBuffer: ArrayBuffer) => this._downloadingService.download('sample.wav', arrayBuffer));
+                    .then((arrayBuffer) => this._downloadingService.download('sample.wav', arrayBuffer));
             });
     }
 
@@ -239,8 +239,8 @@ export class MidiConnectionComponent implements OnInit {
 
         this.instrument$
             .pipe(
-                take<IInstrument>(1),
-                filter((instrument) => (instrument !== null)),
+                take(1),
+                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                 mergeMap(({ id }) => this._instrumentsService.update(id, { name: sanitizedName }))
             )
             .subscribe(() => { // tslint:disable-line:no-empty
@@ -252,8 +252,10 @@ export class MidiConnectionComponent implements OnInit {
         this.midiConnection$
             .pipe(
                 take(1),
-                filter((midiConnection) => (midiConnection !== null)),
-                mergeMap(({ midiOutputId }: IMidiConnection) => this._midiConnectionsService.update(midiOutputId, { sourceId }))
+                filter<IMidiConnection>((midiConnection): midiConnection is IMidiConnection => (midiConnection !== null)),
+                mergeMap(({ midiOutputId }) => {
+                    return this._midiConnectionsService.update(midiOutputId, { sourceId });
+                })
             )
             .subscribe(() => { // tslint:disable-line:no-empty
                 // @todo
