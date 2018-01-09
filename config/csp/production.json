@@ -4,6 +4,6 @@
         "connect-src": [ "'self'", "https://analog4all-samples.s3.amazonaws.com", "https://analog4all-registry.eu-west-1.elasticbeanstalk.com", "wss://analog4all-registry.eu-west-1.elasticbeanstalk.com" ],
         "default-src": "'none'",
         "script-src": [ "'self'", "'unsafe-eval'" ],
-        "style-src": [ "'self'", "'unsafe-inline'" ]
+        "style-src": [ "https://fonts.googleapis.com", "'self'", "'unsafe-inline'" ]
     }
 }
