@@ -25,7 +25,7 @@ const updateInstrument = (instruments: IInstrument[], instrument: IInstrument) =
 
     return [
         ...instruments.slice(0, index),
-        { ...instruments[index], instrument },
+        { ...instruments[index], ...instrument },
         ...instruments.slice(index + 1)
     ];
 };

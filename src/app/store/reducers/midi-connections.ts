@@ -14,7 +14,7 @@ const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection
 
     return [
         ...midiConnections.slice(0, index),
-        { ...midiConnections[index], midiConnection },
+        { ...midiConnections[index], ...midiConnection },
         ...midiConnections.slice(index + 1)
     ];
 };
