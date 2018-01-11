@@ -4,6 +4,7 @@
         "component-selector": [ true, "element", "anp", "kebab-case" ],
         "directive-selector": [ true, "attribute", "anp", "camelCase" ],
         "import-blacklist": false,
+        "newline-per-chained-call": false,
         "no-implicit-dependencies": [ true, "dev" ],
         "no-submodule-imports": [
             true,
