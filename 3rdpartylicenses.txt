@@ -2,7 +2,7 @@ fast-unique-numbers@1.1.2
 MIT
 MIT
 
-@angular/core@5.2.0
+@angular/core@5.2.1
 MIT
 MIT
 
