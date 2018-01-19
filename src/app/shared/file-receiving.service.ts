@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { IMaskableSubject, IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
-import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class FileReceivingService {
@@ -12,11 +11,6 @@ export class FileReceivingService {
             let byteIndex = 0;
 
             const dataChannelSubscription = dataChannelSubject
-                .pipe(
-                    filter<TStringifyableJsonValue, IStringifyableJsonObject>((value): value is IStringifyableJsonObject => {
-                        return (typeof value === 'object' && !Array.isArray(value));
-                    })
-                )
                 .subscribe({
                     complete () {
                         reject();
@@ -25,23 +19,25 @@ export class FileReceivingService {
                         reject(err);
                     },
                     next (message) {
-                        const { type } = message;
+                        if (typeof message === 'object' && !Array.isArray(message)) {
+                            const { type } = <IStringifyableJsonObject> message;
 
-                        // @todo Check why messages with a type of "waiting" can still be received here.
-                        if (type === 'waiting') {
-                            return;
-                        }
+                            // @todo Check why messages with a type of "waiting" can still be received here.
+                            if (type === 'waiting') {
+                                return;
+                            }
 
-                        if (type === 'bof') {
-                            buffer = new ArrayBuffer(<number> message.byteLength);
-                        } else if (type === 'eof') {
-                            dataChannelSubscription.unsubscribe();
+                            if (type === 'bof') {
+                                buffer = new ArrayBuffer(<number> (<IStringifyableJsonObject> message).byteLength);
+                            } else if (type === 'eof') {
+                                dataChannelSubscription.unsubscribe();
 
-                            resolve(buffer);
+                                resolve(buffer);
+                            }
                         } else {
                             const destination = new Uint8Array(buffer);
 
-                            const source = atob(<any> message);
+                            const source = atob(<string> message);
 
                             const length = byteIndex + source.length;
 
