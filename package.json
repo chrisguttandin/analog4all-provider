@@ -12,7 +12,7 @@
     "@angular/platform-browser-dynamic": "^5.2.1",
     "@angular/router": "^5.2.1",
     "@ngrx/store": "^4.1.1",
-    "extendable-media-recorder": "^1.0.56",
+    "extendable-media-recorder": "^1.0.57",
     "extendable-media-recorder-wav-encoder": "^1.0.71",
     "midi-json-parser": "^4.2.2",
     "midi-json-parser-worker": "^4.0.4",
