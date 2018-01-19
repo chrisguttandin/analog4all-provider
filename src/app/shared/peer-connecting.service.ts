@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IDataChannel, IMaskableSubject, IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
+import { IDataChannel, IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { filter } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { ICandidateSubjectEvent, IDescriptionSubjectEvent } from '../interfaces';
 import { WindowService } from './window.service';
 
@@ -42,17 +42,11 @@ export class PeerConnectingService {
     public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> {
         return new Observable((observer: Observer<IDataChannel>) => {
             webSocketSubject
+                .mask<any>({ type: 'request' })
                 .pipe(
-                    filter<TStringifyableJsonValue, IStringifyableJsonObject>((value): value is IStringifyableJsonObject => {
-                        return (typeof value === 'object' && !Array.isArray(value));
-                    }),
-                    filter(({ generator, type }) => (generator !== undefined && type === 'request'))
-                )
-                .subscribe({
-                    complete () {
-                        observer.complete();
-                    },
-                    next () {
+                    mergeMap(({ mask }) => new Observable((bsrvr) => {
+                        const maskedWebSocketSubject = webSocketSubject.mask(mask);
+
                         const peerConnection = new RTCPeerConnection({
                             iceServers: ICE_SERVERS
                         });
@@ -62,10 +56,10 @@ export class PeerConnectingService {
                             ordered: true
                         });
 
-                        const candidateSubject = webSocketSubject
+                        const candidateSubject = maskedWebSocketSubject
                             .mask<ICandidateSubjectEvent>({ type: 'candidate' });
 
-                        const descriptionSubject = webSocketSubject
+                        const descriptionSubject = maskedWebSocketSubject
                             .mask<IDescriptionSubjectEvent>({ type: 'description' });
 
                         const candidateSubjectSubscription = candidateSubject
@@ -88,31 +82,35 @@ export class PeerConnectingService {
                             candidateSubjectSubscription.unsubscribe();
                             descriptionSubjectSubscription.unsubscribe();
 
-                            observer.next(dataChannel);
+                            bsrvr.next(dataChannel);
+                            bsrvr.complete();
                         });
 
-                        peerConnection.addEventListener('icecandidate', ({ candidate }: RTCPeerConnectionIceEvent) => {
+                        peerConnection.addEventListener('icecandidate', ({ candidate }) => {
                             if (candidate) {
                                 candidateSubject.send({ candidate });
                             }
                         });
 
-                        peerConnection
-                            .createOffer()
-                            .then((description) => {
-                                peerConnection
-                                    .setLocalDescription(description)
-                                    .catch(() => {
-                                        // @todo Handle this error and maybe create another offer.
-                                    });
+                        peerConnection.addEventListener('negotiationneeded', () => {
+                            peerConnection
+                                .createOffer()
+                                .then((description) => {
+                                    peerConnection
+                                        .setLocalDescription(description)
+                                        .catch(() => {
+                                            // @todo Handle this error and maybe create another offer.
+                                        });
 
-                                descriptionSubject.send({ description });
-                            })
-                            .catch(() => {
-                                // @todo Handle this error and maybe create another offer.
-                            });
-                    }
-                });
+                                    descriptionSubject.send({ description });
+                                })
+                                .catch(() => {
+                                    // @todo Handle this error and maybe create another offer.
+                                });
+                        });
+                    }))
+                )
+                .subscribe(observer);
         });
     }
 
