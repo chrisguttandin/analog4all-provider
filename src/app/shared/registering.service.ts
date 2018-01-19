@@ -21,13 +21,13 @@ export class RegisteringService {
         // Get the mediaStream first to make sure the user granted access.
         return this._userMediaService
             .getAudioOnlyMediaStream(sourceId)
-            .then(() => new Promise((resolve) => this._instrumentsService
+            .then(() => new Promise<IInstrument>((resolve) => this._instrumentsService
                 .create({ name })
                 .subscribe((instrument) => resolve(instrument))))
-            .then((instrument: { id: any }) => {
+            .then((instrument) => {
                 const connection = this._instrumentsService.connect(instrument);
 
-                return <{ connection: Observable<IDataChannel>, instrument: IInstrument }> { connection, instrument };
+                return { connection, instrument };
             });
     }
 

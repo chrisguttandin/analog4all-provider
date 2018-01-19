@@ -24,8 +24,8 @@ export class InstrumentsService {
         return isSupported;
     }
 
-    public connect ({ id }: { id: string }): Observable<IDataChannel> {
-        const webSocketSubject = connect(`wss${ this._endpoint }instruments/${ id }`);
+    public connect ({ socket: { url } }: IInstrument): Observable<IDataChannel> {
+        const webSocketSubject = connect(url);
 
         return this._peerConnectingService.connect(webSocketSubject);
     }

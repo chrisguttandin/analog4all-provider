@@ -16,4 +16,10 @@ export interface IInstrument {
 
     };
 
+    socket: {
+
+        url: string;
+
+    };
+
 }
