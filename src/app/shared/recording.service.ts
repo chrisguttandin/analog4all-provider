@@ -14,7 +14,7 @@ export class RecordingService {
 
     private _analyserNode: AnalyserNode;
 
-    private _audioContext: AudioContext;
+    private _audioContext: null | AudioContext;
 
     private _gainNode: GainNode;
 
@@ -22,10 +22,14 @@ export class RecordingService {
     private _mediaRecorder: any;
 
     constructor (private _userMediaService: UserMediaService) {
-        this._audioContext = new AudioContext();
+        this._audioContext = null;
     }
 
     public start (sourceId: string) {
+        if (this._audioContext === null) {
+            this._audioContext = new AudioContext();
+        }
+
         return this._userMediaService
             .getAudioOnlyMediaStream(sourceId)
             .then((mediaStream: MediaStream) => this._wireInput(mediaStream))
@@ -47,6 +51,10 @@ export class RecordingService {
     }
 
     private _detectSilence (currentTime: number, done: Function, attempt: number) {
+        if (this._audioContext === null) {
+            throw new Error('Expected an initialized AudioContext.');
+        }
+
         const fftSize = this._analyserNode.fftSize;
 
         const tickLength = fftSize / this._audioContext.sampleRate;
@@ -79,10 +87,20 @@ export class RecordingService {
     }
 
     private _waitForSilence () {
-        return new Promise((resolve) => this._detectSilence(this._audioContext.currentTime, resolve, 0));
+        return new Promise((resolve) => {
+            if (this._audioContext === null) {
+                throw new Error('Expected an initialized AudioContext.');
+            }
+
+            this._detectSilence(this._audioContext.currentTime, resolve, 0);
+        });
     }
 
     private _wireInput (mediaStream: MediaStream) {
+        if (this._audioContext === null) {
+            throw new Error('Expected an initialized AudioContext.');
+        }
+
         const mediaStreamAudioSourceNode = this._audioContext.createMediaStreamSource(mediaStream);
 
         this._gainNode = this._audioContext.createGain();
