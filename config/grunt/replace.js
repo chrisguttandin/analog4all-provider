@@ -13,7 +13,7 @@ module.exports = {
         options: {
             patterns: [ {
                 match: /""\+e\+"\."\+{([0-9]+:"[a-f0-9]{20}",?)+}/g,
-                replacement: (match) => match.replace(/""\+e\+"/g, '"analog4all-client/scripts/"+e+"')
+                replacement: (match) => match.replace(/""\+e\+"/g, '"scripts/"+e+"')
             } ]
         }
     },
@@ -83,7 +83,7 @@ module.exports = {
             patterns: [ {
                 match: /<script\stype="text\/javascript"\ssrc="([a-z]*\.[a-z0-9]*\.bundle\.js)"><\/script>/g,
                 replacement: (match, filename) => {
-                    return `<script type="text/javascript" src="analog4all-provider/scripts/${ filename }"></script>`;
+                    return `<script type="text/javascript" src="scripts/${ filename }"></script>`;
                 }
             } ]
         }
@@ -98,7 +98,7 @@ module.exports = {
             patterns: [ {
                 match: /<link\shref="(styles\.[a-z0-9]*\.bundle\.css)"\srel="stylesheet"\/>/g,
                 replacement: (match, filename) => {
-                    return `<link href="analog4all-provider/styles/${ filename }" rel="stylesheet">`;
+                    return `<link href="styles/${ filename }" rel="stylesheet">`;
                 }
             } ]
         }
