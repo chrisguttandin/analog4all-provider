@@ -27,6 +27,7 @@
     "@angular/cli": "^1.6.7",
     "@angular/compiler-cli": "^5.2.3",
     "@angular/language-service": "^5.2.3",
+    "@ngrx/store-devtools": "^5.0.1",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
