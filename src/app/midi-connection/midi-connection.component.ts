@@ -29,6 +29,10 @@ export class MidiConnectionComponent implements OnInit {
 
     public audioInputs$: Observable<MediaDeviceInfo[]>;
 
+    public description$: Observable<string>;
+
+    public gearogsSlug$: Observable<string>;
+
     public instrument$: Observable<null | IInstrument>;
 
     public instrumentName$: Observable<string>;
@@ -37,11 +41,17 @@ export class MidiConnectionComponent implements OnInit {
 
     public midiConnection$: Observable<null | IMidiConnection>;
 
+    public soundCloudUsername$: Observable<string>;
+
     @Input() public midiOutput: WebMidi.MIDIOutput;
 
     public sourceId$: Observable<string>;
 
     public virtualInstrumentName$: Observable<string>;
+
+    private _descriptionChanges$: BehaviorSubject<string>;
+
+    private _gearogsSlugChanges$: BehaviorSubject<string>;
 
     private _instrumentChanges$: BehaviorSubject<null | IInstrument>;
 
@@ -50,6 +60,8 @@ export class MidiConnectionComponent implements OnInit {
     private _middleCMidiJson: IMidiFile;
 
     private _scaleMidiJson: IMidiFile;
+
+    private _soundCloudUsernameChanges$: BehaviorSubject<string>;
 
     constructor (
         private _downloadingService: DownloadingService,
@@ -62,10 +74,13 @@ export class MidiConnectionComponent implements OnInit {
         private _samplesService: SamplesService,
         scaleMidiJsonService: ScaleMidiJsonService
     ) {
+        this._descriptionChanges$ = new BehaviorSubject('');
+        this._gearogsSlugChanges$ = new BehaviorSubject('');
         this._instrumentChanges$ = new BehaviorSubject(null);
+        this._instrumentNameChanges$ = new BehaviorSubject('');
         this._middleCMidiJson = middleCMidiJsonService.midiJson;
         this._scaleMidiJson = scaleMidiJsonService.midiJson;
-        this._instrumentNameChanges$ = new BehaviorSubject('');
+        this._soundCloudUsernameChanges$ = new BehaviorSubject('');
     }
 
     public deregister () {
@@ -85,6 +100,10 @@ export class MidiConnectionComponent implements OnInit {
     }
 
     public ngOnInit () {
+        this.description$ = this._descriptionChanges$.asObservable();
+
+        this.gearogsSlug$ = this._gearogsSlugChanges$.asObservable();
+
         this.midiConnection$ = this._midiConnectionsService
             .select(this.midiOutput.id);
 
@@ -105,6 +124,8 @@ export class MidiConnectionComponent implements OnInit {
             );
 
         this.instrumentName$ = this._instrumentNameChanges$.asObservable();
+
+        this.soundCloudUsername$ = this._soundCloudUsernameChanges$.asObservable();
 
         this.sourceId$ = this.midiConnection$
             .pipe(
@@ -145,13 +166,13 @@ export class MidiConnectionComponent implements OnInit {
     }
 
     public register () {
-        combineLatest(this.sourceId$, this.virtualInstrumentName$)
+        combineLatest(this.description$, this.gearogsSlug$, this.soundCloudUsername$, this.sourceId$, this.virtualInstrumentName$)
             .pipe(
                 take(1)
             )
-            .subscribe(([ sourceId, instrumentName ]) => {
+            .subscribe(([ description, gearogsSlug, soundCloudUsername, sourceId, instrumentName ]) => {
                 this._registeringService
-                    .register(instrumentName, sourceId)
+                .register(description, gearogsSlug, instrumentName, soundCloudUsername, sourceId)
                     .then(({ connection, instrument }: { connection: Observable<IDataChannel>, instrument: IInstrument }) => {
                         this.midiConnection$
                             .pipe(
@@ -226,6 +247,34 @@ export class MidiConnectionComponent implements OnInit {
             });
     }
 
+    public updateDescription (description: string) {
+        this._descriptionChanges$.next(description);
+
+        this.instrument$
+            .pipe(
+                take(1),
+                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                mergeMap(({ id }) => this._instrumentsService.update(id, { description }))
+            )
+            .subscribe(() => { // tslint:disable-line:no-empty
+                // @todo
+            });
+    }
+
+    public updateGearogsSlug (gearogsSlug: string) {
+        this._gearogsSlugChanges$.next(gearogsSlug);
+
+        this.instrument$
+            .pipe(
+                take(1),
+                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                mergeMap(({ id }) => this._instrumentsService.update(id, { gearogsSlug }))
+            )
+            .subscribe(() => { // tslint:disable-line:no-empty
+                // @todo
+            });
+    }
+
     public updateInstrumentName (name: string) {
         let sanitizedName: string;
 
@@ -242,6 +291,20 @@ export class MidiConnectionComponent implements OnInit {
                 take(1),
                 filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                 mergeMap(({ id }) => this._instrumentsService.update(id, { name: sanitizedName }))
+            )
+            .subscribe(() => { // tslint:disable-line:no-empty
+                // @todo
+            });
+    }
+
+    public updateSoundCloudUsername (soundCloudUsername: string) {
+        this._soundCloudUsernameChanges$.next(soundCloudUsername);
+
+        this.instrument$
+            .pipe(
+                take(1),
+                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                mergeMap(({ id }) => this._instrumentsService.update(id, { soundCloudUsername }))
             )
             .subscribe(() => { // tslint:disable-line:no-empty
                 // @todo

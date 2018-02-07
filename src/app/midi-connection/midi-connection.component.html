@@ -8,6 +8,18 @@
     [sourceId]="sourceId$ | async"
     (sourceIdChange)="updateSourceId($event)"
 ></anp-source-id-select>
+<anp-description-input
+    [description]="description$ | async"
+    (descriptionChange)="updateDescription($event)"
+></anp-description-input>
+<anp-sound-cloud-username-input
+    [soundCloudUsername]="soundCloudUsername$ | async"
+    (soundCloudUsernameChange)="updateSoundCloudUsername($event)"
+></anp-sound-cloud-username-input>
+<anp-gearogs-slug-input
+    [gearogsSlug]="gearogsSlug$ | async"
+    (gearogsSlugChange)="updateGearogsSlug($event)"
+></anp-gearogs-slug-input>
 <button (click)="register()" *ngIf="false === (isRegistered$ | async)">register device</button>
 <button (click)="deregister()" *ngIf="isRegistered$ | async">deregister device</button>
 <button (click)="test()">test device by recording a scale</button>

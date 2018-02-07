@@ -2,6 +2,10 @@ export interface IInstrument {
 
     created: number;
 
+    description?: string;
+
+    gearogsSlug?: string;
+
     id: string;
 
     isAvailable: boolean;
@@ -21,5 +25,7 @@ export interface IInstrument {
         url: string;
 
     };
+
+    soundCloudUsername?: string;
 
 }
