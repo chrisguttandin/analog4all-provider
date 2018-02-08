@@ -250,29 +250,33 @@ export class MidiConnectionComponent implements OnInit {
     public updateDescription (description: string) {
         this._descriptionChanges$.next(description);
 
-        this.instrument$
-            .pipe(
-                take(1),
-                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                mergeMap(({ id }) => this._instrumentsService.update(id, { description }))
-            )
-            .subscribe(() => { // tslint:disable-line:no-empty
-                // @todo
-            });
+        if (description.trim() !== '') {
+            this.instrument$
+                .pipe(
+                    take(1),
+                    filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                    mergeMap(({ id }) => this._instrumentsService.update(id, { description }))
+                )
+                .subscribe(() => { // tslint:disable-line:no-empty
+                    // @todo
+                });
+        }
     }
 
     public updateGearogsSlug (gearogsSlug: string) {
         this._gearogsSlugChanges$.next(gearogsSlug);
 
-        this.instrument$
-            .pipe(
-                take(1),
-                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                mergeMap(({ id }) => this._instrumentsService.update(id, { gearogsSlug }))
-            )
-            .subscribe(() => { // tslint:disable-line:no-empty
-                // @todo
-            });
+        if (gearogsSlug.trim() !== '') {
+            this.instrument$
+                .pipe(
+                    take(1),
+                    filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                    mergeMap(({ id }) => this._instrumentsService.update(id, { gearogsSlug }))
+                )
+                .subscribe(() => { // tslint:disable-line:no-empty
+                    // @todo
+                });
+        }
     }
 
     public updateInstrumentName (name: string) {
@@ -300,15 +304,17 @@ export class MidiConnectionComponent implements OnInit {
     public updateSoundCloudUsername (soundCloudUsername: string) {
         this._soundCloudUsernameChanges$.next(soundCloudUsername);
 
-        this.instrument$
-            .pipe(
-                take(1),
-                filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                mergeMap(({ id }) => this._instrumentsService.update(id, { soundCloudUsername }))
-            )
-            .subscribe(() => { // tslint:disable-line:no-empty
-                // @todo
-            });
+        if (soundCloudUsername.trim() !== '') {
+            this.instrument$
+                .pipe(
+                    take(1),
+                    filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
+                    mergeMap(({ id }) => this._instrumentsService.update(id, { soundCloudUsername }))
+                )
+                .subscribe(() => { // tslint:disable-line:no-empty
+                    // @todo
+                });
+        }
     }
 
     public updateSourceId (sourceId: string) {
