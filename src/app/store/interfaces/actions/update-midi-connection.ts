@@ -3,7 +3,7 @@ import { IMidiConnection } from '../../../interfaces';
 
 export interface IUpdateMidiConnectionAction extends Action {
 
-    payload: IMidiConnection;
+    payload: Partial<IMidiConnection>;
 
     type: 'UPDATE_MIDI_CONNECTION';
 

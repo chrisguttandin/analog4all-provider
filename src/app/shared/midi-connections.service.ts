@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { IMidiConnection } from '../interfaces';
 import { IAppState } from '../store';
-import { ADD_MIDI_CONNECTION, UPDATE_MIDI_CONNECTION } from '../store/actions';
+import { addMidiConnection, updateMidiConnection } from '../store/actions';
 
 @Injectable()
 export class MidiConnectionsService {
@@ -15,9 +15,9 @@ export class MidiConnectionsService {
 
     public create (midiConnection: { midiOutputId: string }): Observable<IMidiConnection> {
         return new Observable((observer) => {
-            const mergedMidiConnection = Object.assign({ sourceId: 'default' }, midiConnection);
+            const mergedMidiConnection = { sourceId: 'default', ...midiConnection };
 
-            this._store.dispatch({ payload: mergedMidiConnection, type: ADD_MIDI_CONNECTION });
+            this._store.dispatch(addMidiConnection(mergedMidiConnection));
 
             observer.next(mergedMidiConnection);
             observer.complete();
@@ -35,9 +35,9 @@ export class MidiConnectionsService {
             );
     }
 
-    public update (midiOutputId: string, delta: object): Observable<null> {
+    public update (midiOutputId: string, delta: Partial<IMidiConnection>): Observable<null> {
         return new Observable<null>((observer) => {
-            this._store.dispatch({ payload: Object.assign({}, delta, { midiOutputId }), type: UPDATE_MIDI_CONNECTION });
+            this._store.dispatch(updateMidiConnection({ ...delta, midiOutputId }));
 
             observer.next(null);
             observer.complete();

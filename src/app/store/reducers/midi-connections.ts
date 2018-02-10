@@ -2,7 +2,7 @@ import { IMidiConnection } from '../../interfaces';
 import { ADD_MIDI_CONNECTION, UPDATE_MIDI_CONNECTION } from '../actions';
 import { TMidiConnectionAction } from '../types';
 
-const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection: IMidiConnection) => {
+const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection: Partial<IMidiConnection>) => {
     const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);
 
     if (index === -1) {

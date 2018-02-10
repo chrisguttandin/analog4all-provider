@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { IAppState } from '../store';
-import { ADD_INSTRUMENT, DELETE_INSTRUMENT, UPDATE_INSTRUMENT } from '../store/actions';
+import { addInstrument, deleteInstrument, updateInstrument } from '../store/actions';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
 import { ResponseError } from './response-error';
@@ -35,9 +35,9 @@ export class InstrumentsService {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
         return this._httpClient
-            .post(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
+            .post<IInstrument>(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
             .pipe(
-                tap((nstrmnt) => this._store.dispatch({ payload: nstrmnt, type: ADD_INSTRUMENT })),
+                tap((nstrmnt) => addInstrument(nstrmnt)),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
@@ -47,7 +47,7 @@ export class InstrumentsService {
             .delete(`https${ this._endpoint }instruments/${ instrument.id }`)
             .pipe(
                 map(() => null),
-                tap(() => this._store.dispatch({ payload: instrument, type: DELETE_INSTRUMENT })),
+                tap(() => this._store.dispatch(deleteInstrument(instrument))),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
@@ -61,12 +61,12 @@ export class InstrumentsService {
             );
     }
 
-    public update (id: string, delta: object): Observable<null> {
+    public update (id: string, delta: Partial<IInstrument>): Observable<null> {
         return this._httpClient
             .patch(`https${ this._endpoint }instruments/${ id }`, delta)
             .pipe(
                 map(() => null),
-                tap(() => this._store.dispatch({ payload: Object.assign({}, delta, { id }), type: UPDATE_INSTRUMENT })),
+                tap(() => this._store.dispatch(updateInstrument({ ...delta, id }))),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
