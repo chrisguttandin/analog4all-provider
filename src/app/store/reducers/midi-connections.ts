@@ -1,9 +1,6 @@
 import { IMidiConnection } from '../../interfaces';
-import { IAddMidiConnectionAction, IUpdateMidiConnectionAction } from '../interfaces';
+import { ADD_MIDI_CONNECTION, UPDATE_MIDI_CONNECTION } from '../actions';
 import { TMidiConnectionAction } from '../types';
-
-export const ADD_MIDI_CONNECTION: IAddMidiConnectionAction['type'] = 'ADD_MIDI_CONNECTION';
-export const UPDATE_MIDI_CONNECTION: IUpdateMidiConnectionAction['type'] = 'UPDATE_MIDI_CONNECTION';
 
 const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection: IMidiConnection) => {
     const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);

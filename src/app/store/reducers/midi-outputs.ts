@@ -1,6 +1,5 @@
+import { UPDATE_MIDI_OUTPUTS } from '../actions';
 import { IUpdateMidiOutputsAction } from '../interfaces';
-
-export const UPDATE_MIDI_OUTPUTS: IUpdateMidiOutputsAction['type'] = 'UPDATE_MIDI_OUTPUTS';
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
 export function midiOutputsReducer (state: WebMidi.MIDIOutput[] = [], action: IUpdateMidiOutputsAction): WebMidi.MIDIOutput[] {

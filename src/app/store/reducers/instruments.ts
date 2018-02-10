@@ -1,10 +1,6 @@
 import { IInstrument } from '../../interfaces';
-import { IAddInstrumentAction, IDeleteInstrumentAction, IUpdateInstrumentAction } from '../interfaces';
+import { ADD_INSTRUMENT, DELETE_INSTRUMENT, UPDATE_INSTRUMENT } from '../actions';
 import { TInstrumentAction } from '../types';
-
-export const ADD_INSTRUMENT: IAddInstrumentAction['type'] = 'ADD_INSTRUMENT';
-export const DELETE_INSTRUMENT: IDeleteInstrumentAction['type'] = 'DELETE_INSTRUMENT';
-export const UPDATE_INSTRUMENT: IUpdateInstrumentAction['type'] = 'UPDATE_INSTRUMENT';
 
 const deleteInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);

@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import { tap } from 'rxjs/operators';
-import { IAppState, UPDATE_MIDI_OUTPUTS } from '../store';
+import { IAppState } from '../store';
+import { UPDATE_MIDI_OUTPUTS } from '../store/actions';
 import { MidiAccessService } from './midi-access.service';
 
 @Injectable()
