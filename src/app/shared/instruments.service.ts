@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { addInstrument, deleteInstrument, updateInstrument } from '../store/actions';
 import { IAppState } from '../store/interfaces';
+import { createInstrumentByIdSelector } from '../store/selectors';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
 import { ResponseError } from './response-error';
@@ -54,10 +55,8 @@ export class InstrumentsService {
 
     public select (id: string): Observable<null | IInstrument> {
         return this._store
-            .select('instruments')
             .pipe(
-                map<IInstrument[], undefined | IInstrument>((instruments) => instruments.find(({ id: d }) => id === d)),
-                map<undefined | IInstrument, null | IInstrument>((instrument) => (instrument === undefined) ? null : instrument)
+                select(createInstrumentByIdSelector(id))
             );
     }
 
