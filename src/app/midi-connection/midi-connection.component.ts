@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { of } from 'rxjs/observable/of';
-import { concatMap, filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
+import { concatMap, filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
 import { IInstrument, IMidiConnection } from '../interfaces';
 import {
     DownloadingService,
@@ -86,11 +86,11 @@ export class MidiConnectionComponent implements OnInit {
     public deregister () {
         this.instrument$
             .pipe(
-                take(1),
+                first(),
                 filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                 switchMap((instrument) => this._registeringService.deregister(instrument)),
                 switchMap(() => this.midiConnection$),
-                take(1),
+                first(),
                 filter<IMidiConnection>((midiConnection): midiConnection is IMidiConnection => (midiConnection !== null)),
                 mergeMap((midiConnection) => this._midiConnectionsService.update(midiConnection.midiOutputId, { instrumentId: undefined }))
             )
@@ -144,7 +144,7 @@ export class MidiConnectionComponent implements OnInit {
 
         this.instrument$
             .pipe(
-                take(1)
+                first()
             )
             .subscribe((instrument) => {
                 if (instrument === null) {
@@ -156,7 +156,7 @@ export class MidiConnectionComponent implements OnInit {
 
         this.midiConnection$
             .pipe(
-                take(1),
+                first(),
                 filter((midiConnection) => midiConnection === null),
                 mergeMap(() => this._midiConnectionsService.create({ midiOutputId: this.midiOutput.id }))
             )
@@ -168,7 +168,7 @@ export class MidiConnectionComponent implements OnInit {
     public register () {
         combineLatest(this.description$, this.gearogsSlug$, this.soundCloudUsername$, this.sourceId$, this.virtualInstrumentName$)
             .pipe(
-                take(1)
+                first()
             )
             .subscribe(([ description, gearogsSlug, soundCloudUsername, sourceId, instrumentName ]) => {
                 this._registeringService
@@ -176,7 +176,7 @@ export class MidiConnectionComponent implements OnInit {
                     .then(({ connection, instrument }: { connection: Observable<IDataChannel>, instrument: IInstrument }) => {
                         this.midiConnection$
                             .pipe(
-                                take(1),
+                                first(),
                                 mergeMap<IMidiConnection, null>((midiConnection) => this._midiConnectionsService
                                     .update(midiConnection.midiOutputId, { instrumentId: instrument.id }))
                             )
@@ -199,7 +199,7 @@ export class MidiConnectionComponent implements OnInit {
     public sample () {
         this.sourceId$
             .pipe(
-                take(1)
+                first()
             )
             .subscribe((sourceId) => {
                 this._recordingService
@@ -216,7 +216,7 @@ export class MidiConnectionComponent implements OnInit {
                         .subscribe((sample) => resolve(sample))))
                     .then((sample: { id: string }) => new Promise((resolve) => this.instrument$
                         .pipe(
-                            take(1),
+                            first(),
                             mergeMap<IInstrument, null>((instrument) => this._instrumentsService
                                 .update(instrument.id, {
                                     sample: {
@@ -231,7 +231,7 @@ export class MidiConnectionComponent implements OnInit {
     public test () {
         this.sourceId$
             .pipe(
-                take(1)
+                first()
             )
             .subscribe((sourceId) => {
                 this._recordingService
@@ -253,7 +253,7 @@ export class MidiConnectionComponent implements OnInit {
         if (description.trim() !== '') {
             this.instrument$
                 .pipe(
-                    take(1),
+                    first(),
                     filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                     mergeMap(({ id }) => this._instrumentsService.update(id, { description }))
                 )
@@ -269,7 +269,7 @@ export class MidiConnectionComponent implements OnInit {
         if (gearogsSlug.trim() !== '') {
             this.instrument$
                 .pipe(
-                    take(1),
+                    first(),
                     filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                     mergeMap(({ id }) => this._instrumentsService.update(id, { gearogsSlug }))
                 )
@@ -292,7 +292,7 @@ export class MidiConnectionComponent implements OnInit {
 
         this.instrument$
             .pipe(
-                take(1),
+                first(),
                 filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                 mergeMap(({ id }) => this._instrumentsService.update(id, { name: sanitizedName }))
             )
@@ -307,7 +307,7 @@ export class MidiConnectionComponent implements OnInit {
         if (soundCloudUsername.trim() !== '') {
             this.instrument$
                 .pipe(
-                    take(1),
+                    first(),
                     filter<IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                     mergeMap(({ id }) => this._instrumentsService.update(id, { soundCloudUsername }))
                 )
@@ -320,7 +320,7 @@ export class MidiConnectionComponent implements OnInit {
     public updateSourceId (sourceId: string) {
         this.midiConnection$
             .pipe(
-                take(1),
+                first(),
                 filter<IMidiConnection>((midiConnection): midiConnection is IMidiConnection => (midiConnection !== null)),
                 mergeMap(({ midiOutputId }) => {
                     return this._midiConnectionsService.update(midiOutputId, { sourceId });
