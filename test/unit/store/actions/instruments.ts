@@ -53,6 +53,7 @@ describe('instruments actions', () => {
 
         it('should create an action', () => {
             const instrument = {
+                id: 'a fake id',
                 name: 'a fake name'
             };
             const action = updateInstrument(instrument);

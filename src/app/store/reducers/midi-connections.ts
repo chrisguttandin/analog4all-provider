@@ -2,11 +2,21 @@ import { IMidiConnection } from '../../interfaces';
 import { ADD_MIDI_CONNECTION, UPDATE_MIDI_CONNECTION } from '../actions';
 import { TMidiConnectionAction } from '../types';
 
-const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection: Partial<IMidiConnection>) => {
+const addMidiConnection = (midiConnections: IMidiConnection[], midiConnection: IMidiConnection) => {
+    const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);
+
+    if (index > -1) {
+        throw new Error('A midiConnection with the same midiOutputId does already exist.');
+    }
+
+    return [ ...midiConnections, midiConnection ];
+};
+
+const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection: { midiOutputId: string } & Partial<IMidiConnection>) => {
     const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);
 
     if (index === -1) {
-        return midiConnections;
+        throw new Error('An midiConnection with the same id is not stored.');
     }
 
     return [
@@ -20,7 +30,7 @@ const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection
 export function midiConnectionsReducer (state: IMidiConnection[] = [], action: TMidiConnectionAction): IMidiConnection[] {
     switch (action.type) {
         case ADD_MIDI_CONNECTION:
-            return [ ...state, action.payload ];
+            return addMidiConnection(state, action.payload);
         case UPDATE_MIDI_CONNECTION:
             return updateMidiConnection(state, action.payload);
         default:

@@ -3,7 +3,7 @@ import { IInstrument } from '../../../interfaces';
 
 export interface IUpdateInstrumentAction extends Action {
 
-    payload: Partial<IInstrument>;
+    payload: { id: string } & Partial<IInstrument>;
 
     type: 'UPDATE_INSTRUMENT';
 

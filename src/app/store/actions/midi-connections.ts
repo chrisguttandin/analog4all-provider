@@ -9,7 +9,7 @@ export const addMidiConnection = (midiConnection: IMidiConnection): IAddMidiConn
     type: ADD_MIDI_CONNECTION
 });
 
-export const updateMidiConnection = (midiConnection: Partial<IMidiConnection>): IUpdateMidiConnectionAction => ({
+export const updateMidiConnection = (midiConnection: { midiOutputId: string } & Partial<IMidiConnection>): IUpdateMidiConnectionAction => ({
     payload: midiConnection,
     type: UPDATE_MIDI_CONNECTION
 });

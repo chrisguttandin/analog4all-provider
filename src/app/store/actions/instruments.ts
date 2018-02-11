@@ -15,7 +15,7 @@ export const deleteInstrument = (instrument: IInstrument): IDeleteInstrumentActi
     type: DELETE_INSTRUMENT
 });
 
-export const updateInstrument = (instrument: Partial<IInstrument>): IUpdateInstrumentAction => ({
+export const updateInstrument = (instrument: { id: string } & Partial<IInstrument>): IUpdateInstrumentAction => ({
     payload: instrument,
     type: UPDATE_INSTRUMENT
 });
