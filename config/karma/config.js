@@ -73,6 +73,8 @@ module.exports = (config) => {
     } else {
         config.set({
 
+            browserNoActivityTimeout: 20000,
+
             browsers: [
                 'ChromeHeadless'
             ]
