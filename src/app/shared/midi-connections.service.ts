@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { IMidiConnection } from '../interfaces';
-import { IAppState } from '../store';
 import { addMidiConnection, updateMidiConnection } from '../store/actions';
+import { IAppState } from '../store/interfaces';
 
 @Injectable()
 export class MidiConnectionsService {
