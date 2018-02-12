@@ -11,7 +11,7 @@ const imports = (environment.production) ?
     [
         NgRxStoreModule.forRoot(appReducer),
         StoreDevtoolsModule.instrument({
-          maxAge: 5
+            maxAge: 5
         })
     ];
 
