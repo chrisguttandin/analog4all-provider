@@ -1,8 +1,6 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { IAppState } from './interfaces';
-import { instrumentsReducer } from './reducers/instruments';
-import { midiConnectionsReducer } from './reducers/midi-connections';
-import { midiOutputsReducer } from './reducers/midi-outputs';
+import { instrumentsReducer, midiConnectionsReducer, midiOutputsReducer } from './reducers';
 
 export const appReducer: ActionReducerMap<IAppState> = {
     instruments: instrumentsReducer,
