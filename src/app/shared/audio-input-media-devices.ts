@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { of } from 'rxjs/observable/of';
+import { switchMap } from 'rxjs/operators';
+import { MicrophonePermissionStateService } from './microphone-permission-state';
 import { WindowService } from './window.service';
 
 @Injectable()
@@ -8,7 +10,10 @@ export class AudioInputMediaDevicesService {
 
     private _window: Window;
 
-    constructor (windowService: WindowService) {
+    constructor (
+        private _microphonePermissionStateService: MicrophonePermissionStateService,
+        windowService: WindowService
+    ) {
         this._window = windowService.nativeWindow;
     }
 
@@ -23,7 +28,7 @@ export class AudioInputMediaDevicesService {
     }
 
     public watch (): Observable<MediaDeviceInfo[]> {
-        return new Observable((observer: Observer<MediaDeviceInfo[]>) => {
+        const $mediaDevices = new Observable<MediaDeviceInfo[]>((observer) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
 
@@ -31,9 +36,11 @@ export class AudioInputMediaDevicesService {
 
                 const enumerateDevices = () => mediaDevices
                     .enumerateDevices()
-                    .then((mediaDeviceInfos: any) => {
+                    .then((mediaDeviceInfos) => {
                         if (!isUnsubscribed) {
-                            observer.next(mediaDeviceInfos.filter(({ kind }: any) => kind === 'audioinput'));
+                            observer.next(mediaDeviceInfos.filter(({ kind, label }) => {
+                                return (kind === 'audioinput' && label !== '');
+                            }));
                         }
                     });
 
@@ -56,6 +63,18 @@ export class AudioInputMediaDevicesService {
             // @todo The return statement is necessary to keep TypeScript happy.
             return;
         });
+
+        return this._microphonePermissionStateService
+            .watch()
+            .pipe(
+                switchMap((permissionState) => {
+                    if (permissionState === 'granted') {
+                        return $mediaDevices;
+                    }
+
+                    return of([ ]);
+                })
+            );
     }
 
 }

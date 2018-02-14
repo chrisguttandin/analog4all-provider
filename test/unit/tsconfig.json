@@ -6,7 +6,9 @@
     "types": [
       "jasmine",
       "node",
-      "webmidi"
+      "webmidi",
+      "../../src/media-devices",
+      "../../src/permissions"
     ]
   },
   "extends": "../../node_modules/tsconfig-holy-grail/src/tsconfig-browser",
