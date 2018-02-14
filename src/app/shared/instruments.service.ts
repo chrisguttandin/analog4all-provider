@@ -38,7 +38,7 @@ export class InstrumentsService {
         return this._httpClient
             .post<IInstrument>(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
             .pipe(
-                tap((nstrmnt) => addInstrument(nstrmnt)),
+                tap((nstrmnt) => this._store.dispatch(addInstrument(nstrmnt))),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
