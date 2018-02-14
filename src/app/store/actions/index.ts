@@ -1,3 +1,3 @@
 export * from './instruments';
 export * from './midi-connections';
-export * from './midi-output';
+export * from './midi-outputs';
