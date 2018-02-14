@@ -1,0 +1,5 @@
+describe('midiOutputs reducer', () => {
+
+    // @todo
+
+});
