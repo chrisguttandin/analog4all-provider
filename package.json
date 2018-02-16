@@ -24,7 +24,7 @@
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
-    "@angular/cli": "^1.6.8",
+    "@angular/cli": "^1.7.0",
     "@angular/compiler-cli": "^5.2.5",
     "@angular/language-service": "^5.2.5",
     "@ngrx/store-devtools": "^5.1.0",
