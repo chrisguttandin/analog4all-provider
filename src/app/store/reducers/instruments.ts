@@ -22,7 +22,7 @@ const deleteInstrument = (instruments: IInstrument[], instrument: IInstrument) =
     return [ ...instruments.slice(0, index), ...instruments.slice(index + 1) ];
 };
 
-const updateInstrument = (instruments: IInstrument[], instrument: { id: string } & Partial<IInstrument>) => {
+const updateInstrument = (instruments: IInstrument[], instrument: { id: IInstrument['id'] } & Partial<IInstrument>) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index === -1) {

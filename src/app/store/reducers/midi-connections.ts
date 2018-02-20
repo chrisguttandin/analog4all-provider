@@ -12,7 +12,10 @@ const addMidiConnection = (midiConnections: IMidiConnection[], midiConnection: I
     return [ ...midiConnections, midiConnection ];
 };
 
-const updateMidiConnection = (midiConnections: IMidiConnection[], midiConnection: { midiOutputId: string } & Partial<IMidiConnection>) => {
+const updateMidiConnection = (
+    midiConnections: IMidiConnection[],
+    midiConnection: { midiOutputId: IMidiConnection['midiOutputId'] } & Partial<IMidiConnection>
+) => {
     const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);
 
     if (index === -1) {
