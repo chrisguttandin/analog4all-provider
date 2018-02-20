@@ -53,8 +53,6 @@ export class MidiConnectionComponent implements OnInit {
 
     private _gearogsSlugChanges$: BehaviorSubject<string>;
 
-    private _instrumentChanges$: BehaviorSubject<null | IInstrument>;
-
     private _instrumentNameChanges$: BehaviorSubject<string>;
 
     private _middleCMidiJson: IMidiFile;
@@ -76,7 +74,6 @@ export class MidiConnectionComponent implements OnInit {
     ) {
         this._descriptionChanges$ = new BehaviorSubject('');
         this._gearogsSlugChanges$ = new BehaviorSubject('');
-        this._instrumentChanges$ = new BehaviorSubject(null);
         this._instrumentNameChanges$ = new BehaviorSubject('');
         this._middleCMidiJson = middleCMidiJsonService.midiJson;
         this._scaleMidiJson = scaleMidiJsonService.midiJson;
