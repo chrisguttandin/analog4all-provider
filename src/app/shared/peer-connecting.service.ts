@@ -44,7 +44,7 @@ export class PeerConnectingService {
             webSocketSubject
                 .mask<any>({ type: 'request' })
                 .pipe(
-                    mergeMap(({ mask }) => new Observable((bsrvr) => {
+                    mergeMap(({ mask }) => new Observable<IDataChannel>((bsrvr) => {
                         const maskedWebSocketSubject = webSocketSubject.mask(mask);
 
                         const peerConnection = new RTCPeerConnection({

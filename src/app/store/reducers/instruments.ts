@@ -1,6 +1,6 @@
 import { IInstrument } from '../../interfaces';
 import { ADD_INSTRUMENT, DELETE_INSTRUMENT, UPDATE_INSTRUMENT } from '../actions';
-import { TInstrumentAction } from '../types';
+import { TStoreAction } from '../types';
 
 const addInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
@@ -37,7 +37,7 @@ const updateInstrument = (instruments: IInstrument[], instrument: { id: IInstrum
 };
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function instrumentsReducer (state: IInstrument[] = [], action: TInstrumentAction): IInstrument[] {
+export function instrumentsReducer (state: IInstrument[] = [], action: TStoreAction): IInstrument[] {
     switch (action.type) {
         case ADD_INSTRUMENT:
             return addInstrument(state, action.payload);

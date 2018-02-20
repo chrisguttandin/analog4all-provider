@@ -1,6 +1,6 @@
 import { IMidiConnection } from '../../interfaces';
 import { ADD_MIDI_CONNECTION, UPDATE_MIDI_CONNECTION } from '../actions';
-import { TMidiConnectionAction } from '../types';
+import { TStoreAction } from '../types';
 
 const addMidiConnection = (midiConnections: IMidiConnection[], midiConnection: IMidiConnection) => {
     const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);
@@ -30,7 +30,7 @@ const updateMidiConnection = (
 };
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function midiConnectionsReducer (state: IMidiConnection[] = [], action: TMidiConnectionAction): IMidiConnection[] {
+export function midiConnectionsReducer (state: IMidiConnection[] = [], action: TStoreAction): IMidiConnection[] {
     switch (action.type) {
         case ADD_MIDI_CONNECTION:
             return addMidiConnection(state, action.payload);
