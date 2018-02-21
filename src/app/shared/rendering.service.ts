@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { parseArrayBuffer } from 'midi-json-parser';
-import { IMidiFile } from 'midi-json-parser-worker';
 import { midiPlayerFactory } from 'midi-player';
 import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 import { FileReceivingService } from './file-receiving.service';
@@ -31,7 +30,7 @@ export class RenderingService {
 
                 return parseArrayBuffer(arrayBuffer);
             })
-            .then((midiJson: IMidiFile) => {
+            .then((midiJson) => {
                 midiJson.tracks = midiJson.tracks
                     .map((events) => {
                         const allowedEvents = [];
