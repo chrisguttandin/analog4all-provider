@@ -41,12 +41,10 @@ describe('midiConnections selectors', () => {
         let midiConnections: IMidiConnection[];
 
         beforeEach(() => {
-            const midiConnection = {
+            midiConnections = [ {
                 midiOutputId: 'a fake midiOutputId',
                 sourceId: 'a fake sourceId'
-            };
-
-            midiConnections = [ midiConnection ];
+            } ];
         });
 
         describe('createMidiConnectionByMidiOutputIdSelector()', () => {

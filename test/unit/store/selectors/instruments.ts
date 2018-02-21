@@ -41,7 +41,7 @@ describe('instruments selectors', () => {
         let instruments: IInstrument[];
 
         beforeEach(() => {
-            const instrument = {
+            instruments = [ {
                 created: 1518284684850,
                 id: 'a fake id',
                 isAvailable: false,
@@ -50,9 +50,7 @@ describe('instruments selectors', () => {
                 socket: {
                     url: 'a fake socket url'
                 }
-            };
-
-            instruments = [ instrument ];
+            } ];
         });
 
         describe('createInstrumentByIdSelector()', () => {
