@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { IMidiConnection } from '../interfaces';
 import { addMidiConnection, updateMidiConnection } from '../store/actions';
 import { IAppState } from '../store/interfaces';
-import { createMidiConnectionByMidiOutputIdSelector } from '../store/selectors';
 
 @Injectable()
 export class MidiConnectionsService {
@@ -22,13 +21,6 @@ export class MidiConnectionsService {
             observer.next(mergedMidiConnection);
             observer.complete();
         });
-    }
-
-    public select (midiOutputId: string): Observable<null | IMidiConnection> {
-        return this._store
-            .pipe(
-                select(createMidiConnectionByMidiOutputIdSelector(midiOutputId))
-            );
     }
 
     public update (midiOutputId: string, delta: Partial<IMidiConnection>): Observable<null> {

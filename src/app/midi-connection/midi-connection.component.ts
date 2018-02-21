@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { midiPlayerFactory } from 'midi-player';
 import { IDataChannel, wrap } from 'rxjs-broker';
@@ -19,6 +20,8 @@ import {
     SamplesService,
     ScaleMidiJsonService
 } from '../shared';
+import { IAppState } from '../store/interfaces';
+import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector } from '../store/selectors';
 
 @Component({
     selector: 'anp-midi-connection',
@@ -70,7 +73,8 @@ export class MidiConnectionComponent implements OnInit {
         private _renderingService: RenderingService,
         private _recordingService: RecordingService,
         private _samplesService: SamplesService,
-        scaleMidiJsonService: ScaleMidiJsonService
+        scaleMidiJsonService: ScaleMidiJsonService,
+        private _store: Store<IAppState>
     ) {
         this._descriptionChanges$ = new BehaviorSubject('');
         this._gearogsSlugChanges$ = new BehaviorSubject('');
@@ -103,8 +107,10 @@ export class MidiConnectionComponent implements OnInit {
 
         this.gearogsSlug$ = this._gearogsSlugChanges$.asObservable();
 
-        this.midiConnection$ = this._midiConnectionsService
-            .select(this.midiOutput.id);
+        this.midiConnection$ = this._store
+            .pipe(
+                select(createMidiConnectionByMidiOutputIdSelector(this.midiOutput.id))
+            );
 
         this.instrument$ = this.midiConnection$
             .pipe(
@@ -113,7 +119,10 @@ export class MidiConnectionComponent implements OnInit {
                         return of(null);
                     }
 
-                    return this._instrumentsService.select(midiConnection.instrumentId);
+                    return this._store
+                        .pipe(
+                            select(createInstrumentByIdSelector(midiConnection.instrumentId))
+                        );
                 })
             );
 
