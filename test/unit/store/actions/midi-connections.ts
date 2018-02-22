@@ -1,6 +1,28 @@
-import { UPDATE_MIDI_CONNECTION, updateMidiConnection } from '../../../../src/app/store/actions';
+import {
+    MERGE_MIDI_CONNECTIONS,
+    UPDATE_MIDI_CONNECTION,
+    mergeMidiConnections,
+    updateMidiConnection
+} from '../../../../src/app/store/actions';
 
 describe('midiConnections actions', () => {
+
+    describe('mergeMidiConnections()', () => {
+
+        it('should create an action', () => {
+            const midiConnections = [ {
+                isConnected: true,
+                midiOutputId: 'a fake midiOutputId',
+                midiOutputName: 'a fake midiOutputName',
+                name: 'a fake name',
+                sourceId: 'default'
+            } ];
+            const action = mergeMidiConnections(midiConnections);
+
+            expect(action).toEqual({ payload: midiConnections, type: MERGE_MIDI_CONNECTIONS });
+        });
+
+    });
 
     describe('updateMidiConnection()', () => {
 

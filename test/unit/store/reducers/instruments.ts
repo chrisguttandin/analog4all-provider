@@ -35,6 +35,117 @@ describe('instruments reducer', () => {
 
         });
 
+        describe('with an action of type DELETE_INSTRUMENT', () => {
+
+            it('should return the default state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(undefined, <any> { payload: instrument, type: 'DELETE_INSTRUMENT' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
+        describe('with an action of type DELETE_INSTRUMENT_FAIL', () => {
+
+            it('should return the default state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(undefined, <any> { payload: instrument, type: 'DELETE_INSTRUMENT_FAIL' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
+        describe('with an action of type DELETE_INSTRUMENT_SUCCESS', () => {
+
+            it('should return the default state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(undefined, <any> { payload: instrument, type: 'DELETE_INSTRUMENT_SUCCESS' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
+        describe('with an action of type PATCH_INSTRUMENT', () => {
+
+            it('should return the default state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(undefined, <any> { payload: instrument, type: 'PATCH_INSTRUMENT' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
+        describe('with an action of type PATCH_INSTRUMENT_FAIL', () => {
+
+            it('should return the default state', () => {
+                const id = 'a fake id';
+                const state = instrumentsReducer(undefined, <any> { payload: id, type: 'PATCH_INSTRUMENT_FAIL' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
+        describe('with an action of type PATCH_INSTRUMENT_SUCCESS', () => {
+
+            it('should return the default state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(undefined, <any> { payload: instrument, type: 'PATCH_INSTRUMENT_SUCCESS' });
+
+                expect(state).toEqual([ ]);
+            });
+
+        });
+
         describe('with an action of type REMOVE_INSTRUMENT', () => {
 
             it('should throw an error', () => {
@@ -116,6 +227,117 @@ describe('instruments reducer', () => {
                 expect(() => {
                     instrumentsReducer(previousState, { payload: instrument, type: 'ADD_INSTRUMENT' });
                 }).toThrow(new Error('An instrument with the same id does already exist.'));
+            });
+
+        });
+
+        describe('with an action of type DELETE_INSTRUMENT', () => {
+
+            it('should return the previous state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(previousState, <any> { payload: instrument, type: 'DELETE_INSTRUMENT' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type DELETE_INSTRUMENT_FAIL', () => {
+
+            it('should return the previous state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(previousState, <any> { payload: instrument, type: 'DELETE_INSTRUMENT_FAIL' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type DELETE_INSTRUMENT_SUCCESS', () => {
+
+            it('should return the previous state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(previousState, <any> { payload: instrument, type: 'DELETE_INSTRUMENT_SUCCESS' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type PATCH_INSTRUMENT', () => {
+
+            it('should return the previous state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(previousState, <any> { payload: instrument, type: 'PATCH_INSTRUMENT' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type PATCH_INSTRUMENT_FAIL', () => {
+
+            it('should return the previous state', () => {
+                const id = 'a fake id';
+                const state = instrumentsReducer(previousState, <any> { payload: id, type: 'PATCH_INSTRUMENT_FAIL' });
+
+                expect(state).toEqual(previousState);
+            });
+
+        });
+
+        describe('with an action of type PATCH_INSTRUMENT_SUCCESS', () => {
+
+            it('should return the previous state', () => {
+                const instrument = {
+                    created: 1518284684850,
+                    id: 'a fake id',
+                    isAvailable: false,
+                    modified: 1518284684850,
+                    name: 'a fake name',
+                    socket: {
+                        url: 'a fake socket url'
+                    }
+                };
+                const state = instrumentsReducer(previousState, <any> { payload: instrument, type: 'PATCH_INSTRUMENT_SUCCESS' });
+
+                expect(state).toEqual(previousState);
             });
 
         });
