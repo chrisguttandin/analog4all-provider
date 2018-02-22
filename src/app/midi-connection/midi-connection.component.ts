@@ -13,13 +13,13 @@ import {
     DownloadingService,
     InstrumentsService,
     MiddleCMidiJsonService,
-    MidiConnectionsService,
     RecordingService,
     RegisteringService,
     RenderingService,
     SamplesService,
     ScaleMidiJsonService
 } from '../shared';
+import { addMidiConnection, updateMidiConnection } from '../store/actions';
 import { IAppState } from '../store/interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector } from '../store/selectors';
 
@@ -68,7 +68,6 @@ export class MidiConnectionComponent implements OnInit {
         private _downloadingService: DownloadingService,
         private _instrumentsService: InstrumentsService,
         middleCMidiJsonService: MiddleCMidiJsonService,
-        private _midiConnectionsService: MidiConnectionsService,
         private _registeringService: RegisteringService,
         private _renderingService: RenderingService,
         private _recordingService: RecordingService,
@@ -94,11 +93,10 @@ export class MidiConnectionComponent implements OnInit {
                 first(),
                 filter<null | IMidiConnection, IMidiConnection>((midiConnection): midiConnection is IMidiConnection => {
                     return (midiConnection !== null);
-                }),
-                mergeMap((midiConnection) => this._midiConnectionsService.update(midiConnection.midiOutputId, { instrumentId: undefined }))
+                })
             )
-            .subscribe(() => { // tslint:disable-line:no-empty
-                // @todo
+            .subscribe(({ midiOutputId }) => { // tslint:disable-line:no-empty
+                this._store.dispatch(updateMidiConnection({ instrumentId: undefined, midiOutputId }));
             });
     }
 
@@ -166,7 +164,11 @@ export class MidiConnectionComponent implements OnInit {
             .pipe(
                 first(),
                 filter((midiConnection) => midiConnection === null),
-                mergeMap(() => this._midiConnectionsService.create({ midiOutputId: this.midiOutput.id }))
+                map(() => {
+                    const midiConnection = { midiOutputId: this.midiOutput.id, sourceId: 'default' };
+
+                    this._store.dispatch(addMidiConnection(midiConnection));
+                })
             )
             .subscribe(() => { // tslint:disable-line:no-empty
                 // @todo Catch and handle errors.
@@ -187,12 +189,10 @@ export class MidiConnectionComponent implements OnInit {
                                 filter<null | IMidiConnection, IMidiConnection>((midiConnection): midiConnection is IMidiConnection => {
                                     return (midiConnection !== null);
                                 }),
-                                first(),
-                                mergeMap<IMidiConnection, null>((midiConnection) => this._midiConnectionsService
-                                    .update(midiConnection.midiOutputId, { instrumentId: instrument.id }))
+                                first()
                             )
-                            .subscribe(() => { // tslint:disable-line:no-empty
-                                // @todo
+                            .subscribe(({ midiOutputId }) => { // tslint:disable-line:no-empty
+                                this._store.dispatch(updateMidiConnection({ instrumentId: instrument.id, midiOutputId }));
                             });
 
                         connection
@@ -335,13 +335,10 @@ export class MidiConnectionComponent implements OnInit {
                 first(),
                 filter<null | IMidiConnection, IMidiConnection>((midiConnection): midiConnection is IMidiConnection => {
                     return (midiConnection !== null);
-                }),
-                mergeMap(({ midiOutputId }) => {
-                    return this._midiConnectionsService.update(midiOutputId, { sourceId });
                 })
             )
-            .subscribe(() => { // tslint:disable-line:no-empty
-                // @todo
+            .subscribe(({ midiOutputId }) => { // tslint:disable-line:no-empty
+                this._store.dispatch(updateMidiConnection({ midiOutputId, sourceId }));
             });
     }
 

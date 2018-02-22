@@ -7,7 +7,6 @@ export * from './instruments.service';
 export * from './middle-c-midi-json.service';
 export * from './microphone-permission-state';
 export * from './midi-access.service';
-export * from './midi-connections.service';
 export * from './midi-outputs.service';
 export * from './peer-connecting.service';
 export * from './recording.service';
