@@ -28,7 +28,7 @@ export class AudioInputMediaDevicesService {
     }
 
     public watch (): Observable<MediaDeviceInfo[]> {
-        const $mediaDevices = new Observable<MediaDeviceInfo[]>((observer) => {
+        const mediaDevices$ = new Observable<MediaDeviceInfo[]>((observer) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
 
@@ -69,7 +69,7 @@ export class AudioInputMediaDevicesService {
             .pipe(
                 switchMap((permissionState) => {
                     if (permissionState === 'granted') {
-                        return $mediaDevices;
+                        return mediaDevices$;
                     }
 
                     return of([ ]);
