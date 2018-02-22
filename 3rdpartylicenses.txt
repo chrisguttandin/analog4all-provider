@@ -49,7 +49,7 @@ fast-unique-numbers@1.1.3
 MIT
 MIT
 
-@angular/core@5.2.5
+@angular/core@5.2.6
 MIT
 MIT
 
