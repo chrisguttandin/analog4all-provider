@@ -35,7 +35,7 @@ describe('instruments reducer', () => {
 
         });
 
-        describe('with an action of type DELETE_INSTRUMENT', () => {
+        describe('with an action of type REMOVE_INSTRUMENT', () => {
 
             it('should throw an error', () => {
                 const instrument = {
@@ -50,8 +50,8 @@ describe('instruments reducer', () => {
                 };
 
                 expect(() => {
-                    instrumentsReducer(undefined, { payload: instrument, type: 'DELETE_INSTRUMENT' });
-                }).toThrow(new Error('The instrument to be deleted is not stored.'));
+                    instrumentsReducer(undefined, { payload: instrument, type: 'REMOVE_INSTRUMENT' });
+                }).toThrow(new Error('The instrument to be removed is not stored.'));
             });
 
         });
@@ -120,11 +120,11 @@ describe('instruments reducer', () => {
 
         });
 
-        describe('with an action of type DELETE_INSTRUMENT', () => {
+        describe('with an action of type REMOVE_INSTRUMENT', () => {
 
             it('should return an array without the given instrument', () => {
                 const instrument = previousState[0];
-                const state = instrumentsReducer(previousState, { payload: instrument, type: 'DELETE_INSTRUMENT' });
+                const state = instrumentsReducer(previousState, { payload: instrument, type: 'REMOVE_INSTRUMENT' });
 
                 expect(state).toEqual([ ]);
             });

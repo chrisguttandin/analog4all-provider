@@ -1,10 +1,10 @@
 import { Action } from '@ngrx/store';
 import { IInstrument } from '../../../interfaces';
 
-export interface IDeleteInstrumentAction extends Action {
+export interface IRemoveInstrumentAction extends Action {
 
     payload: IInstrument;
 
-    type: 'DELETE_INSTRUMENT';
+    type: 'REMOVE_INSTRUMENT';
 
 }

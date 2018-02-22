@@ -1,5 +1,5 @@
 import { IInstrument } from '../../interfaces';
-import { ADD_INSTRUMENT, DELETE_INSTRUMENT, UPDATE_INSTRUMENT } from '../actions';
+import { ADD_INSTRUMENT, REMOVE_INSTRUMENT, UPDATE_INSTRUMENT } from '../actions';
 import { TStoreAction } from '../types';
 
 const addInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
@@ -12,11 +12,11 @@ const addInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
     return [ ...instruments, instrument ];
 };
 
-const deleteInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
+const removeInstrument = (instruments: IInstrument[], instrument: IInstrument) => {
     const index = instruments.indexOf(instrument);
 
     if (index === -1) {
-        throw new Error('The instrument to be deleted is not stored.');
+        throw new Error('The instrument to be removed is not stored.');
     }
 
     return [ ...instruments.slice(0, index), ...instruments.slice(index + 1) ];
@@ -41,8 +41,8 @@ export function instrumentsReducer (state: IInstrument[] = [], action: TStoreAct
     switch (action.type) {
         case ADD_INSTRUMENT:
             return addInstrument(state, action.payload);
-        case DELETE_INSTRUMENT:
-            return deleteInstrument(state, action.payload);
+        case REMOVE_INSTRUMENT:
+            return removeInstrument(state, action.payload);
         case UPDATE_INSTRUMENT:
             return updateInstrument(state, action.payload);
         default:

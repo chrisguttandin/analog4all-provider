@@ -1,9 +1,9 @@
 import {
     ADD_INSTRUMENT,
-    DELETE_INSTRUMENT,
+    REMOVE_INSTRUMENT,
     UPDATE_INSTRUMENT,
     addInstrument,
-    deleteInstrument,
+    removeInstrument,
     updateInstrument
 } from '../../../../src/app/store/actions';
 
@@ -29,7 +29,7 @@ describe('instruments actions', () => {
 
     });
 
-    describe('deleteInstrument()', () => {
+    describe('removeInstrument()', () => {
 
         it('should create an action', () => {
             const instrument = {
@@ -42,9 +42,9 @@ describe('instruments actions', () => {
                     url: 'a fake socket url'
                 }
             };
-            const action = deleteInstrument(instrument);
+            const action = removeInstrument(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: DELETE_INSTRUMENT });
+            expect(action).toEqual({ payload: instrument, type: REMOVE_INSTRUMENT });
         });
 
     });

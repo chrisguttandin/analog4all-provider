@@ -5,7 +5,7 @@ import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
-import { addInstrument, deleteInstrument } from '../store/actions';
+import { addInstrument, removeInstrument } from '../store/actions';
 import { IAppState } from '../store/interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
@@ -47,7 +47,7 @@ export class InstrumentsService {
             .delete(`https${ this._endpoint }instruments/${ instrument.id }`)
             .pipe(
                 map(() => null),
-                tap(() => this._store.dispatch(deleteInstrument(instrument))),
+                tap(() => this._store.dispatch(removeInstrument(instrument))),
                 catchError((response) => Observable.throw(new ResponseError(response)))
             );
     }
