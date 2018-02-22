@@ -7,11 +7,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { of } from 'rxjs/observable/of';
-import { concatMap, filter, first, map, mergeMap, switchMap } from 'rxjs/operators';
+import { concatMap, filter, first, map, switchMap } from 'rxjs/operators';
 import { IInstrument, IMidiConnection } from '../interfaces';
 import {
     DownloadingService,
-    InstrumentsService,
     MiddleCMidiJsonService,
     RecordingService,
     RegisteringService,
@@ -19,7 +18,7 @@ import {
     SamplesService,
     ScaleMidiJsonService
 } from '../shared';
-import { addMidiConnection, updateMidiConnection } from '../store/actions';
+import { addMidiConnection, patchInstrument, updateMidiConnection } from '../store/actions';
 import { IAppState } from '../store/interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector } from '../store/selectors';
 
@@ -66,7 +65,6 @@ export class MidiConnectionComponent implements OnInit {
 
     constructor (
         private _downloadingService: DownloadingService,
-        private _instrumentsService: InstrumentsService,
         middleCMidiJsonService: MiddleCMidiJsonService,
         private _registeringService: RegisteringService,
         private _renderingService: RenderingService,
@@ -229,12 +227,9 @@ export class MidiConnectionComponent implements OnInit {
                         .pipe(
                             filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
                             first(),
-                            mergeMap<IInstrument, null>((instrument) => this._instrumentsService
-                                .update(instrument.id, {
-                                    sample: {
-                                        id: sample.id
-                                    }
-                                }))
+                            map(({ id }) => {
+                                this._store.dispatch(patchInstrument({ id, sample: { id: sample.id } }));
+                            })
                         )
                         .subscribe(() => resolve())));
             });
@@ -266,11 +261,10 @@ export class MidiConnectionComponent implements OnInit {
             this.instrument$
                 .pipe(
                     first(),
-                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                    mergeMap(({ id }) => this._instrumentsService.update(id, { description }))
+                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null))
                 )
-                .subscribe(() => { // tslint:disable-line:no-empty
-                    // @todo
+                .subscribe(({ id }) => { // tslint:disable-line:no-empty
+                    this._store.dispatch(patchInstrument({ description, id }));
                 });
         }
     }
@@ -282,11 +276,10 @@ export class MidiConnectionComponent implements OnInit {
             this.instrument$
                 .pipe(
                     first(),
-                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                    mergeMap(({ id }) => this._instrumentsService.update(id, { gearogsSlug }))
+                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null))
                 )
-                .subscribe(() => { // tslint:disable-line:no-empty
-                    // @todo
+                .subscribe(({ id }) => { // tslint:disable-line:no-empty
+                    this._store.dispatch(patchInstrument({ gearogsSlug, id }));
                 });
         }
     }
@@ -305,11 +298,10 @@ export class MidiConnectionComponent implements OnInit {
         this.instrument$
             .pipe(
                 first(),
-                filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                mergeMap(({ id }) => this._instrumentsService.update(id, { name: sanitizedName }))
+                filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null))
             )
-            .subscribe(() => { // tslint:disable-line:no-empty
-                // @todo
+            .subscribe(({ id }) => { // tslint:disable-line:no-empty
+                this._store.dispatch(patchInstrument({ id, name: sanitizedName }));
             });
     }
 
@@ -320,11 +312,10 @@ export class MidiConnectionComponent implements OnInit {
             this.instrument$
                 .pipe(
                     first(),
-                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                    mergeMap(({ id }) => this._instrumentsService.update(id, { soundCloudUsername }))
+                    filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null))
                 )
-                .subscribe(() => { // tslint:disable-line:no-empty
-                    // @todo
+                .subscribe(({ id }) => { // tslint:disable-line:no-empty
+                    this._store.dispatch(patchInstrument({ id, soundCloudUsername }));
                 });
         }
     }
