@@ -19,7 +19,10 @@ describe('midiConnections reducer', () => {
 
             it('should return an array with the given midiConnection', () => {
                 const midiConnection = {
+                    isConnected: false,
                     midiOutputId: 'a fake midiOutputId',
+                    midiOutputName: 'a fake midiOutputName',
+                    name: 'a fake name',
                     sourceId: 'a fake sourceId'
                 };
                 const state = midiConnectionsReducer(undefined, { payload: midiConnection, type: 'ADD_MIDI_CONNECTION' });
@@ -51,7 +54,10 @@ describe('midiConnections reducer', () => {
 
         beforeEach(() => {
             previousState = [ {
+                isConnected: false,
                 midiOutputId: 'a fake midiOutputId',
+                midiOutputName: 'a fake midiOutputName',
+                name: 'a fake name',
                 sourceId: 'a fake sourceId'
             } ];
         });
@@ -70,7 +76,10 @@ describe('midiConnections reducer', () => {
 
             it('should throw an error', () => {
                 const midiConnection = {
+                    isConnected: false,
                     midiOutputId: 'a fake midiOutputId',
+                    midiOutputName: 'a fake midiOutputName',
+                    name: 'a fake name',
                     sourceId: 'a fake sourceId'
                 };
 

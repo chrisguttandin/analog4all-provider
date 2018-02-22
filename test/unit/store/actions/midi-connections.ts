@@ -6,7 +6,10 @@ describe('midiConnections actions', () => {
 
         it('should create an action', () => {
             const midiConnection = {
+                isConnected: false,
                 midiOutputId: 'a fake midiOutputId',
+                midiOutputName: 'a fake midiOutputName',
+                name: 'a fake name',
                 sourceId: 'a fake sourceId'
             };
             const action = addMidiConnection(midiConnection);
@@ -20,7 +23,8 @@ describe('midiConnections actions', () => {
 
         it('should create an action', () => {
             const midiConnection = {
-                midiOutputId: 'a fake midiOutputId'
+                midiOutputId: 'a fake midiOutputId',
+                name: 'a fake name'
             };
             const action = updateMidiConnection(midiConnection);
 

@@ -1,6 +1,7 @@
 import {
     IAddInstrumentAction,
     IAddMidiConnectionAction,
+    IMergeMidiConnectionsAction,
     IRemoveInstrumentAction,
     IUpdateInstrumentAction,
     IUpdateMidiConnectionAction,
@@ -9,6 +10,7 @@ import {
 
 export type TStoreAction = IAddInstrumentAction |
     IAddMidiConnectionAction |
+    IMergeMidiConnectionsAction |
     IRemoveInstrumentAction |
     IUpdateInstrumentAction |
     IUpdateMidiConnectionAction |

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IDataChannel } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
-import { IInstrument } from '../interfaces';
+import { IInstrument, IMidiConnection } from '../interfaces';
 import { InstrumentsService } from './instruments.service';
 import { UserMediaService } from './user-media.service';
 
@@ -14,29 +14,38 @@ export class RegisteringService {
     ) { }
 
     public register (
-        description: string | undefined,
-        gearogsSlug: string | undefined,
-        name: string,
-        soundCloudUsername: string | undefined,
-        sourceId: string
+        midiConnection: IMidiConnection,
+        name: string
     ): Promise<{ connection: Observable<IDataChannel>, instrument: IInstrument }> {
         // Get the mediaStream first to make sure the user granted access.
         return this._userMediaService
-            .getAudioOnlyMediaStream(sourceId)
+            .getAudioOnlyMediaStream(midiConnection.sourceId)
             .then(() => {
                 return new Promise<IInstrument>((resolve) => {
                     const data: { description?: string; name: string; gearogsSlug?: string; soundCloudUsername?: string; }  = { name };
 
-                    if (description !== undefined && description.trim() !== '') {
-                        data.description = description;
+                    if (midiConnection.description !== undefined) {
+                        const description = midiConnection.description.trim();
+
+                        if (description !== '') {
+                            data.description = description;
+                        }
                     }
 
-                    if (gearogsSlug !== undefined && gearogsSlug.trim() !== '') {
-                        data.gearogsSlug = gearogsSlug;
+                    if (midiConnection.gearogsSlug !== undefined) {
+                        const gearogsSlug = midiConnection.gearogsSlug.trim();
+
+                        if (gearogsSlug !== '') {
+                            data.gearogsSlug = gearogsSlug;
+                        }
                     }
 
-                    if (soundCloudUsername !== undefined && soundCloudUsername.trim() !== '') {
-                        data.soundCloudUsername = soundCloudUsername;
+                    if (midiConnection.soundCloudUsername !== undefined) {
+                        const soundCloudUsername = midiConnection.soundCloudUsername.trim();
+
+                        if (soundCloudUsername !== '') {
+                            data.soundCloudUsername = soundCloudUsername;
+                        }
                     }
 
                     this._instrumentsService

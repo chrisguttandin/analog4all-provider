@@ -1,5 +1,5 @@
 import { IMidiConnection } from '../../interfaces';
-import { ADD_MIDI_CONNECTION, UPDATE_MIDI_CONNECTION } from '../actions';
+import { ADD_MIDI_CONNECTION, MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION } from '../actions';
 import { TStoreAction } from '../types';
 
 const addMidiConnection = (midiConnections: IMidiConnection[], midiConnection: IMidiConnection) => {
@@ -10,6 +10,25 @@ const addMidiConnection = (midiConnections: IMidiConnection[], midiConnection: I
     }
 
     return [ ...midiConnections, midiConnection ];
+};
+
+const mergeMidiConnections = (oldMidiConnections: IMidiConnection[], newMidiConnections: IMidiConnection[]) => {
+    const intersectingMidiConnections = oldMidiConnections
+        .map((midiConnection) => [ midiConnection, newMidiConnections
+            .find(({ midiOutputId }) => midiConnection.midiOutputId === midiOutputId) ])
+        .filter<[ IMidiConnection, IMidiConnection ]>(
+            (oldAndNewMidiConnection): oldAndNewMidiConnection is [ IMidiConnection, IMidiConnection ] => {
+                return (oldAndNewMidiConnection[1] !== undefined);
+            })
+        .map(([ oldMidiConnection, newMidiConnection ]) => ({ ...oldMidiConnection, ...newMidiConnection }));
+
+    const remainingMidiConnections = oldMidiConnections
+        .filter(({ midiOutputId }) => intersectingMidiConnections.every(({ midiOutputId: mdTptD }) => midiOutputId !== mdTptD));
+
+    const additionalMidiConnections = newMidiConnections
+        .filter(({ midiOutputId }) => intersectingMidiConnections.every(({ midiOutputId: mdTptD }) => midiOutputId !== mdTptD));
+
+    return [ ...remainingMidiConnections, ...intersectingMidiConnections, ...additionalMidiConnections ];
 };
 
 const updateMidiConnection = (
@@ -34,6 +53,8 @@ export function midiConnectionsReducer (state: IMidiConnection[] = [], action: T
     switch (action.type) {
         case ADD_MIDI_CONNECTION:
             return addMidiConnection(state, action.payload);
+        case MERGE_MIDI_CONNECTIONS:
+            return mergeMidiConnections(state, action.payload);
         case UPDATE_MIDI_CONNECTION:
             return updateMidiConnection(state, action.payload);
         default:

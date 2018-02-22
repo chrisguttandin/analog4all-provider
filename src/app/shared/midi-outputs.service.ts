@@ -1,50 +1,83 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
-import { tap } from 'rxjs/operators';
-import { updateMidiOutputs } from '../store/actions';
-import { IAppState } from '../store/interfaces';
+import { of } from 'rxjs/observable/of';
+import { switchMap } from 'rxjs/operators';
 import { MidiAccessService } from './midi-access.service';
+import { PermissionStateService } from './permission-state';
 
 @Injectable()
 export class MidiOutputsService {
 
+    private _midiAccess: null | WebMidi.MIDIAccess;
+
     constructor (
         private _midiAccessService: MidiAccessService,
-        private _store: Store<IAppState>
-    ) { }
+        private _permissionStateService: PermissionStateService
+    ) {
+        this._midiAccess = null;
+    }
+
+    public get (id: string): WebMidi.MIDIOutput {
+        if (this._midiAccess === null) {
+            throw new Error('Expected an exisiting MIDIAccess object.');
+        }
+
+        const midiOutput = Array
+            .from(this._midiAccess.outputs.values())
+            .find(({ id: d }) => (id === d));
+
+        if (midiOutput === undefined) {
+            throw new Error('A MIDIOutput with the given id is not connected.');
+        }
+
+        return midiOutput;
+    }
 
     public watch (): Observable<WebMidi.MIDIOutput[]> {
-        return new Observable((observer: Observer<WebMidi.MIDIOutput[]>) => {
-            let midiAccess: null | WebMidi.MIDIAccess = null;
+        const midiOutputs$ = new Observable<WebMidi.MIDIOutput[]>((observer) => {
+            if (this._midiAccessService.isSupported && this._permissionStateService.isSupported) {
+                let onStateChangeListener: null | EventListener = null;
 
-            let onStateChangeListener: null | EventListener = null;
+                this._midiAccessService
+                    .request()
+                    .then((midiAccess) => {
+                        this._midiAccess = midiAccess;
 
-            this._midiAccessService
-                .request()
-                .then((mdAccss) => {
-                    midiAccess = mdAccss;
+                        observer.next(Array.from(midiAccess.outputs.values()));
 
-                    observer.next(Array.from(midiAccess.outputs.values()));
+                        onStateChangeListener = () => {
+                            if (midiAccess !== null) {
+                                observer.next(Array.from(midiAccess.outputs.values()));
+                            }
+                        };
 
-                    onStateChangeListener = () => {
-                        if (midiAccess !== null) {
-                            observer.next(Array.from(midiAccess.outputs.values()));
-                        }
-                    };
+                        midiAccess.addEventListener('statechange', onStateChangeListener);
+                    });
 
-                    midiAccess.addEventListener('statechange', onStateChangeListener);
-                });
+                return () => {
+                    if (this._midiAccess !== null && onStateChangeListener !== null) {
+                        this._midiAccess.removeEventListener('statechange', onStateChangeListener);
+                        this._midiAccess = null;
+                    }
+                };
+            }
 
-            return () => {
-                if (midiAccess !== null && onStateChangeListener !== null) {
-                    midiAccess.removeEventListener('statechange', onStateChangeListener);
-                }
-            };
-        })
+            observer.complete();
+
+            // @todo The return statement is necessary to keep TypeScript happy.
+            return;
+        });
+
+        return this._permissionStateService
+            .watch('midi')
             .pipe(
-                tap((midiOutputs: WebMidi.MIDIOutput[]) => this._store.dispatch(updateMidiOutputs(midiOutputs)))
+                switchMap((permissionState) => {
+                    if (permissionState === 'granted') {
+                        return midiOutputs$;
+                    }
+
+                    return of([ ]);
+                })
             );
     }
 

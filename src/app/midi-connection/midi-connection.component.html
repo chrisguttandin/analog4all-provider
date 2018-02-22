@@ -1,26 +1,26 @@
-<h3>{{ virtualInstrumentName$ | async }}</h3>
+<h3>{{ virtualInstrumentName }}</h3>
 <anp-instrument-name-input
-    [defaultName]="midiOutput.name"
-    [name]="instrumentName$ | async"
+    [defaultName]="midiConnection.midiOutputName"
+    [name]="midiConnection.name"
     (nameChange)="updateInstrumentName($event)"
 ></anp-instrument-name-input>
 <anp-source-id-select
-    [sourceId]="sourceId$ | async"
+    [sourceId]="midiConnection.sourceId"
     (sourceIdChange)="updateSourceId($event)"
 ></anp-source-id-select>
 <anp-description-input
-    [description]="description$ | async"
+    [description]="midiConnection.description"
     (descriptionChange)="updateDescription($event)"
 ></anp-description-input>
 <anp-sound-cloud-username-input
-    [soundCloudUsername]="soundCloudUsername$ | async"
+    [soundCloudUsername]="midiConnection.soundCloudUsername"
     (soundCloudUsernameChange)="updateSoundCloudUsername($event)"
 ></anp-sound-cloud-username-input>
 <anp-gearogs-slug-input
-    [gearogsSlug]="gearogsSlug$ | async"
+    [gearogsSlug]="midiConnection.gearogsSlug"
     (gearogsSlugChange)="updateGearogsSlug($event)"
 ></anp-gearogs-slug-input>
-<button (click)="register()" *ngIf="false === (isRegistered$ | async)">register device</button>
-<button (click)="deregister()" *ngIf="isRegistered$ | async">deregister device</button>
+<button (click)="register()" *ngIf="!isRegistered">register device</button>
+<button (click)="deregister()" *ngIf="isRegistered">deregister device</button>
 <button (click)="test()">test device by recording a scale</button>
-<button (click)="sample()" *ngIf="isRegistered$ | async">record a middle c (#60/C3)</button>
+<button (click)="sample()" *ngIf="isRegistered">record a middle c (#60/C3)</button>

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-import { MidiOutputsService } from '../shared';
+import { IMidiConnection } from '../interfaces';
+import { IAppState } from '../store/interfaces';
+import { selectMidiConnections } from '../store/selectors';
 
 @Component({
     selector: 'anp-local-registry',
@@ -10,19 +13,28 @@ import { MidiOutputsService } from '../shared';
 })
 export class LocalRegistryComponent implements OnInit {
 
-    public midiOutputs$: Observable<WebMidi.MIDIOutput[]>;
+    public connectedMidiConnections$: Observable<IMidiConnection[]>;
 
-    public midiOutputsLength$: Observable<number>;
+    public hasConnectedMidiConnections$: Observable<boolean>;
 
-    constructor (private _midiOutputsService: MidiOutputsService) { }
+    constructor (
+        private _store: Store<IAppState>
+    ) { }
+
+    public identifyMidiConnection (_: number, { midiOutputId }: IMidiConnection) {
+        return midiOutputId;
+    }
 
     public ngOnInit () {
-        this.midiOutputs$ = this._midiOutputsService
-            .watch();
-
-        this.midiOutputsLength$ = this.midiOutputs$
+        this.connectedMidiConnections$ = this._store
             .pipe(
-                map<WebMidi.MIDIOutput[], number>((midiOutputs) => midiOutputs.length)
+                select(selectMidiConnections),
+                map((midiConnections) => midiConnections.filter(({ isConnected }) => isConnected))
+            );
+
+        this.hasConnectedMidiConnections$ = this.connectedMidiConnections$
+            .pipe(
+                map((connectedMidiConnections) => (connectedMidiConnections.length > 0))
             );
     }
 

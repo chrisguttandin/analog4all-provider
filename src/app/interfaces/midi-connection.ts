@@ -1,10 +1,20 @@
 export interface IMidiConnection {
 
-    // @todo When TypeScript 2.1 is ready use "instrument: Partial<IInstument>;".
+    description?: string;
+
+    gearogsSlug?: string;
 
     instrumentId?: string;
 
+    isConnected: boolean;
+
     midiOutputId: string;
+
+    midiOutputName: string;
+
+    name: null | string;
+
+    soundCloudUsername?: string;
 
     sourceId: string;
 

@@ -42,7 +42,10 @@ describe('midiConnections selectors', () => {
 
         beforeEach(() => {
             midiConnections = [ {
+                isConnected: false,
                 midiOutputId: 'a fake midiOutputId',
+                midiOutputName: 'a fake midiOutputName',
+                name: 'a fake name',
                 sourceId: 'a fake sourceId'
             } ];
         });

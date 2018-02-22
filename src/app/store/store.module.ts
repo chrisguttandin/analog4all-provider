@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule as NgRxStoreModule } from '@ngrx/store';
+import { Store, StoreModule as NgRxStoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'; // tslint:disable-line:no-implicit-dependencies
 import { storeFreeze } from 'ngrx-store-freeze'; // tslint:disable-line:no-implicit-dependencies
 import { environment } from '../../environments/environment';
-import { InstrumentsEffects, MidiConnectionsEffects } from './effects';
+import { watchMidiOutputs } from './actions';
+import { InstrumentsEffects, MidiConnectionsEffects, MidiOutputsEffects } from './effects';
+import { IAppState } from './interfaces';
 import { InstrumentService } from './services';
 import { appReducer } from './store';
 
 const effects = [
     InstrumentsEffects,
-    MidiConnectionsEffects
+    MidiConnectionsEffects,
+    MidiOutputsEffects
 ];
 
 const imports = (environment.production) ?
@@ -34,4 +37,12 @@ const imports = (environment.production) ?
         InstrumentService
     ]
 })
-export class StoreModule { }
+export class StoreModule {
+
+    constructor (
+        store: Store<IAppState>
+    ) {
+        store.dispatch(watchMidiOutputs());
+    }
+
+}
