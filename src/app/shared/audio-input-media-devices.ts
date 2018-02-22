@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { switchMap } from 'rxjs/operators';
-import { MicrophonePermissionStateService } from './microphone-permission-state';
+import { PermissionStateService } from './permission-state';
 import { WindowService } from './window.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class AudioInputMediaDevicesService {
     private _window: Window;
 
     constructor (
-        private _microphonePermissionStateService: MicrophonePermissionStateService,
+        private _permissionStateService: PermissionStateService,
         windowService: WindowService
     ) {
         this._window = windowService.nativeWindow;
@@ -64,8 +64,8 @@ export class AudioInputMediaDevicesService {
             return;
         });
 
-        return this._microphonePermissionStateService
-            .watch()
+        return this._permissionStateService
+            .watch('microphone')
             .pipe(
                 switchMap((permissionState) => {
                     if (permissionState === 'granted') {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { WindowService } from './window.service';
 
 @Injectable()
-export class MicrophonePermissionStateService {
+export class PermissionStateService {
 
     private _window: Window;
 
@@ -13,7 +13,7 @@ export class MicrophonePermissionStateService {
 
     /**
      * This property is true if the browser supports all the required APIs to use the
-     * MicrophonePermissionStateService.
+     * PermissionStateService.
      */
     get isSupported () {
         return ('navigator' in this._window &&
@@ -21,14 +21,14 @@ export class MicrophonePermissionStateService {
             'query' in this._window.navigator.permissions);
     }
 
-    public watch (): Observable<TPermissionState> {
+    public watch (name: 'microphone' | 'midi'): Observable<TPermissionState> {
         return new Observable<TPermissionState>((observer) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
                 let removeOnChangeListener: null | (() => void) = null;
 
                 this._window.navigator.permissions
-                    .query({ name: 'microphone' })
+                    .query({ name })
                     .then((status) => {
                         if (!isUnsubscribed) {
                             observer.next(status.state);
