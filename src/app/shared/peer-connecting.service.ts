@@ -17,7 +17,7 @@ const ICE_SERVERS = [ { urls: [
 @Injectable()
 export class PeerConnectingService {
 
-    private _window: Window;
+    private _window: null | Window;
 
     constructor (windowService: WindowService) {
         this._window = windowService.nativeWindow;
@@ -28,7 +28,7 @@ export class PeerConnectingService {
      * PeerConnectingService.
      */
     get isSupported () {
-        if ('RTCPeerConnection' in this._window) {
+        if (this._window !== null && 'RTCPeerConnection' in this._window) {
             const peerConnection = new RTCPeerConnection({
                 iceServers: [ { urls: 'stun:0' } ]
             });

@@ -8,7 +8,7 @@ import { WindowService } from './window.service';
 @Injectable()
 export class AudioInputMediaDevicesService {
 
-    private _window: Window;
+    private _window: null | Window;
 
     constructor (
         private _permissionStateService: PermissionStateService,
@@ -22,7 +22,7 @@ export class AudioInputMediaDevicesService {
      * AudioInputMediaDevicesService.
      */
     get isSupported () {
-        return ('navigator' in this._window &&
+        return (this._window !== null &&
             'mediaDevices' in this._window.navigator &&
             'enumerateDevices' in this._window.navigator.mediaDevices);
     }
@@ -32,7 +32,7 @@ export class AudioInputMediaDevicesService {
             if (this.isSupported) {
                 let isUnsubscribed = false;
 
-                const mediaDevices =  this._window.navigator.mediaDevices;
+                const mediaDevices = (<Window> this._window).navigator.mediaDevices;
 
                 const enumerateDevices = () => mediaDevices
                     .enumerateDevices()

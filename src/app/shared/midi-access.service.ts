@@ -6,7 +6,7 @@ export class MidiAccessService {
 
     private _midiAccess: null | WebMidi.MIDIAccess;
 
-    private _window: Window;
+    private _window: null | Window;
 
     constructor (windowService: WindowService) {
         this._midiAccess = null;
@@ -18,7 +18,7 @@ export class MidiAccessService {
      * MidiAccessService.
      */
     get isSupported () {
-        return ('navigator' in this._window && 'requestMIDIAccess' in this._window.navigator);
+        return (this._window !== null && 'requestMIDIAccess' in this._window.navigator);
     }
 
     public request (): Promise<WebMidi.MIDIAccess> {
@@ -27,7 +27,7 @@ export class MidiAccessService {
         }
 
         if (this.isSupported) {
-            return this._window.navigator
+            return (<Window> this._window).navigator
                 .requestMIDIAccess()
                 .then((midiAccess) => this._midiAccess = midiAccess);
         }

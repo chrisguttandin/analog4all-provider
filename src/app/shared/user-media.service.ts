@@ -6,7 +6,7 @@ export class UserMediaService {
 
     private _mediaStream: null | MediaStream;
 
-    private _window: Window;
+    private _window: null | Window;
 
     constructor (windowService: WindowService) {
         this._mediaStream = null;
@@ -18,7 +18,7 @@ export class UserMediaService {
      * UserMediaService.
      */
     get isSupported () {
-        return ('navigator' in this._window &&
+        return (this._window !== null &&
             'mediaDevices' in this._window.navigator &&
             'getUserMedia' in this._window.navigator.mediaDevices);
     }
@@ -33,7 +33,7 @@ export class UserMediaService {
         }
 
         if (this.isSupported) {
-            return this._window.navigator.mediaDevices
+            return (<Window> this._window).navigator.mediaDevices
                 .getUserMedia({
                     audio: {
                         // @todo Theoretically that should be 'sourceId' and not 'deviceId'.

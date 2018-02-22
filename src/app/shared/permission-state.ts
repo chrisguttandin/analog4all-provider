@@ -5,7 +5,7 @@ import { WindowService } from './window.service';
 @Injectable()
 export class PermissionStateService {
 
-    private _window: Window;
+    private _window: null | Window;
 
     constructor (windowService: WindowService) {
         this._window = windowService.nativeWindow;
@@ -16,9 +16,7 @@ export class PermissionStateService {
      * PermissionStateService.
      */
     get isSupported () {
-        return ('navigator' in this._window &&
-            'permissions' in this._window.navigator &&
-            'query' in this._window.navigator.permissions);
+        return (this._window !== null && 'permissions' in this._window.navigator && 'query' in this._window.navigator.permissions);
     }
 
     public watch (name: 'microphone' | 'midi'): Observable<TPermissionState> {
@@ -27,7 +25,7 @@ export class PermissionStateService {
                 let isUnsubscribed = false;
                 let removeOnChangeListener: null | (() => void) = null;
 
-                this._window.navigator.permissions
+                (<Window> this._window).navigator.permissions
                     .query({ name })
                     .then((status) => {
                         if (!isUnsubscribed) {
