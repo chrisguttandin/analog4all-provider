@@ -1,23 +1,6 @@
-import { ADD_MIDI_CONNECTION, UPDATE_MIDI_CONNECTION, addMidiConnection, updateMidiConnection } from '../../../../src/app/store/actions';
+import { UPDATE_MIDI_CONNECTION, updateMidiConnection } from '../../../../src/app/store/actions';
 
 describe('midiConnections actions', () => {
-
-    describe('addMidiConnection()', () => {
-
-        it('should create an action', () => {
-            const midiConnection = {
-                isConnected: false,
-                midiOutputId: 'a fake midiOutputId',
-                midiOutputName: 'a fake midiOutputName',
-                name: 'a fake name',
-                sourceId: 'a fake sourceId'
-            };
-            const action = addMidiConnection(midiConnection);
-
-            expect(action).toEqual({ payload: midiConnection, type: ADD_MIDI_CONNECTION });
-        });
-
-    });
 
     describe('updateMidiConnection()', () => {
 

@@ -1,5 +1,4 @@
 export * from './add-instrument';
-export * from './add-midi-connection';
 export * from './delete-instrument';
 export * from './delete-instrument-fail';
 export * from './delete-instrument-success';
@@ -10,5 +9,4 @@ export * from './patch-instrument-success';
 export * from './remove-instrument';
 export * from './update-instrument';
 export * from './update-midi-connection';
-export * from './update-midi-outputs';
 export * from './watch-midi-outputs';

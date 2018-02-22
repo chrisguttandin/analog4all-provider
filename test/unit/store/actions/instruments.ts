@@ -49,6 +49,12 @@ describe('instruments actions', () => {
 
     });
 
+    describe('patchInstrument()', () => {
+
+        // ...
+
+    });
+
     describe('updateInstrument()', () => {
 
         it('should create an action', () => {

@@ -6,6 +6,4 @@ export interface IAppState {
 
     midiConnections: IMidiConnection[];
 
-    midiOutputs: WebMidi.MIDIOutput[];
-
 }

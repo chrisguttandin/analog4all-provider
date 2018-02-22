@@ -15,23 +15,6 @@ describe('midiConnections reducer', () => {
 
         });
 
-        describe('with an action of type ADD_MIDI_CONNECTION', () => {
-
-            it('should return an array with the given midiConnection', () => {
-                const midiConnection = {
-                    isConnected: false,
-                    midiOutputId: 'a fake midiOutputId',
-                    midiOutputName: 'a fake midiOutputName',
-                    name: 'a fake name',
-                    sourceId: 'a fake sourceId'
-                };
-                const state = midiConnectionsReducer(undefined, { payload: midiConnection, type: 'ADD_MIDI_CONNECTION' });
-
-                expect(state).toEqual([ midiConnection ]);
-            });
-
-        });
-
         describe('with an action of type UPDATE_MIDI_CONNECTION', () => {
 
             it('should throw an error', () => {
@@ -68,24 +51,6 @@ describe('midiConnections reducer', () => {
                 const state = midiConnectionsReducer(previousState, <any> { });
 
                 expect(state).toEqual(previousState);
-            });
-
-        });
-
-        describe('with an action of type ADD_MIDI_CONNECTION', () => {
-
-            it('should throw an error', () => {
-                const midiConnection = {
-                    isConnected: false,
-                    midiOutputId: 'a fake midiOutputId',
-                    midiOutputName: 'a fake midiOutputName',
-                    name: 'a fake name',
-                    sourceId: 'a fake sourceId'
-                };
-
-                expect(() => {
-                    midiConnectionsReducer(previousState, { payload: midiConnection, type: 'ADD_MIDI_CONNECTION' });
-                }).toThrow(new Error('A midiConnection with the same midiOutputId does already exist.'));
             });
 
         });

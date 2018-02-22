@@ -1,14 +1,13 @@
-import { UPDATE_MIDI_OUTPUTS, updateMidiOutputs } from '../../../../src/app/store/actions';
+import { WATCH_MIDI_OUTPUTS, watchMidiOutputs } from '../../../../src/app/store/actions';
 
 describe('midiOutputs actions', () => {
 
-    describe('updateMidiOutputs()', () => {
+    describe('watchMidiOutputs()', () => {
 
         it('should create an action', () => {
-            const midiOutputs = <WebMidi.MIDIOutput[]> [ ];
-            const action = updateMidiOutputs(midiOutputs);
+            const action = watchMidiOutputs();
 
-            expect(action).toEqual({ payload: midiOutputs, type: UPDATE_MIDI_OUTPUTS });
+            expect(action).toEqual({ type: WATCH_MIDI_OUTPUTS });
         });
 
     });
