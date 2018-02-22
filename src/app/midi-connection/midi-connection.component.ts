@@ -18,7 +18,7 @@ import {
     SamplesService,
     ScaleMidiJsonService
 } from '../shared';
-import { addMidiConnection, patchInstrument, updateMidiConnection } from '../store/actions';
+import { addMidiConnection, deleteInstrument, patchInstrument, updateMidiConnection } from '../store/actions';
 import { IAppState } from '../store/interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector } from '../store/selectors';
 
@@ -84,17 +84,11 @@ export class MidiConnectionComponent implements OnInit {
     public deregister () {
         this.instrument$
             .pipe(
-                first(),
                 filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => (instrument !== null)),
-                switchMap((instrument) => this._registeringService.deregister(instrument)),
-                switchMap(() => this.midiConnection$),
-                first(),
-                filter<null | IMidiConnection, IMidiConnection>((midiConnection): midiConnection is IMidiConnection => {
-                    return (midiConnection !== null);
-                })
+                first()
             )
-            .subscribe(({ midiOutputId }) => { // tslint:disable-line:no-empty
-                this._store.dispatch(updateMidiConnection({ instrumentId: undefined, midiOutputId }));
+            .subscribe((instrument) => {
+                this._store.dispatch(deleteInstrument(instrument));
             });
     }
 

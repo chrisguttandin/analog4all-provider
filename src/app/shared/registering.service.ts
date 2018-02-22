@@ -13,10 +13,6 @@ export class RegisteringService {
         private _userMediaService: UserMediaService
     ) { }
 
-    public deregister (instrument: IInstrument) {
-        return this._instrumentsService.delete(instrument);
-    }
-
     public register (
         description: string | undefined,
         gearogsSlug: string | undefined,

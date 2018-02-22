@@ -5,8 +5,13 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map } from 'rxjs/operators';
 import { IInstrument } from '../../interfaces';
 import { ENDPOINT } from '../../shared';
-import { patchInstrumentFail, patchInstrumentSuccess } from '../actions';
-import { IPatchInstrumentFailAction, IPatchInstrumentSuccessAction } from '../interfaces';
+import { deleteInstrumentFail, deleteInstrumentSuccess, patchInstrumentFail, patchInstrumentSuccess } from '../actions';
+import {
+    IDeleteInstrumentFailAction,
+    IDeleteInstrumentSuccessAction,
+    IPatchInstrumentFailAction,
+    IPatchInstrumentSuccessAction
+} from '../interfaces';
 
 @Injectable()
 export class InstrumentService {
@@ -15,6 +20,15 @@ export class InstrumentService {
         @Inject(ENDPOINT) private _endpoint: string,
         private _httpClient: HttpClient
     ) { }
+
+    public delete (instrument: IInstrument): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
+        return this._httpClient
+            .delete<void>(`https${ this._endpoint }instruments/${ instrument.id }`)
+            .pipe(
+                map(() => deleteInstrumentSuccess(instrument)),
+                catchError(() => of(deleteInstrumentFail(instrument)))
+            );
+    }
 
     public patch (
         { id, ...delta }: { id: IInstrument['id'] } & Partial<IInstrument>

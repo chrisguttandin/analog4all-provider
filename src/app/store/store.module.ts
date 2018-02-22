@@ -4,12 +4,13 @@ import { StoreModule as NgRxStoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'; // tslint:disable-line:no-implicit-dependencies
 import { storeFreeze } from 'ngrx-store-freeze'; // tslint:disable-line:no-implicit-dependencies
 import { environment } from '../../environments/environment';
-import { InstrumentsEffects } from './effects';
+import { InstrumentsEffects, MidiConnectionsEffects } from './effects';
 import { InstrumentService } from './services';
 import { appReducer } from './store';
 
 const effects = [
-    InstrumentsEffects
+    InstrumentsEffects,
+    MidiConnectionsEffects
 ];
 
 const imports = (environment.production) ?
