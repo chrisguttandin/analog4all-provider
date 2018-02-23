@@ -16,6 +16,7 @@
             "prefix": "anp",
             "root": "src",
             "scripts": [],
+            "serviceWorker": true,
             "styles": [
                 "styles/styles.css"
             ],
