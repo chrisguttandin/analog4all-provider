@@ -11,6 +11,7 @@
     "@angular/platform-browser": "^5.2.6",
     "@angular/platform-browser-dynamic": "^5.2.6",
     "@angular/router": "^5.2.6",
+    "@angular/service-worker": "^5.2.6",
     "@ngrx/effects": "^5.1.0",
     "@ngrx/store": "^5.1.0",
     "extendable-media-recorder": "^1.0.62",
