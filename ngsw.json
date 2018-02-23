@@ -1,0 +1,32 @@
+{
+  "configVersion": 1,
+  "index": "/analog4all-provider/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/analog4all-provider/index.html",
+        "/analog4all-provider/scripts/main.2d2de0ec7e4d328a3e5c.bundle.js",
+        "/analog4all-provider/scripts/polyfills.33bc5e6e598ed9bfcd89.bundle.js",
+        "/analog4all-provider/styles/styles.583d631a27d394283ffc.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/analog4all-provider/scripts/main.2d2de0ec7e4d328a3e5c.bundle.js": "f871e51d4cf705c752e0db06e444c7b3df6c6a78",
+    "/analog4all-provider/scripts/polyfills.33bc5e6e598ed9bfcd89.bundle.js": "7e3b6afd3a08d187291fdd7b7e54302016348986",
+    "/analog4all-provider/styles/styles.583d631a27d394283ffc.bundle.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2",
+    "/analog4all-provider/index.html": "cd687fb6ba16972b3fd67eeec2b1e92c99f53615"
+  }
+}
