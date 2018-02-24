@@ -67,7 +67,7 @@
     "load-grunt-config": "^0.19.2",
     "ngrx-store-freeze": "^0.2.1",
     "protractor": "~5.1.2",
-    "sonarwhal": "0.25.0",
+    "sonarwhal": "0.27.0",
     "stylelint": "^9.1.1",
     "stylelint-config-holy-grail": "^1.0.0",
     "ts-node": "~4.1.0",
