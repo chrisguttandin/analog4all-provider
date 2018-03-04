@@ -10,7 +10,8 @@ describe('/', () => {
 
     it('should display the correct headline', () => {
         page.navigateTo();
-        expect<any>(page.getHeadline()).toEqual('Analog4All Provider');
+
+        expect(page.getHeadline()).toEqual('Analog4All Provider');
     });
 
 });
