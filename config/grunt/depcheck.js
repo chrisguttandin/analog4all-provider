@@ -14,6 +14,7 @@ module.exports = {
                 '@angular/compiler-cli',
                 '@angular/language-service',
                 '@commitlint/cli',
+                '@commitlint/config-angular',
                 '@ngrx/store-devtools',
                 '@types/*',
                 'axe-core',
