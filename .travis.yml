@@ -1,4 +1,10 @@
 addons:
+  apt:
+    packages:
+      - g++-4.8
+      - libasound2-dev
+    sources:
+      - ubuntu-toolchain-r-test
   chrome: stable
 after_script: greenkeeper-lockfile-upload
 before_install: npm install npm@latest --global
