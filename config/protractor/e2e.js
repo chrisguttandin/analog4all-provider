@@ -10,8 +10,8 @@ exports.config = {
         chromeOptions: {
             // @todo Running the tests in headless mode seems to disable the Web MIDI API.
             args: (process.env.TRAVIS) ?
-                [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', '--window-size=1024,768' ] :
-                [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', '--headless', '--window-size=1024,768' ]
+                [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', '--headless', '--window-size=1024,768' ] :
+                [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', '--window-size=1024,768' ]
         }
     },
 
