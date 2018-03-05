@@ -1,4 +1,3 @@
-import { IMidiInput } from 'midi';
 import { HomePage } from './home.po';
 
 describe('/', () => {
@@ -27,7 +26,7 @@ describe('/', () => {
 
     describe('with a MIDI device (at least locally)', () => {
 
-        let virtualMidiInput: IMidiInput;
+        let virtualMidiInput: { closePort (): void; openVirtualPort (name: string): void; };
 
         afterEach(() => {
             if (!process.env.TRAVIS) {
