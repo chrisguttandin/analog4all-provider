@@ -26,4 +26,4 @@ node_js: 9
 script:
   - npm test
   - grunt deploy-on-version-updates
-sudo: required
+sudo: false
