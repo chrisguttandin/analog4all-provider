@@ -8,7 +8,8 @@ exports.config = {
     capabilities: {
         browserName: 'chrome',
         chromeOptions: {
-            args: [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', '--headless', '--window-size=1024,768' ]
+            // @todo Running the tests in headless mode seems to disable the Web MIDI API.
+            args: [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', /* '--headless', */ '--window-size=1024,768' ]
         }
     },
 

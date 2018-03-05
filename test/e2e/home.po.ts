@@ -8,6 +8,10 @@ export class HomePage {
         return element(by.css('anp-app h1')).getText();
     }
 
+    public getSubHeadline () {
+        return element(by.css('anp-app h2')).getText();
+    }
+
     public navigateTo () {
         return browser.get((IS_SMOKE_TEST) ? 'https://chrisguttandin.github.io/analog4all-provider' : '/');
     }
