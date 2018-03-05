@@ -1,6 +1,6 @@
 <main>
     <h2 *ngIf="false === (hasConnectedMidiConnections$ | async)">There is currently no instrument connected via MIDI</h2>
-    <h2 *ngIf="hasConnectedMidiConnections$ | async">Currently connected instruments MIDI</h2>
+    <h2 *ngIf="hasConnectedMidiConnections$ | async">Currently connected MIDI instruments</h2>
     <ul>
         <li *ngFor="let midiConnection of connectedMidiConnections$ | async; trackBy: identifyMidiConnection">
             <anp-midi-connection [midiConnection]="midiConnection"></anp-midi-connection>

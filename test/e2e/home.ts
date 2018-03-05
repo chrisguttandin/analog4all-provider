@@ -43,7 +43,7 @@ describe('/', () => {
         it('should display the correct sub headline', () => {
             page.navigateTo();
 
-            expect(page.getSubHeadline()).toEqual('Currently connected instruments MIDI');
+            expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
         });
 
     });
