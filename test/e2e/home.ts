@@ -1,4 +1,4 @@
-import { IMidiInput, input } from 'midi';
+import { IMidiInput } from 'midi';
 import { HomePage } from './home.po';
 
 describe('/', () => {
@@ -25,25 +25,37 @@ describe('/', () => {
 
     });
 
-    describe('without a MIDI device', () => {
+    describe('with a MIDI device (at least locally)', () => {
 
         let virtualMidiInput: IMidiInput;
 
         afterEach(() => {
-            virtualMidiInput.closePort();
+            if (!process.env.TRAVIS) {
+                virtualMidiInput.closePort();
+            }
         });
 
-        beforeEach((done: any) => {
-            virtualMidiInput = new input();
-            virtualMidiInput.openVirtualPort('VirtualSynth');
+        beforeEach(async (done: any) => {
+            if (process.env.TRAVIS) {
+                done();
+            } else {
+                const { input } = await import('midi');
 
-            setTimeout(done, 1000);
+                virtualMidiInput = new input();
+                virtualMidiInput.openVirtualPort('VirtualSynth');
+
+                setTimeout(done, 1000);
+            }
         });
 
         it('should display the correct sub headline', () => {
             page.navigateTo();
 
-            expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
+            if (process.env.TRAVIS) {
+                expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
+            } else {
+                expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
+            }
         });
 
     });
