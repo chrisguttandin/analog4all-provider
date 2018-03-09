@@ -161,7 +161,7 @@ midi-file-slicer@4.0.23
 MIT
 MIT
 
-midi-player@3.0.0
+midi-player@3.0.1
 MIT
 MIT
 
