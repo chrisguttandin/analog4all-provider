@@ -149,23 +149,23 @@ midi-json-parser@4.2.9
 MIT
 MIT
 
-midi-file-slicer@4.0.23
-MIT
-MIT
-
-midi-player@2.0.85
-MIT
-MIT
-
-json-midi-message-encoder@1.1.13
-MIT
-MIT
-
 worker-timers-broker@4.0.12
 MIT
 MIT
 
 worker-timers@4.0.23
+MIT
+MIT
+
+midi-file-slicer@4.0.23
+MIT
+MIT
+
+midi-player@3.0.0
+MIT
+MIT
+
+json-midi-message-encoder@1.1.13
 MIT
 MIT
 
