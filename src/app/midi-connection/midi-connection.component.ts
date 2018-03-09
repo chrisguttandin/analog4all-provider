@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IMidiFile } from 'midi-json-parser-worker';
-import { midiPlayerFactory } from 'midi-player';
+import { create as createMidiPlayer } from 'midi-player';
 import { IDataChannel, wrap } from 'rxjs-broker';
 import { Observable } from 'rxjs/Observable';
 import { concatMap, filter, first, map } from 'rxjs/operators';
@@ -93,12 +93,14 @@ export class MidiConnectionComponent implements OnChanges {
     public sample () {
         this._recordingService
             .start(this.midiConnection.sourceId)
-            .then(() => midiPlayerFactory
-                .create({
+            .then(() => {
+                const midiPlayer = createMidiPlayer({
                     json: this._middleCMidiJson,
                     midiOutput: this._midiOutputsService.get(this.midiConnection.midiOutputId)
-                })
-                .play())
+                });
+
+                return midiPlayer.play();
+            })
             .then(() => this._recordingService.stop())
             .then((arrayBuffer) => new Promise<{ id: string }>((resolve) => this._samplesService
                 .create({ file: new Blob([ arrayBuffer ]) })
@@ -128,12 +130,14 @@ export class MidiConnectionComponent implements OnChanges {
     public test () {
         this._recordingService
             .start(this.midiConnection.sourceId)
-            .then(() => midiPlayerFactory
-                .create({
+            .then(() => {
+                const midiPlayer = createMidiPlayer({
                     json: this._scaleMidiJson,
                     midiOutput: this._midiOutputsService.get(this.midiConnection.midiOutputId)
-                })
-                .play())
+                });
+
+                return midiPlayer.play();
+            })
             .then(() => this._recordingService.stop())
             .then((arrayBuffer) => this._downloadingService.download('sample.wav', arrayBuffer));
     }

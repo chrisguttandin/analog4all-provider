@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { parseArrayBuffer } from 'midi-json-parser';
-import { midiPlayerFactory } from 'midi-player';
+import { create as createMidiPlayer } from 'midi-player';
 import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';
@@ -65,9 +65,11 @@ export class RenderingService {
                     .start(sourceId)
                     .then(() => midiJson);
             })
-            .then((midiJson) => midiPlayerFactory
-                .create({ json: midiJson, midiOutput })
-                .play())
+            .then((midiJson) => {
+                const midiPlayer = createMidiPlayer({ json: midiJson, midiOutput });
+
+                return midiPlayer.play();
+            })
             .then(() => {
                 // @todo console.log('stop');
 
