@@ -76,7 +76,7 @@
     "midi": "^0.9.5",
     "ngrx-store-freeze": "^0.2.1",
     "protractor": "~5.1.2",
-    "sonarwhal": "1.0.1",
+    "sonarwhal": "^1.0.3",
     "stylelint": "^9.1.1",
     "stylelint-config-holy-grail": "^1.0.0",
     "ts-node": "~4.1.0",
