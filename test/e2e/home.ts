@@ -1,3 +1,4 @@
+import { browser } from 'protractor';
 import { HomePage } from './home.po';
 
 describe('/', () => {
@@ -16,16 +17,29 @@ describe('/', () => {
 
     describe('without any MIDI devices', () => {
 
+        let browserName: string;
+
+        beforeEach(async () => {
+            const capabilities = await browser.getCapabilities();
+
+            browserName = capabilities.get('browserName');
+        });
+
         it('should display the correct sub headline', () => {
             page.navigateTo();
 
-            expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
+            if (browserName === 'safari') {
+                expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
+            } else {
+                expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
+            }
         });
 
     });
 
     describe('with a MIDI device (at least locally)', () => {
 
+        let browserName: string;
         let virtualMidiInput: { closePort (): void; openVirtualPort (name: string): void; };
 
         afterEach(() => {
@@ -34,23 +48,29 @@ describe('/', () => {
             }
         });
 
-        beforeEach(async (done: any) => {
+        beforeEach(async () => {
+            const capabilities = await browser.getCapabilities();
+
+            browserName = capabilities.get('browserName');
+
             if (process.env.TRAVIS) {
-                done();
-            } else {
-                const { input } = await import('midi');
-
-                virtualMidiInput = new input();
-                virtualMidiInput.openVirtualPort('VirtualSynth');
-
-                setTimeout(done, 1000);
+                return;
             }
+
+            const { input } = await import('midi');
+
+            virtualMidiInput = new input();
+            virtualMidiInput.openVirtualPort('VirtualSynth');
+
+            return new Promise((resolve) => setTimeout(resolve, 1000));
         });
 
         it('should display the correct sub headline', () => {
             page.navigateTo();
 
-            if (process.env.TRAVIS) {
+            if (browserName === 'safari') {
+                expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
+            } else if (process.env.TRAVIS) {
                 expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
             } else {
                 expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');

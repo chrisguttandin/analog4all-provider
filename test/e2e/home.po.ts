@@ -8,6 +8,10 @@ export class HomePage {
         return element(by.css('anp-app h1')).getText();
     }
 
+    public getParagraph () {
+        return element(by.css('main p')).getText();
+    }
+
     public getSubHeadline () {
         return element(by.css('anp-app h2')).getText();
     }
