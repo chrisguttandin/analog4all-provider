@@ -45,7 +45,7 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-fast-unique-numbers@1.1.4
+fast-unique-numbers@1.1.5
 MIT
 MIT
 
@@ -117,55 +117,55 @@ MIT
 MIT
 MIT
 
-rxjs-broker@2.2.13
+rxjs-broker@2.2.17
 MIT
 MIT
 
-midi-json-parser-worker@4.0.14
+midi-json-parser-worker@4.0.15
 MIT
 MIT
 
-extendable-media-recorder@1.1.1
+extendable-media-recorder@1.1.2
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder-broker@2.2.1
+extendable-media-recorder-wav-encoder-broker@2.2.2
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.86
+extendable-media-recorder-wav-encoder@1.0.87
 MIT
 MIT
 
-broker-factory@1.2.14
+broker-factory@1.2.15
 MIT
 MIT
 
-midi-json-parser-broker@2.0.30
+midi-json-parser-broker@2.0.32
 MIT
 MIT
 
-midi-json-parser@4.2.11
+midi-json-parser@4.2.13
 MIT
 MIT
 
-worker-timers-broker@4.0.15
+worker-timers-broker@4.0.17
 MIT
 MIT
 
-worker-timers@4.0.26
+worker-timers@4.0.28
 MIT
 MIT
 
-midi-file-slicer@4.0.25
+midi-file-slicer@4.0.27
 MIT
 MIT
 
-midi-player@3.0.4
+midi-player@3.0.7
 MIT
 MIT
 
-json-midi-message-encoder@1.1.17
+json-midi-message-encoder@1.1.18
 MIT
 MIT
 
@@ -197,11 +197,11 @@ SOFTWARE.
 MIT
 MIT
 
-zone.js@0.8.20
+zone.js@0.8.23
 MIT
 The MIT License
 
-Copyright (c) 2016 Google, Inc.
+Copyright (c) 2016-2018 Google, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
