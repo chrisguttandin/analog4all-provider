@@ -117,7 +117,7 @@ MIT
 MIT
 MIT
 
-rxjs-broker@2.2.19
+rxjs-broker@2.2.20
 MIT
 MIT
 
@@ -197,7 +197,7 @@ SOFTWARE.
 MIT
 MIT
 
-zone.js@0.8.24
+zone.js@0.8.25
 MIT
 The MIT License
 
