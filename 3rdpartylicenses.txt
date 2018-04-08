@@ -45,7 +45,7 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-fast-unique-numbers@1.1.5
+fast-unique-numbers@2.0.0
 MIT
 MIT
 
@@ -121,7 +121,7 @@ rxjs-broker@2.2.20
 MIT
 MIT
 
-midi-json-parser-worker@4.0.15
+midi-json-parser-worker@4.0.17
 MIT
 MIT
 
@@ -129,43 +129,43 @@ extendable-media-recorder@1.1.2
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder-broker@2.2.2
+extendable-media-recorder-wav-encoder-broker@2.2.3
 MIT
 MIT
 
-extendable-media-recorder-wav-encoder@1.0.87
+extendable-media-recorder-wav-encoder@1.0.88
 MIT
 MIT
 
-broker-factory@1.2.15
+broker-factory@1.2.17
 MIT
 MIT
 
-midi-json-parser-broker@2.0.32
+midi-json-parser-broker@2.0.34
 MIT
 MIT
 
-midi-json-parser@4.2.13
+midi-json-parser@4.2.15
 MIT
 MIT
 
-worker-timers-broker@4.0.17
+worker-timers-broker@4.0.18
 MIT
 MIT
 
-worker-timers@4.0.28
+worker-timers@4.0.29
 MIT
 MIT
 
-midi-file-slicer@4.0.27
+midi-file-slicer@4.0.29
 MIT
 MIT
 
-midi-player@3.0.7
+midi-player@3.0.8
 MIT
 MIT
 
-json-midi-message-encoder@1.1.18
+json-midi-message-encoder@1.1.20
 MIT
 MIT
 
@@ -197,7 +197,7 @@ SOFTWARE.
 MIT
 MIT
 
-zone.js@0.8.25
+zone.js@0.8.26
 MIT
 The MIT License
 
