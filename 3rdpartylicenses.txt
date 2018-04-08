@@ -153,7 +153,7 @@ worker-timers-broker@4.0.18
 MIT
 MIT
 
-worker-timers@4.0.29
+worker-timers@4.0.30
 MIT
 MIT
 
@@ -161,7 +161,7 @@ midi-file-slicer@4.0.29
 MIT
 MIT
 
-midi-player@3.0.8
+midi-player@3.0.9
 MIT
 MIT
 
