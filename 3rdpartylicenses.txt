@@ -117,7 +117,7 @@ MIT
 MIT
 MIT
 
-rxjs-broker@2.2.20
+rxjs-broker@2.2.21
 MIT
 MIT
 
