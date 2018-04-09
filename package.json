@@ -71,7 +71,7 @@
     "bundle-buddy": "^0.2.1",
     "commitizen": "^2.9.6",
     "content-security-policy-builder": "^2.0.0",
-    "core-js": "^2.5.4",
+    "core-js": "^2.5.5",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-holy-grail": "^26.0.2",
