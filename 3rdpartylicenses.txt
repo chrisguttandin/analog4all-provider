@@ -1,4 +1,4 @@
-ngrx-store-freeze@0.2.1
+ngrx-store-freeze@0.2.2
 MIT
 The MIT License (MIT)
 
@@ -117,7 +117,7 @@ MIT
 MIT
 MIT
 
-rxjs-broker@2.2.21
+rxjs-broker@2.2.22
 MIT
 MIT
 
@@ -161,7 +161,7 @@ midi-file-slicer@4.0.29
 MIT
 MIT
 
-midi-player@3.0.9
+midi-player@3.0.10
 MIT
 MIT
 
