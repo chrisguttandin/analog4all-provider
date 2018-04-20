@@ -161,11 +161,11 @@ midi-file-slicer@4.0.30
 MIT
 MIT
 
-midi-player@3.0.12
+midi-player@3.0.13
 MIT
 MIT
 
-json-midi-message-encoder@1.1.21
+json-midi-message-encoder@1.1.22
 MIT
 MIT
 
