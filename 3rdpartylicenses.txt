@@ -121,7 +121,7 @@ rxjs-broker@2.2.24
 MIT
 MIT
 
-midi-json-parser-worker@4.0.18
+midi-json-parser-worker@4.0.19
 MIT
 MIT
 
@@ -137,15 +137,15 @@ extendable-media-recorder-wav-encoder@1.0.88
 MIT
 MIT
 
-broker-factory@1.2.18
+broker-factory@1.2.19
 MIT
 MIT
 
-midi-json-parser-broker@2.0.35
+midi-json-parser-broker@2.0.37
 MIT
 MIT
 
-midi-json-parser@4.2.16
+midi-json-parser@4.2.17
 MIT
 MIT
 
@@ -157,15 +157,15 @@ worker-timers@4.0.30
 MIT
 MIT
 
-midi-file-slicer@4.0.30
+midi-file-slicer@4.0.31
 MIT
 MIT
 
-midi-player@3.0.13
+midi-player@3.0.14
 MIT
 MIT
 
-json-midi-message-encoder@1.1.22
+json-midi-message-encoder@1.1.23
 MIT
 MIT
 
