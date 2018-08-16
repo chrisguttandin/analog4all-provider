@@ -24,8 +24,8 @@ module.exports = {
     },
     smoke: {
         cmd: (process.env.TRAVIS) ?
-            'IS_SMOKE_TEST=true ng e2e --serve false && sonarwhal https://chrisguttandin.github.io/analog4all-provider && rm cdp.pid' :
-            'webdriver-manager update && IS_SMOKE_TEST=true ng e2e --no-webdriver-update --serve false && sonarwhal https://chrisguttandin.github.io/analog4all-provider && rm cdp.pid'
+            'IS_SMOKE_TEST=true ng e2e --serve false && hint https://chrisguttandin.github.io/analog4all-provider && rm cdp.pid' :
+            'webdriver-manager update && IS_SMOKE_TEST=true ng e2e --no-webdriver-update --serve false && hint https://chrisguttandin.github.io/analog4all-provider && rm cdp.pid'
     },
     test: {
         cmd: 'ng test --watch false'
