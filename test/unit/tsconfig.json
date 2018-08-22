@@ -5,6 +5,7 @@
     "outDir": "../../out-tsc/spec",
     "skipLibCheck": true,
     "types": [
+      "deep-freeze-strict",
       "jasmine",
       "node",
       "webmidi",

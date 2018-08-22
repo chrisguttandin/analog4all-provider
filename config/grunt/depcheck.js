@@ -21,6 +21,8 @@ module.exports = {
                 'axe-core',
                 'bundle-buddy',
                 'commitizen',
+                // @todo deep-freeze-strict is actually used but gets detected as unused for some reason.
+                'deep-freeze-strict',
                 'eslint',
                 'eslint-config-holy-grail',
                 'greenkeeper-lockfile',

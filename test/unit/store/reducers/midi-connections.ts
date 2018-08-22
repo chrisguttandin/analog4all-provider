@@ -1,6 +1,9 @@
 import { IMidiConnection } from '../../../../src/app/interfaces';
 import { midiConnectionsReducer } from '../../../../src/app/store/reducers';
 
+// @todo 'deep-freeze-strict' can't be imported as module.
+const deepFreeze = require('deep-freeze-strict'); // tslint:disable-line:no-var-requires no-require-imports
+
 describe('midiConnections reducer', () => {
 
     describe('with an undefined state', () => {
@@ -8,7 +11,7 @@ describe('midiConnections reducer', () => {
         describe('with an empty action', () => {
 
             it('should return the default state', () => {
-                const state = midiConnectionsReducer(undefined, <any> { });
+                const state = midiConnectionsReducer(undefined, <any> deepFreeze({ }));
 
                 expect(state).toEqual([ ]);
             });
@@ -29,7 +32,7 @@ describe('midiConnections reducer', () => {
                 };
 
                 expect(() => {
-                    midiConnectionsReducer(undefined, { payload: midiConnection, type: 'UPDATE_MIDI_CONNECTION' });
+                    midiConnectionsReducer(undefined, deepFreeze({ payload: midiConnection, type: 'UPDATE_MIDI_CONNECTION' }));
                 }).toThrow(new Error('An midiConnection with the same id is not stored.'));
             });
 
@@ -42,19 +45,19 @@ describe('midiConnections reducer', () => {
         let previousState: IMidiConnection[];
 
         beforeEach(() => {
-            previousState = [ {
+            previousState = deepFreeze([ {
                 isConnected: false,
                 midiOutputId: 'a fake midiOutputId',
                 midiOutputName: 'a fake midiOutputName',
                 name: 'a fake name',
                 sourceId: 'a fake sourceId'
-            } ];
+            } ]);
         });
 
         describe('with an empty action', () => {
 
             it('should return the previous state', () => {
-                const state = midiConnectionsReducer(previousState, <any> { });
+                const state = midiConnectionsReducer(previousState, <any> deepFreeze({ }));
 
                 expect(state).toEqual(previousState);
             });
@@ -74,7 +77,10 @@ describe('midiConnections reducer', () => {
                     midiOutputId: 'a fake midiOutputId',
                     sourceId: 'another fake sourceId'
                 };
-                const state = midiConnectionsReducer(previousState, { payload: midiConnection, type: 'UPDATE_MIDI_CONNECTION' });
+                const state = midiConnectionsReducer(previousState, deepFreeze({
+                    payload: midiConnection,
+                    type: 'UPDATE_MIDI_CONNECTION'
+                }));
 
                 expect(state).toEqual([ { ...previousState[0], ...midiConnection } ]);
             });
