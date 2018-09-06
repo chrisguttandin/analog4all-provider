@@ -1,3 +1,5 @@
+const { env } = require('process');
+
 module.exports = {
     analyze: {
         cmd: 'ng build --aot --build-optimizer --prod --sourcemaps --stats-json && (bundle-buddy build/*.map & webpack-bundle-analyzer build/stats.json)'
@@ -9,7 +11,7 @@ module.exports = {
         cmd: 'ng test'
     },
     e2e: {
-        cmd: (process.env.TRAVIS) ?
+        cmd: (env.TRAVIS) ?
             'ng e2e --aot' :
             'webdriver-manager update && ng e2e --aot --no-webdriver-update'
     },
@@ -23,7 +25,7 @@ module.exports = {
         cmd: 'ng serve --aot --build-optimizer --port 8833 --prod'
     },
     smoke: {
-        cmd: (process.env.TRAVIS) ?
+        cmd: (env.TRAVIS) ?
             'IS_SMOKE_TEST=true ng e2e --serve false && hint https://chrisguttandin.github.io/analog4all-provider && rm cdp.pid' :
             'webdriver-manager update && IS_SMOKE_TEST=true ng e2e --no-webdriver-update --serve false && hint https://chrisguttandin.github.io/analog4all-provider && rm cdp.pid'
     },

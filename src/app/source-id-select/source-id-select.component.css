@@ -19,8 +19,8 @@ label {
 select {
     -webkit-appearance: none;
     background-color: #FFF;
-    border-radius: 0;
     border: none;
+    border-radius: 0;
     outline: none;
     width: 70%;
 }

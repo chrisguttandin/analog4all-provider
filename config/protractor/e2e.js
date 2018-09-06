@@ -1,4 +1,5 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
+const { env } = require('process');
 const tsNode = require('ts-node');
 
 // eslint-disable-next-line padding-line-between-statements
@@ -6,7 +7,7 @@ const chromeCapabilities = {
     browserName: 'chrome',
     chromeOptions: {
         // @todo Running the tests in headless mode seems to disable the Web MIDI API.
-        args: (process.env.TRAVIS) ?
+        args: (env.TRAVIS) ?
             [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', '--headless', '--window-size=1024,768' ] :
             [ '--device-scale-factor=2', '--disable-gpu', '--force-device-scale-factor=2', '--window-size=1024,768' ]
     }
@@ -16,7 +17,7 @@ exports.config = {
 
     allScriptsTimeout: 11000,
 
-    directConnect: !!process.env.TRAVIS,
+    directConnect: !!env.TRAVIS,
 
     framework: 'jasmine',
 
@@ -26,7 +27,7 @@ exports.config = {
         showColors: true
     },
 
-    multiCapabilities: (process.env.TRAVIS) ?
+    multiCapabilities: (env.TRAVIS) ?
         [ chromeCapabilities ] :
         [ chromeCapabilities, { browserName: 'safari' } ],
 
