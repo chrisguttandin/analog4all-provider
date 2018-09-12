@@ -83,7 +83,7 @@
     "grunt": "^1.0.2",
     "grunt-axe-webdriver": "^1.1.0",
     "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-htmlmin": "^3.0.0",
     "grunt-depcheck": "^0.1.3",
