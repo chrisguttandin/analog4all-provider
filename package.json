@@ -72,7 +72,7 @@
     "@types/webmidi": "2.0.2",
     "axe-core": "^3.0.2",
     "bundle-buddy": "^0.2.1",
-    "commitizen": "^2.9.6",
+    "commitizen": "^3.0.0",
     "content-security-policy-builder": "^2.0.0",
     "core-js": "^2.5.5",
     "cz-conventional-changelog": "^2.1.0",
