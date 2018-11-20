@@ -78,7 +78,7 @@
     "@hint/parser-manifest": "^2.0.0",
     "@ngrx/store-devtools": "^6.1.2",
     "@types/deep-freeze-strict": "^1.1.0",
-    "@types/jasmine": "~2.8.8",
+    "@types/jasmine": "~2.8.12",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.5",
     "@types/webmidi": "2.0.2",
