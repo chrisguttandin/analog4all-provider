@@ -56,6 +56,9 @@
         "manifest-is-valid": "error",
         "meta-charset-utf-8": "error",
         "meta-viewport": "error",
+        "minified-js": "error",
+        "no-bom": "error",
+        "no-broken-links": "error",
         "no-disallowed-headers": "off",
         "no-friendly-error-pages": "error",
         "no-html-only-headers": "error",
@@ -65,11 +68,13 @@
                 "max-html-redirects": 1
             }
         ],
+        'no-p3p': 'error',
         "no-protocol-relative-urls": "error",
         "no-vulnerable-javascript-libraries": "error",
         "sri": "error",
         "ssllabs": "error",
         "strict-transport-security": "off",
+        "stylesheet-limits": "error",
         "validate-set-cookie-header": "error",
         "x-content-type-options": "off"
     },
