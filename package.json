@@ -30,10 +30,10 @@
     "midi-json-parser": "^6.0.5",
     "midi-json-parser-worker": "^6.0.3",
     "midi-player": "^4.0.6",
-    "rxjs": "^6.3.3",
+    "rxjs": "~6.3.3",
     "rxjs-broker": "^4.0.9",
     "tslib": "^1.9.3",
-    "zone.js": "^0.8.26"
+    "zone.js": "~0.8.26"
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
@@ -78,7 +78,7 @@
     "@hint/parser-manifest": "^2.0.0",
     "@ngrx/store-devtools": "^6.1.2",
     "@types/deep-freeze-strict": "^1.1.0",
-    "@types/jasmine": "~2.8.7",
+    "@types/jasmine": "^2.8.8",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~8.9.5",
     "@types/webmidi": "2.0.2",
