@@ -26,7 +26,6 @@ module.exports = {
                 'deep-freeze-strict',
                 'eslint',
                 'eslint-config-holy-grail',
-                'greenkeeper-lockfile',
                 'grunt-*',
                 'hint',
                 'husky',
