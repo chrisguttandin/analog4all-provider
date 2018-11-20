@@ -129,6 +129,16 @@
   },
   "greenkeeper": {
     "ignore": [
+      "@angular-devkit/build-angular",
+      "@angular/common",
+      "@angular/compiler",
+      "@angular/compiler-cli",
+      "@angular/core",
+      "@angular/forms",
+      "@angular/language-service",
+      "@angular/platform-browser",
+      "@angular/platform-browser-dynamic",
+      "@angular/router",
       "@types/jasmine",
       "@types/jasminewd2",
       "@types/node",
@@ -136,11 +146,14 @@
       "jasmine-spec-reporter",
       "karma",
       "karma-chrome-launcher",
+      "karma-coverage-istanbul-reporter",
       "karma-jasmine",
       "protractor",
+      "rxjs",
       "ts-node",
       "tslint",
-      "typescript"
+      "typescript",
+      "zone.js"
     ]
   },
   "homepage": "https://chrisguttandin.github.io/analog4all-provider",
