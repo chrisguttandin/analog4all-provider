@@ -59,7 +59,7 @@ import { StoreModule } from './store';
     providers: [
         AudioInputMediaDevicesService,
         DownloadingService,
-        { provide: ENDPOINT, useValue: '://w8flhge089.execute-api.eu-west-1.amazonaws.com/dev/' },
+        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' },
         FileReceivingService,
         FileSendingService,
         InstrumentsService,
