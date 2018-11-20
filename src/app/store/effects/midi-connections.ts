@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import { from } from 'rxjs/observable/from';
+import { Observable, from } from 'rxjs';
 import { debounceTime, filter, first, map, mergeMap, pairwise, withLatestFrom } from 'rxjs/operators';
 import { IInstrument, IMidiConnection } from '../../interfaces';
 import { UPDATE_MIDI_CONNECTION, deleteInstrument, patchInstrument } from '../actions';
@@ -62,9 +61,9 @@ export class MidiConnectionsEffects {
                             }),
                             first(),
                             map(({ instrumentId, midiOutputName }) => [ instrumentId, midiOutputName ]),
-                            filter<(string | undefined)[], [ string, string ]>((args): args is [ string, string ] => args[0] !== undefined)
+                            filter<(string | undefined)[], [ string, string ]>((args): args is [ string, string ] => args[0] !== undefined),
+                            map(([ instrumentId, midiOutputName ]) => ({ instrumentId, midiConnection, midiOutputName })))
                         ),
-                    (midiConnection, [ instrumentId, midiOutputName ]) => ({ instrumentId, midiConnection, midiOutputName })),
                 filter(({ midiConnection: { description, gearogsSlug, name, soundCloudUsername } }) => {
                     return (description !== undefined ||
                         gearogsSlug !== undefined ||

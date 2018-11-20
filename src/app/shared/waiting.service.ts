@@ -21,7 +21,7 @@ export class WaitingService {
                     complete () {
                         reject(new Error('The underlying channel was closed before any value could be received.'));
                     },
-                    error (err) {
+                    error (err: any) {
                         reject(err);
                     },
                     next () {

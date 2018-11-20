@@ -12,17 +12,19 @@ const FADE_OUT_TICKS = 20;
 @Injectable()
 export class RecordingService {
 
-    private _analyserNode: AnalyserNode;
+    private _analyserNode: null | AnalyserNode;
 
     private _audioContext: null | AudioContext;
 
-    private _gainNode: GainNode;
+    private _gainNode: null | GainNode;
 
     // @todo Use IMediaRecorder once it is exported by extendable-media-recorder.
     private _mediaRecorder: any;
 
     constructor (private _userMediaService: UserMediaService) {
+        this._analyserNode = null;
         this._audioContext = null;
+        this._gainNode = null;
     }
 
     public start (sourceId: string) {
@@ -51,8 +53,16 @@ export class RecordingService {
     }
 
     private _detectSilence (currentTime: number, done: Function, attempt: number) {
+        if (this._analyserNode === null) {
+            throw new Error('Expected an AnalyserNode.');
+        }
+
         if (this._audioContext === null) {
             throw new Error('Expected an initialized AudioContext.');
+        }
+
+        if (this._gainNode === null) {
+            throw new Error('Expected an GainNode.');
         }
 
         const fftSize = this._analyserNode.fftSize;

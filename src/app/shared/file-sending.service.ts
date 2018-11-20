@@ -15,32 +15,40 @@ export class FileSendingService {
             fileReader.onload = () => {
                 const buffer = fileReader.result;
 
-                const byteLength = buffer.byteLength;
+                if (buffer instanceof ArrayBuffer) {
+                    const byteLength = buffer.byteLength;
 
-                resolve(dataChannelSubject
-                    .send({ byteLength, type: 'bof' })
-                    .then(() => {
-                        let byteIndex = 0;
+                    resolve(dataChannelSubject
+                        .send({ byteLength, type: 'bof' })
+                        .then(() => {
+                            let byteIndex = 0;
 
-                        const promise = Promise.resolve();
+                            const promise = Promise.resolve();
 
-                        while (byteIndex + CHUNK_SIZE < byteLength) {
-                            const slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
+                            while (byteIndex + CHUNK_SIZE < byteLength) {
+                                const slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
 
-                            promise.then(() => dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice)))));
+                                promise.then(() => {
+                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice))));
+                                });
 
-                            byteIndex += CHUNK_SIZE;
-                        }
+                                byteIndex += CHUNK_SIZE;
+                            }
 
-                        if (byteIndex < byteLength) {
-                            const slice = buffer.slice(byteIndex);
+                            if (byteIndex < byteLength) {
+                                const slice = buffer.slice(byteIndex);
 
-                            promise.then(() => dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice)))));
-                        }
+                                promise.then(() => {
+                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice))));
+                                });
+                            }
 
-                        return promise;
-                    })
-                    .then(() => dataChannelSubject.send({ type: 'eof' })));
+                            return promise;
+                        })
+                        .then(() => dataChannelSubject.send({ type: 'eof' })));
+                } else {
+                    reject(new Error('Reading the file failed.'));
+                }
             };
 
             fileReader.readAsArrayBuffer(file);

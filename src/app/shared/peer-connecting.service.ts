@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, Observer } from 'rxjs';
 import { IDataChannel, IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 import { mergeMap } from 'rxjs/operators';
 import { ICandidateSubjectEvent, IDescriptionSubjectEvent } from '../interfaces';
 import { WindowService } from './window.service';
@@ -88,7 +87,7 @@ export class PeerConnectingService {
 
                         peerConnection.addEventListener('icecandidate', ({ candidate }) => {
                             if (candidate) {
-                                candidateSubject.send({ candidate });
+                                candidateSubject.send(<any> { candidate });
                             }
                         });
 
@@ -102,7 +101,8 @@ export class PeerConnectingService {
                                             // @todo Handle this error and maybe create another offer.
                                         });
 
-                                    descriptionSubject.send({ description });
+                                    // @todo Remove casting again when possible.
+                                    descriptionSubject.send(<any> { description });
                                 })
                                 .catch(() => {
                                     // @todo Handle this error and maybe create another offer.

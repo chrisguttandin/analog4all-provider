@@ -1,10 +1,10 @@
 module.exports = {
     default: {
         files: [ {
-            cwd: 'build/',
-            dest: 'build/',
+            cwd: 'build/analog4all-provider',
+            dest: 'build/analog4all-provider',
             expand: true,
-            src: [ '**/!(index).html' ]
+            src: [ '**/*.html' ]
         } ],
         options: {
             caseSensitive: true,

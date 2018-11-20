@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AudioInputMediaDevicesService } from '../shared';
 
 @Component({
@@ -9,9 +9,9 @@ import { AudioInputMediaDevicesService } from '../shared';
 })
 export class SourceIdSelectComponent implements OnInit {
 
-    public audioInputs$: Observable<MediaDeviceInfo[]>;
+    public audioInputs$!: Observable<MediaDeviceInfo[]>;
 
-    @Input() public sourceId: string;
+    @Input() public sourceId!: string;
 
     @Output() public sourceIdChange: EventEmitter<Event>;
 

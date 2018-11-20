@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { throwError } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ISampleResponse } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
@@ -34,7 +34,7 @@ export class SamplesService {
                             map(() => ({ created, id, modified }))
                         );
                 }),
-                catchError((response) => Observable.throw(new ResponseError(response)))
+                catchError((response) => throwError(new ResponseError(response)))
             );
     }
 

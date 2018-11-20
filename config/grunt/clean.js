@@ -1,15 +1,11 @@
 module.exports = {
-    inline: [
-        'build/inline.*.bundle.js'
+    runtime: [
+        'build/analog4all-provider/runtime.*.js'
     ],
     scripts: [
-        'build/*.bundle.js',
-        'build/*.bundle.js.gz',
-        'build/*.chunk.js',
-        'build/*.chunk.js.gz'
+        'build/analog4all-provider/!(ngsw-worker).js'
     ],
     styles: [
-        'build/*.bundle.css',
-        'build/*.bundle.css.gz'
+        'build/analog4all-provider/**.css'
     ]
 };

@@ -2,8 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { create as createMidiPlayer } from 'midi-player';
+import { Observable } from 'rxjs';
 import { IDataChannel, wrap } from 'rxjs-broker';
-import { Observable } from 'rxjs/Observable';
 import { concatMap, filter, first, map } from 'rxjs/operators';
 import { IInstrument, IMidiConnection } from '../interfaces';
 import {
@@ -27,13 +27,13 @@ import { createInstrumentByIdSelector } from '../store/selectors';
 })
 export class MidiConnectionComponent implements OnChanges {
 
-    public audioInputs$: Observable<MediaDeviceInfo[]>;
+    public audioInputs$!: Observable<MediaDeviceInfo[]>;
 
-    public instrumentName$: Observable<string>;
+    public instrumentName$!: Observable<string>;
 
     public isRegistered: boolean;
 
-    @Input() public midiConnection: IMidiConnection;
+    @Input() public midiConnection!: IMidiConnection;
 
     public virtualInstrumentName: string;
 
@@ -52,8 +52,10 @@ export class MidiConnectionComponent implements OnChanges {
         scaleMidiJsonService: ScaleMidiJsonService,
         private _store: Store<IAppState>
     ) {
+        this.isRegistered = false;
         this._middleCMidiJson = middleCMidiJsonService.midiJson;
         this._scaleMidiJson = scaleMidiJsonService.midiJson;
+        this.virtualInstrumentName = '';
     }
 
     public deregister () {

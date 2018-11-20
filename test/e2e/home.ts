@@ -28,7 +28,7 @@ describe('/', () => {
         it('should display the correct sub headline', () => {
             page.navigateTo();
 
-            if (browserName === 'safari') {
+            if (browserName === 'Safari') {
                 expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
             } else {
                 expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
@@ -68,7 +68,7 @@ describe('/', () => {
         it('should display the correct sub headline', () => {
             page.navigateTo();
 
-            if (browserName === 'safari') {
+            if (browserName === 'Safari') {
                 expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
             } else if (process.env.TRAVIS) {
                 expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');

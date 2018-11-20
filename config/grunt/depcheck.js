@@ -13,6 +13,7 @@ module.exports = {
                 '@angular/cli',
                 '@angular/compiler-cli',
                 '@angular/language-service',
+                '@angular-devkit/build-angular',
                 '@commitlint/cli',
                 '@commitlint/config-angular',
                 '@hint/*',

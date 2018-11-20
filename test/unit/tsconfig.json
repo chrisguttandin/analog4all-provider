@@ -1,21 +1,22 @@
 {
   "compilerOptions": {
     "declaration": false,
-    "module": "commonjs",
+    "declarationMap": false,
     "outDir": "../../out-tsc/spec",
-    "skipLibCheck": true,
     "types": [
       "deep-freeze-strict",
       "jasmine",
       "node",
       "webmidi",
       "../../src/media-devices",
+      "../../src/media-recorder",
       "../../src/permissions"
     ]
   },
   "extends": "../../node_modules/tsconfig-holy-grail/src/tsconfig-browser",
   "files": [
-    "../../config/karma/test.ts"
+    "../../config/karma/test.ts",
+    "../../src/polyfills.ts"
   ],
   "include": [
     "**/*.ts"

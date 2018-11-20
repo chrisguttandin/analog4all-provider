@@ -32,15 +32,17 @@ exports.config = {
         [ chromeCapabilities, { browserName: 'safari' } ],
 
     onPrepare () {
+        browser.resetUrl = 'about:blank'; // eslint-disable-line no-undef
+
         tsNode.register({
-            project: 'test/e2e'
+            project: 'test/e2e/tsconfig.json'
         });
 
         jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } })); // eslint-disable-line no-undef
     },
 
-    specs: [
-        '../../test/e2e/**/*.ts'
-    ]
+    suites: {
+        e2e: '../../test/e2e/**/*.ts'
+    }
 
 };

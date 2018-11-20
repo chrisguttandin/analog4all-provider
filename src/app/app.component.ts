@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { InstrumentsService, MidiAccessService, PeerConnectingService, UserMediaService } from './shared';
 
 @Component({
@@ -6,7 +6,7 @@ import { InstrumentsService, MidiAccessService, PeerConnectingService, UserMedia
     styleUrls: [ './app.component.css' ],
     templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
     public isSupported: boolean;
 
@@ -15,9 +15,7 @@ export class AppComponent implements OnInit {
         private _midiAccessService: MidiAccessService,
         private _peerConnectingService: PeerConnectingService,
         private _userMediaService: UserMediaService
-    ) { }
-
-    public ngOnInit () {
+    ) {
         this.isSupported = this._instrumentsService.isSupported &&
             this._midiAccessService.isSupported &&
             this._peerConnectingService.isSupported &&

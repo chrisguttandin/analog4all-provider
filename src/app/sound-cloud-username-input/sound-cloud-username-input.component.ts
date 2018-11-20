@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SoundCloudUsernameInputComponent {
 
-    @Input() public soundCloudUsername: string;
+    @Input() public soundCloudUsername!: string;
 
     @Output() public soundCloudUsernameChange: EventEmitter<Event>;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IMidiConnection } from '../interfaces';
 import { IAppState } from '../store/interfaces';
@@ -13,9 +13,9 @@ import { selectMidiConnections } from '../store/selectors';
 })
 export class LocalRegistryComponent implements OnInit {
 
-    public connectedMidiConnections$: Observable<IMidiConnection[]>;
+    public connectedMidiConnections$!: Observable<IMidiConnection[]>;
 
-    public hasConnectedMidiConnections$: Observable<boolean>;
+    public hasConnectedMidiConnections$!: Observable<boolean>;
 
     constructor (
         private _store: Store<IAppState>

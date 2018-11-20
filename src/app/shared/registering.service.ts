@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IDataChannel } from 'rxjs-broker';
-import { Observable } from 'rxjs/Observable';
 import { IInstrument, IMidiConnection } from '../interfaces';
 import { InstrumentsService } from './instruments.service';
 import { UserMediaService } from './user-media.service';
@@ -22,7 +22,7 @@ export class RegisteringService {
             .getAudioOnlyMediaStream(midiConnection.sourceId)
             .then(() => {
                 return new Promise<IInstrument>((resolve) => {
-                    const data: { description?: string; name: string; gearogsSlug?: string; soundCloudUsername?: string; }  = { name };
+                    const data: { description?: string; gearogsSlug?: string; name: string; soundCloudUsername?: string; } = { name };
 
                     if (midiConnection.description !== undefined) {
                         const description = midiConnection.description.trim();

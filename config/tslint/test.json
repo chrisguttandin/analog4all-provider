@@ -1,43 +1,23 @@
 {
     "extends": "tslint-config-holy-grail",
     "rules": {
-        "component-selector": [ true, "element", "anp", "kebab-case" ],
-        "directive-selector": [ true, "attribute", "anp", "camelCase" ],
+        "component-selector": [
+            true,
+            "element",
+            "anp",
+            "kebab-case"
+        ],
+        "directive-selector": [
+            true,
+            "attribute",
+            "anp",
+            "camelCase"
+        ],
         "import-blacklist": false,
         "newline-per-chained-call": false,
-        "no-implicit-dependencies": [ true, "dev" ],
-        "no-submodule-imports": [
+        "no-implicit-dependencies": [
             true,
-            "@angular/common/http",
-            "@angular/core/testing",
-            "@angular/platform-browser/animations",
-            "@angular/platform-browser-dynamic/testing",
-            "@angular/router/testing",
-            "@ngrx/effects/testing",
-            "angulartics2/ga",
-            "core-js/es7/reflect",
-            "lodash-es",
-            "regenerator-runtime/runtime",
-            "rxjs/AsyncSubject",
-            "rxjs/BehaviorSubject",
-            "rxjs/InnerSubscriber",
-            "rxjs/Notification",
-            "rxjs/Observable",
-            "rxjs/Observer",
-            "rxjs/Operator",
-            "rxjs/OuterSubscriber",
-            "rxjs/ReplaySubject",
-            "rxjs/Scheduler",
-            "rxjs/Subject",
-            "rxjs/SubjectSubscription",
-            "rxjs/Subscriber",
-            "rxjs/Subscription",
-            "rxjs/observable",
-            "rxjs/operators",
-            "rxjs/scheduler",
-            "rxjs/symbol",
-            "zone.js/dist"
-        ],
-        "pipe-naming": [ true, "camelCase", "anp" ]
+            "dev"
+        ]
     }
 }

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable, throwError } from 'rxjs';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
-import { Observable } from 'rxjs/Observable';
 import { catchError, tap } from 'rxjs/operators';
 import { IInstrument } from '../interfaces';
 import { addInstrument } from '../store/actions';
@@ -38,7 +38,7 @@ export class InstrumentsService {
             .post<IInstrument>(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
             .pipe(
                 tap((nstrmnt) => this._store.dispatch(addInstrument(nstrmnt))),
-                catchError((response) => Observable.throw(new ResponseError(response)))
+                catchError((response) => throwError(new ResponseError(response)))
             );
     }
 
