@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { MediaRecorder, extend } from 'extendable-media-recorder';
-import { wavEncoder } from 'extendable-media-recorder-wav-encoder';
+import { MediaRecorder, register } from 'extendable-media-recorder';
+import { connect } from 'extendable-media-recorder-wav-encoder';
 import { UserMediaService } from './user-media.service';
 
-extend(wavEncoder);
+connect()
+    .then((port) => register(port));
 
 const FADE_OUT_OFFSET = 5;
 
