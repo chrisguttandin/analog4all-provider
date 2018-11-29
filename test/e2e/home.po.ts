@@ -1,6 +1,7 @@
+import { env } from 'process';
 import { browser, by, element } from 'protractor';
 
-const IS_SMOKE_TEST = !!process.env.IS_SMOKE_TEST;
+const IS_SMOKE_TEST = !!env.IS_SMOKE_TEST;
 
 export class HomePage {
 

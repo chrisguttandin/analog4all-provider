@@ -1,3 +1,4 @@
+import { env } from 'process';
 import { browser } from 'protractor';
 import { HomePage } from './home.po';
 
@@ -43,7 +44,7 @@ describe('/', () => {
         let virtualMidiInput: { closePort (): void; openVirtualPort (name: string): void; };
 
         afterEach(() => {
-            if (!process.env.TRAVIS) {
+            if (!env.TRAVIS) {
                 virtualMidiInput.closePort();
             }
         });
@@ -53,7 +54,7 @@ describe('/', () => {
 
             browserName = capabilities.get('browserName');
 
-            if (process.env.TRAVIS) {
+            if (env.TRAVIS) {
                 return;
             }
 
@@ -70,7 +71,7 @@ describe('/', () => {
 
             if (browserName === 'Safari') {
                 expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
-            } else if (process.env.TRAVIS) {
+            } else if (env.TRAVIS) {
                 expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
             } else {
                 expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
