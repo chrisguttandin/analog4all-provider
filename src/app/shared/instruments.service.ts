@@ -21,7 +21,7 @@ export class InstrumentsService {
         private _store: Store<IAppState>
     ) { }
 
-    get isSupported () {
+    get isSupported (): boolean {
         return isSupported;
     }
 

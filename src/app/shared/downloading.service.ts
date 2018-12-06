@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DownloadingService {
 
-    public download (fileName: string, ...arrayBuffers: ArrayBuffer[]) {
+    public download (fileName: string, ...arrayBuffers: ArrayBuffer[]): void {
         const file = new File(arrayBuffers, fileName, { type: 'audio/wav' });
 
         const link$ = document.createElement('a');

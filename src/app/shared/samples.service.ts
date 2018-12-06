@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ISampleResponse } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
@@ -14,7 +14,7 @@ export class SamplesService {
         private _httpClient: HttpClient
     ) {}
 
-    public create ({ file }: { file: Blob }) {
+    public create ({ file }: { file: Blob }): Observable<{ created: number; id: string; modified: number }> {
         return this._httpClient
             .post<ISampleResponse>(`https${ this._endpoint }samples`, null)
             .pipe(

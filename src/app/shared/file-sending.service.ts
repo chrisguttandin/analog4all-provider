@@ -6,7 +6,7 @@ const CHUNK_SIZE = 1024;
 @Injectable()
 export class FileSendingService {
 
-    public send (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, file: Blob) {
+    public send (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, file: Blob): Promise<void> {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
 

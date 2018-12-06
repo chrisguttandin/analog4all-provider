@@ -17,7 +17,11 @@ export class RenderingService {
         private _waitingService: WaitingService
     ) { }
 
-    public render (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, midiOutput: WebMidi.MIDIOutput, sourceId: string) {
+    public render (
+        dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>,
+        midiOutput: WebMidi.MIDIOutput,
+        sourceId: string
+    ): Promise<void> {
         return this._waitingService
             .wait(dataChannelSubject)
             .then(() => {

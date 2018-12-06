@@ -21,11 +21,11 @@ export class SourceIdSelectComponent implements OnInit {
         this.sourceIdChange = new EventEmitter();
     }
 
-    public ngOnInit () {
+    public ngOnInit (): void {
         this.audioInputs$ = this._audioInputMediaDevicesService.watch();
     }
 
-    public onChange (value: Event) {
+    public onChange (value: Event): void {
         this.sourceIdChange.emit(value);
     }
 

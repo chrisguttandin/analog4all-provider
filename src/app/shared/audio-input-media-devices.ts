@@ -20,7 +20,7 @@ export class AudioInputMediaDevicesService {
      * This property is true if the browser supports all the required APIs to use the
      * AudioInputMediaDevicesService.
      */
-    get isSupported () {
+    get isSupported (): boolean {
         return (this._window !== null &&
             'mediaDevices' in this._window.navigator &&
             'enumerateDevices' in this._window.navigator.mediaDevices);

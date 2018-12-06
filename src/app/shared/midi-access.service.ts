@@ -17,7 +17,7 @@ export class MidiAccessService {
      * This property is true if the browser supports all the required APIs to use the
      * MidiAccessService.
      */
-    get isSupported () {
+    get isSupported (): boolean {
         return (this._window !== null && 'requestMIDIAccess' in this._window.navigator);
     }
 

@@ -17,13 +17,13 @@ export class UserMediaService {
      * This property is true if the browser supports all the required APIs to use the
      * UserMediaService.
      */
-    get isSupported () {
+    get isSupported (): boolean {
         return (this._window !== null &&
             'mediaDevices' in this._window.navigator &&
             'getUserMedia' in this._window.navigator.mediaDevices);
     }
 
-    public getAudioOnlyMediaStream (sourceId: string) {
+    public getAudioOnlyMediaStream (sourceId: string): Promise<MediaStream> {
         if (this._mediaStream !== null) {
             const audioTracks = this._mediaStream.getAudioTracks();
 

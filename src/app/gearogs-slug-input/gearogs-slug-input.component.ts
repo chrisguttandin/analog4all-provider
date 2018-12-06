@@ -15,7 +15,7 @@ export class GearogsSlugInputComponent {
         this.gearogsSlugChange = new EventEmitter();
     }
 
-    public onChange (value: Event) {
+    public onChange (value: Event): void {
         this.gearogsSlugChange.emit(value);
     }
 

@@ -4,7 +4,7 @@ import { IMidiFile } from 'midi-json-parser-worker';
 @Injectable()
 export class ScaleMidiJsonService {
 
-    get midiJson () {
+    get midiJson (): IMidiFile {
         return <IMidiFile> {
             division: 480,
             format: 1,

@@ -15,7 +15,7 @@ export class DescriptionInputComponent {
         this.descriptionChange = new EventEmitter();
     }
 
-    public onChange (value: Event) {
+    public onChange (value: Event): void {
         this.descriptionChange.emit(value);
     }
 

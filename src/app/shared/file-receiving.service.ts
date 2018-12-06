@@ -12,13 +12,13 @@ export class FileReceivingService {
 
             const dataChannelSubscription = dataChannelSubject
                 .subscribe({
-                    complete () {
+                    complete (): void {
                         reject();
                     },
-                    error (err) {
+                    error (err): void {
                         reject(err);
                     },
-                    next (message) {
+                    next (message): void {
                         if (typeof message === 'object' && !Array.isArray(message)) {
                             const { type } = <IStringifyableJsonObject> message;
 

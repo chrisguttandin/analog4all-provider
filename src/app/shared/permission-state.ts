@@ -15,7 +15,7 @@ export class PermissionStateService {
      * This property is true if the browser supports all the required APIs to use the
      * PermissionStateService.
      */
-    get isSupported () {
+    get isSupported (): boolean {
         return (this._window !== null && 'permissions' in this._window.navigator && 'query' in this._window.navigator.permissions);
     }
 

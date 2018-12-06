@@ -26,7 +26,7 @@ export class PeerConnectingService {
      * This property is true if the browser supports all the required APIs to use the
      * PeerConnectingService.
      */
-    get isSupported () {
+    get isSupported (): boolean {
         if (this._window !== null && 'RTCPeerConnection' in this._window) {
             const peerConnection = new RTCPeerConnection({
                 iceServers: [ { urls: 'stun:0' } ]

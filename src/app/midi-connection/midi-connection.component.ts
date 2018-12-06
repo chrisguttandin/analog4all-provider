@@ -58,11 +58,11 @@ export class MidiConnectionComponent implements OnChanges {
         this.virtualInstrumentName = '';
     }
 
-    public deregister () {
+    public deregister (): void {
         this._store.dispatch(updateMidiConnection({ instrumentId: undefined, midiOutputId: this.midiConnection.midiOutputId }));
     }
 
-    public ngOnChanges (changes: SimpleChanges) {
+    public ngOnChanges (changes: SimpleChanges): void {
         if (changes.midiConnection !== undefined) {
             const midiConnection = this.midiConnection;
 
@@ -71,7 +71,7 @@ export class MidiConnectionComponent implements OnChanges {
         }
     }
 
-    public register () {
+    public register (): void {
         this._registeringService
             .register(this.midiConnection, this.virtualInstrumentName)
             .then(({ connection, instrument }) => {
@@ -86,13 +86,13 @@ export class MidiConnectionComponent implements OnChanges {
                                 this.midiConnection.sourceId
                             ))
                     )
-                    .subscribe(() => { // tslint:disable-line:no-empty
+                    .subscribe(() => { // tslint:disable-line:no-empty rxjs-prefer-async-pipe
                         // @todo
                     });
             });
     }
 
-    public sample () {
+    public sample (): void {
         this._recordingService
             .start(this.midiConnection.sourceId)
             .then(() => {
@@ -106,7 +106,7 @@ export class MidiConnectionComponent implements OnChanges {
             .then(() => this._recordingService.stop())
             .then((arrayBuffer) => new Promise<{ id: string }>((resolve) => this._samplesService
                 .create({ file: new Blob([ arrayBuffer ]) })
-                .subscribe((sample) => resolve(sample))))
+                .subscribe((sample) => resolve(sample)))) // tslint:disable-line:rxjs-prefer-async-pipe
             .then((sample) => new Promise((resolve) => {
                 const instrumentId = this.midiConnection.instrumentId;
 
@@ -125,11 +125,11 @@ export class MidiConnectionComponent implements OnChanges {
                             this._store.dispatch(patchInstrument({ id: instrumentId, sample: { id: sample.id } }));
                         })
                     )
-                    .subscribe(() => resolve());
+                    .subscribe(() => resolve()); // tslint:disable-line:rxjs-prefer-async-pipe
             }));
     }
 
-    public test () {
+    public test (): void {
         this._recordingService
             .start(this.midiConnection.sourceId)
             .then(() => {
@@ -144,7 +144,7 @@ export class MidiConnectionComponent implements OnChanges {
             .then((arrayBuffer) => this._downloadingService.download('sample.wav', arrayBuffer));
     }
 
-    public updateDescription (description: string) {
+    public updateDescription (description: string): void {
         const sanitizedDescription = description.trim();
 
         this._store.dispatch(updateMidiConnection({
@@ -153,7 +153,7 @@ export class MidiConnectionComponent implements OnChanges {
         }));
     }
 
-    public updateGearogsSlug (gearogsSlug: string) {
+    public updateGearogsSlug (gearogsSlug: string): void {
         const sanitizedGearogsSlug = gearogsSlug.trim();
 
         this._store.dispatch(updateMidiConnection({
@@ -162,7 +162,7 @@ export class MidiConnectionComponent implements OnChanges {
         }));
     }
 
-    public updateInstrumentName (name: string) {
+    public updateInstrumentName (name: string): void {
         const sanitizedName = name.trim();
 
         this._store.dispatch(updateMidiConnection({
@@ -171,7 +171,7 @@ export class MidiConnectionComponent implements OnChanges {
         }));
     }
 
-    public updateSoundCloudUsername (soundCloudUsername: string) {
+    public updateSoundCloudUsername (soundCloudUsername: string): void {
         const sanitizedSoundCloudUsername = soundCloudUsername.trim();
 
         this._store.dispatch(updateMidiConnection({
@@ -180,7 +180,7 @@ export class MidiConnectionComponent implements OnChanges {
         }));
     }
 
-    public updateSourceId (sourceId: string) {
+    public updateSourceId (sourceId: string): void {
         this._store.dispatch(updateMidiConnection({ midiOutputId: this.midiConnection.midiOutputId, sourceId }));
     }
 

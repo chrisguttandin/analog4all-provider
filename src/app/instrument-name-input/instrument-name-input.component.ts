@@ -17,7 +17,7 @@ export class InstrumentNameInputComponent {
         this.nameChange = new EventEmitter();
     }
 
-    public onChange (value: Event) {
+    public onChange (value: Event): void {
         this.nameChange.emit(value);
     }
 

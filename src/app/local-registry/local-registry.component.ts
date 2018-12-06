@@ -21,11 +21,11 @@ export class LocalRegistryComponent implements OnInit {
         private _store: Store<IAppState>
     ) { }
 
-    public identifyMidiConnection (_: number, { midiOutputId }: IMidiConnection) {
+    public identifyMidiConnection (_: number, { midiOutputId }: IMidiConnection): string {
         return midiOutputId;
     }
 
-    public ngOnInit () {
+    public ngOnInit (): void {
         this.connectedMidiConnections$ = this._store
             .pipe(
                 select(selectMidiConnections),

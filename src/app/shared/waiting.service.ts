@@ -9,7 +9,7 @@ import { first } from 'rxjs/operators';
 @Injectable()
 export class WaitingService {
 
-    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>) {
+    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<void> {
         return new Promise((resolve, reject) => {
             const waitingChannel = dataChannelSubject.mask({ type: 'waiting' });
 
@@ -18,13 +18,13 @@ export class WaitingService {
                     first<any>()
                 )
                 .subscribe({
-                    complete () {
+                    complete (): void {
                         reject(new Error('The underlying channel was closed before any value could be received.'));
                     },
-                    error (err: any) {
+                    error (err: any): void {
                         reject(err);
                     },
-                    next () {
+                    next (): void {
                         waitingChannelSubscription.unsubscribe();
                         dataChannelSubject.next({ type: 'ready' });
 

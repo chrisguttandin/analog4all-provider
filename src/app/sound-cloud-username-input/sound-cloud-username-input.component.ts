@@ -15,7 +15,7 @@ export class SoundCloudUsernameInputComponent {
         this.soundCloudUsernameChange = new EventEmitter();
     }
 
-    public onChange (value: Event) {
+    public onChange (value: Event): void {
         this.soundCloudUsernameChange.emit(value);
     }
 
