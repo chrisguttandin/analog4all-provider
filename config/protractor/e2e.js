@@ -1,6 +1,7 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
 const { env } = require('process');
 const tsNode = require('ts-node');
+const { defaultProject, projects } = require('../../angular.json');
 
 // eslint-disable-next-line padding-line-between-statements
 const chromeCapabilities = {
@@ -16,6 +17,8 @@ const chromeCapabilities = {
 exports.config = {
 
     allScriptsTimeout: 11000,
+
+    baseUrl: (env.IS_SMOKE_TEST) ? 'https://chrisguttandin.github.io/analog4all-provider' : `http://localhost:${ projects[defaultProject].targets.serve.options.port }`,
 
     directConnect: !!env.TRAVIS,
 
