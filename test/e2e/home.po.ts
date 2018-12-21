@@ -17,7 +17,7 @@ export class HomePage {
     }
 
     public navigateTo (): promise.Promise<any> {
-        return browser.get((env.IS_SMOKE_TEST) ? '/analog4all-provider' : '/');
+        return browser.get((env.IS_SMOKE_TEST === 'true') ? '/analog4all-provider' : '/');
     }
 
 }

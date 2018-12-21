@@ -16,13 +16,13 @@ export class RegisteringService {
     public register (
         midiConnection: IMidiConnection,
         name: string
-    ): Promise<{ connection: Observable<IDataChannel>, instrument: IInstrument }> {
+    ): Promise<{ connection: Observable<IDataChannel>; instrument: IInstrument }> {
         // Get the mediaStream first to make sure the user granted access.
         return this._userMediaService
             .getAudioOnlyMediaStream(midiConnection.sourceId)
             .then(() => {
                 return new Promise<IInstrument>((resolve) => {
-                    const data: { description?: string; gearogsSlug?: string; name: string; soundCloudUsername?: string; } = { name };
+                    const data: { description?: string; gearogsSlug?: string; name: string; soundCloudUsername?: string } = { name };
 
                     if (midiConnection.description !== undefined) {
                         const description = midiConnection.description.trim();

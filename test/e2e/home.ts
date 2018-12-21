@@ -41,10 +41,10 @@ describe('/', () => {
     describe('with a MIDI device (at least locally)', () => {
 
         let browserName: string;
-        let virtualMidiInput: { closePort (): void; openVirtualPort (name: string): void; };
+        let virtualMidiInput: { closePort (): void; openVirtualPort (name: string): void };
 
         afterEach(() => {
-            if (!env.TRAVIS) {
+            if (env.TRAVIS === 'true') {
                 virtualMidiInput.closePort();
             }
         });
@@ -54,7 +54,7 @@ describe('/', () => {
 
             browserName = capabilities.get('browserName');
 
-            if (env.TRAVIS) {
+            if (env.TRAVIS === 'true') {
                 return;
             }
 
@@ -71,7 +71,7 @@ describe('/', () => {
 
             if (browserName === 'Safari') {
                 expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
-            } else if (env.TRAVIS) {
+            } else if (env.TRAVIS === 'true') {
                 expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
             } else {
                 expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
