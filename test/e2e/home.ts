@@ -44,7 +44,7 @@ describe('/', () => {
         let virtualMidiInput: { closePort (): void; openVirtualPort (name: string): void };
 
         afterEach(() => {
-            if (env.TRAVIS === 'true') {
+            if (env.TRAVIS === undefined) {
                 virtualMidiInput.closePort();
             }
         });
