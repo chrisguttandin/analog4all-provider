@@ -8,7 +8,7 @@
       "updateMode": "prefetch",
       "urls": [
         "/analog4all-provider/index.html",
-        "/analog4all-provider/scripts/main.423dfcc0b3ab4518cd51.js",
+        "/analog4all-provider/scripts/main.e8afadfc02378de4d342.js",
         "/analog4all-provider/scripts/polyfills.56b3606388c3129f8411.js",
         "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
@@ -24,8 +24,8 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-provider/index.html": "22e1366f4ac2de4c4352b1b4c926c63bf259a9c5",
-    "/analog4all-provider/scripts/main.423dfcc0b3ab4518cd51.js": "da464d216f296bff55955f81f9920a6dffc820ce",
+    "/analog4all-provider/index.html": "71b71e814b0cf4f0bd8eb4b28e9ed8fdffd9fa3e",
+    "/analog4all-provider/scripts/main.e8afadfc02378de4d342.js": "a92b3e68bdec7145aeee2a3e91e3d729fff4665e",
     "/analog4all-provider/scripts/polyfills.56b3606388c3129f8411.js": "f5c688c6cdf730d54759e30839fbd417dbe38e31",
     "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
