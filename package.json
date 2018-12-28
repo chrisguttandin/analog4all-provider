@@ -117,7 +117,7 @@
     "load-grunt-config": "^1.0.1",
     "midi": "^0.9.5",
     "ngrx-store-freeze": "^0.2.4",
-    "protractor": "~5.4.1",
+    "protractor": "~5.4.2",
     "stylelint": "^9.9.0",
     "stylelint-config-holy-grail": "^3.0.1",
     "ts-node": "~7.0.1",
