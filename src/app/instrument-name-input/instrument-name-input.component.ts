@@ -7,11 +7,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class InstrumentNameInputComponent {
 
-    @Input() public defaultName!: string;
+    @Input() public readonly defaultName!: string;
 
-    @Input() public name!: string;
+    @Input() public readonly name!: string;
 
-    @Output() public nameChange: EventEmitter<Event>;
+    @Output() public readonly nameChange: EventEmitter<Event>;
 
     constructor () {
         this.nameChange = new EventEmitter();

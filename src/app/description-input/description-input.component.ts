@@ -7,9 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class DescriptionInputComponent {
 
-    @Input() public description!: string;
+    @Input() public readonly description!: string;
 
-    @Output() public descriptionChange: EventEmitter<Event>;
+    @Output() public readonly descriptionChange: EventEmitter<Event>;
 
     constructor () {
         this.descriptionChange = new EventEmitter();

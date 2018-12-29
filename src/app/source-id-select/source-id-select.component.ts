@@ -11,9 +11,9 @@ export class SourceIdSelectComponent implements OnInit {
 
     public audioInputs$!: Observable<MediaDeviceInfo[]>;
 
-    @Input() public sourceId!: string;
+    @Input() public readonly sourceId!: string;
 
-    @Output() public sourceIdChange: EventEmitter<Event>;
+    @Output() public readonly sourceIdChange: EventEmitter<Event>;
 
     constructor (
         private _audioInputMediaDevicesService: AudioInputMediaDevicesService
