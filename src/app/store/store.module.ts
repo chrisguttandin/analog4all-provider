@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule as NgRxStoreModule } from '@ngrx/store';
@@ -11,30 +12,22 @@ import { IAppState, ICacheableMidiConnection } from './interfaces';
 import { InstrumentService } from './services';
 import { appReducer } from './store';
 
-const effects = [
-    InstrumentsEffects,
-    LocalStorageEffects,
-    MidiConnectionsEffects,
-    MidiOutputsEffects
-];
-
-const imports = (environment.production) ?
-    [
-        NgRxStoreModule.forRoot(appReducer),
-        EffectsModule.forRoot(effects)
-    ] :
-    [
-        NgRxStoreModule.forRoot(appReducer, {
-            metaReducers: [ storeFreeze ]
-        }),
-        EffectsModule.forRoot(effects),
-        StoreDevtoolsModule.instrument({
-            maxAge: 5
-        })
-    ];
-
 @NgModule({
-    imports,
+    imports: [
+        CommonModule,
+        (environment.production)
+            ? NgRxStoreModule.forRoot(appReducer)
+            : NgRxStoreModule.forRoot(appReducer, { metaReducers: [ storeFreeze ] }),
+        EffectsModule.forRoot([
+            InstrumentsEffects,
+            LocalStorageEffects,
+            MidiConnectionsEffects,
+            MidiOutputsEffects
+        ]),
+        (environment.production)
+            ? [ ]
+            : StoreDevtoolsModule.instrument({ maxAge: 5 })
+    ],
     providers: [
         InstrumentService
     ]
