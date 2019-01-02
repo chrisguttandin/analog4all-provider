@@ -234,7 +234,7 @@ fast-unique-numbers
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -370,7 +370,7 @@ compilerr
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -401,7 +401,7 @@ rxjs-broker
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -426,7 +426,7 @@ broker-factory
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -451,7 +451,7 @@ media-encoder-host-broker
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -476,7 +476,7 @@ media-encoder-host
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -501,7 +501,7 @@ extendable-media-recorder
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -526,7 +526,7 @@ worker-factory
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -551,7 +551,7 @@ recorder-audio-worklet
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -576,7 +576,7 @@ async-array-buffer-broker
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -601,7 +601,7 @@ async-array-buffer
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -626,7 +626,7 @@ standardized-audio-context
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -651,7 +651,7 @@ extendable-media-recorder-wav-encoder-broker
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -676,7 +676,7 @@ extendable-media-recorder-wav-encoder
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -701,7 +701,7 @@ midi-json-parser-broker
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -726,7 +726,7 @@ midi-json-parser
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -751,7 +751,7 @@ worker-timers-broker
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -776,7 +776,7 @@ worker-timers
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -801,7 +801,7 @@ midi-file-slicer
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -826,7 +826,7 @@ midi-player
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -851,7 +851,7 @@ json-midi-message-encoder
 MIT
 MIT License
 
-Copyright (c) 2018 Christoph Guttandin
+Copyright (c) 2019 Christoph Guttandin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
