@@ -30,7 +30,7 @@ export class InstrumentsEffects {
         private _instrumentService: InstrumentService
     ) { }
 
-    @Effect() public get deleteInstrument$ (): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
+    @Effect() get deleteInstrument$ (): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
         return this._actions$
             .pipe(
                 ofType<IDeleteInstrumentAction>(DELETE_INSTRUMENT),
@@ -38,7 +38,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get patchInstrument$ (): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
+    @Effect() get patchInstrument$ (): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
         return this._actions$
             .pipe(
                 ofType<IPatchInstrumentAction>(PATCH_INSTRUMENT),
@@ -46,7 +46,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get removeInstrument$ (): Observable<IRemoveInstrumentAction> {
+    @Effect() get removeInstrument$ (): Observable<IRemoveInstrumentAction> {
         return this._actions$
             .pipe(
                 ofType<IDeleteInstrumentSuccessAction>(DELETE_INSTRUMENT_SUCCESS),
@@ -54,7 +54,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() public get updateInstrument$ (): Observable<IUpdateInstrumentAction> {
+    @Effect() get updateInstrument$ (): Observable<IUpdateInstrumentAction> {
         return this._actions$
             .pipe(
                 ofType<IPatchInstrumentSuccessAction>(PATCH_INSTRUMENT_SUCCESS),

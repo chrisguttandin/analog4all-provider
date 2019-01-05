@@ -17,7 +17,7 @@ export class MidiOutputsEffects {
         private _store: Store<IAppState>
     ) { }
 
-    @Effect() public get mergeMidiConnections$ (): Observable<IMergeMidiConnectionsAction> {
+    @Effect() get mergeMidiConnections$ (): Observable<IMergeMidiConnectionsAction> {
         return this._actions$
             .pipe(
                 ofType(WATCH_MIDI_OUTPUTS),

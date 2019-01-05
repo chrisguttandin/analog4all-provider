@@ -21,7 +21,7 @@ export class LocalStorageEffects {
         this._window = windowService.nativeWindow;
     }
 
-    @Effect({ dispatch: false }) public get setMidiConnections$ (): Observable<void> {
+    @Effect({ dispatch: false }) get setMidiConnections$ (): Observable<void> {
         return this._actions$
             .pipe(
                 ofType(MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION),

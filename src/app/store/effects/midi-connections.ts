@@ -16,7 +16,7 @@ export class MidiConnectionsEffects {
         private _store: Store<IAppState>
     ) { }
 
-    @Effect() public get deleteInstruments$ (): Observable<IDeleteInstrumentAction> {
+    @Effect() get deleteInstruments$ (): Observable<IDeleteInstrumentAction> {
         return this._actions$
             .pipe(
                 ofType<IUpdateMidiConnectionAction>(UPDATE_MIDI_CONNECTION),
@@ -45,7 +45,7 @@ export class MidiConnectionsEffects {
             );
     }
 
-    @Effect() public get patchInstrument$ (): Observable<IPatchInstrumentAction> {
+    @Effect() get patchInstrument$ (): Observable<IPatchInstrumentAction> {
         return this._actions$
             .pipe(
                 ofType<IUpdateMidiConnectionAction>(UPDATE_MIDI_CONNECTION),
