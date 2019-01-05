@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MediaRecorder, register } from 'extendable-media-recorder';
+import { IMediaRecorder, MediaRecorder, register } from 'extendable-media-recorder';
 import { connect } from 'extendable-media-recorder-wav-encoder';
 import { UserMediaService } from './user-media.service';
 
@@ -19,13 +19,13 @@ export class RecordingService {
 
     private _gainNode: null | GainNode;
 
-    // @todo Use IMediaRecorder once it is exported by extendable-media-recorder.
-    private _mediaRecorder: any;
+    private _mediaRecorder: null | IMediaRecorder;
 
     constructor (private _userMediaService: UserMediaService) {
         this._analyserNode = null;
         this._audioContext = null;
         this._gainNode = null;
+        this._mediaRecorder = null;
     }
 
     public start (sourceId: string): Promise<void> {
@@ -47,6 +47,10 @@ export class RecordingService {
         return this._waitForSilence()
             .then(() => {
                 return new Promise<ArrayBuffer>((resolve) => {
+                    if (this._mediaRecorder === null) {
+                        throw new Error('Expected a MediaRecorder.');
+                    }
+
                     this._mediaRecorder.addEventListener('dataavailable', ({ data }: any) => resolve(data));
                     this._mediaRecorder.stop();
                 });
