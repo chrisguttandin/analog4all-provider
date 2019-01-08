@@ -104,8 +104,8 @@ export class MidiConnectionComponent implements OnChanges {
                 return midiPlayer.play();
             })
             .then(() => this._recordingService.stop())
-            .then((arrayBuffer) => new Promise<{ id: string }>((resolve) => this._samplesService
-                .create({ file: new Blob([ arrayBuffer ]) })
+            .then((blob) => new Promise<{ id: string }>((resolve) => this._samplesService
+                .create({ file: blob })
                 .subscribe((sample) => resolve(sample)))) // tslint:disable-line:rxjs-prefer-async-pipe
             .then((sample) => new Promise((resolve) => {
                 const instrumentId = this.midiConnection.instrumentId;
@@ -141,7 +141,7 @@ export class MidiConnectionComponent implements OnChanges {
                 return midiPlayer.play();
             })
             .then(() => this._recordingService.stop())
-            .then((arrayBuffer) => this._downloadingService.download('sample.wav', arrayBuffer));
+            .then((blob) => this._downloadingService.download('sample.wav', blob));
     }
 
     public updateDescription (description: string): void {

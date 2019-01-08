@@ -43,10 +43,10 @@ export class RecordingService {
             });
     }
 
-    public stop (): Promise<ArrayBuffer> {
+    public stop (): Promise<Blob> {
         return this._waitForSilence()
             .then(() => {
-                return new Promise<ArrayBuffer>((resolve) => {
+                return new Promise<Blob>((resolve) => {
                     if (this._mediaRecorder === null) {
                         throw new Error('Expected a MediaRecorder.');
                     }
