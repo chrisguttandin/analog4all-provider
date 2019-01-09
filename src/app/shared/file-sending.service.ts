@@ -29,7 +29,7 @@ export class FileSendingService {
                                 const slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
 
                                 promise.then(() => {
-                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice))));
+                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
                                 });
 
                                 byteIndex += CHUNK_SIZE;
@@ -39,7 +39,7 @@ export class FileSendingService {
                                 const slice = buffer.slice(byteIndex);
 
                                 promise.then(() => {
-                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, new Uint8Array(slice))));
+                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
                                 });
                             }
 
