@@ -76,7 +76,7 @@
     "@hint/hint-validate-set-cookie-header": "^2.1.1",
     "@hint/hint-x-content-type-options": "^2.1.1",
     "@hint/parser-javascript": "^2.0.3",
-    "@hint/parser-manifest": "^2.0.1",
+    "@hint/parser-manifest": "^2.0.2",
     "@ngrx/store-devtools": "^7.0.0",
     "@types/deep-freeze-strict": "^1.1.0",
     "@types/jasmine": "~2.8.14",
