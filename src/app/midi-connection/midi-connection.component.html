@@ -20,7 +20,7 @@
     [gearogsSlug]="midiConnection.gearogsSlug"
     (gearogsSlugChange)="updateGearogsSlug($event)"
 ></anp-gearogs-slug-input>
-<button (click)="register()" *ngIf="!isRegistered">register device</button>
-<button (click)="deregister()" *ngIf="isRegistered">deregister device</button>
-<button (click)="test()">test device by recording a scale</button>
-<button (click)="sample()" *ngIf="isRegistered">record a middle c (#60/C3)</button>
+<button *ngIf="!isRegistered" (click)="register()" type="button">register device</button>
+<button *ngIf="isRegistered" (click)="deregister()" type="button">deregister device</button>
+<button (click)="test()" type="button">test device by recording a scale</button>
+<button *ngIf="isRegistered" (click)="sample()" type="button">record a middle c (#60/C3)</button>
