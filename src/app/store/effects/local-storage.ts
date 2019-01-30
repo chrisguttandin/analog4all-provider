@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { WindowService } from '../../shared/window.service';
 import { MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION } from '../actions';
 import { IAppState, ICacheableMidiConnection } from '../interfaces';
-import { selectMidiConnections } from '../selectors';
+import { createMidiConnectionsSelector } from '../selectors';
 
 @Injectable()
 export class LocalStorageEffects {
@@ -26,10 +26,7 @@ export class LocalStorageEffects {
             .pipe(
                 ofType(MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION),
                 withLatestFrom(
-                    this._store
-                        .pipe(
-                            select(selectMidiConnections)
-                        ),
+                    createMidiConnectionsSelector(this._store),
                     (_, midiConnections) => midiConnections),
                 map((midiConnections) => {
                     if (this._window !== null) {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IMidiConnection } from '../interfaces';
 import { IAppState } from '../store/interfaces';
-import { selectMidiConnections } from '../store/selectors';
+import { createMidiConnectionsSelector } from '../store/selectors';
 
 @Component({
     selector: 'anp-local-registry',
@@ -26,9 +26,8 @@ export class LocalRegistryComponent implements OnInit {
     }
 
     public ngOnInit (): void {
-        this.connectedMidiConnections$ = this._store
+        this.connectedMidiConnections$ = createMidiConnectionsSelector(this._store)
             .pipe(
-                select(selectMidiConnections),
                 map((midiConnections) => midiConnections.filter(({ isConnected }) => isConnected))
             );
 

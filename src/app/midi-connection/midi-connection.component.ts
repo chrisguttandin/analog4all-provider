@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { create as createMidiPlayer } from 'midi-player';
 import { Observable } from 'rxjs';
@@ -116,9 +116,8 @@ export class MidiConnectionComponent implements OnChanges {
                     return;
                 }
 
-                return this._store
+                return createInstrumentByIdSelector(this._store, instrumentId)
                     .pipe(
-                        select(createInstrumentByIdSelector(instrumentId)),
                         filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => instrument !== null),
                         first(),
                         map(() => {
