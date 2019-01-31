@@ -422,6 +422,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+@ngrx/store
+MIT
+
 broker-factory
 MIT
 MIT License
@@ -826,9 +829,6 @@ SOFTWARE.
 MIT
 
 @angular/forms
-MIT
-
-@ngrx/store
 MIT
 
 @angular/service-worker
