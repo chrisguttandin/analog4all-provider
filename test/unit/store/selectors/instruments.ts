@@ -1,35 +1,27 @@
-import { IInstrument } from '../../../../src/app/interfaces';
-import { IAppState } from '../../../../src/app/store/interfaces';
-import { createInstrumentByIdSelector, selectInstruments } from '../../../../src/app/store/selectors';
+import { readFirst } from '@nrwl/nx/testing';
+import { BehaviorSubject } from 'rxjs';
+import { createInstrumentByIdSelector } from '../../../../src/app/store/selectors';
+import { TAppState, TInstrument } from '../../../../src/app/store/types';
 
 describe('instruments selectors', () => {
 
     describe('without any instrument', () => {
 
-        let instruments: IInstrument[];
+        let instruments: TInstrument[];
+        let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {
             instruments = [ ];
+            store = new BehaviorSubject(<TAppState> { instruments });
         });
 
         describe('createInstrumentByIdSelector()', () => {
 
-            it('should select the value of null', () => {
+            it('should select the value of null', async () => {
                 const id = 'a fake id';
-                const selector = createInstrumentByIdSelector(id);
-                const slice = selector(<IAppState> { instruments });
+                const slice = await readFirst(createInstrumentByIdSelector(store, id));
 
                 expect(slice).toEqual(null);
-            });
-
-        });
-
-        describe('selectInstruments()', () => {
-
-            it('should select the value of instruments', () => {
-                const slice = selectInstruments(<IAppState> { instruments });
-
-                expect(slice).toEqual(instruments);
             });
 
         });
@@ -38,7 +30,8 @@ describe('instruments selectors', () => {
 
     describe('with an instrument', () => {
 
-        let instruments: IInstrument[];
+        let instruments: TInstrument[];
+        let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {
             instruments = [ {
@@ -51,25 +44,15 @@ describe('instruments selectors', () => {
                     url: 'a fake socket url'
                 }
             } ];
+            store = new BehaviorSubject(<TAppState> { instruments });
         });
 
         describe('createInstrumentByIdSelector()', () => {
 
-            it('should select the instrument with the given id', () => {
-                const selector = createInstrumentByIdSelector(instruments[0].id);
-                const slice = selector(<IAppState> { instruments });
+            it('should select the instrument with the given id', async () => {
+                const slice = await readFirst(createInstrumentByIdSelector(store, instruments[0].id));
 
                 expect(slice).toEqual(instruments[0]);
-            });
-
-        });
-
-        describe('selectInstruments()', () => {
-
-            it('should select the value of instruments', () => {
-                const slice = selectInstruments(<IAppState> { instruments });
-
-                expect(slice).toEqual(instruments);
             });
 
         });

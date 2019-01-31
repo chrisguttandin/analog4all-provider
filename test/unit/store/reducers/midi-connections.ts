@@ -1,5 +1,5 @@
-import { IMidiConnection } from '../../../../src/app/interfaces';
 import { midiConnectionsReducer } from '../../../../src/app/store/reducers';
+import { TMidiConnection } from '../../../../src/app/store/types';
 
 // @todo 'deep-freeze-strict' can't be imported as module.
 const deepFreeze = require('deep-freeze-strict'); // tslint:disable-line:no-var-requires no-require-imports
@@ -42,7 +42,7 @@ describe('midiConnections reducer', () => {
 
     describe('with an array of midiConnections as state', () => {
 
-        let previousState: IMidiConnection[];
+        let previousState: TMidiConnection[];
 
         beforeEach(() => {
             previousState = deepFreeze([ {

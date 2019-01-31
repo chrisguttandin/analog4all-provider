@@ -1,5 +1,5 @@
-import { IInstrument } from '../../../../src/app/interfaces';
 import { instrumentsReducer } from '../../../../src/app/store/reducers';
+import { TInstrument } from '../../../../src/app/store/types';
 
 // @todo 'deep-freeze-strict' can't be imported as module.
 const deepFreeze = require('deep-freeze-strict'); // tslint:disable-line:no-var-requires no-require-imports
@@ -188,7 +188,7 @@ describe('instruments reducer', () => {
 
     describe('with an array of instruments as state', () => {
 
-        let previousState: IInstrument[];
+        let previousState: TInstrument[];
 
         beforeEach(() => {
             previousState = deepFreeze([ {

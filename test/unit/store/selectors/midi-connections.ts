@@ -1,33 +1,35 @@
-import { IMidiConnection } from '../../../../src/app/interfaces';
-import { IAppState } from '../../../../src/app/store/interfaces';
-import { createMidiConnectionByMidiOutputIdSelector, selectMidiConnections } from '../../../../src/app/store/selectors';
+import { readFirst } from '@nrwl/nx/testing';
+import { BehaviorSubject } from 'rxjs';
+import { createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../../../../src/app/store/selectors';
+import { TAppState, TMidiConnection } from '../../../../src/app/store/types';
 
 describe('midiConnections selectors', () => {
 
     describe('without any midiConnection', () => {
 
-        let midiConnections: IMidiConnection[];
+        let midiConnections: TMidiConnection[];
+        let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {
             midiConnections = [ ];
+            store = new BehaviorSubject(<TAppState> { midiConnections });
         });
 
         describe('createMidiConnectionByMidiOutputIdSelector()', () => {
 
-            it('should select the value of null', () => {
+            it('should select the value of null', async () => {
                 const id = 'a fake id';
-                const selector = createMidiConnectionByMidiOutputIdSelector(id);
-                const slice = selector(<IAppState> { midiConnections });
+                const slice = await readFirst(createMidiConnectionByMidiOutputIdSelector(store, id));
 
                 expect(slice).toEqual(null);
             });
 
         });
 
-        describe('selectMidiConnections()', () => {
+        describe('createMidiConnectionsSelector()', () => {
 
-            it('should select the value of midiConnections', () => {
-                const slice = selectMidiConnections(<IAppState> { midiConnections });
+            it('should select the value of midiConnections', async () => {
+                const slice = await readFirst(createMidiConnectionsSelector(store));
 
                 expect(slice).toEqual(midiConnections);
             });
@@ -38,7 +40,8 @@ describe('midiConnections selectors', () => {
 
     describe('with an midiConnection', () => {
 
-        let midiConnections: IMidiConnection[];
+        let midiConnections: TMidiConnection[];
+        let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {
             midiConnections = [ {
@@ -48,23 +51,23 @@ describe('midiConnections selectors', () => {
                 name: 'a fake name',
                 sourceId: 'a fake sourceId'
             } ];
+            store = new BehaviorSubject(<TAppState> { midiConnections });
         });
 
         describe('createMidiConnectionByMidiOutputIdSelector()', () => {
 
-            it('should select the midiConnection with the given midiOutputId', () => {
-                const selector = createMidiConnectionByMidiOutputIdSelector(midiConnections[0].midiOutputId);
-                const slice = selector(<IAppState> { midiConnections });
+            it('should select the midiConnection with the given midiOutputId', async () => {
+                const slice = await readFirst(createMidiConnectionByMidiOutputIdSelector(store, midiConnections[0].midiOutputId));
 
                 expect(slice).toEqual(midiConnections[0]);
             });
 
         });
 
-        describe('selectMidiConnections()', () => {
+        describe('createMidiConnectionsSelector()', () => {
 
-            it('should select the value of midiConnections', () => {
-                const slice = selectMidiConnections(<IAppState> { midiConnections });
+            it('should select the value of midiConnections', async () => {
+                const slice = await readFirst(createMidiConnectionsSelector(store));
 
                 expect(slice).toEqual(midiConnections);
             });
