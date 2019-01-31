@@ -1,9 +1,8 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { IAppState } from './interfaces';
 import { instrumentsReducer, midiConnectionsReducer } from './reducers';
-import { TStoreAction } from './types';
+import { TAppState, TStoreAction } from './types';
 
-export const appReducer: ActionReducerMap<IAppState, TStoreAction> = {
+export const appReducer: ActionReducerMap<TAppState, TStoreAction> = {
     instruments: instrumentsReducer,
     midiConnections: midiConnectionsReducer
 };

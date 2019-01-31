@@ -3,17 +3,17 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, from } from 'rxjs';
 import { debounceTime, filter, first, map, mergeMap, pairwise, withLatestFrom } from 'rxjs/operators';
-import { IInstrument, IMidiConnection } from '../../interfaces';
 import { UPDATE_MIDI_CONNECTION, deleteInstrument, patchInstrument } from '../actions';
-import { IAppState, IDeleteInstrumentAction, IPatchInstrumentAction, IUpdateMidiConnectionAction } from '../interfaces';
+import { IDeleteInstrumentAction, IPatchInstrumentAction, IUpdateMidiConnectionAction } from '../interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../selectors';
+import { TAppState, TInstrument, TMidiConnection } from '../types';
 
 @Injectable()
 export class MidiConnectionsEffects {
 
     constructor (
         private _actions$: Actions,
-        private _store: Store<IAppState>
+        private _store: Store<TAppState>
     ) { }
 
     @Effect() get deleteInstruments$ (): Observable<IDeleteInstrumentAction> {
@@ -25,10 +25,9 @@ export class MidiConnectionsEffects {
                         pairwise()
                     )),
                 map(([ , [ previousMidiConnections, currentMidiConnections ] ]) => previousMidiConnections
-                    .filter<{ instrumentId: string } & IMidiConnection>(
-                        (midiConnection): midiConnection is { instrumentId: string } & IMidiConnection => {
-                            return (midiConnection.instrumentId !== undefined);
-                        })
+                    .filter((midiConnection): midiConnection is { instrumentId: string } & TMidiConnection => {
+                        return (midiConnection.instrumentId !== undefined);
+                    })
                     .filter(({ midiOutputId }) => currentMidiConnections
                         .some(({ instrumentId, midiOutputId: mdTptD }) => (midiOutputId === mdTptD && instrumentId === undefined)))
                     .map(({ instrumentId }) => instrumentId)),
@@ -36,7 +35,7 @@ export class MidiConnectionsEffects {
                 mergeMap((instrumentIds) => from(instrumentIds)),
                 mergeMap((instrumentId) => createInstrumentByIdSelector(this._store, instrumentId)
                     .pipe(
-                        filter((instrument): instrument is IInstrument => instrument !== null),
+                        filter((instrument): instrument is TInstrument => instrument !== null),
                         first()
                     )),
                 map((instrument) => deleteInstrument(instrument))
@@ -53,7 +52,7 @@ export class MidiConnectionsEffects {
                 mergeMap(
                     (midiConnection) => createMidiConnectionByMidiOutputIdSelector(this._store, midiConnection.midiOutputId)
                         .pipe(
-                            filter((mdCnnctn): mdCnnctn is IMidiConnection => (mdCnnctn !== null)),
+                            filter((mdCnnctn): mdCnnctn is TMidiConnection => (mdCnnctn !== null)),
                             first(),
                             map(({ instrumentId, midiOutputName }) => [ instrumentId, midiOutputName ]),
                             filter<(string | undefined)[], [ string, string ]>((args): args is [ string, string ] => args[0] !== undefined),

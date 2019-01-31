@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { WindowService } from '../../shared/window.service';
 import { MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION } from '../actions';
-import { IAppState, ICacheableMidiConnection } from '../interfaces';
+import { ICacheableMidiConnection } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
+import { TAppState } from '../types';
 
 @Injectable()
 export class LocalStorageEffects {
@@ -15,7 +16,7 @@ export class LocalStorageEffects {
 
     constructor (
         private _actions$: Actions,
-        private _store: Store<IAppState>,
+        private _store: Store<TAppState>,
         windowService: WindowService
     ) {
         this._window = windowService.nativeWindow;

@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IInstrument } from '../../../interfaces';
+import { TIdentifiable, TInstrument } from '../../types';
 
 export interface IPatchInstrumentAction extends Action {
 
-    payload: { id: IInstrument['id'] } & Partial<IInstrument>;
+    readonly payload: TIdentifiable<TInstrument, 'id'>;
 
     type: 'PATCH_INSTRUMENT';
 

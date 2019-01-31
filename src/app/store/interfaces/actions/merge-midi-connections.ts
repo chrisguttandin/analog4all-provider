@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IMidiConnection } from '../../../interfaces';
+import { TMidiConnection } from '../../types';
 
 export interface IMergeMidiConnectionsAction extends Action {
 
-    payload: IMidiConnection[];
+    readonly payload: TMidiConnection[];
 
     type: 'MERGE_MIDI_CONNECTIONS';
 

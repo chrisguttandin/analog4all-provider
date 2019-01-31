@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IInstrument } from '../../../interfaces';
+import { TInstrument } from '../../types';
 
 export interface IDeleteInstrumentSuccessAction extends Action {
 
-    payload: IInstrument;
+    readonly payload: TInstrument;
 
     type: 'DELETE_INSTRUMENT_SUCCESS';
 

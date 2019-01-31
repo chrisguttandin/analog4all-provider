@@ -1,15 +1,13 @@
-import { IMidiConnection } from '../../interfaces';
 import { MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION } from '../actions';
-import { TStoreAction } from '../types';
+import { TIdentifiable, TMidiConnection, TStoreAction } from '../types';
 
-const mergeMidiConnections = (oldMidiConnections: IMidiConnection[], newMidiConnections: IMidiConnection[]) => {
+const mergeMidiConnections = (oldMidiConnections: TMidiConnection[], newMidiConnections: TMidiConnection[]) => {
     const intersectingMidiConnections = oldMidiConnections
         .map((midiConnection) => [ midiConnection, newMidiConnections
             .find(({ midiOutputId }) => midiConnection.midiOutputId === midiOutputId) ])
-        .filter<[ IMidiConnection, IMidiConnection ]>(
-            (oldAndNewMidiConnection): oldAndNewMidiConnection is [ IMidiConnection, IMidiConnection ] => {
-                return (oldAndNewMidiConnection[1] !== undefined);
-            })
+        .filter((oldAndNewMidiConnection): oldAndNewMidiConnection is [ TMidiConnection, TMidiConnection ] => {
+            return (oldAndNewMidiConnection[1] !== undefined);
+        })
         .map(([ oldMidiConnection, newMidiConnection ]) => ({ ...oldMidiConnection, ...newMidiConnection }));
 
     const remainingMidiConnections = oldMidiConnections
@@ -21,10 +19,7 @@ const mergeMidiConnections = (oldMidiConnections: IMidiConnection[], newMidiConn
     return [ ...remainingMidiConnections, ...intersectingMidiConnections, ...additionalMidiConnections ];
 };
 
-const updateMidiConnection = (
-    midiConnections: IMidiConnection[],
-    midiConnection: { midiOutputId: IMidiConnection['midiOutputId'] } & Partial<IMidiConnection>
-) => {
+const updateMidiConnection = (midiConnections: TMidiConnection[], midiConnection: TIdentifiable<TMidiConnection, 'midiOutputId'>) => {
     const index = midiConnections.findIndex(({ midiOutputId }) => midiOutputId === midiConnection.midiOutputId);
 
     if (index === -1) {
@@ -39,7 +34,7 @@ const updateMidiConnection = (
 };
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function midiConnectionsReducer (state: IMidiConnection[] = [], action: TStoreAction): IMidiConnection[] {
+export function midiConnectionsReducer (state: TMidiConnection[] = [], action: TStoreAction): TMidiConnection[] {
     switch (action.type) {
         case MERGE_MIDI_CONNECTIONS:
             return mergeMidiConnections(state, action.payload);

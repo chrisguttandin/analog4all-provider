@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { IInstrument } from '../../interfaces';
 import { ENDPOINT } from '../../shared';
 import { deleteInstrumentFail, deleteInstrumentSuccess, patchInstrumentFail, patchInstrumentSuccess } from '../actions';
 import {
@@ -11,6 +10,7 @@ import {
     IPatchInstrumentFailAction,
     IPatchInstrumentSuccessAction
 } from '../interfaces';
+import { TIdentifiable, TInstrument } from '../types';
 
 @Injectable()
 export class InstrumentService {
@@ -20,7 +20,7 @@ export class InstrumentService {
         private _httpClient: HttpClient
     ) { }
 
-    public delete (instrument: IInstrument): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
+    public delete (instrument: TInstrument): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
         return this._httpClient
             .delete<void>(`https${ this._endpoint }instruments/${ instrument.id }`)
             .pipe(
@@ -30,7 +30,7 @@ export class InstrumentService {
     }
 
     public patch (
-        { id, ...delta }: { id: IInstrument['id'] } & Partial<IInstrument>
+        { id, ...delta }: TIdentifiable<TInstrument, 'id'>
     ): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
         return this._httpClient
             .patch<void>(`https${ this._endpoint }instruments/${ id }`, delta)

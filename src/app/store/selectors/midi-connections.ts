@@ -1,18 +1,17 @@
 import { createSelector, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IMidiConnection } from '../../interfaces';
-import { IAppState } from '../interfaces';
+import { TAppState, TMidiConnection } from '../types';
 
 const findMidiConnectionByMidiOutputIdSelector = (
-    midiConnections: IAppState['midiConnections'],
-    midiOutputId: IMidiConnection['midiOutputId']
+    midiConnections: TAppState['midiConnections'],
+    midiOutputId: TMidiConnection['midiOutputId']
 ) => {
     return midiConnections.find((midiConnection) => (midiConnection.midiOutputId === midiOutputId));
 };
 
 const midiConnectionByMidiOutputIdSelector = (
-    midiConnections: IAppState['midiConnections'],
-    { midiOutputId }: { midiOutputId: IMidiConnection['midiOutputId'] }
+    midiConnections: TAppState['midiConnections'],
+    { midiOutputId }: { midiOutputId: TMidiConnection['midiOutputId'] }
 ) => {
     const midiConnection = findMidiConnectionByMidiOutputIdSelector(midiConnections, midiOutputId);
 
@@ -23,11 +22,11 @@ const midiConnectionByMidiOutputIdSelector = (
     return midiConnection;
 };
 
-const midiConnectionsSelector = (state: IAppState) => state.midiConnections;
+const midiConnectionsSelector = (state: TAppState) => state.midiConnections;
 
 export const createMidiConnectionByMidiOutputIdSelector = (
-    store: Observable<IAppState>,
-    midiOutputId: IMidiConnection['midiOutputId']
+    store: Observable<TAppState>,
+    midiOutputId: TMidiConnection['midiOutputId']
 ) => {
     return store
         .pipe(
@@ -35,7 +34,7 @@ export const createMidiConnectionByMidiOutputIdSelector = (
         );
 };
 
-export const createMidiConnectionsSelector = (store: Observable<IAppState>) => store
+export const createMidiConnectionsSelector = (store: Observable<TAppState>) => store
     .pipe(
         select(midiConnectionsSelector)
     );

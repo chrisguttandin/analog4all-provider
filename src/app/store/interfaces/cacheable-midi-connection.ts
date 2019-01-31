@@ -1,19 +1,19 @@
-import { IMidiConnection } from '../../interfaces';
+import { TMidiConnection } from '../types';
 
 export interface ICacheableMidiConnection {
 
-    description?: IMidiConnection['description'];
+    description?: TMidiConnection['description'];
 
-    gearogsSlug?: IMidiConnection['gearogsSlug'];
+    gearogsSlug?: TMidiConnection['gearogsSlug'];
 
-    midiOutputId: IMidiConnection['midiOutputId'];
+    midiOutputId: TMidiConnection['midiOutputId'];
 
-    midiOutputName: IMidiConnection['midiOutputName'];
+    midiOutputName: TMidiConnection['midiOutputName'];
 
-    name: IMidiConnection['name'];
+    name: TMidiConnection['name'];
 
-    soundCloudUsername?: IMidiConnection['soundCloudUsername'];
+    soundCloudUsername?: TMidiConnection['soundCloudUsername'];
 
-    sourceId: IMidiConnection['sourceId'];
+    sourceId: TMidiConnection['sourceId'];
 
 }

@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IInstrument } from '../../../interfaces';
+import { TInstrument } from '../../types';
 
 export interface IPatchInstrumentFailAction extends Action {
 
-    payload: IInstrument['id'];
+    readonly payload: TInstrument['id'];
 
     type: 'PATCH_INSTRUMENT_FAIL';
 

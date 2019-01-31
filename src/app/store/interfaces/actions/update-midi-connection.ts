@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
-import { IMidiConnection } from '../../../interfaces';
+import { TIdentifiable, TMidiConnection } from '../../types';
 
 export interface IUpdateMidiConnectionAction extends Action {
 
-    payload: { midiOutputId: IMidiConnection['midiOutputId'] } & Partial<IMidiConnection>;
+    readonly payload: TIdentifiable<TMidiConnection, 'midiOutputId'>;
 
     type: 'UPDATE_MIDI_CONNECTION';
 
