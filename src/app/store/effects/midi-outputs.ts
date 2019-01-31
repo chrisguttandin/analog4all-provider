@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, mergeMap, withLatestFrom } from 'rxjs/operators';
-import { MidiOutputsService } from '../../shared';
+import { MidiOutputsService } from '../../shared/midi-outputs.service';
 import { WATCH_MIDI_OUTPUTS, mergeMidiConnections } from '../actions';
 import { IMergeMidiConnectionsAction } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
