@@ -5,7 +5,6 @@ import { create as createMidiPlayer } from 'midi-player';
 import { Observable } from 'rxjs';
 import { IDataChannel, wrap } from 'rxjs-broker';
 import { concatMap, filter, first, map } from 'rxjs/operators';
-import { IInstrument, IMidiConnection } from '../interfaces';
 import {
     DownloadingService,
     MiddleCMidiJsonService,
@@ -16,9 +15,7 @@ import {
     SamplesService,
     ScaleMidiJsonService
 } from '../shared';
-import { patchInstrument, updateMidiConnection } from '../store/actions';
-import { IAppState } from '../store/interfaces';
-import { createInstrumentByIdSelector } from '../store/selectors';
+import { TAppState, TInstrument, TMidiConnection, createInstrumentByIdSelector, patchInstrument, updateMidiConnection } from '../store';
 
 @Component({
     selector: 'anp-midi-connection',
@@ -33,7 +30,7 @@ export class MidiConnectionComponent implements OnChanges {
 
     public isRegistered: boolean;
 
-    @Input() public readonly midiConnection!: IMidiConnection;
+    @Input() public readonly midiConnection!: TMidiConnection;
 
     public virtualInstrumentName: string;
 
@@ -50,7 +47,7 @@ export class MidiConnectionComponent implements OnChanges {
         private _recordingService: RecordingService,
         private _samplesService: SamplesService,
         scaleMidiJsonService: ScaleMidiJsonService,
-        private _store: Store<IAppState>
+        private _store: Store<TAppState>
     ) {
         this.isRegistered = false;
         this._middleCMidiJson = middleCMidiJsonService.midiJson;
@@ -118,7 +115,7 @@ export class MidiConnectionComponent implements OnChanges {
 
                 return createInstrumentByIdSelector(this._store, instrumentId)
                     .pipe(
-                        filter<null | IInstrument, IInstrument>((instrument): instrument is IInstrument => instrument !== null),
+                        filter((instrument): instrument is TInstrument => instrument !== null),
                         first(),
                         map(() => {
                             this._store.dispatch(patchInstrument({ id: instrumentId, sample: { id: sample.id } }));

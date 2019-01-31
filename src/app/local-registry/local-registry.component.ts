@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IMidiConnection } from '../interfaces';
-import { IAppState } from '../store/interfaces';
-import { createMidiConnectionsSelector } from '../store/selectors';
+import { TAppState, TMidiConnection, createMidiConnectionsSelector } from '../store';
 
 @Component({
     selector: 'anp-local-registry',
@@ -13,15 +11,15 @@ import { createMidiConnectionsSelector } from '../store/selectors';
 })
 export class LocalRegistryComponent implements OnInit {
 
-    public connectedMidiConnections$!: Observable<IMidiConnection[]>;
+    public connectedMidiConnections$!: Observable<TMidiConnection[]>;
 
     public hasConnectedMidiConnections$!: Observable<boolean>;
 
     constructor (
-        private _store: Store<IAppState>
+        private _store: Store<TAppState>
     ) { }
 
-    public identifyMidiConnection (_: number, { midiOutputId }: IMidiConnection): string {
+    public identifyMidiConnection (_: number, { midiOutputId }: TMidiConnection): string {
         return midiOutputId;
     }
 

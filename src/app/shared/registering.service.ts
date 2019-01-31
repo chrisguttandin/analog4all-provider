@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IDataChannel } from 'rxjs-broker';
-import { IInstrument, IMidiConnection } from '../interfaces';
+import { TInstrument, TMidiConnection } from '../store';
 import { InstrumentsService } from './instruments.service';
 import { UserMediaService } from './user-media.service';
 
@@ -14,14 +14,14 @@ export class RegisteringService {
     ) { }
 
     public register (
-        midiConnection: IMidiConnection,
+        midiConnection: TMidiConnection,
         name: string
-    ): Promise<{ connection: Observable<IDataChannel>; instrument: IInstrument }> {
+    ): Promise<{ connection: Observable<IDataChannel>; instrument: TInstrument }> {
         // Get the mediaStream first to make sure the user granted access.
         return this._userMediaService
             .getAudioOnlyMediaStream(midiConnection.sourceId)
             .then(() => {
-                return new Promise<IInstrument>((resolve) => {
+                return new Promise<TInstrument>((resolve) => {
                     const data: { description?: string; gearogsSlug?: string; name: string; soundCloudUsername?: string } = { name };
 
                     if (midiConnection.description !== undefined) {

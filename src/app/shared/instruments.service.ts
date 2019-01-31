@@ -4,9 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { IDataChannel, connect, isSupported } from 'rxjs-broker';
 import { catchError, tap } from 'rxjs/operators';
-import { IInstrument } from '../interfaces';
-import { addInstrument } from '../store/actions';
-import { IAppState } from '../store/interfaces';
+import { TAppState, TInstrument, addInstrument } from '../store';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
 import { ResponseError } from './response-error';
@@ -18,24 +16,24 @@ export class InstrumentsService {
         @Inject(ENDPOINT) private _endpoint: string,
         private _httpClient: HttpClient,
         private _peerConnectingService: PeerConnectingService,
-        private _store: Store<IAppState>
+        private _store: Store<TAppState>
     ) { }
 
     get isSupported (): boolean {
         return isSupported;
     }
 
-    public connect ({ socket: { url } }: IInstrument): Observable<IDataChannel> {
+    public connect ({ socket: { url } }: TInstrument): Observable<IDataChannel> {
         const webSocketSubject = connect(url);
 
         return this._peerConnectingService.connect(webSocketSubject);
     }
 
-    public create (instrument: object): Observable<IInstrument> {
+    public create (instrument: object): Observable<TInstrument> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
         return this._httpClient
-            .post<IInstrument>(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
+            .post<TInstrument>(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
             .pipe(
                 tap((nstrmnt) => this._store.dispatch(addInstrument(nstrmnt))),
                 catchError((response) => throwError(new ResponseError(response)))
