@@ -11,9 +11,9 @@ export class WaitingService {
 
     public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<void> {
         return new Promise((resolve, reject) => {
-            const waitingChannel = dataChannelSubject.mask({ type: 'waiting' });
+            const waitingChannelSubject = dataChannelSubject.mask({ type: 'waiting' });
 
-            const waitingChannelSubscription = waitingChannel
+            const waitingChannelSubscription = waitingChannelSubject
                 .pipe(
                     first<any>()
                 )
@@ -32,7 +32,7 @@ export class WaitingService {
                     }
                 });
 
-            waitingChannel.next(undefined);
+            waitingChannelSubject.next(undefined);
         });
     }
 
