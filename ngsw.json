@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1554213763310,
+  "timestamp": 1554496695771,
   "index": "/analog4all-provider/index.html",
   "assetGroups": [
     {
@@ -19,13 +19,16 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
-      "urls": [],
+      "urls": [
+        "/analog4all-provider/undefined"
+      ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-provider/index.html": "cdfa098d98aa0115083aaa6eb7c7321538b33d5b",
+    "/analog4all-provider/undefined": "b6751d2cc1c320cf9e5c0f3641010e5c451c3910",
+    "/analog4all-provider/index.html": "224689e48ee4407dce08d41a34d3bffe975740d5",
     "/analog4all-provider/scripts/main.6c4eb5d4e3bf97fc687e.js": "686d40a3874382123c5db57e03539b1a4047ddb9",
     "/analog4all-provider/scripts/polyfills.a340e5b77583aee02db5.js": "6946e10a03311677a01490b8e91741668e64e17e",
     "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
