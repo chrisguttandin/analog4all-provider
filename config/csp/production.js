@@ -10,7 +10,7 @@ module.exports = {
         ],
         'default-src': "'none'",
         'font-src': 'https://fonts.gstatic.com',
-        'image-src': "'self'",
+        'img-src': "'self'",
         'script-src': [ "'self'", "'unsafe-eval'" ],
         'style-src': [ 'https://fonts.googleapis.com', "'self'", "'unsafe-inline'" ],
         'worker-src': [ 'blob:', "'self'" ]
