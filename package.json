@@ -122,7 +122,7 @@
     "midi": "^0.9.5",
     "ngrx-store-freeze": "^0.2.4",
     "protractor": "~5.4.2",
-    "stylelint": "^9.10.1",
+    "stylelint": "^10.0.0",
     "stylelint-config-holy-grail": "^4.0.3",
     "ts-node": "~7.0.1",
     "tsconfig-holy-grail": "^9.1.15",
