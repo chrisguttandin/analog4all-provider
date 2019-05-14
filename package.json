@@ -80,7 +80,7 @@
     "@hint/parser-javascript": "^2.0.3",
     "@hint/parser-manifest": "^2.0.2",
     "@ngrx/store-devtools": "^7.4.0",
-    "@nrwl/nx": "^7.8.3",
+    "@nrwl/nx": "^7.8.5",
     "@types/deep-freeze-strict": "^1.1.0",
     "@types/jasmine": "~2.8.16",
     "@types/jasminewd2": "~2.0.6",
