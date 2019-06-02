@@ -19,6 +19,7 @@
             true,
             "dev"
         ],
+        "no-lifecycle-call": false,
         "rxjs-suffix-subjects": false
     }
 }
