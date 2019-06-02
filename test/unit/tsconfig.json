@@ -10,6 +10,7 @@
       "node",
       "webmidi",
       "../../src/media-recorder",
+      "../../src/omit",
       "../../src/permissions"
     ]
   },
