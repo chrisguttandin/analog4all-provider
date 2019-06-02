@@ -9,7 +9,6 @@
       "jasmine",
       "node",
       "webmidi",
-      "../../src/media-devices",
       "../../src/media-recorder",
       "../../src/permissions"
     ]
