@@ -9,9 +9,9 @@ import { first } from 'rxjs/operators';
 @Injectable()
 export class WaitingService {
 
-    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<void> {
+    public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<void> { // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
-            const waitingChannelSubject = dataChannelSubject.mask({ type: 'waiting' });
+            const waitingChannelSubject = dataChannelSubject.mask({ type: 'waiting' }); // tslint:disable-line:no-null-undefined-union
 
             const waitingChannelSubscription = waitingChannelSubject
                 .pipe(

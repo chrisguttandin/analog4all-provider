@@ -38,13 +38,13 @@ export class PeerConnectingService {
         return false;
     }
 
-    public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> {
+    public connect (webSocketSubject: IMaskableSubject<TStringifyableJsonValue>): Observable<IDataChannel> { // tslint:disable-line:max-line-length no-null-undefined-union
         return new Observable((observer: Observer<IDataChannel>) => {
             webSocketSubject
                 .mask<any>({ type: 'request' })
                 .pipe(
                     mergeMap(({ mask }) => new Observable<IDataChannel>((bsrvr) => {
-                        const maskedWebSocketSubject = webSocketSubject.mask(mask);
+                        const maskedWebSocketSubject = webSocketSubject.mask(mask); // tslint:disable-line:no-null-undefined-union
 
                         const peerConnection = new RTCPeerConnection({
                             iceServers: ICE_SERVERS

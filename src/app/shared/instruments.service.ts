@@ -24,7 +24,7 @@ export class InstrumentsService {
     }
 
     public connect ({ socket: { url } }: TInstrument): Observable<IDataChannel> {
-        const webSocketSubject = connect(url);
+        const webSocketSubject = connect(url); // tslint:disable-line:no-null-undefined-union
 
         return this._peerConnectingService.connect(webSocketSubject);
     }

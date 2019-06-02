@@ -4,7 +4,7 @@ import { IMaskableSubject, IStringifyableJsonObject, TStringifyableJsonValue } f
 @Injectable()
 export class FileReceivingService {
 
-    public receive (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<ArrayBuffer> {
+    public receive (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<ArrayBuffer> { // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
             let buffer: ArrayBuffer;
 
@@ -18,7 +18,7 @@ export class FileReceivingService {
                     error (err): void {
                         reject(err);
                     },
-                    next (message): void {
+                    next (message): void { // tslint:disable-line:no-null-undefined-union
                         if (typeof message === 'object' && !Array.isArray(message)) {
                             const { type } = <IStringifyableJsonObject> message;
 

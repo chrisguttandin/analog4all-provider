@@ -18,7 +18,7 @@ export class RenderingService {
     ) { }
 
     public render (
-        dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>,
+        dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, // tslint:disable-line:no-null-undefined-union
         midiOutput: WebMidi.MIDIOutput,
         sourceId: string
     ): Promise<void> {

@@ -12,7 +12,7 @@ export class SamplesService {
     constructor (
         @Inject(ENDPOINT) private _endpoint: string,
         private _httpClient: HttpClient
-    ) {}
+    ) { }
 
     public create ({ file }: { file: Blob }): Observable<{ created: number; id: string; modified: number }> {
         return this._httpClient
