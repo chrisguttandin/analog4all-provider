@@ -1,26 +1,28 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent, AppModule } from '../../src/app';
+import { StoreModule } from '../../src/app/store';
 
 describe('AppComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
-                AppModule
+                AppModule,
+                RouterTestingModule
             ],
-            providers: [ {
-                provide: APP_BASE_HREF,
-                useValue : '/'
-            } ]
+            providers: [
+                // Replace the StoreModule because it would otherwise dispatch events right away.
+                { provide: StoreModule, useValue: null }
+            ]
         });
     });
 
-    it('should create the app', async(() => {
+    it('should create the app', () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
 
         expect(app).toBeTruthy();
-    }));
+    });
 
 });
