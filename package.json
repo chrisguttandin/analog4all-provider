@@ -32,7 +32,7 @@
     "midi-player": "^4.0.37",
     "rxjs": "~6.5.2",
     "rxjs-broker": "4.0.23",
-    "tslib": "^1.9.3",
+    "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
   "description": "This is the provider for analog4all.",
