@@ -147,11 +147,15 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<script\ssrc="([a-z0-9-]*\.[a-z0-9]*\.js)"(\s(?:nomodule|type="module"))\sintegrity="(sha384-[a-zA-Z0-9+/]*=*)"\scrossorigin="anonymous"><\/script>/g,
+                    match: /<script\ssrc="([a-z0-9-]*\.[a-z0-9]*\.js)"(\s(?:nomodule|type="module"))?\sintegrity="(sha384-[a-zA-Z0-9+/]*=*)"\scrossorigin="anonymous"><\/script>/g,
                     replacement: (match, filename, moduleAttribute, initialHash) => {
                         const updatedHash = (/main-es(?:2015|5)\.[a-z0-9]*\.js/.test(filename)) ?
                             `sha384-${ computeHashOfFile(`build/analog4all-provider/scripts/${ filename }`, 'sha384', 'base64') }` :
                             initialHash;
+
+                        if (moduleAttribute === undefined) {
+                            return `<script src="scripts/${ filename }" integrity="${ updatedHash }" crossorigin="anonymous"></script>`;
+                        }
 
                         return `<script src="scripts/${ filename }"${ moduleAttribute } integrity="${ updatedHash }" crossorigin="anonymous"></script>`;
                     }
