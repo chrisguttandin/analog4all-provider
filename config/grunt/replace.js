@@ -39,7 +39,7 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /""\+\({[^}]*}\[e\]\|\|e\)\+"-es5\."\+{([0-9]+:"[a-f0-9]{20}",?)+}/g,
+                    match: /""\+\({[^}]*}\[e\]\|\|e\)\+"-es(2015|5)\."\+{([0-9]+:"[a-f0-9]{20}",?)+}/g,
                     replacement: (match) => match.replace(/^""/g, '"scripts/"')
                 } ]
             }
@@ -104,14 +104,14 @@ module.exports = (grunt) => {
                     match: /\/([a-z0-9-]*\.[a-z0-9]*\.js)"/g,
                     replacement: (_, filename) => `/scripts/${ filename }"`
                 }, {
-                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime-(?:es2015|es5)\.[a-z0-9]*\.js",/g,
+                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime-es(?:2015|5)\.[a-z0-9]*\.js",/g,
                     replacement: ''
                 }, {
-                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime-(?:es2015|es5)\.[a-z0-9]*\.js":\s"[a-z0-9]+",/g,
+                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime-es(?:2015|5)\.[a-z0-9]*\.js":\s"[a-z0-9]+",/g,
                     replacement: ''
                 }, {
                     // Replace the hash value inside of the hashTable for "/scripts/main.*.js" because it was modified before.
-                    match: /"\/analog4all-provider(\/scripts\/main-(?:es2015|es5)\.[a-z0-9]+.js)":\s"[a-z0-9]+"/g,
+                    match: /"\/analog4all-provider(\/scripts\/main-es(?:2015|5)\.[a-z0-9]+.js)":\s"[a-z0-9]+"/g,
                     replacement: (_, filename) => {
                         return `"/analog4all-provider${ filename }": "${ computeHashOfFile(`build/analog4all-provider${ filename }`, 'sha1', 'hex') }"`;
                     }
@@ -132,7 +132,7 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<script\ssrc="(runtime-(?:es2015|es5)\.[a-z0-9]*\.js)"(\s(nomodule|type="module"))\sintegrity="sha384-[a-zA-Z0-9+/]*=*"\scrossorigin="anonymous"><\/script>/g,
+                    match: /<script\ssrc="(runtime-es(?:2015|5)\.[a-z0-9]*\.js)"(\s(nomodule|type="module"))\sintegrity="sha384-[a-zA-Z0-9+/]*=*"\scrossorigin="anonymous"><\/script>/g,
                     replacement: (match, filename, moduleAttribute) => {
                         return `<script${ moduleAttribute }>${ fs.readFileSync(`build/analog4all-provider/${ filename }`) }</script>`;
                     }
@@ -149,7 +149,7 @@ module.exports = (grunt) => {
                 patterns: [ {
                     match: /<script\ssrc="([a-z0-9-]*\.[a-z0-9]*\.js)"(\s(?:nomodule|type="module"))\sintegrity="(sha384-[a-zA-Z0-9+/]*=*)"\scrossorigin="anonymous"><\/script>/g,
                     replacement: (match, filename, moduleAttribute, initialHash) => {
-                        const updatedHash = (/main-(?:es2015|es5)\.[a-z0-9]*\.js/.test(filename)) ?
+                        const updatedHash = (/main-es(?:2015|5)\.[a-z0-9]*\.js/.test(filename)) ?
                             `sha384-${ computeHashOfFile(`build/analog4all-provider/scripts/${ filename }`, 'sha384', 'base64') }` :
                             initialHash;
 
