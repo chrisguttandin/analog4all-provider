@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1560300044089,
+  "timestamp": 1560304522023,
   "index": "/analog4all-provider/index.html",
   "assetGroups": [
     {
@@ -32,7 +32,7 @@
   "dataGroups": [],
   "hashTable": {
     "/analog4all-provider/undefined": "b6751d2cc1c320cf9e5c0f3641010e5c451c3910",
-    "/analog4all-provider/index.html": "b1f41ef544c224187345c341cf819a0f60397e54",
+    "/analog4all-provider/index.html": "d2a562c9ed5e7209cd2e942c510fff1605aeb64f",
     "/analog4all-provider/scripts/main-es2015.417efc5402a345335575.js": "ee1f484ea0a281ed66559a71d9b4f6ce6c836122",
     "/analog4all-provider/scripts/main-es5.9c2d2bde2cf635e5fbe3.js": "2f7d8f367d8458a3a99ef1bd713b4327ce538ae7",
     "/analog4all-provider/scripts/polyfills-es2015.7aaf650bc424e0438353.js": "4578bb107ec3b89d39eb3e9800266ebf8cda1f62",
