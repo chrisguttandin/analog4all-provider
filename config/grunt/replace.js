@@ -132,9 +132,9 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<script\ssrc="(runtime\.[a-z0-9]*\.js)"\sintegrity="sha384-[a-zA-Z0-9+/]*=*"\scrossorigin="anonymous"><\/script>/g,
-                    replacement: (match, filename) => {
-                        return `<script>${ fs.readFileSync(`build/analog4all-provider/${ filename }`) }</script>`;
+                    match: /<script\ssrc="(runtime-(?:es2015|es5)\.[a-z0-9]*\.js)"(\s(nomodule|type="module"))\sintegrity="sha384-[a-zA-Z0-9+/]*=*"\scrossorigin="anonymous"><\/script>/g,
+                    replacement: (match, filename, moduleAttribute) => {
+                        return `<script${ moduleAttribute }>${ fs.readFileSync(`build/analog4all-provider/${ filename }`) }</script>`;
                     }
                 } ]
             }
@@ -147,17 +147,13 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<script\ssrc="([a-z0-9-]*\.[a-z0-9]*\.js)"\s(nomodule\s)?integrity="(sha384-[a-zA-Z0-9+/]*=*)"\scrossorigin="anonymous"><\/script>/g,
-                    replacement: (match, filename, nomoduleAttribute, initialHash) => {
+                    match: /<script\ssrc="([a-z0-9-]*\.[a-z0-9]*\.js)"(\s(?:nomodule|type="module"))\sintegrity="(sha384-[a-zA-Z0-9+/]*=*)"\scrossorigin="anonymous"><\/script>/g,
+                    replacement: (match, filename, moduleAttribute, initialHash) => {
                         const updatedHash = (/main\.[a-z0-9]*\.js/.test(filename)) ?
                             `sha384-${ computeHashOfFile(`build/analog4all-provider/scripts/${ filename }`, 'sha384', 'base64') }` :
                             initialHash;
 
-                        if (nomoduleAttribute === undefined) {
-                            return `<script src="scripts/${ filename }" integrity="${ updatedHash }" crossorigin="anonymous"></script>`;
-                        }
-
-                        return `<script src="scripts/${ filename }" nomodule integrity="${ updatedHash }" crossorigin="anonymous"></script>`;
+                        return `<script src="scripts/${ filename }"${ moduleAttribute } integrity="${ updatedHash }" crossorigin="anonymous"></script>`;
                     }
                 } ]
             }
