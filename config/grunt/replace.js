@@ -110,7 +110,7 @@ module.exports = (grunt) => {
                     match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime-es(?:2015|5)\.[a-z0-9]*\.js":\s"[a-z0-9]+",/g,
                     replacement: ''
                 }, {
-                    // Replace the hash value inside of the hashTable for "/scripts/main.*.js" because it was modified before.
+                    // Replace the hash value inside of the hashTable for "/scripts/main-es*.js" because it was modified before.
                     match: /"\/analog4all-provider(\/scripts\/main-es(?:2015|5)\.[a-z0-9]+.js)":\s"[a-z0-9]+"/g,
                     replacement: (_, filename) => {
                         return `"/analog4all-provider${ filename }": "${ computeHashOfFile(`build/analog4all-provider${ filename }`, 'sha1', 'hex') }"`;
