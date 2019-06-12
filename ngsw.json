@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1560305264323,
+  "timestamp": 1560306477289,
   "index": "/analog4all-provider/index.html",
   "assetGroups": [
     {
@@ -13,8 +13,6 @@
         "/analog4all-provider/scripts/main-es5.9c2d2bde2cf635e5fbe3.js",
         "/analog4all-provider/scripts/polyfills-es2015.7aaf650bc424e0438353.js",
         "/analog4all-provider/scripts/polyfills-es5.d15c3b0448b2fa7e0d14.js",
-        "/analog4all-provider/scripts/runtime-es2015.aa07b9a3b0cae2c9a247.js",
-        "/analog4all-provider/scripts/runtime-es5.1639cdb4613df70a18ae.js",
         "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
       "patterns": []
@@ -32,13 +30,11 @@
   "dataGroups": [],
   "hashTable": {
     "/analog4all-provider/undefined": "b6751d2cc1c320cf9e5c0f3641010e5c451c3910",
-    "/analog4all-provider/index.html": "d2a562c9ed5e7209cd2e942c510fff1605aeb64f",
-    "/analog4all-provider/scripts/main-es2015.417efc5402a345335575.js": "ee1f484ea0a281ed66559a71d9b4f6ce6c836122",
-    "/analog4all-provider/scripts/main-es5.9c2d2bde2cf635e5fbe3.js": "2f7d8f367d8458a3a99ef1bd713b4327ce538ae7",
+    "/analog4all-provider/index.html": "31d59cfdd8ebaebbb827a4fa7483b0497c019fe4",
+    "/analog4all-provider/scripts/main-es2015.417efc5402a345335575.js": "355013cdccacead1dccf58bf2e0348597f75a074",
+    "/analog4all-provider/scripts/main-es5.9c2d2bde2cf635e5fbe3.js": "2d1354bb28dcab661d3231fb69f71d17fce12994",
     "/analog4all-provider/scripts/polyfills-es2015.7aaf650bc424e0438353.js": "4578bb107ec3b89d39eb3e9800266ebf8cda1f62",
     "/analog4all-provider/scripts/polyfills-es5.d15c3b0448b2fa7e0d14.js": "042d7744ef82a64c73310f1db253736731a03950",
-    "/analog4all-provider/scripts/runtime-es2015.aa07b9a3b0cae2c9a247.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "/analog4all-provider/scripts/runtime-es5.1639cdb4613df70a18ae.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
   "navigationUrls": [
