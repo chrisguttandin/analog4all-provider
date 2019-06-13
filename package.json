@@ -28,7 +28,7 @@
     "extendable-media-recorder": "^4.2.9",
     "extendable-media-recorder-wav-encoder": "^4.0.29",
     "midi-json-parser": "^6.2.8",
-    "midi-json-parser-worker": "^6.3.6",
+    "midi-json-parser-worker": "^6.3.8",
     "midi-player": "^4.0.37",
     "rxjs": "~6.5.2",
     "rxjs-broker": "4.0.23",
