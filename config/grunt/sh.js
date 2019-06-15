@@ -16,7 +16,7 @@ module.exports = {
             'webdriver-manager update && ng e2e --no-webdriver-update'
     },
     lint: {
-        cmd: 'ng lint analog4all-provider --type-check && ng lint analog4all-provider-e2e --type-check && ng lint analog4all-provider-unit --type-check'
+        cmd: 'ng lint analog4all-provider --type-check && ng lint analog4all-provider --configuration test'
     },
     monitor: {
         cmd: 'ng serve --aot'
