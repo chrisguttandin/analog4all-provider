@@ -7,7 +7,7 @@
             "prefix": "anp",
             "projectType": "application",
             "root": "",
-            "schematics": { },
+            "schematics": {},
             "sourceRoot": "src",
             "targets": {
                 "build": {
@@ -45,6 +45,7 @@
                         }
                     },
                     "options": {
+                        "aot": false,
                         "assets": [
                             "src/assets"
                         ],
@@ -52,11 +53,23 @@
                         "main": "src/main.ts",
                         "outputPath": "build/analog4all-provider",
                         "polyfills": "src/polyfills.ts",
-                        "scripts": [ ],
+                        "scripts": [],
                         "styles": [
                             "src/styles/styles.css"
                         ],
                         "tsConfig": "src/tsconfig.json"
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "analog4all-provider:serve:production"
+                        }
+                    },
+                    "options": {
+                        "devServerTarget": "analog4all-provider:serve",
+                        "protractorConfig": "config/protractor/e2e.js"
                     }
                 },
                 "extract-i18n": {
@@ -67,6 +80,15 @@
                 },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
+                    "configurations": {
+                        "test": {
+                            "tsConfig": [
+                                "test/e2e/tsconfig.json",
+                                "test/unit/tsconfig.json"
+                            ],
+                            "tslintConfig": "config/tslint/test.json"
+                        }
+                    },
                     "options": {
                         "exclude": [
                             "**/node_modules/**"
@@ -96,55 +118,11 @@
                         "karmaConfig": "config/karma/config.js",
                         "main": "config/karma/test.ts",
                         "polyfills": "src/polyfills.ts",
-                        "scripts": [ ],
+                        "scripts": [],
                         "styles": [
                             "src/styles/styles.css"
                         ],
                         "tsConfig": "test/unit/tsconfig.json"
-                    }
-                }
-            }
-        },
-        "analog4all-provider-e2e": {
-            "projectType": "application",
-            "root": "test/e2e/",
-            "targets": {
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "analog4all-provider:serve:production"
-                        }
-                    },
-                    "options": {
-                        "devServerTarget": "analog4all-provider:serve",
-                        "protractorConfig": "config/protractor/e2e.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "exclude": [
-                            "**/node_modules/**"
-                        ],
-                        "tsConfig": "test/e2e/tsconfig.json",
-                        "tslintConfig": "config/tslint/test.json"
-                    }
-                }
-            }
-        },
-        "analog4all-provider-unit": {
-            "projectType": "application",
-            "root": "test/unit/",
-            "targets": {
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "exclude": [
-                            "**/node_modules/**"
-                        ],
-                        "tsConfig": "test/unit/tsconfig.json",
-                        "tslintConfig": "config/tslint/test.json"
                     }
                 }
             }
