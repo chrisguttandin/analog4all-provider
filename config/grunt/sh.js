@@ -1,4 +1,12 @@
 const { env } = require('process');
+const documentConfig = require('../htmlhint/document');
+const templateConfig = require('../htmlhint/template');
+
+// eslint-disable-next-line padding-line-between-statements
+const convertConfig = (config) => Object
+    .entries(config)
+    .map(([ key, value ]) => (typeof value === 'string') ? `${ key }=${ value }` : key)
+    .join(',');
 
 module.exports = {
     analyze: {
@@ -16,7 +24,7 @@ module.exports = {
             'webdriver-manager update && ng e2e --no-webdriver-update'
     },
     lint: {
-        cmd: 'ng lint analog4all-provider --type-check && ng lint analog4all-provider --configuration test'
+        cmd: `htmlhint --rules ${ convertConfig(documentConfig) } 'src/**/index.html' && htmlhint --rules ${ convertConfig(templateConfig) } 'src/app/**/*.component.html' && ng lint analog4all-provider --type-check && ng lint analog4all-provider --configuration test`
     },
     monitor: {
         cmd: 'ng serve --aot'
