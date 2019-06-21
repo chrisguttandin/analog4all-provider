@@ -22,7 +22,6 @@ module.exports = {
         'replace:fix',
         'sh:verify',
         'clean:source-maps',
-        'replace:bundle',
         'copy:404',
         'replace:runtime',
         'replace:chunks',
@@ -37,6 +36,7 @@ module.exports = {
         'replace:styles',
         'clean:styles',
         'htmlmin',
+        'replace:bundle',
         'replace:manifest',
         'gh-pages:deploy',
         'smoke'
