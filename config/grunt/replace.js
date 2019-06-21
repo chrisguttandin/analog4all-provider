@@ -39,7 +39,7 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /""\+\({[^}]*}\[e\]\|\|e\)\+"-es(2015|5)\."\+{([0-9]+:"[a-f0-9]{20}",?)+}/g,
+                    match: /""\+\({[^}]*}\[e\]\|\|e\)\+"(?:-es(?:2015|5))?\."\+{([0-9]+:"[a-f0-9]{20}",?)+}/g,
                     replacement: (match) => match.replace(/^""/g, '"scripts/"')
                 } ]
             }
@@ -109,11 +109,8 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /assets\/apple-touch-icon\.png/g,
-                    replacement: () => grunt.file.expand({ cwd: 'build/analog4all-provider' }, 'assets/*.apple-touch-icon.png')[0]
-                }, {
-                    match: /assets\/favicon\.ico/g,
-                    replacement: () => grunt.file.expand({ cwd: 'build/analog4all-provider' }, 'assets/*.favicon.ico')[0]
+                    match: /assets\/([a-z0-9-]+)\.(ico|jpg|png)/g,
+                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-provider' }, `assets/*.${ filename }.${ extension }`)[0]
                 }, {
                     match: /\/([a-z0-9-]+\.[a-z0-9]*\.css)"/g,
                     replacement: (_, filename) => `/styles/${ filename }"`
@@ -121,22 +118,28 @@ module.exports = (grunt) => {
                     match: /\/([a-z0-9-]*\.[a-z0-9]*\.js)"/g,
                     replacement: (_, filename) => `/scripts/${ filename }"`
                 }, {
-                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime-es(?:2015|5)\.[a-z0-9]*\.js",/g,
+                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime(?:-es(?:2015|5))?.[a-z0-9]*\.js",/g,
                     replacement: ''
                 }, {
-                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime-es(?:2015|5)\.[a-z0-9]*\.js":\s"[a-z0-9]+",/g,
+                    match: /[\s]*"\/analog4all-provider(\/scripts)?\/runtime(?:-es(?:2015|5))?.[a-z0-9]*\.js":\s"[a-z0-9]+",/g,
                     replacement: ''
                 }, {
                     // Replace the hash value inside of the hashTable for "/scripts/main-es*.js" because it was modified before.
-                    match: /"\/analog4all-provider(\/scripts\/main-es(?:2015|5)\.[a-z0-9]+.js)":\s"[a-z0-9]+"/g,
+                    match: /"\/analog4all-provider(\/scripts\/main(?:-es(?:2015|5))?.[a-z0-9]+.js)":\s"[a-z0-9]+"/g,
                     replacement: (_, filename) => {
                         return `"/analog4all-provider${ filename }": "${ computeHashOfFile(`build/analog4all-provider${ filename }`, 'sha1', 'hex') }"`;
                     }
                 }, {
-                    // Replace the hash value inside of the hashTable for "/index.html" because it was modified before.
-                    match: /"\/analog4all-provider\/index\.html":\s"[a-z0-9]+"/g,
-                    replacement: () => {
-                        return `"/analog4all-provider/index.html": "${ computeHashOfFile('build/analog4all-provider/index.html', 'sha1', 'hex') }"`;
+                    // Replace the hash value inside of the hashTable for "/styles/styles*.css" because it was modified before.
+                    match: /"\/analog4all-provider(\/styles\/styles\.[a-z0-9]*\.css)":\s"[a-z0-9]+"/g,
+                    replacement: (_, filename) => {
+                        return `"/analog4all-provider${ filename }": "${ computeHashOfFile(`build/analog4all-provider${ filename }`, 'sha1', 'hex') }"`;
+                    }
+                }, {
+                    // Replace the hash value inside of the hashTable for "/(index|start).html" because it was modified before.
+                    match: /"\/analog4all-provider\/(index|start)\.html":\s"[a-z0-9]+"/g,
+                    replacement: (_, filename) => {
+                        return `"/analog4all-provider/${ filename }.html": "${ computeHashOfFile(`build/analog4all-provider/${ filename }.html`, 'sha1', 'hex') }"`;
                     }
                 } ]
             }
@@ -149,8 +152,12 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<script\ssrc="(runtime-es(?:2015|5)\.[a-z0-9]*\.js)"(\s(nomodule|type="module"))\sintegrity="sha384-[a-zA-Z0-9+/]*=*"\scrossorigin="anonymous"><\/script>/g,
+                    match: /<script\ssrc="(runtime(?:-es(?:2015|5))?.[a-z0-9]*\.js)"(\s(?:nomodule|type="module"))?\sintegrity="sha384-[a-zA-Z0-9+/]*=*"\scrossorigin="anonymous"><\/script>/g,
                     replacement: (match, filename, moduleAttribute) => {
+                        if (moduleAttribute === undefined) {
+                            return `<script>${ fs.readFileSync(`build/analog4all-provider/${ filename }`) }</script>`;
+                        }
+
                         return `<script${ moduleAttribute }>${ fs.readFileSync(`build/analog4all-provider/${ filename }`) }</script>`;
                     }
                 } ]
@@ -166,7 +173,7 @@ module.exports = (grunt) => {
                 patterns: [ {
                     match: /<script\ssrc="([a-z0-9-]*\.[a-z0-9]*\.js)"(\s(?:nomodule|type="module"))?\sintegrity="(sha384-[a-zA-Z0-9+/]*=*)"\scrossorigin="anonymous"><\/script>/g,
                     replacement: (match, filename, moduleAttribute, initialHash) => {
-                        const updatedHash = (/main-es(?:2015|5)\.[a-z0-9]*\.js/.test(filename)) ?
+                        const updatedHash = (/main(?:-es(?:2015|5))?.[a-z0-9]*\.js/.test(filename)) ?
                             `sha384-${ computeHashOfFile(`build/analog4all-provider/scripts/${ filename }`, 'sha384', 'base64') }` :
                             initialHash;
 
@@ -187,8 +194,10 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<link\srel="stylesheet"\shref="(styles\.[a-z0-9]*\.css)"\sintegrity="(sha384-[a-zA-Z0-9+/]*=*)"\scrossorigin="anonymous">/g,
-                    replacement: (match, filename, hash) => {
+                    match: /<link\srel="stylesheet"\shref="(styles\.[a-z0-9]*\.css)"\sintegrity="sha384-[a-zA-Z0-9+/]*=*"\scrossorigin="anonymous">/g,
+                    replacement: (match, filename) => {
+                        const hash = `sha384-${ computeHashOfFile(`build/analog4all-provider/styles/${ filename }`, 'sha384', 'base64') }`;
+
                         return `<link href="styles/${ filename }" rel="stylesheet" integrity="${ hash }" crossorigin="anonymous">`;
                     }
                 } ]
