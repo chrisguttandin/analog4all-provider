@@ -34,9 +34,9 @@ module.exports = {
         'copy:styles',
         'replace:styles',
         'clean:styles',
-        'htmlmin',
         'replace:chunks',
         'replace:csp-production',
+        'htmlmin',
         'replace:manifest',
         'gh-pages:deploy',
         'smoke'
