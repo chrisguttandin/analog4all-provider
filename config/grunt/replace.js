@@ -21,7 +21,7 @@ module.exports = (grunt) => {
         'bundle': {
             files: {
                 './': [
-                    'build/analog4all-provider/main-es*.js'
+                    'build/analog4all-provider/main*.js'
                 ]
             },
             options: {
