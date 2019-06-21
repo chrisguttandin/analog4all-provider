@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1560556475876,
+  "timestamp": 1561116114649,
   "index": "/analog4all-provider/index.html",
   "assetGroups": [
     {
@@ -9,10 +9,9 @@
       "updateMode": "prefetch",
       "urls": [
         "/analog4all-provider/index.html",
-        "/analog4all-provider/scripts/main-es2015.a28bb18cb32004495f94.js",
-        "/analog4all-provider/scripts/main-es5.5a9f847aa8100b3886a7.js",
-        "/analog4all-provider/scripts/polyfills-es2015.786bd6c86564da7e1e9e.js",
-        "/analog4all-provider/scripts/polyfills-es5.d15c3b0448b2fa7e0d14.js",
+        "/analog4all-provider/scripts/main.baf6326e8340c80e7340.js",
+        "/analog4all-provider/scripts/polyfills.786bd6c86564da7e1e9e.js",
+        "/analog4all-provider/scripts/runtime.aa07b9a3b0cae2c9a247.js",
         "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
       "patterns": []
@@ -30,11 +29,10 @@
   "dataGroups": [],
   "hashTable": {
     "/analog4all-provider/undefined": "b6751d2cc1c320cf9e5c0f3641010e5c451c3910",
-    "/analog4all-provider/index.html": "2f97055a579d5369e3171284bc001e919a6f3186",
-    "/analog4all-provider/scripts/main-es2015.a28bb18cb32004495f94.js": "62d94e6d13f6a810956ba3728091e6e31542cdbe",
-    "/analog4all-provider/scripts/main-es5.5a9f847aa8100b3886a7.js": "dc7c34b61b56283c44c6a3ce7b1fbe2f0fd3d7d2",
-    "/analog4all-provider/scripts/polyfills-es2015.786bd6c86564da7e1e9e.js": "77f974dd2b186031cfc4f4526d96db4efcd39353",
-    "/analog4all-provider/scripts/polyfills-es5.d15c3b0448b2fa7e0d14.js": "042d7744ef82a64c73310f1db253736731a03950",
+    "/analog4all-provider/index.html": "1cf6d0286bb52555bf6b1d978ebb1cbe1aba6820",
+    "/analog4all-provider/scripts/main.baf6326e8340c80e7340.js": "c9eac1b398b71a63da335b9f03d0598fd8927ddd",
+    "/analog4all-provider/scripts/polyfills.786bd6c86564da7e1e9e.js": "77f974dd2b186031cfc4f4526d96db4efcd39353",
+    "/analog4all-provider/scripts/runtime.aa07b9a3b0cae2c9a247.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
     "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
   "navigationUrls": [
