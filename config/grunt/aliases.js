@@ -29,6 +29,7 @@ module.exports = {
         'replace:csp-production',
         'clean:runtime',
         'rev',
+        'replace:images',
         'copy:scripts',
         'replace:scripts',
         'clean:scripts',
