@@ -28,6 +28,7 @@ module.exports = {
         'replace:chunks',
         'replace:csp-production',
         'clean:runtime',
+        'rev',
         'copy:scripts',
         'replace:scripts',
         'clean:scripts',
