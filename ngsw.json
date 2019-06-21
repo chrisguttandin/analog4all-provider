@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1561121427675,
+  "timestamp": 1561123109156,
   "index": "/analog4all-provider/index.html",
   "assetGroups": [
     {
@@ -20,7 +20,7 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [
-        "/analog4all-provider/undefined"
+        "/analog4all-provider/assets/ae3b44a1.favicon.ico"
       ],
       "patterns": []
     },
@@ -37,7 +37,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/analog4all-provider/undefined": "b6751d2cc1c320cf9e5c0f3641010e5c451c3910",
+    "/analog4all-provider/assets/ae3b44a1.favicon.ico": "b6751d2cc1c320cf9e5c0f3641010e5c451c3910",
     "/analog4all-provider/index.html": "846701ffb6bed0eeeb36bc3d5c088b2cade81283",
     "/analog4all-provider/scripts/main.baf6326e8340c80e7340.js": "c9eac1b398b71a63da335b9f03d0598fd8927ddd",
     "/analog4all-provider/scripts/polyfills.786bd6c86564da7e1e9e.js": "77f974dd2b186031cfc4f4526d96db4efcd39353",
