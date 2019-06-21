@@ -16,8 +16,8 @@ const computeHashOfString = (string, algorithm, encoding) => {
         .digest(encoding);
 };
 const replaceHashInMatch = (grunt, match, prefix, index) => {
-    const filename = grunt.file.expand({ cwd: 'build/analog4all-client' }, `${ prefix }.*.js`)[0];
-    const hash = `sha384-${ computeHashOfFile(`build/analog4all-client/${ filename }`, 'sha384', 'base64') }`;
+    const filename = grunt.file.expand({ cwd: 'build/analog4all-provider/scripts' }, `${ prefix }.*.js`)[0];
+    const hash = `sha384-${ computeHashOfFile(`build/analog4all-provider/scripts/${ filename }`, 'sha384', 'base64') }`;
     const chunkExpression = new RegExp(`${ index }:"sha384-[a-zA-Z0-9+/]{64}"`);
 
     return match.replace(chunkExpression, `${ index }:"${ hash }"`);
