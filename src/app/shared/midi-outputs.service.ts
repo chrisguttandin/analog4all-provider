@@ -4,7 +4,9 @@ import { switchMap } from 'rxjs/operators';
 import { MidiAccessService } from './midi-access.service';
 import { PermissionStateService } from './permission-state';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MidiOutputsService {
 
     private _midiAccess: null | WebMidi.MIDIAccess;

@@ -9,7 +9,9 @@ import { IMergeMidiConnectionsAction } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
 import { TAppState } from '../types';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MidiOutputsEffects {
 
     constructor (

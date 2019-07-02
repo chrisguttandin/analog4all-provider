@@ -13,7 +13,9 @@ const ICE_SERVERS = [ { urls: [
     'stun:stun4.l.google.com:19302'
 ] } ];
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PeerConnectingService {
 
     private _window: null | Window;

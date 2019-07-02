@@ -9,7 +9,9 @@ import { ICacheableMidiConnection } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
 import { TAppState } from '../types';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class LocalStorageEffects {
 
     private _window: null | Window;

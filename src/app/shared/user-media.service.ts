@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { WindowService } from './window.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class UserMediaService {
 
     private _mediaStream: null | MediaStream;

@@ -8,7 +8,9 @@ import { IDeleteInstrumentAction, IPatchInstrumentAction, IUpdateMidiConnectionA
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../selectors';
 import { TAppState, TInstrument, TMidiConnection } from '../types';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MidiConnectionsEffects {
 
     constructor (

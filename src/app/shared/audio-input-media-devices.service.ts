@@ -4,7 +4,9 @@ import { switchMap } from 'rxjs/operators';
 import { PermissionStateService } from './permission-state';
 import { WindowService } from './window.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AudioInputMediaDevicesService {
 
     private _window: null | Window;

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WindowService } from './window.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PermissionStateService {
 
     private _window: null | Window;

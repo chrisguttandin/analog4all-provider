@@ -9,7 +9,6 @@ import { WindowService } from '../shared/window.service';
 import { mergeMidiConnections, watchMidiOutputs } from './actions';
 import { InstrumentsEffects, LocalStorageEffects, MidiConnectionsEffects, MidiOutputsEffects } from './effects';
 import { ICacheableMidiConnection } from './interfaces';
-import { InstrumentService } from './services';
 import { appReducer } from './store';
 import { TAppState } from './types';
 
@@ -28,9 +27,6 @@ import { TAppState } from './types';
         (environment.production)
             ? [ ]
             : StoreDevtoolsModule.instrument({ maxAge: 50 })
-    ],
-    providers: [
-        InstrumentService
     ]
 })
 export class StoreModule {

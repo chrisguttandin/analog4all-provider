@@ -6,7 +6,9 @@ import { ISampleResponse } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { ResponseError } from './response-error';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SamplesService {
 
     constructor (

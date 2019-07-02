@@ -10,27 +10,7 @@ import { GearogsSlugInputComponent } from './gearogs-slug-input/gearogs-slug-inp
 import { InstrumentNameInputComponent } from './instrument-name-input/instrument-name-input.component';
 import { LocalRegistryComponent } from './local-registry/local-registry.component';
 import { MidiConnectionComponent } from './midi-connection/midi-connection.component';
-import {
-    AudioInputMediaDevicesService,
-    DownloadingService,
-    ENDPOINT,
-    FileReceivingService,
-    FileSendingService,
-    InstrumentsService,
-    MiddleCMidiJsonService,
-    MidiAccessService,
-    MidiOutputsService,
-    PeerConnectingService,
-    PermissionStateService,
-    RecordingService,
-    RegisteringService,
-    RenderingService,
-    SamplesService,
-    ScaleMidiJsonService,
-    UserMediaService,
-    WaitingService,
-    WindowService
-} from './shared';
+import { ENDPOINT } from './shared';
 import { SoundCloudUsernameInputComponent } from './sound-cloud-username-input/sound-cloud-username-input.component';
 import { SourceIdSelectComponent } from './source-id-select/source-id-select.component';
 import { StoreModule } from './store';
@@ -57,25 +37,7 @@ import { StoreModule } from './store';
         StoreModule
     ],
     providers: [
-        AudioInputMediaDevicesService,
-        DownloadingService,
-        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' },
-        FileReceivingService,
-        FileSendingService,
-        InstrumentsService,
-        MiddleCMidiJsonService,
-        MidiAccessService,
-        MidiOutputsService,
-        PeerConnectingService,
-        PermissionStateService,
-        RecordingService,
-        RegisteringService,
-        RenderingService,
-        SamplesService,
-        ScaleMidiJsonService,
-        UserMediaService,
-        WaitingService,
-        WindowService
+        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }
     ]
 })
 export class AppModule { }

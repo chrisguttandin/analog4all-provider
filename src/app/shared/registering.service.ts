@@ -5,7 +5,9 @@ import { TInstrument, TMidiConnection } from '../store';
 import { InstrumentsService } from './instruments.service';
 import { UserMediaService } from './user-media.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class RegisteringService {
 
     constructor (

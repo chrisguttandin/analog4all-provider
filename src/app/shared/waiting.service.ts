@@ -6,7 +6,9 @@ import { first } from 'rxjs/operators';
  * This service sends a waiting message to the data channel. It waits for the data channel to emit a
  * waiting message and then sends a ready event an resolves the promise.
  */
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class WaitingService {
 
     public wait (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<void> { // tslint:disable-line:max-line-length no-null-undefined-union

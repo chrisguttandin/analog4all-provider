@@ -22,7 +22,9 @@ import {
 } from '../interfaces';
 import { InstrumentService } from '../services';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class InstrumentsEffects {
 
     constructor (

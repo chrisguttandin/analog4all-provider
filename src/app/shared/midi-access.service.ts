@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { WindowService } from './window.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MidiAccessService {
 
     private _midiAccess: null | WebMidi.MIDIAccess;

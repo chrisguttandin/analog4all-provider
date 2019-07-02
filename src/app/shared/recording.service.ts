@@ -10,7 +10,9 @@ const FADE_OUT_OFFSET = 5;
 
 const FADE_OUT_TICKS = 20;
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class RecordingService {
 
     private _analyserNode: null | AnalyserNode;

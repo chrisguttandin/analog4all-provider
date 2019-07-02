@@ -3,7 +3,9 @@ import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
 
 const CHUNK_SIZE = 1024;
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class FileSendingService {
 
     public send (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, file: Blob): Promise<void> { // tslint:disable-line:max-line-length no-null-undefined-union

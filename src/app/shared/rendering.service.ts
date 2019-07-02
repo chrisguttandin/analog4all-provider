@@ -7,7 +7,9 @@ import { FileSendingService } from './file-sending.service';
 import { RecordingService } from './recording.service';
 import { WaitingService } from './waiting.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class RenderingService {
 
     constructor (

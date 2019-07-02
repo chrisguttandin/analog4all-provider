@@ -12,7 +12,9 @@ import {
 } from '../interfaces';
 import { TIdentifiable, TInstrument } from '../types';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class InstrumentService {
 
     constructor (

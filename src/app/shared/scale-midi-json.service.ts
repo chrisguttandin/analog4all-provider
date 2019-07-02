@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IMidiFile } from 'midi-json-parser-worker';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ScaleMidiJsonService {
 
     get midiJson (): IMidiFile {

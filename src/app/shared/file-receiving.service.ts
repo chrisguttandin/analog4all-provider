@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IMaskableSubject, IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class FileReceivingService {
 
     public receive (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<ArrayBuffer> { // tslint:disable-line:max-line-length no-null-undefined-union
