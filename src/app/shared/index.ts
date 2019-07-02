@@ -1,4 +1,4 @@
-export * from './audio-input-media-devices';
+export * from './audio-input-media-devices.service';
 export * from './downloading.service';
 export * from './endpoint-token';
 export * from './file-receiving.service';
