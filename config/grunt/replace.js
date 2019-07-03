@@ -112,23 +112,6 @@ module.exports = (grunt) => {
                 } ]
             }
         },
-        'fix': {
-            files: {
-                './': [
-                    'build/analog4all-provider/ngsw-worker.js'
-                ]
-            },
-            options: {
-                /*
-                 * @todo This is currently necessary because there is a little bug in Angular's Service Worker.
-                 * https://github.com/angular/angular/issues/31061
-                 */
-                patterns: [ {
-                    match: /const\sparsed\s=\snew\sURL\(url,\srelativeTo\);/g,
-                    replacement: 'const parsed = !relativeTo ? new URL(url) : new URL(url, relativeTo);'
-                } ]
-            }
-        },
         'images': {
             files: {
                 './': [
