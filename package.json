@@ -120,7 +120,7 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "karma-sauce-launcher": "^2.0.2",
     "load-grunt-config": "^2.0.0",
-    "midi": "^0.9.5",
+    "midi": "^1.0.0",
     "ngrx-store-freeze": "^0.2.4",
     "protractor": "~5.4.2",
     "stylelint": "^10.1.0",
