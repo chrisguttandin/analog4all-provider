@@ -90,7 +90,7 @@
     "bundle-buddy": "^0.2.1",
     "commitizen": "^4.0.3",
     "content-security-policy-builder": "^2.1.0",
-    "cz-conventional-changelog": "^2.1.0",
+    "cz-conventional-changelog": "^3.0.2",
     "deep-freeze-strict": "^1.1.1",
     "eslint": "^6.1.0",
     "eslint-config-holy-grail": "^38.0.3",
