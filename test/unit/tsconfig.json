@@ -10,8 +10,7 @@
       "jasmine",
       "node",
       "webmidi",
-      "../../src/media-recorder",
-      "../../src/permissions"
+      "../../src/media-recorder"
     ]
   },
   "extends": "tsconfig-holy-grail/src/tsconfig-browser",

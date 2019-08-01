@@ -21,8 +21,8 @@ export class PermissionStateService {
         return (this._window !== null && 'permissions' in this._window.navigator && 'query' in this._window.navigator.permissions);
     }
 
-    public watch (name: 'microphone' | 'midi'): Observable<TPermissionState> {
-        return new Observable<TPermissionState>((observer) => {
+    public watch (name: 'microphone' | 'midi'): Observable<PermissionState> {
+        return new Observable<PermissionState>((observer) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
                 let removeOnChangeListener: null | (() => void) = null;
