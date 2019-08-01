@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
@@ -32,10 +32,8 @@ export class InstrumentsService {
     }
 
     public create (instrument: object): Observable<TInstrument> {
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
         return this._httpClient
-            .post<TInstrument>(`https${ this._endpoint }instruments`, JSON.stringify(instrument), { headers })
+            .post<TInstrument>(`https${ this._endpoint }instruments`, instrument)
             .pipe(
                 tap((nstrmnt) => this._store.dispatch(addInstrument(nstrmnt))),
                 catchError((response) => throwError(new ResponseError(response)))
