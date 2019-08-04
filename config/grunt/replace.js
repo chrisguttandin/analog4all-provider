@@ -220,11 +220,11 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<link\srel="stylesheet"\shref="(styles\.[a-z0-9]*\.css)"\scrossorigin="anonymous"\sdefer\sintegrity="sha384-[a-zA-Z0-9+/]*=*">/g,
+                    match: /<link\srel="stylesheet"\shref="(styles\.[a-z0-9]*\.css)"\scrossorigin="anonymous"\sintegrity="sha384-[a-zA-Z0-9+/]*=*">/g,
                     replacement: (match, filename) => {
                         const hash = `sha384-${ computeHashOfFile(`build/analog4all-provider/styles/${ filename }`, 'sha384', 'base64') }`;
 
-                        return `<link href="styles/${ filename }" rel="stylesheet" crossorigin="anonymous" defer integrity="${ hash }">`;
+                        return `<link href="styles/${ filename }" rel="stylesheet" crossorigin="anonymous" integrity="${ hash }">`;
                     }
                 } ]
             }
