@@ -24,15 +24,17 @@ export class FileSendingService {
                         .send({ byteLength, type: 'bof' })
                         .then(() => {
                             let byteIndex = 0;
-
-                            const promise = Promise.resolve();
+                            let promise = Promise.resolve();
 
                             while (byteIndex + CHUNK_SIZE < byteLength) {
                                 const slice = buffer.slice(byteIndex, byteIndex + CHUNK_SIZE);
 
-                                promise.then(() => {
-                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
-                                });
+                                promise = promise
+                                    .then(() => {
+                                        const message = btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice))));
+
+                                        return dataChannelSubject.send(<any> message);
+                                    });
 
                                 byteIndex += CHUNK_SIZE;
                             }
@@ -40,9 +42,12 @@ export class FileSendingService {
                             if (byteIndex < byteLength) {
                                 const slice = buffer.slice(byteIndex);
 
-                                promise.then(() => {
-                                    dataChannelSubject.send(<any> btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice)))));
-                                });
+                                promise = promise
+                                    .then(() => {
+                                        const message = btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(slice))));
+
+                                        return dataChannelSubject.send(<any> message);
+                                    });
                             }
 
                             return promise;
