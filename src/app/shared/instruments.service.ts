@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
-import { IDataChannel, connect, isSupported } from 'rxjs-broker';
+import { connect, isSupported } from 'rxjs-broker';
 import { catchError, tap } from 'rxjs/operators';
 import { TAppState, TInstrument, addInstrument } from '../store';
+import { TWebSocketEvent } from '../types';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
 import { ResponseError } from './response-error';
@@ -25,8 +26,8 @@ export class InstrumentsService {
         return isSupported;
     }
 
-    public connect ({ socket: { url } }: TInstrument): Observable<IDataChannel> {
-        const webSocketSubject = connect(url); // tslint:disable-line:no-null-undefined-union
+    public connect ({ socket: { url } }: TInstrument): Observable<RTCDataChannel> {
+        const webSocketSubject = connect<TWebSocketEvent>(url); // tslint:disable-line:no-null-undefined-union
 
         return this._peerConnectingService.connect(webSocketSubject);
     }

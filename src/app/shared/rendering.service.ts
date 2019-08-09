@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { parseArrayBuffer } from 'midi-json-parser';
 import { create as createMidiPlayer } from 'midi-player';
-import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
+import { IRemoteSubject, IStringifyableJsonObject } from 'rxjs-broker';
 import { FileReceivingService } from './file-receiving.service';
 import { FileSendingService } from './file-sending.service';
 import { RecordingService } from './recording.service';
@@ -20,7 +20,7 @@ export class RenderingService {
     ) { }
 
     public render (
-        dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, // tslint:disable-line:no-null-undefined-union
+        dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, // tslint:disable-line:no-null-undefined-union
         midiOutput: WebMidi.MIDIOutput,
         sourceId: string
     ): Promise<void> {

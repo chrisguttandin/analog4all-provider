@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDataChannel } from 'rxjs-broker';
 import { TInstrument, TMidiConnection } from '../store';
 import { InstrumentsService } from './instruments.service';
 import { UserMediaService } from './user-media.service';
@@ -18,7 +17,7 @@ export class RegisteringService {
     public register (
         midiConnection: TMidiConnection,
         name: string
-    ): Promise<{ connection: Observable<IDataChannel>; instrument: TInstrument }> {
+    ): Promise<{ connection: Observable<RTCDataChannel>; instrument: TInstrument }> {
         // Get the mediaStream first to make sure the user granted access.
         return this._userMediaService
             .getAudioOnlyMediaStream(midiConnection.sourceId)

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { create as createMidiPlayer } from 'midi-player';
 import { Observable } from 'rxjs';
-import { IDataChannel, wrap } from 'rxjs-broker';
+import { wrap } from 'rxjs-broker';
 import { concatMap, filter, first, map } from 'rxjs/operators';
 import {
     DownloadingService,
@@ -76,12 +76,11 @@ export class MidiConnectionComponent implements OnChanges {
 
                 connection
                     .pipe(
-                        concatMap<IDataChannel, any>
-                            ((dataChannel) => this._renderingService.render(
-                                wrap(dataChannel),
-                                this._midiOutputsService.get(this.midiConnection.midiOutputId),
-                                this.midiConnection.sourceId
-                            ))
+                        concatMap((dataChannel) => this._renderingService.render(
+                            wrap(dataChannel),
+                            this._midiOutputsService.get(this.midiConnection.midiOutputId),
+                            this.midiConnection.sourceId
+                        ))
                     )
                     .subscribe(() => { // tslint:disable-line:no-empty rxjs-prefer-async-pipe
                         // @todo

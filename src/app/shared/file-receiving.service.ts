@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { IMaskableSubject, IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
+import { Observable } from 'rxjs';
+import { IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FileReceivingService {
 
-    public receive (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>): Promise<ArrayBuffer> { // tslint:disable-line:max-line-length no-null-undefined-union
+    public receive (dataChannelSubject: Observable<TStringifyableJsonValue>): Promise<ArrayBuffer> { // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
             let buffer: ArrayBuffer;
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IMaskableSubject, TStringifyableJsonValue } from 'rxjs-broker';
+import { IRemoteSubject, IStringifyableJsonObject } from 'rxjs-broker';
 
 const CHUNK_SIZE = 1024;
 
@@ -8,7 +8,7 @@ const CHUNK_SIZE = 1024;
 })
 export class FileSendingService {
 
-    public send (dataChannelSubject: IMaskableSubject<TStringifyableJsonValue>, file: Blob): Promise<void> { // tslint:disable-line:max-line-length no-null-undefined-union
+    public send (dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, file: Blob): Promise<void> { // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
 
