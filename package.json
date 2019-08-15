@@ -29,7 +29,7 @@
     "extendable-media-recorder-wav-encoder": "^4.0.33",
     "midi-json-parser": "^6.4.1",
     "midi-json-parser-worker": "^6.5.0",
-    "midi-player": "^4.0.43",
+    "midi-player": "^4.0.44",
     "rxjs": "~6.5.2",
     "rxjs-broker": "^5.0.12",
     "tslib": "^1.10.0",
