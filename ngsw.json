@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1568476351654,
+  "timestamp": 1569424428761,
   "index": "/analog4all-provider/index.html",
   "assetGroups": [
     {
@@ -9,7 +9,7 @@
       "updateMode": "prefetch",
       "urls": [
         "/analog4all-provider/index.html",
-        "/analog4all-provider/scripts/main.4a52b8f0cbe34383c70a.js",
+        "/analog4all-provider/scripts/main.0d5fe27eb039d20bb96d.js",
         "/analog4all-provider/scripts/polyfills.4c5a115b4a8377d7af7a.js",
         "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css"
       ],
@@ -38,8 +38,8 @@
   "dataGroups": [],
   "hashTable": {
     "/analog4all-provider/assets/ae3b44a1.favicon.ico": "b6751d2cc1c320cf9e5c0f3641010e5c451c3910",
-    "/analog4all-provider/index.html": "96d8a5cd80164942a5dc9458e16920e7098294eb",
-    "/analog4all-provider/scripts/main.4a52b8f0cbe34383c70a.js": "32c4d9770ab63ac53dc4ed1166f4e25db27c45c4",
+    "/analog4all-provider/index.html": "e9396dac7ccafdea517e5f4c40b0ab648e325605",
+    "/analog4all-provider/scripts/main.0d5fe27eb039d20bb96d.js": "77f85cf721759a6cb2bf23f935a702865206f9b5",
     "/analog4all-provider/scripts/polyfills.4c5a115b4a8377d7af7a.js": "a514da8731833287c9583044e9d512d74c45312a",
     "/analog4all-provider/styles/styles.937dfc4e92c4e4572e9a.css": "5405c7a4262d0de324f64d02faa5ea5145afbfd2"
   },
