@@ -1,3 +1,4 @@
+import { createReducer, on } from '@ngrx/store';
 import { addInstrument, removeInstrument, updateInstrument } from '../actions';
 import { TIdentifiable, TInstrument, TStoreAction } from '../types';
 
@@ -35,16 +36,14 @@ const updateInstrumentFunction = (instruments: readonly TInstrument[], instrumen
     ];
 };
 
+const reducer = createReducer<readonly TInstrument[]>(
+    [ ],
+    on(addInstrument, (state, { payload }) => addInstrumentFunction(state, payload)),
+    on(removeInstrument, (state, { payload }) => removeInstrumentFunction(state, payload)),
+    on(updateInstrument, (state, { payload }) => updateInstrumentFunction(state, payload))
+);
+
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
 export function instrumentsReducer (state: readonly TInstrument[] = [], action: TStoreAction): readonly TInstrument[] {
-    switch (action.type) {
-        case addInstrument.type:
-            return addInstrumentFunction(state, action.payload);
-        case removeInstrument.type:
-            return removeInstrumentFunction(state, action.payload);
-        case updateInstrument.type:
-            return updateInstrumentFunction(state, action.payload);
-        default:
-            return state;
-    }
+    return reducer(state, action);
 }

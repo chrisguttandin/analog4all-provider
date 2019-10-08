@@ -1,3 +1,4 @@
+import { createReducer, on } from '@ngrx/store';
 import { mergeMidiConnections, updateMidiConnection } from '../actions';
 import { TIdentifiable, TMidiConnection, TStoreAction } from '../types';
 
@@ -36,14 +37,13 @@ const updateMidiConnectionFunction = (
     ];
 };
 
+const reducer = createReducer<readonly TMidiConnection[]>(
+    [ ],
+    on(mergeMidiConnections, (state, { payload }) => mergeMidiConnectionsFunction(state, payload)),
+    on(updateMidiConnection, (state, { payload }) => updateMidiConnectionFunction(state, payload))
+);
+
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
 export function midiConnectionsReducer (state: readonly TMidiConnection[] = [], action: TStoreAction): readonly TMidiConnection[] {
-    switch (action.type) {
-        case mergeMidiConnections.type:
-            return mergeMidiConnectionsFunction(state, action.payload);
-        case updateMidiConnection.type:
-            return updateMidiConnectionFunction(state, action.payload);
-        default:
-            return state;
-    }
+    return reducer(state, action);
 }
