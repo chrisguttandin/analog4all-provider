@@ -1,7 +1,7 @@
 import { ADD_INSTRUMENT, REMOVE_INSTRUMENT, UPDATE_INSTRUMENT } from '../actions';
 import { TIdentifiable, TInstrument, TStoreAction } from '../types';
 
-const addInstrument = (instruments: TInstrument[], instrument: TInstrument) => {
+const addInstrument = (instruments: readonly TInstrument[], instrument: TInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index > -1) {
@@ -11,7 +11,7 @@ const addInstrument = (instruments: TInstrument[], instrument: TInstrument) => {
     return [ ...instruments, instrument ];
 };
 
-const removeInstrument = (instruments: TInstrument[], instrument: TInstrument) => {
+const removeInstrument = (instruments: readonly TInstrument[], instrument: TInstrument) => {
     const index = instruments.indexOf(instrument);
 
     if (index === -1) {
@@ -21,7 +21,7 @@ const removeInstrument = (instruments: TInstrument[], instrument: TInstrument) =
     return [ ...instruments.slice(0, index), ...instruments.slice(index + 1) ];
 };
 
-const updateInstrument = (instruments: TInstrument[], instrument: TIdentifiable<TInstrument, 'id'>) => {
+const updateInstrument = (instruments: readonly TInstrument[], instrument: TIdentifiable<TInstrument, 'id'>) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index === -1) {
@@ -36,7 +36,7 @@ const updateInstrument = (instruments: TInstrument[], instrument: TIdentifiable<
 };
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function instrumentsReducer (state: TInstrument[] = [], action: TStoreAction): TInstrument[] {
+export function instrumentsReducer (state: readonly TInstrument[] = [], action: TStoreAction): readonly TInstrument[] {
     switch (action.type) {
         case ADD_INSTRUMENT:
             return addInstrument(state, action.payload);

@@ -2,8 +2,8 @@ import { TInstrument, TMidiConnection } from '../types';
 
 export type TAppState = Readonly<{
 
-    instruments: TInstrument[];
+    instruments: readonly TInstrument[];
 
-    midiConnections: TMidiConnection[];
+    midiConnections: readonly TMidiConnection[];
 
 }>;

@@ -7,7 +7,7 @@ describe('midiConnections selectors', () => {
 
     describe('without any midiConnection', () => {
 
-        let midiConnections: TMidiConnection[];
+        let midiConnections: readonly TMidiConnection[];
         let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {
@@ -40,7 +40,7 @@ describe('midiConnections selectors', () => {
 
     describe('with an midiConnection', () => {
 
-        let midiConnections: TMidiConnection[];
+        let midiConnections: readonly TMidiConnection[];
         let store: BehaviorSubject<TAppState>;
 
         beforeEach(() => {

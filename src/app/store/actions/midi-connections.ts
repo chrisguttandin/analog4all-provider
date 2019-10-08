@@ -4,7 +4,7 @@ import { TIdentifiable, TMidiConnection } from '../types';
 export const MERGE_MIDI_CONNECTIONS: IMergeMidiConnectionsAction['type'] = 'MERGE_MIDI_CONNECTIONS';
 export const UPDATE_MIDI_CONNECTION: IUpdateMidiConnectionAction['type'] = 'UPDATE_MIDI_CONNECTION';
 
-export const mergeMidiConnections = (midiConnections: TMidiConnection[]): IMergeMidiConnectionsAction => ({
+export const mergeMidiConnections = (midiConnections: readonly TMidiConnection[]): IMergeMidiConnectionsAction => ({
     payload: midiConnections,
     type: MERGE_MIDI_CONNECTIONS
 });
