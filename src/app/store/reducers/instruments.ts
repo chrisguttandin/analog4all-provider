@@ -1,7 +1,7 @@
-import { ADD_INSTRUMENT, REMOVE_INSTRUMENT, UPDATE_INSTRUMENT } from '../actions';
+import { addInstrument, removeInstrument, updateInstrument } from '../actions';
 import { TIdentifiable, TInstrument, TStoreAction } from '../types';
 
-const addInstrument = (instruments: readonly TInstrument[], instrument: TInstrument) => {
+const addInstrumentFunction = (instruments: readonly TInstrument[], instrument: TInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index > -1) {
@@ -11,7 +11,7 @@ const addInstrument = (instruments: readonly TInstrument[], instrument: TInstrum
     return [ ...instruments, instrument ];
 };
 
-const removeInstrument = (instruments: readonly TInstrument[], instrument: TInstrument) => {
+const removeInstrumentFunction = (instruments: readonly TInstrument[], instrument: TInstrument) => {
     const index = instruments.indexOf(instrument);
 
     if (index === -1) {
@@ -21,7 +21,7 @@ const removeInstrument = (instruments: readonly TInstrument[], instrument: TInst
     return [ ...instruments.slice(0, index), ...instruments.slice(index + 1) ];
 };
 
-const updateInstrument = (instruments: readonly TInstrument[], instrument: TIdentifiable<TInstrument, 'id'>) => {
+const updateInstrumentFunction = (instruments: readonly TInstrument[], instrument: TIdentifiable<TInstrument, 'id'>) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
     if (index === -1) {
@@ -38,12 +38,12 @@ const updateInstrument = (instruments: readonly TInstrument[], instrument: TIden
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
 export function instrumentsReducer (state: readonly TInstrument[] = [], action: TStoreAction): readonly TInstrument[] {
     switch (action.type) {
-        case ADD_INSTRUMENT:
-            return addInstrument(state, action.payload);
-        case REMOVE_INSTRUMENT:
-            return removeInstrument(state, action.payload);
-        case UPDATE_INSTRUMENT:
-            return updateInstrument(state, action.payload);
+        case addInstrument.type:
+            return addInstrumentFunction(state, action.payload);
+        case removeInstrument.type:
+            return removeInstrumentFunction(state, action.payload);
+        case updateInstrument.type:
+            return updateInstrumentFunction(state, action.payload);
         default:
             return state;
     }

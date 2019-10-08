@@ -1,7 +1,7 @@
-import { MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION } from '../actions';
+import { mergeMidiConnections, updateMidiConnection } from '../actions';
 import { TIdentifiable, TMidiConnection, TStoreAction } from '../types';
 
-const mergeMidiConnections = (oldMidiConnections: readonly TMidiConnection[], newMidiConnections: readonly TMidiConnection[]) => {
+const mergeMidiConnectionsFunction = (oldMidiConnections: readonly TMidiConnection[], newMidiConnections: readonly TMidiConnection[]) => {
     const intersectingMidiConnections = oldMidiConnections
         .map((midiConnection) => [ midiConnection, newMidiConnections
             .find(({ midiOutputId }) => midiConnection.midiOutputId === midiOutputId) ])
@@ -19,7 +19,7 @@ const mergeMidiConnections = (oldMidiConnections: readonly TMidiConnection[], ne
     return [ ...remainingMidiConnections, ...intersectingMidiConnections, ...additionalMidiConnections ];
 };
 
-const updateMidiConnection = (
+const updateMidiConnectionFunction = (
     midiConnections: readonly TMidiConnection[],
     midiConnection: TIdentifiable<TMidiConnection, 'midiOutputId'>
 ) => {
@@ -39,10 +39,10 @@ const updateMidiConnection = (
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
 export function midiConnectionsReducer (state: readonly TMidiConnection[] = [], action: TStoreAction): readonly TMidiConnection[] {
     switch (action.type) {
-        case MERGE_MIDI_CONNECTIONS:
-            return mergeMidiConnections(state, action.payload);
-        case UPDATE_MIDI_CONNECTION:
-            return updateMidiConnection(state, action.payload);
+        case mergeMidiConnections.type:
+            return mergeMidiConnectionsFunction(state, action.payload);
+        case updateMidiConnection.type:
+            return updateMidiConnectionFunction(state, action.payload);
         default:
             return state;
     }

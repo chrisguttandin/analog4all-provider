@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, from } from 'rxjs';
 import { debounceTime, filter, first, map, mergeMap, pairwise, withLatestFrom } from 'rxjs/operators';
-import { UPDATE_MIDI_CONNECTION, deleteInstrument, patchInstrument } from '../actions';
-import { IDeleteInstrumentAction, IPatchInstrumentAction, IUpdateMidiConnectionAction } from '../interfaces';
+import { deleteInstrument, patchInstrument, updateMidiConnection } from '../actions';
+import { IDeleteInstrumentAction, IPatchInstrumentAction } from '../interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../selectors';
 import { TAppState, TInstrument, TMidiConnection } from '../types';
 
@@ -21,7 +21,7 @@ export class MidiConnectionsEffects {
     @Effect() get deleteInstruments$ (): Observable<IDeleteInstrumentAction> {
         return this._actions$
             .pipe(
-                ofType<IUpdateMidiConnectionAction>(UPDATE_MIDI_CONNECTION),
+                ofType(updateMidiConnection),
                 withLatestFrom(createMidiConnectionsSelector(this._store)
                     .pipe(
                         pairwise()
@@ -47,7 +47,7 @@ export class MidiConnectionsEffects {
     @Effect() get patchInstrument$ (): Observable<IPatchInstrumentAction> {
         return this._actions$
             .pipe(
-                ofType<IUpdateMidiConnectionAction>(UPDATE_MIDI_CONNECTION),
+                ofType(updateMidiConnection),
                 debounceTime(500),
                 map(({ payload: midiConnection }) => midiConnection),
                 filter((midiConnection) => !('instrumentId' in midiConnection)),

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { MidiOutputsService } from '../../shared/midi-outputs.service';
-import { WATCH_MIDI_OUTPUTS, mergeMidiConnections } from '../actions';
+import { mergeMidiConnections, watchMidiOutputs } from '../actions';
 import { IMergeMidiConnectionsAction } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
 import { TAppState } from '../types';
@@ -23,7 +23,7 @@ export class MidiOutputsEffects {
     @Effect() get mergeMidiConnections$ (): Observable<IMergeMidiConnectionsAction> {
         return this._actions$
             .pipe(
-                ofType(WATCH_MIDI_OUTPUTS),
+                ofType(watchMidiOutputs),
                 mergeMap(() => this._midiOutputsService.watch()),
                 withLatestFrom(createMidiConnectionsSelector(this._store)),
                 map(([ midiOutputs, midiConnections ]) => mergeMidiConnections([

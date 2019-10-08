@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { WindowService } from '../../shared/window.service';
-import { MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION } from '../actions';
+import { mergeMidiConnections, updateMidiConnection } from '../actions';
 import { ICacheableMidiConnection } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
 import { TAppState } from '../types';
@@ -27,7 +27,7 @@ export class LocalStorageEffects {
     @Effect({ dispatch: false }) get setMidiConnections$ (): Observable<void> {
         return this._actions$
             .pipe(
-                ofType(MERGE_MIDI_CONNECTIONS, UPDATE_MIDI_CONNECTION),
+                ofType(mergeMidiConnections, updateMidiConnection),
                 withLatestFrom(
                     createMidiConnectionsSelector(this._store),
                     (_, midiConnections) => midiConnections),

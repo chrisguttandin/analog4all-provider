@@ -3,18 +3,16 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import {
-    DELETE_INSTRUMENT,
-    DELETE_INSTRUMENT_SUCCESS,
-    PATCH_INSTRUMENT,
-    PATCH_INSTRUMENT_SUCCESS,
+    deleteInstrument,
+    deleteInstrumentSuccess,
+    patchInstrument,
+    patchInstrumentSuccess,
     removeInstrument,
     updateInstrument
 } from '../actions';
 import {
-    IDeleteInstrumentAction,
     IDeleteInstrumentFailAction,
     IDeleteInstrumentSuccessAction,
-    IPatchInstrumentAction,
     IPatchInstrumentFailAction,
     IPatchInstrumentSuccessAction,
     IRemoveInstrumentAction,
@@ -35,7 +33,7 @@ export class InstrumentsEffects {
     @Effect() get deleteInstrument$ (): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
         return this._actions$
             .pipe(
-                ofType<IDeleteInstrumentAction>(DELETE_INSTRUMENT),
+                ofType(deleteInstrument),
                 mergeMap(({ payload: instrument }) => this._instrumentService.delete(instrument))
             );
     }
@@ -43,7 +41,7 @@ export class InstrumentsEffects {
     @Effect() get patchInstrument$ (): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
         return this._actions$
             .pipe(
-                ofType<IPatchInstrumentAction>(PATCH_INSTRUMENT),
+                ofType(patchInstrument),
                 mergeMap(({ payload: instrument }) => this._instrumentService.patch(instrument))
             );
     }
@@ -51,7 +49,7 @@ export class InstrumentsEffects {
     @Effect() get removeInstrument$ (): Observable<IRemoveInstrumentAction> {
         return this._actions$
             .pipe(
-                ofType<IDeleteInstrumentSuccessAction>(DELETE_INSTRUMENT_SUCCESS),
+                ofType(deleteInstrumentSuccess),
                 map(({ payload: instrument }) => removeInstrument(instrument))
             );
     }
@@ -59,7 +57,7 @@ export class InstrumentsEffects {
     @Effect() get updateInstrument$ (): Observable<IUpdateInstrumentAction> {
         return this._actions$
             .pipe(
-                ofType<IPatchInstrumentSuccessAction>(PATCH_INSTRUMENT_SUCCESS),
+                ofType(patchInstrumentSuccess),
                 map(({ payload: instrument }) => updateInstrument(instrument))
             );
     }

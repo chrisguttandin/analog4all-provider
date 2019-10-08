@@ -1,3 +1,4 @@
+import { createAction } from '@ngrx/store';
 import {
     IAddInstrumentAction,
     IDeleteInstrumentAction,
@@ -21,47 +22,24 @@ export const PATCH_INSTRUMENT_SUCCESS: IPatchInstrumentSuccessAction['type'] = '
 export const REMOVE_INSTRUMENT: IRemoveInstrumentAction['type'] = 'REMOVE_INSTRUMENT';
 export const UPDATE_INSTRUMENT: IUpdateInstrumentAction['type'] = 'UPDATE_INSTRUMENT';
 
-export const addInstrument = (instrument: TInstrument): IAddInstrumentAction => ({
-    payload: instrument,
-    type: ADD_INSTRUMENT
-});
+export const addInstrument = createAction(ADD_INSTRUMENT, (instrument: TInstrument) => ({ payload: instrument }));
 
-export const deleteInstrument = (instrument: TInstrument): IDeleteInstrumentAction => ({
-    payload: instrument,
-    type: DELETE_INSTRUMENT
-});
+export const deleteInstrument = createAction(DELETE_INSTRUMENT, (instrument: TInstrument) => ({ payload: instrument }));
 
-export const deleteInstrumentFail = (instrument: TInstrument): IDeleteInstrumentFailAction => ({
-    payload: instrument,
-    type: DELETE_INSTRUMENT_FAIL
-});
+export const deleteInstrumentFail = createAction(DELETE_INSTRUMENT_FAIL, (instrument: TInstrument) => ({ payload: instrument }));
 
-export const deleteInstrumentSuccess = (instrument: TInstrument): IDeleteInstrumentSuccessAction => ({
-    payload: instrument,
-    type: DELETE_INSTRUMENT_SUCCESS
-});
+export const deleteInstrumentSuccess = createAction(DELETE_INSTRUMENT_SUCCESS, (instrument: TInstrument) => ({ payload: instrument }));
 
-export const patchInstrument = (instrument: TIdentifiable<TInstrument, 'id'>): IPatchInstrumentAction => ({
-    payload: instrument,
-    type: PATCH_INSTRUMENT
-});
+export const patchInstrument = createAction(PATCH_INSTRUMENT, (instrument: TIdentifiable<TInstrument, 'id'>) => ({ payload: instrument }));
 
-export const patchInstrumentFail = (id: TInstrument['id']): IPatchInstrumentFailAction => ({
-    payload: id,
-    type: PATCH_INSTRUMENT_FAIL
-});
+export const patchInstrumentFail = createAction(PATCH_INSTRUMENT_FAIL, (id: TInstrument['id']) => ({ payload: id }));
 
-export const patchInstrumentSuccess = (instrument: TIdentifiable<TInstrument, 'id'>): IPatchInstrumentSuccessAction => ({
-    payload: instrument,
-    type: PATCH_INSTRUMENT_SUCCESS
-});
+export const patchInstrumentSuccess = createAction(PATCH_INSTRUMENT_SUCCESS, (instrument: TIdentifiable<TInstrument, 'id'>) => ({
+    payload: instrument
+}));
 
-export const removeInstrument = (instrument: TInstrument): IRemoveInstrumentAction => ({
-    payload: instrument,
-    type: REMOVE_INSTRUMENT
-});
+export const removeInstrument = createAction(REMOVE_INSTRUMENT, (instrument: TInstrument) => ({ payload: instrument }));
 
-export const updateInstrument = (instrument: TIdentifiable<TInstrument, 'id'>): IUpdateInstrumentAction => ({
-    payload: instrument,
-    type: UPDATE_INSTRUMENT
-});
+export const updateInstrument = createAction(UPDATE_INSTRUMENT, (instrument: TIdentifiable<TInstrument, 'id'>) => ({
+    payload: instrument
+}));
