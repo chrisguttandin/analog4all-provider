@@ -20,22 +20,11 @@ export class SamplesService {
         return this._httpClient
             .post<ISampleResponse>(`https${ this._endpoint }samples`, null)
             .pipe(
-                mergeMap(({ accessKeyId, created, id, modified, policy, signature, url }) => {
-                    const formData = new FormData();
-
-                    formData.append('acl', 'private');
-                    formData.append('awsaccesskeyid', accessKeyId);
-                    formData.append('key', `${ id }.wav`);
-                    formData.append('policy', policy);
-                    formData.append('signature', signature);
-                    formData.append('file', file);
-
-                    return this._httpClient
-                        .post(url, formData)
-                        .pipe(
-                            map(() => ({ created, id, modified }))
-                        );
-                }),
+                mergeMap(({ created, id, modified, url }) => this._httpClient
+                    .put(url, file)
+                    .pipe(
+                        map(() => ({ created, id, modified }))
+                    )),
                 catchError((response) => throwError(new ResponseError(response)))
             );
     }
