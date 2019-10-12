@@ -3,6 +3,7 @@ module.exports = {
         // @todo The child-src directive is deprecated but still necessary in Safari (v11) because Safari does not implement the worker-src directive yet.
         'child-src': 'blob:',
         'connect-src': [
+            'blob:',
             "'self'",
             'https://analog4all-samples.s3.amazonaws.com',
             'https://jbnw79pt56.execute-api.eu-west-1.amazonaws.com',
