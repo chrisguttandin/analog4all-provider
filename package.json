@@ -85,7 +85,7 @@
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "~8.9.5",
     "@types/webmidi": "^2.0.3",
-    "axe-core": "^3.3.2",
+    "axe-core": "^3.4.0",
     "bundle-buddy": "^0.2.2",
     "commitizen": "^4.0.3",
     "content-security-policy-builder": "^2.1.0",
