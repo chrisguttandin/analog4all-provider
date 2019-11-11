@@ -1,3 +1,3 @@
-<label>instrument name:</label>
-<input [ngModel]="name" (ngModelChange)="onChange($event)" [placeholder]="defaultName">
+<label for="name">instrument name:</label>
+<input id="name" [ngModel]="name" (ngModelChange)="onChange($event)" [placeholder]="defaultName">
 <p>This name will be used publicly for your MIDI device.</p>
