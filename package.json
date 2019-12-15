@@ -26,7 +26,7 @@
     "@ngrx/effects": "^8.5.2",
     "@ngrx/store": "^8.5.2",
     "extendable-media-recorder": "^5.0.4",
-    "extendable-media-recorder-wav-encoder": "^6.0.7",
+    "extendable-media-recorder-wav-encoder": "^6.0.8",
     "midi-json-parser": "^6.4.13",
     "midi-json-parser-worker": "^6.5.11",
     "midi-player": "^4.0.55",
