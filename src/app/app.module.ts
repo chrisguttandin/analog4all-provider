@@ -15,6 +15,12 @@ import { SoundCloudUsernameInputComponent } from './sound-cloud-username-input/s
 import { SourceIdSelectComponent } from './source-id-select/source-id-select.component';
 import { StoreModule } from './store';
 
+/*
+ * @todo This seems to be redundant but for some reason it is required to eliminate the environment
+ * file from the production build.
+ */
+const enabled = (environment.production) ? true : false;
+
 @NgModule({
     bootstrap: [
         AppComponent
@@ -33,7 +39,7 @@ import { StoreModule } from './store';
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled }),
         StoreModule
     ],
     providers: [
