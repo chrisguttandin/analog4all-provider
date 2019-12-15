@@ -81,7 +81,7 @@
     "@ngrx/store-devtools": "^8.5.2",
     "@nrwl/nx": "^7.8.7",
     "@types/deep-freeze-strict": "^1.1.0",
-    "@types/jasmine": "~3.3.16",
+    "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "~12.11.1",
     "@types/webmidi": "^2.0.3",
