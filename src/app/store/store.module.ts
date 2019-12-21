@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule as NgRxStoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'; // tslint:disable-line:no-implicit-dependencies
@@ -27,27 +27,34 @@ import { TAppState } from './types';
         (environment.production)
             ? [ ]
             : StoreDevtoolsModule.instrument({ maxAge: 50 })
+    ],
+    providers: [
+        {
+            deps: [ Store ],
+            multi: true,
+            provide: APP_INITIALIZER,
+            useFactory: (store: Store<TAppState>) => () => store.dispatch(watchMidiOutputs())
+        },
+        {
+            deps: [ Store, WindowService ],
+            multi: true,
+            provide: APP_INITIALIZER,
+            useFactory: (store: Store<TAppState>, windowService: WindowService) => () => {
+                const stringifiedMidiConnections = (windowService.nativeWindow === null)
+                    ? null
+                    : windowService.nativeWindow.localStorage.getItem('midiConnections');
+
+                if (stringifiedMidiConnections !== null) {
+                    const midiConnections: ICacheableMidiConnection[] = JSON.parse(stringifiedMidiConnections);
+                    const unconnectedMidiConnections = midiConnections
+                        .map((midiConnection) => ({ ...midiConnection, isConnected: false }));
+
+                    // @todo Validate midiConnections.
+
+                    store.dispatch(mergeMidiConnections(unconnectedMidiConnections));
+                }
+            }
+        }
     ]
 })
-export class StoreModule {
-
-    constructor (
-        store: Store<TAppState>,
-        windowService: WindowService
-    ) {
-        const stringifiedMidiConnections = (windowService.nativeWindow === null)
-            ? null
-            : windowService.nativeWindow.localStorage.getItem('midiConnections');
-
-        if (stringifiedMidiConnections !== null) {
-            const midiConnections: ICacheableMidiConnection[] = JSON.parse(stringifiedMidiConnections);
-
-            // @todo Validate midiConnections.
-
-            store.dispatch(mergeMidiConnections(midiConnections.map((midiConnection) => ({ ...midiConnection, isConnected: false }))));
-        }
-
-        store.dispatch(watchMidiOutputs());
-    }
-
-}
+export class StoreModule { }
