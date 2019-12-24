@@ -30,6 +30,44 @@ const replaceHashInMatch = (grunt, match, prefix, index) => {
 
 module.exports = (grunt) => {
     return {
+        'assets': {
+            files: {
+                './': [
+                    'build/analog4all-provider/index.html',
+                    'build/analog4all-provider/**/*.css',
+                    'build/analog4all-provider/**/*.js'
+                ]
+            },
+            options: {
+                patterns: [ {
+                    match: /(?<filename>[\d\-a-z]+)\.(?<hash>[\da-f]{20})\.(?<extension>ico|jpg|png)/g,
+                    replacement: (_, filename, hash, extension) => {
+                        if (grunt.file.exists(`build/analog4all-provider/assets/${ filename }.${ extension }`)) {
+                            grunt.file.delete(`build/analog4all-provider/assets/${ filename }.${ extension }`);
+                        }
+
+                        return `assets/${ filename }.${ hash }.${ extension }`;
+                    }
+                }, {
+                    match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
+                    replacement: (_, filename, extension) => {
+                        if (grunt.file.exists(`build/analog4all-provider/assets/${ filename }.${ extension }`)) {
+                            const hash = computeHashOfFile(`build/analog4all-provider/assets/${ filename }.${ extension }`, 'sha1', 'hex').slice(0, 20);
+
+                            grunt.file.copy(
+                                `build/analog4all-provider/assets/${ filename }.${ extension }`,
+                                `build/analog4all-provider/assets/${ filename }.${ hash }.${ extension }`
+                            );
+                            grunt.file.delete(`build/analog4all-provider/assets/${ filename }.${ extension }`);
+
+                            return `assets/${ filename }.${ hash }.${ extension }`;
+                        }
+
+                        return grunt.file.expand({ cwd: 'build/analog4all-provider', ext: extension }, `assets/${ filename }.*`)[0];
+                    }
+                } ]
+            }
+        },
         'bundle': {
             files: {
                 './': [
@@ -112,21 +150,6 @@ module.exports = (grunt) => {
                 } ]
             }
         },
-        'images': {
-            files: {
-                './': [
-                    'build/analog4all-provider/index.html',
-                    'build/analog4all-provider/**/*.css',
-                    'build/analog4all-provider/**/*.js'
-                ]
-            },
-            options: {
-                patterns: [ {
-                    match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
-                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-provider' }, `assets/*.${ filename }.${ extension }`)[0]
-                } ]
-            }
-        },
         'manifest': {
             files: {
                 './': [
@@ -136,7 +159,7 @@ module.exports = (grunt) => {
             options: {
                 patterns: [ {
                     match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
-                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-provider' }, `assets/*.${ filename }.${ extension }`)[0]
+                    replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-provider', ext: extension }, `assets/${ filename }.*`)[0]
                 }, {
                     match: /\/(?<filename>[\d\-a-z]+\.[\da-z]*\.css)"/g,
                     replacement: (_, filename) => `/styles/${ filename }"`

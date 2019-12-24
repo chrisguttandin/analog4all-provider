@@ -9,6 +9,16 @@ module.exports = {
             }
         ]
     },
+    assets: {
+        files: [
+            {
+                cwd: 'build/analog4all-provider/',
+                dest: 'build/analog4all-provider/assets/',
+                expand: true,
+                src: [ '*.ico', '*.jpg', '*.png' ]
+            }
+        ]
+    },
     scripts: {
         files: [
             {
