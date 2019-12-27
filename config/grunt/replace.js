@@ -1,6 +1,7 @@
 const cspBuilder = require('content-security-policy-builder');
 const cspProductionConfig = require('../csp/production');
 const crypto = require('crypto');
+const { dirname, relative } = require('path');
 const fs = require('fs');
 
 // eslint-disable-next-line padding-line-between-statements
@@ -41,29 +42,33 @@ module.exports = (grunt) => {
             options: {
                 patterns: [ {
                     match: /(?<filename>[\d\-a-z]+)\.(?<hash>[\da-f]{20})\.(?<extension>ico|jpg|png)/g,
-                    replacement: (_, filename, hash, extension) => {
-                        if (grunt.file.exists(`build/analog4all-provider/assets/${ filename }.${ extension }`)) {
-                            grunt.file.delete(`build/analog4all-provider/assets/${ filename }.${ extension }`);
+                    replacement: (_1, filename, hash, extension, _2, _3, _4, source) => {
+                        const cwd = 'build/analog4all-provider';
+
+                        if (grunt.file.exists(`${ cwd }/assets/${ filename }.${ extension }`)) {
+                            grunt.file.delete(`${ cwd }/assets/${ filename }.${ extension }`);
                         }
 
-                        return `assets/${ filename }.${ hash }.${ extension }`;
+                        return relative(dirname(source), `${ cwd }/assets/${ filename }.${ hash }.${ extension }`);
                     }
                 }, {
                     match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
-                    replacement: (_, filename, extension) => {
-                        if (grunt.file.exists(`build/analog4all-provider/assets/${ filename }.${ extension }`)) {
-                            const hash = computeHashOfFile(`build/analog4all-provider/assets/${ filename }.${ extension }`, 'sha1', 'hex').slice(0, 20);
+                    replacement: (_1, filename, extension, _2, _3, _4, source) => {
+                        const cwd = 'build/analog4all-provider';
+
+                        if (grunt.file.exists(`${ cwd }/assets/${ filename }.${ extension }`)) {
+                            const hash = computeHashOfFile(`${ cwd }/assets/${ filename }.${ extension }`, 'sha1', 'hex').slice(0, 20);
 
                             grunt.file.copy(
-                                `build/analog4all-provider/assets/${ filename }.${ extension }`,
-                                `build/analog4all-provider/assets/${ filename }.${ hash }.${ extension }`
+                                `${ cwd }/assets/${ filename }.${ extension }`,
+                                `${ cwd }/assets/${ filename }.${ hash }.${ extension }`
                             );
-                            grunt.file.delete(`build/analog4all-provider/assets/${ filename }.${ extension }`);
+                            grunt.file.delete(`${ cwd }/assets/${ filename }.${ extension }`);
 
-                            return `assets/${ filename }.${ hash }.${ extension }`;
+                            return relative(dirname(source), `${ cwd }/assets/${ filename }.${ hash }.${ extension }`);
                         }
 
-                        return grunt.file.expand({ cwd: 'build/analog4all-provider', ext: extension }, `assets/${ filename }.*`)[0];
+                        return relative(dirname(source), `${ cwd }/${ grunt.file.expand({ cwd, ext: extension }, `assets/${ filename }.*`)[0] }`);
                     }
                 } ]
             }
