@@ -3,6 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, from } from 'rxjs';
 import { debounceTime, filter, first, map, mergeMap, pairwise, withLatestFrom } from 'rxjs/operators';
+import { pluckPayloadOfType } from '../../operators';
 import { deleteInstrument, patchInstrument, updateMidiConnection } from '../actions';
 import { IDeleteInstrumentAction, IPatchInstrumentAction } from '../interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../selectors';
@@ -47,9 +48,8 @@ export class MidiConnectionsEffects {
     @Effect() get patchInstrument$ (): Observable<IPatchInstrumentAction> {
         return this._actions$
             .pipe(
-                ofType(updateMidiConnection),
+                pluckPayloadOfType(updateMidiConnection),
                 debounceTime(500),
-                map(({ payload: midiConnection }) => midiConnection),
                 filter((midiConnection) => !('instrumentId' in midiConnection)),
                 mergeMap(
                     (midiConnection) => createMidiConnectionByMidiOutputIdSelector(this._store, midiConnection.midiOutputId)
