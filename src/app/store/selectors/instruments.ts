@@ -6,7 +6,7 @@ const findInstrumentByIdSelector = (instruments: TAppState['instruments'], id: T
     return instruments.find((instrument) => (instrument.id === id));
 };
 
-const instrumentByIdSelector = (instruments: TAppState['instruments'], { id }: { id: TInstrument['id'] }) => {
+const instrumentByIdSelector = (instruments: TAppState['instruments'], id: TInstrument['id']) => {
     const instrument = findInstrumentByIdSelector(instruments, id);
 
     if (instrument === undefined) {
@@ -20,5 +20,5 @@ const instrumentsSelector = (state: TAppState) => state.instruments;
 
 export const createInstrumentByIdSelector = (store: Observable<TAppState>, id: TInstrument['id']) => store
     .pipe(
-        select(createSelector(instrumentsSelector, instrumentByIdSelector), { id })
+        select(createSelector(instrumentsSelector, instrumentByIdSelector), id)
     );

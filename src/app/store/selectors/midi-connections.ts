@@ -11,7 +11,7 @@ const findMidiConnectionByMidiOutputIdSelector = (
 
 const midiConnectionByMidiOutputIdSelector = (
     midiConnections: TAppState['midiConnections'],
-    { midiOutputId }: { midiOutputId: TMidiConnection['midiOutputId'] }
+    midiOutputId: TMidiConnection['midiOutputId']
 ) => {
     const midiConnection = findMidiConnectionByMidiOutputIdSelector(midiConnections, midiOutputId);
 
@@ -30,7 +30,7 @@ export const createMidiConnectionByMidiOutputIdSelector = (
 ) => {
     return store
         .pipe(
-            select(createSelector(midiConnectionsSelector, midiConnectionByMidiOutputIdSelector), { midiOutputId })
+            select(createSelector(midiConnectionsSelector, midiConnectionByMidiOutputIdSelector), midiOutputId)
         );
 };
 
