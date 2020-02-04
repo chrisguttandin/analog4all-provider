@@ -4,7 +4,9 @@ import { Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { connect, isSupported } from 'rxjs-broker';
 import { catchError, tap } from 'rxjs/operators';
-import { TAppState, TInstrument, addInstrument } from '../store';
+import { TAppState, TInstrument } from '../store';
+// @todo The following import is importing from /store/actions directly avoid circular dependencies.
+import { addInstrument } from '../store/actions';
 import { TWebSocketEvent } from '../types';
 import { ENDPOINT } from './endpoint-token';
 import { PeerConnectingService } from './peer-connecting.service';
