@@ -9,6 +9,9 @@ import { ICacheableMidiConnection } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
 import { TAppState } from '../types';
 
+// @todo This is temporary fix to make sure Observable gets only imported as a type.
+type TObservable<T> = Observable<T>;
+
 @Injectable({
     providedIn: 'root'
 })
@@ -24,7 +27,7 @@ export class LocalStorageEffects {
         this._window = windowService.nativeWindow;
     }
 
-    @Effect({ dispatch: false }) get setMidiConnections$ (): Observable<void> {
+    @Effect({ dispatch: false }) get setMidiConnections$ (): TObservable<void> {
         return this._actions$
             .pipe(
                 ofType(mergeMidiConnections, updateMidiConnection),

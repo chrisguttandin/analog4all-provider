@@ -21,6 +21,9 @@ import {
 } from '../interfaces';
 import { InstrumentService } from '../services';
 
+// @todo This is temporary fix to make sure Observable gets only imported as a type.
+type TObservable<T> = Observable<T>;
+
 @Injectable({
     providedIn: 'root'
 })
@@ -31,7 +34,7 @@ export class InstrumentsEffects {
         private _instrumentService: InstrumentService
     ) { }
 
-    @Effect() get deleteInstrument$ (): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
+    @Effect() get deleteInstrument$ (): TObservable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
         return this._actions$
             .pipe(
                 pluckPayloadOfType(deleteInstrument),
@@ -39,7 +42,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() get patchInstrument$ (): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
+    @Effect() get patchInstrument$ (): TObservable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
         return this._actions$
             .pipe(
                 pluckPayloadOfType(patchInstrument),
@@ -47,7 +50,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() get removeInstrument$ (): Observable<IRemoveInstrumentAction> {
+    @Effect() get removeInstrument$ (): TObservable<IRemoveInstrumentAction> {
         return this._actions$
             .pipe(
                 pluckPayloadOfType(deleteInstrumentSuccess),
@@ -55,7 +58,7 @@ export class InstrumentsEffects {
             );
     }
 
-    @Effect() get updateInstrument$ (): Observable<IUpdateInstrumentAction> {
+    @Effect() get updateInstrument$ (): TObservable<IUpdateInstrumentAction> {
         return this._actions$
             .pipe(
                 pluckPayloadOfType(patchInstrumentSuccess),

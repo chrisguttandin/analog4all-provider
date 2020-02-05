@@ -9,6 +9,9 @@ import { IDeleteInstrumentAction, IPatchInstrumentAction } from '../interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../selectors';
 import { TAppState, TInstrument, TMidiConnection } from '../types';
 
+// @todo This is temporary fix to make sure Observable gets only imported as a type.
+type TObservable<T> = Observable<T>;
+
 @Injectable({
     providedIn: 'root'
 })
@@ -19,7 +22,7 @@ export class MidiConnectionsEffects {
         private _store: Store<TAppState>
     ) { }
 
-    @Effect() get deleteInstruments$ (): Observable<IDeleteInstrumentAction> {
+    @Effect() get deleteInstruments$ (): TObservable<IDeleteInstrumentAction> {
         return this._actions$
             .pipe(
                 ofType(updateMidiConnection),
@@ -45,7 +48,7 @@ export class MidiConnectionsEffects {
             );
     }
 
-    @Effect() get patchInstrument$ (): Observable<IPatchInstrumentAction> {
+    @Effect() get patchInstrument$ (): TObservable<IPatchInstrumentAction> {
         return this._actions$
             .pipe(
                 pluckPayloadOfType(updateMidiConnection),
