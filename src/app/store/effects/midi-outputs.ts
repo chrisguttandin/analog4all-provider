@@ -9,9 +9,6 @@ import { IMergeMidiConnectionsAction } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
 import { TAppState } from '../types';
 
-// @todo This is temporary fix to make sure Observable gets only imported as a type.
-type TObservable<T> = Observable<T>;
-
 @Injectable({
     providedIn: 'root'
 })
@@ -23,7 +20,7 @@ export class MidiOutputsEffects {
         private _store: Store<TAppState>
     ) { }
 
-    @Effect() get mergeMidiConnections$ (): TObservable<IMergeMidiConnectionsAction> {
+    @Effect() get mergeMidiConnections$ (): Observable<IMergeMidiConnectionsAction> {
         return this._actions$
             .pipe(
                 ofType(watchMidiOutputs),
