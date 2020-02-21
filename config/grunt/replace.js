@@ -43,7 +43,7 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /(?<filename>[\d\-a-z]+)\.(?<hash>[\da-f]{20})\.(?<extension>ico|jpg|png)/g,
+                    match: /(?<filename>[\da-z-]+)\.(?<hash>[\da-f]{20})\.(?<extension>ico|jpg|png)/g,
                     replacement: (_1, filename, hash, extension, _2, _3, _4, source) => {
                         const cwd = 'build/analog4all-provider';
 
@@ -58,7 +58,7 @@ module.exports = (grunt) => {
                         return `assets/${ filename }.${ hash }.${ extension }`;
                     }
                 }, {
-                    match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
+                    match: /assets\/(?<filename>[\da-z-]+)\.(?<extension>ico|jpg|png)/g,
                     replacement: (_1, filename, extension, _2, _3, _4, source) => {
                         const cwd = 'build/analog4all-provider';
 
@@ -174,13 +174,13 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /assets\/(?<filename>[\d\-a-z]+)\.(?<extension>ico|jpg|png)/g,
+                    match: /assets\/(?<filename>[\da-z-]+)\.(?<extension>ico|jpg|png)/g,
                     replacement: (_, filename, extension) => grunt.file.expand({ cwd: 'build/analog4all-provider', ext: extension }, `assets/${ filename }.*`)[0]
                 }, {
-                    match: /\/(?<filename>[\d\-a-z]+\.[\da-z]*\.css)"/g,
+                    match: /\/(?<filename>[\da-z-]+\.[\da-z]*\.css)"/g,
                     replacement: (_, filename) => `/styles/${ filename }"`
                 }, {
-                    match: /\/(?<filename>[\d\-a-z]*\.[\da-z]*\.js)"/g,
+                    match: /\/(?<filename>[\da-z-]*\.[\da-z]*\.js)"/g,
                     replacement: (_, filename) => `/scripts/${ filename }"`
                 }, {
                     match: /\s*"\/analog4all-provider(?:\/scripts)?\/runtime(?:-es(?:2015|5))?.[\da-z]*\.js",/g,
@@ -236,7 +236,7 @@ module.exports = (grunt) => {
             },
             options: {
                 patterns: [ {
-                    match: /<script\ssrc="(?<filename>[\d\-a-z]+\.[\da-z]+\.js)"\scrossorigin="anonymous"(?<moduleAttribute>\s(?:nomodule|type="module"))?\sdefer\sintegrity="(?<initialHash>sha384-[\d+/A-Za-z]+=*)"><\/script>/g,
+                    match: /<script\ssrc="(?<filename>[\da-z-]+\.[\da-z]+\.js)"\scrossorigin="anonymous"(?<moduleAttribute>\s(?:nomodule|type="module"))?\sdefer\sintegrity="(?<initialHash>sha384-[\d+/A-Za-z]+=*)"><\/script>/g,
                     replacement: (match, filename, moduleAttribute, initialHash) => {
                         const updatedHash = (/main(?:-es(?:2015|5))?\.[\da-z]+\.js/.test(filename)) ?
                             `sha384-${ computeHashOfFile(`build/analog4all-provider/scripts/${ filename }`, 'sha384', 'base64') }` :
