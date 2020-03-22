@@ -33,7 +33,7 @@
     "rxjs": "~6.5.4",
     "rxjs-broker": "^6.0.6",
     "tslib": "^1.11.1",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.3"
   },
   "description": "This is the provider for analog4all.",
   "devDependencies": {
