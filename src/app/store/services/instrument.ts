@@ -24,7 +24,7 @@ export class InstrumentService {
 
     public delete (instrument: TInstrument): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
         return this._httpClient
-            .delete<void>(`https${ this._endpoint }instruments/${ instrument.id }`)
+            .delete(`https${ this._endpoint }instruments/${ instrument.id }`)
             .pipe(
                 map(() => deleteInstrumentSuccess(instrument)),
                 catchError(() => of(deleteInstrumentFail(instrument)))
@@ -35,7 +35,7 @@ export class InstrumentService {
         { id, ...delta }: TIdentifiable<TInstrument, 'id'>
     ): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
         return this._httpClient
-            .patch<void>(`https${ this._endpoint }instruments/${ id }`, delta)
+            .patch(`https${ this._endpoint }instruments/${ id }`, delta)
             .pipe(
                 map(() => patchInstrumentSuccess({ id, ...delta })),
                 catchError(() => of(patchInstrumentFail(id)))
