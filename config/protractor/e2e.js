@@ -9,8 +9,8 @@ const chromeCapabilities = {
     chromeOptions: {
         // @todo Running the tests in headless mode seems to disable the Web MIDI API.
         args: (env.TRAVIS) ?
-            [ '--device-scale-factor=2', '--disable-gpu', '--enable-features=NetworkService', '--force-device-scale-factor=2', '--headless', '--window-size=1024,768' ] :
-            [ '--device-scale-factor=2', '--disable-gpu', '--enable-features=NetworkService', '--force-device-scale-factor=2', '--window-size=1024,768' ]
+            [ '--device-scale-factor=2', '--disable-gpu', '--enable-features=NetworkService', '--force-device-scale-factor=2', '--force-prefers-reduced-motion', '--headless', '--window-size=1024,768' ] :
+            [ '--device-scale-factor=2', '--disable-gpu', '--enable-features=NetworkService', '--force-device-scale-factor=2', '--force-prefers-reduced-motion', '--window-size=1024,768' ]
     }
 };
 
