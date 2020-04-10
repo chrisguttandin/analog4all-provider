@@ -9,7 +9,7 @@ export class InstrumentNameInputComponent {
 
     @Input() public readonly defaultName!: string;
 
-    @Input() public readonly name!: string;
+    @Input() public readonly name!: null | string;
 
     @Output() public readonly nameChange: EventEmitter<Event>;
 

@@ -139,43 +139,65 @@ export class MidiConnectionComponent implements OnChanges {
             .then((blob) => this._downloadingService.download('sample.wav', blob));
     }
 
-    public updateDescription (description: string): void {
-        const sanitizedDescription = description.trim();
+    public updateDescription (event: Event): void {
+        if (event.target === null) {
+            return;
+        }
+
+        const description = (<HTMLInputElement> event.target).value.trim();
 
         this._store.dispatch(updateMidiConnection({
-            description: (sanitizedDescription === '') ? undefined : sanitizedDescription,
+            description: (description === '') ? undefined : description,
             midiOutputId: this.midiConnection.midiOutputId
         }));
     }
 
-    public updateGearogsSlug (gearogsSlug: string): void {
-        const sanitizedGearogsSlug = gearogsSlug.trim();
+    public updateGearogsSlug (event: Event): void {
+        if (event.target === null) {
+            return;
+        }
+
+        const description = (<HTMLInputElement> event.target).value.trim();
 
         this._store.dispatch(updateMidiConnection({
-            gearogsSlug: (sanitizedGearogsSlug === '') ? undefined : sanitizedGearogsSlug,
+            gearogsSlug: (description === '') ? undefined : description,
             midiOutputId: this.midiConnection.midiOutputId
         }));
     }
 
-    public updateInstrumentName (name: string): void {
-        const sanitizedName = name.trim();
+    public updateInstrumentName (event: Event): void {
+        if (event.target === null) {
+            return;
+        }
+
+        const name = (<HTMLInputElement> event.target).value.trim();
 
         this._store.dispatch(updateMidiConnection({
             midiOutputId: this.midiConnection.midiOutputId,
-            name: (sanitizedName === '') ? null : sanitizedName
+            name: (name === '') ? null : name
         }));
     }
 
-    public updateSoundCloudUsername (soundCloudUsername: string): void {
-        const sanitizedSoundCloudUsername = soundCloudUsername.trim();
+    public updateSoundCloudUsername (event: Event): void {
+        if (event.target === null) {
+            return;
+        }
+
+        const soundCloudUsername = (<HTMLInputElement> event.target).value.trim();
 
         this._store.dispatch(updateMidiConnection({
             midiOutputId: this.midiConnection.midiOutputId,
-            soundCloudUsername: (sanitizedSoundCloudUsername === '') ? undefined : sanitizedSoundCloudUsername
+            soundCloudUsername: (soundCloudUsername === '') ? undefined : soundCloudUsername
         }));
     }
 
-    public updateSourceId (sourceId: string): void {
+    public updateSourceId (event: Event): void {
+        if (event.target === null) {
+            return;
+        }
+
+        const sourceId = (<HTMLInputElement> event.target).value;
+
         this._store.dispatch(updateMidiConnection({ midiOutputId: this.midiConnection.midiOutputId, sourceId }));
     }
 

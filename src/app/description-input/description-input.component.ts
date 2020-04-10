@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class DescriptionInputComponent {
 
-    @Input() public readonly description!: string;
+    @Input() public readonly description!: string | undefined;
 
     @Output() public readonly descriptionChange: EventEmitter<Event>;
 
