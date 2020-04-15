@@ -4,12 +4,7 @@
     "newProjectRoot": "projects",
     "projects": {
         "analog4all-provider": {
-            "prefix": "anp",
-            "projectType": "application",
-            "root": "",
-            "schematics": {},
-            "sourceRoot": "src",
-            "targets": {
+            "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "configurations": {
@@ -129,7 +124,12 @@
                         "tsConfig": "test/unit/tsconfig.json"
                     }
                 }
-            }
+            },
+            "prefix": "anp",
+            "projectType": "application",
+            "root": "",
+            "schematics": {},
+            "sourceRoot": "src"
         }
     },
     "schematics": {
