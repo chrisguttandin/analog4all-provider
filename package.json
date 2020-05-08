@@ -87,7 +87,7 @@
     "@types/webmidi": "^2.0.4",
     "axe-core": "^3.5.3",
     "bundle-buddy": "^0.2.2",
-    "commitizen": "^4.0.5",
+    "commitizen": "^4.1.2",
     "content-security-policy-builder": "^2.1.0",
     "cz-conventional-changelog": "^3.1.0",
     "deep-freeze-strict": "^1.1.1",
