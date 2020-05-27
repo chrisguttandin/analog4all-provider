@@ -18,7 +18,7 @@ export class ScaleMidiJsonService {
                     }, {
                         delta: 0,
                         setTempo: {
-                            microsecondsPerBeat: 500000
+                            microsecondsPerQuarter: 500000
                         }
                     }, {
                         delta: 0,
