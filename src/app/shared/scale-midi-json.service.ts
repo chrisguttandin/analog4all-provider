@@ -7,7 +7,7 @@ import { IMidiFile } from 'midi-json-parser-worker';
 export class ScaleMidiJsonService {
 
     get midiJson (): IMidiFile {
-        return <IMidiFile> {
+        return {
             division: 480,
             format: 1,
             tracks: [
