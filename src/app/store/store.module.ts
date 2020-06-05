@@ -18,6 +18,7 @@ import { TAppState } from './types';
             runtimeChecks: {
                 strictActionImmutability: !environment.production,
                 strictActionSerializability: !environment.production,
+                strictActionTypeUniqueness: !environment.production,
                 strictStateImmutability: !environment.production,
                 strictStateSerializability: !environment.production
             }
