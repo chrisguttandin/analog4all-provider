@@ -2,21 +2,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'anp-description-input',
-    styleUrls: [ './description-input.component.css' ],
+    styleUrls: ['./description-input.component.css'],
     templateUrl: './description-input.component.html'
 })
 export class DescriptionInputComponent {
-
     @Input() public readonly description!: string | undefined;
 
     @Output() public readonly descriptionChange: EventEmitter<Event>;
 
-    constructor () {
+    constructor() {
         this.descriptionChange = new EventEmitter();
     }
 
-    public onChange (value: Event): void {
+    public onChange(value: Event): void {
         this.descriptionChange.emit(value);
     }
-
 }

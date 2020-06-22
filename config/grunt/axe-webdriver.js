@@ -5,8 +5,6 @@ module.exports = {
         options: {
             browser: 'chrome'
         },
-        urls: [
-            `http://localhost:${ projects[defaultProject].architect.serve.options.port }`
-        ]
+        urls: [`http://localhost:${projects[defaultProject].architect.serve.options.port}`]
     }
 };

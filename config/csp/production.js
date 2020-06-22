@@ -13,8 +13,8 @@ module.exports = {
         'default-src': "'none'",
         'font-src': 'https://fonts.gstatic.com',
         'img-src': "'self'",
-        'script-src': [ 'blob:', "'self'", "'unsafe-eval'" ],
-        'style-src': [ 'https://fonts.googleapis.com', "'self'", "'unsafe-inline'" ],
-        'worker-src': [ 'blob:', "'self'" ]
+        'script-src': ['blob:', "'self'", "'unsafe-eval'"],
+        'style-src': ['https://fonts.googleapis.com', "'self'", "'unsafe-inline'"],
+        'worker-src': ['blob:', "'self'"]
     }
 };

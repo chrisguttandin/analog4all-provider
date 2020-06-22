@@ -1,7 +1,6 @@
 import { TMidiConnection } from '../types';
 
 export interface ICacheableMidiConnection {
-
     description?: TMidiConnection['description'];
 
     gearogsSlug?: TMidiConnection['gearogsSlug'];
@@ -15,5 +14,4 @@ export interface ICacheableMidiConnection {
     soundCloudUsername?: TMidiConnection['soundCloudUsername'];
 
     sourceId: TMidiConnection['sourceId'];
-
 }

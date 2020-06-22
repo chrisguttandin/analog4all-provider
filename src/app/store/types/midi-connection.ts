@@ -1,5 +1,4 @@
 export type TMidiConnection = Readonly<{
-
     description?: string;
 
     gearogsSlug?: string;
@@ -17,5 +16,4 @@ export type TMidiConnection = Readonly<{
     soundCloudUsername?: string;
 
     sourceId: string;
-
 }>;

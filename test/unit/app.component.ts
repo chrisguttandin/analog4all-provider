@@ -5,13 +5,9 @@ import { AppModule } from '../../src/app/app.module';
 import { StoreModule } from '../../src/app/store';
 
 describe('AppComponent', () => {
-
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [
-                AppModule,
-                RouterTestingModule
-            ],
+            imports: [AppModule, RouterTestingModule],
             providers: [
                 // Replace the StoreModule because it would otherwise dispatch events right away.
                 { provide: StoreModule, useValue: null }
@@ -25,5 +21,4 @@ describe('AppComponent', () => {
 
         expect(app).toBeTruthy();
     });
-
 });

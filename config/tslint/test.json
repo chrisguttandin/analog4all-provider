@@ -1,24 +1,11 @@
 {
     "extends": "tslint-config-holy-grail",
     "rules": {
-        "component-selector": [
-            true,
-            "element",
-            "anp",
-            "kebab-case"
-        ],
-        "directive-selector": [
-            true,
-            "attribute",
-            "anp",
-            "camelCase"
-        ],
+        "component-selector": [true, "element", "anp", "kebab-case"],
+        "directive-selector": [true, "attribute", "anp", "camelCase"],
         "import-blacklist": false,
         "newline-per-chained-call": false,
-        "no-implicit-dependencies": [
-            true,
-            "dev"
-        ],
+        "no-implicit-dependencies": [true, "dev"],
         "no-lifecycle-call": false,
         "rxjs-suffix-subjects": false
     }

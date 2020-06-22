@@ -13,33 +13,25 @@ import { TAppState } from '../types';
     providedIn: 'root'
 })
 export class LocalStorageEffects {
-
     private _window: null | Window;
 
-    constructor (
-        private _actions$: Actions,
-        private _store: Store<TAppState>,
-        windowService: WindowService
-    ) {
+    constructor(private _actions$: Actions, private _store: Store<TAppState>, windowService: WindowService) {
         this._window = windowService.nativeWindow;
     }
 
-    @Effect({ dispatch: false }) get setMidiConnections$ (): Observable<void> {
-        return this._actions$
-            .pipe(
-                ofType(mergeMidiConnections, updateMidiConnection),
-                withLatestFrom(
-                    createMidiConnectionsSelector(this._store),
-                    (_, midiConnections) => midiConnections),
-                map((midiConnections) => {
-                    if (this._window !== null) {
-                        const strippedMidiConnections: ICacheableMidiConnection[] = midiConnections
-                            .map(({ instrumentId: _1, isConnected: _2, ...properties }) => properties);
+    @Effect({ dispatch: false }) get setMidiConnections$(): Observable<void> {
+        return this._actions$.pipe(
+            ofType(mergeMidiConnections, updateMidiConnection),
+            withLatestFrom(createMidiConnectionsSelector(this._store), (_, midiConnections) => midiConnections),
+            map((midiConnections) => {
+                if (this._window !== null) {
+                    const strippedMidiConnections: ICacheableMidiConnection[] = midiConnections.map(
+                        ({ instrumentId: _1, isConnected: _2, ...properties }) => properties
+                    );
 
-                        this._window.localStorage.setItem('midiConnections', JSON.stringify(strippedMidiConnections));
-                    }
-                })
-            );
+                    this._window.localStorage.setItem('midiConnections', JSON.stringify(strippedMidiConnections));
+                }
+            })
+        );
     }
-
 }

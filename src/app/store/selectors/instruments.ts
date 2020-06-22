@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { TAppState, TInstrument } from '../types';
 
 const findInstrumentByIdSelector = (instruments: TAppState['instruments'], id: TInstrument['id']) => {
-    return instruments.find((instrument) => (instrument.id === id));
+    return instruments.find((instrument) => instrument.id === id);
 };
 
 const instrumentByIdSelector = (instruments: TAppState['instruments'], id: TInstrument['id']) => {
@@ -18,7 +18,5 @@ const instrumentByIdSelector = (instruments: TAppState['instruments'], id: TInst
 
 const instrumentsSelector = (state: TAppState) => state.instruments;
 
-export const createInstrumentByIdSelector = (store: Observable<TAppState>, id: TInstrument['id']) => store
-    .pipe(
-        select(createSelector(instrumentsSelector, instrumentByIdSelector), id)
-    );
+export const createInstrumentByIdSelector = (store: Observable<TAppState>, id: TInstrument['id']) =>
+    store.pipe(select(createSelector(instrumentsSelector, instrumentByIdSelector), id));

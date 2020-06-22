@@ -11,15 +11,14 @@ import { WaitingService } from './waiting.service';
     providedIn: 'root'
 })
 export class RenderingService {
-
-    constructor (
+    constructor(
         private _fileReceivingService: FileReceivingService,
         private _fileSendingService: FileSendingService,
         private _recordingService: RecordingService,
         private _waitingService: WaitingService
-    ) { }
+    ) {}
 
-    public render (
+    public render(
         dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, // tslint:disable-line:no-null-undefined-union
         midiOutput: WebMidi.MIDIOutput,
         sourceId: string
@@ -37,39 +36,36 @@ export class RenderingService {
                 return parseArrayBuffer(arrayBuffer);
             })
             .then((midiJson) => {
-                midiJson.tracks = midiJson.tracks
-                    .map((events) => {
-                        const allowedEvents = [];
+                midiJson.tracks = midiJson.tracks.map((events) => {
+                    const allowedEvents = [];
 
-                        let delta = 0;
+                    let delta = 0;
 
-                        const length = events.length;
+                    const length = events.length;
 
-                        for (let i = 0; i < length; i += 1) {
-                            const event = events[i];
+                    for (let i = 0; i < length; i += 1) {
+                        const event = events[i];
 
-                            if (
-                                'endOfTrack' in event ||
-                                'noteOff' in event ||
-                                'noteOn' in event ||
-                                'setTempo' in event ||
-                                'timeSignature' in event ||
-                                'trackName' in event
-                            ) {
-                                event.delta = event.delta + delta;
-                                allowedEvents.push(event);
-                                delta = 0;
-                            } else {
-                                delta += event.delta;
-                            }
+                        if (
+                            'endOfTrack' in event ||
+                            'noteOff' in event ||
+                            'noteOn' in event ||
+                            'setTempo' in event ||
+                            'timeSignature' in event ||
+                            'trackName' in event
+                        ) {
+                            event.delta = event.delta + delta;
+                            allowedEvents.push(event);
+                            delta = 0;
+                        } else {
+                            delta += event.delta;
                         }
+                    }
 
-                        return allowedEvents;
-                    });
+                    return allowedEvents;
+                });
 
-                return this._recordingService
-                    .start(sourceId)
-                    .then(() => midiJson);
+                return this._recordingService.start(sourceId).then(() => midiJson);
             })
             .then((midiJson) => {
                 const midiPlayer = createMidiPlayer({ json: midiJson, midiOutput });
@@ -84,7 +80,7 @@ export class RenderingService {
             .then((arrayBuffer) => {
                 // @todo console.log('send');
 
-                return this._fileSendingService.send(dataChannelSubject, new Blob([ arrayBuffer ]));
+                return this._fileSendingService.send(dataChannelSubject, new Blob([arrayBuffer]));
             })
             .then(() => {
                 // @todo console.log('done');
@@ -92,5 +88,4 @@ export class RenderingService {
                 dataChannelSubject.close();
             });
     }
-
 }

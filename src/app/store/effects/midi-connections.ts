@@ -13,70 +13,63 @@ import { TAppState, TInstrument, TMidiConnection } from '../types';
     providedIn: 'root'
 })
 export class MidiConnectionsEffects {
+    constructor(private _actions$: Actions, private _store: Store<TAppState>) {}
 
-    constructor (
-        private _actions$: Actions,
-        private _store: Store<TAppState>
-    ) { }
-
-    @Effect() get deleteInstruments$ (): Observable<IDeleteInstrumentAction> {
-        return this._actions$
-            .pipe(
-                ofType(updateMidiConnection),
-                withLatestFrom(createMidiConnectionsSelector(this._store)
-                    .pipe(
-                        pairwise()
-                    )),
-                map(([ , [ previousMidiConnections, currentMidiConnections ] ]) => previousMidiConnections
+    @Effect() get deleteInstruments$(): Observable<IDeleteInstrumentAction> {
+        return this._actions$.pipe(
+            ofType(updateMidiConnection),
+            withLatestFrom(createMidiConnectionsSelector(this._store).pipe(pairwise())),
+            map(([, [previousMidiConnections, currentMidiConnections]]) =>
+                previousMidiConnections
                     .filter((midiConnection): midiConnection is { instrumentId: string } & TMidiConnection => {
-                        return (midiConnection.instrumentId !== undefined);
+                        return midiConnection.instrumentId !== undefined;
                     })
-                    .filter(({ midiOutputId }) => currentMidiConnections
-                        .some(({ instrumentId, midiOutputId: mdTptD }) => (midiOutputId === mdTptD && instrumentId === undefined)))
-                    .map(({ instrumentId }) => instrumentId)),
-                filter((instrumentIds) => (instrumentIds.length > 0)),
-                mergeMap((instrumentIds) => from(instrumentIds)),
-                mergeMap((instrumentId) => createInstrumentByIdSelector(this._store, instrumentId)
-                    .pipe(
-                        filter((instrument): instrument is TInstrument => instrument !== null),
-                        first()
-                    )),
-                map((instrument) => deleteInstrument(instrument))
-            );
+                    .filter(({ midiOutputId }) =>
+                        currentMidiConnections.some(
+                            ({ instrumentId, midiOutputId: mdTptD }) => midiOutputId === mdTptD && instrumentId === undefined
+                        )
+                    )
+                    .map(({ instrumentId }) => instrumentId)
+            ),
+            filter((instrumentIds) => instrumentIds.length > 0),
+            mergeMap((instrumentIds) => from(instrumentIds)),
+            mergeMap((instrumentId) =>
+                createInstrumentByIdSelector(this._store, instrumentId).pipe(
+                    filter((instrument): instrument is TInstrument => instrument !== null),
+                    first()
+                )
+            ),
+            map((instrument) => deleteInstrument(instrument))
+        );
     }
 
-    @Effect() get patchInstrument$ (): Observable<IPatchInstrumentAction> {
-        return this._actions$
-            .pipe(
-                pluckPayloadOfType(updateMidiConnection),
-                debounceTime(500),
-                filter((midiConnection) => !('instrumentId' in midiConnection)),
-                mergeMap(
-                    (midiConnection) => createMidiConnectionByMidiOutputIdSelector(this._store, midiConnection.midiOutputId)
-                        .pipe(
-                            filter((mdCnnctn): mdCnnctn is TMidiConnection => (mdCnnctn !== null)),
-                            first(),
-                            map(({ instrumentId, midiOutputName }) => [ instrumentId, midiOutputName ]),
-                            filter<(string | undefined)[], [ string, string ]>((args): args is [ string, string ] => args[0] !== undefined),
-                            map(([ instrumentId, midiOutputName ]) => ({ instrumentId, midiConnection, midiOutputName })))
-                        ),
-                filter(({ midiConnection: { description, gearogsSlug, name, soundCloudUsername } }) => {
-                    return (description !== undefined ||
-                        gearogsSlug !== undefined ||
-                        name !== undefined ||
-                        soundCloudUsername !== undefined);
-                }),
-                map(({ instrumentId, midiConnection, midiOutputName }) => {
-                    const { description, gearogsSlug, name, soundCloudUsername } = midiConnection;
-                    const instrument = { description, gearogsSlug, soundCloudUsername };
+    @Effect() get patchInstrument$(): Observable<IPatchInstrumentAction> {
+        return this._actions$.pipe(
+            pluckPayloadOfType(updateMidiConnection),
+            debounceTime(500),
+            filter((midiConnection) => !('instrumentId' in midiConnection)),
+            mergeMap((midiConnection) =>
+                createMidiConnectionByMidiOutputIdSelector(this._store, midiConnection.midiOutputId).pipe(
+                    filter((mdCnnctn): mdCnnctn is TMidiConnection => mdCnnctn !== null),
+                    first(),
+                    map(({ instrumentId, midiOutputName }) => [instrumentId, midiOutputName]),
+                    filter<(string | undefined)[], [string, string]>((args): args is [string, string] => args[0] !== undefined),
+                    map(([instrumentId, midiOutputName]) => ({ instrumentId, midiConnection, midiOutputName }))
+                )
+            ),
+            filter(({ midiConnection: { description, gearogsSlug, name, soundCloudUsername } }) => {
+                return description !== undefined || gearogsSlug !== undefined || name !== undefined || soundCloudUsername !== undefined;
+            }),
+            map(({ instrumentId, midiConnection, midiOutputName }) => {
+                const { description, gearogsSlug, name, soundCloudUsername } = midiConnection;
+                const instrument = { description, gearogsSlug, soundCloudUsername };
 
-                    if (name !== undefined) {
-                        return patchInstrument({ id: instrumentId, ...instrument, name: (name === null) ? midiOutputName : name });
-                    }
+                if (name !== undefined) {
+                    return patchInstrument({ id: instrumentId, ...instrument, name: name === null ? midiOutputName : name });
+                }
 
-                    return patchInstrument({ id: instrumentId, ...instrument });
-                })
-            );
+                return patchInstrument({ id: instrumentId, ...instrument });
+            })
+        );
     }
-
 }

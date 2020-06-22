@@ -16,31 +16,27 @@ import { ResponseError } from './response-error';
     providedIn: 'root'
 })
 export class InstrumentsService {
-
-    constructor (
+    constructor(
         @Inject(ENDPOINT) private _endpoint: string,
         private _httpClient: HttpClient,
         private _peerConnectingService: PeerConnectingService,
         private _store: Store<TAppState>
-    ) { }
+    ) {}
 
-    get isSupported (): boolean {
+    get isSupported(): boolean {
         return isSupported;
     }
 
-    public connect ({ socket: { url } }: TInstrument): Observable<RTCDataChannel> {
+    public connect({ socket: { url } }: TInstrument): Observable<RTCDataChannel> {
         const webSocketSubject = connect<TWebSocketEvent>(url); // tslint:disable-line:no-null-undefined-union
 
         return this._peerConnectingService.connect(webSocketSubject);
     }
 
-    public create (instrument: object): Observable<TInstrument> {
-        return this._httpClient
-            .post<TInstrument>(`https${ this._endpoint }instruments`, instrument)
-            .pipe(
-                tap((nstrmnt) => this._store.dispatch(addInstrument(nstrmnt))),
-                catchError((response) => throwError(new ResponseError(response)))
-            );
+    public create(instrument: object): Observable<TInstrument> {
+        return this._httpClient.post<TInstrument>(`https${this._endpoint}instruments`, instrument).pipe(
+            tap((nstrmnt) => this._store.dispatch(addInstrument(nstrmnt))),
+            catchError((response) => throwError(new ResponseError(response)))
+        );
     }
-
 }

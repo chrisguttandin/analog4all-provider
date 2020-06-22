@@ -10,23 +10,12 @@ import { ResponseError } from './response-error';
     providedIn: 'root'
 })
 export class SamplesService {
+    constructor(@Inject(ENDPOINT) private _endpoint: string, private _httpClient: HttpClient) {}
 
-    constructor (
-        @Inject(ENDPOINT) private _endpoint: string,
-        private _httpClient: HttpClient
-    ) { }
-
-    public create ({ file }: { file: Blob }): Observable<{ created: number; id: string; modified: number }> {
-        return this._httpClient
-            .post<ISampleResponse>(`https${ this._endpoint }samples`, null)
-            .pipe(
-                mergeMap(({ created, id, modified, url }) => this._httpClient
-                    .put(url, file)
-                    .pipe(
-                        map(() => ({ created, id, modified }))
-                    )),
-                catchError((response) => throwError(new ResponseError(response)))
-            );
+    public create({ file }: { file: Blob }): Observable<{ created: number; id: string; modified: number }> {
+        return this._httpClient.post<ISampleResponse>(`https${this._endpoint}samples`, null).pipe(
+            mergeMap(({ created, id, modified, url }) => this._httpClient.put(url, file).pipe(map(() => ({ created, id, modified })))),
+            catchError((response) => throwError(new ResponseError(response)))
+        );
     }
-
 }

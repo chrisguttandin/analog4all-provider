@@ -3,8 +3,7 @@ import { IMediaRecorder, MediaRecorder, register } from 'extendable-media-record
 import { connect } from 'extendable-media-recorder-wav-encoder';
 import { UserMediaService } from './user-media.service';
 
-connect()
-    .then((port) => register(port));
+connect().then((port) => register(port));
 
 const FADE_OUT_OFFSET = 5;
 
@@ -14,7 +13,6 @@ const FADE_OUT_TICKS = 20;
     providedIn: 'root'
 })
 export class RecordingService {
-
     private _analyserNode: null | AnalyserNode;
 
     private _audioContext: null | AudioContext;
@@ -23,14 +21,14 @@ export class RecordingService {
 
     private _mediaRecorder: null | IMediaRecorder;
 
-    constructor (private _userMediaService: UserMediaService) {
+    constructor(private _userMediaService: UserMediaService) {
         this._analyserNode = null;
         this._audioContext = null;
         this._gainNode = null;
         this._mediaRecorder = null;
     }
 
-    public start (sourceId: string): Promise<void> {
+    public start(sourceId: string): Promise<void> {
         if (this._audioContext === null) {
             this._audioContext = new AudioContext();
         }
@@ -45,21 +43,20 @@ export class RecordingService {
             });
     }
 
-    public stop (): Promise<Blob> {
-        return this._waitForSilence()
-            .then(() => {
-                return new Promise<Blob>((resolve) => {
-                    if (this._mediaRecorder === null) {
-                        throw new Error('Expected a MediaRecorder.');
-                    }
+    public stop(): Promise<Blob> {
+        return this._waitForSilence().then(() => {
+            return new Promise<Blob>((resolve) => {
+                if (this._mediaRecorder === null) {
+                    throw new Error('Expected a MediaRecorder.');
+                }
 
-                    this._mediaRecorder.addEventListener('dataavailable', ({ data }: any) => resolve(data));
-                    this._mediaRecorder.stop();
-                });
+                this._mediaRecorder.addEventListener('dataavailable', ({ data }: any) => resolve(data));
+                this._mediaRecorder.stop();
             });
+        });
     }
 
-    private _detectSilence (currentTime: number, done: Function, attempt: number): void {
+    private _detectSilence(currentTime: number, done: Function, attempt: number): void {
         if (this._analyserNode === null) {
             throw new Error('Expected an AnalyserNode.');
         }
@@ -95,7 +92,7 @@ export class RecordingService {
         if (sum === 0) {
             done();
         } else {
-            const gain = (attempt > FADE_OUT_TICKS) ? 0 : 1 - Math.pow((attempt / FADE_OUT_TICKS), 2);
+            const gain = attempt > FADE_OUT_TICKS ? 0 : 1 - Math.pow(attempt / FADE_OUT_TICKS, 2);
 
             this._gainNode.gain.linearRampToValueAtTime(gain, this._audioContext.currentTime + tickLength);
 
@@ -103,7 +100,7 @@ export class RecordingService {
         }
     }
 
-    private _waitForSilence (): Promise<void> {
+    private _waitForSilence(): Promise<void> {
         return new Promise((resolve) => {
             if (this._audioContext === null) {
                 throw new Error('Expected an initialized AudioContext.');
@@ -113,7 +110,7 @@ export class RecordingService {
         });
     }
 
-    private _wireInput (mediaStream: MediaStream): MediaStream {
+    private _wireInput(mediaStream: MediaStream): MediaStream {
         if (this._audioContext === null) {
             throw new Error('Expected an initialized AudioContext.');
         }
@@ -123,19 +120,14 @@ export class RecordingService {
         this._gainNode = this._audioContext.createGain();
         this._analyserNode = this._audioContext.createAnalyser();
 
-        const mediaStreamAudioDestinationNode = (<any> this._audioContext).createMediaStreamDestination();
+        const mediaStreamAudioDestinationNode = (<any>this._audioContext).createMediaStreamDestination();
 
-        mediaStreamAudioSourceNode
-            .connect(this._gainNode)
-            .connect(this._analyserNode);
+        mediaStreamAudioSourceNode.connect(this._gainNode).connect(this._analyserNode);
 
-        this._analyserNode
-            .connect(mediaStreamAudioDestinationNode);
+        this._analyserNode.connect(mediaStreamAudioDestinationNode);
 
-        this._analyserNode
-            .connect(this._audioContext.destination);
+        this._analyserNode.connect(this._audioContext.destination);
 
         return mediaStreamAudioDestinationNode.stream;
     }
-
 }

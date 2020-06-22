@@ -8,24 +8,18 @@ import { PermissionStateService } from './permission-state';
     providedIn: 'root'
 })
 export class MidiOutputsService {
-
     private _midiAccess: null | WebMidi.MIDIAccess;
 
-    constructor (
-        private _midiAccessService: MidiAccessService,
-        private _permissionStateService: PermissionStateService
-    ) {
+    constructor(private _midiAccessService: MidiAccessService, private _permissionStateService: PermissionStateService) {
         this._midiAccess = null;
     }
 
-    public get (id: string): WebMidi.MIDIOutput {
+    public get(id: string): WebMidi.MIDIOutput {
         if (this._midiAccess === null) {
             throw new Error('Expected an exisiting MIDIAccess object.');
         }
 
-        const midiOutput = Array
-            .from(this._midiAccess.outputs.values())
-            .find(({ id: d }) => (id === d));
+        const midiOutput = Array.from(this._midiAccess.outputs.values()).find(({ id: d }) => id === d);
 
         if (midiOutput === undefined) {
             throw new Error('A MIDIOutput with the given id is not connected.');
@@ -34,26 +28,24 @@ export class MidiOutputsService {
         return midiOutput;
     }
 
-    public watch (): Observable<WebMidi.MIDIOutput[]> {
+    public watch(): Observable<WebMidi.MIDIOutput[]> {
         const midiOutputs$ = new Observable<WebMidi.MIDIOutput[]>((observer) => {
             if (this._midiAccessService.isSupported && this._permissionStateService.isSupported) {
                 let onStateChangeListener: null | EventListener = null;
 
-                this._midiAccessService
-                    .request()
-                    .then((midiAccess) => {
-                        this._midiAccess = midiAccess;
+                this._midiAccessService.request().then((midiAccess) => {
+                    this._midiAccess = midiAccess;
 
-                        observer.next(Array.from(midiAccess.outputs.values()));
+                    observer.next(Array.from(midiAccess.outputs.values()));
 
-                        onStateChangeListener = () => {
-                            if (midiAccess !== null) {
-                                observer.next(Array.from(midiAccess.outputs.values()));
-                            }
-                        };
+                    onStateChangeListener = () => {
+                        if (midiAccess !== null) {
+                            observer.next(Array.from(midiAccess.outputs.values()));
+                        }
+                    };
 
-                        midiAccess.addEventListener('statechange', onStateChangeListener);
-                    });
+                    midiAccess.addEventListener('statechange', onStateChangeListener);
+                });
 
                 return () => {
                     if (this._midiAccess !== null && onStateChangeListener !== null) {
@@ -69,17 +61,14 @@ export class MidiOutputsService {
             return;
         });
 
-        return this._permissionStateService
-            .watch('midi')
-            .pipe(
-                switchMap((permissionState) => {
-                    if (permissionState === 'granted') {
-                        return midiOutputs$;
-                    }
+        return this._permissionStateService.watch('midi').pipe(
+            switchMap((permissionState) => {
+                if (permissionState === 'granted') {
+                    return midiOutputs$;
+                }
 
-                    return of([ ]);
-                })
-            );
+                return of([]);
+            })
+        );
     }
-
 }

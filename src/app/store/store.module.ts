@@ -23,36 +23,27 @@ import { TAppState } from './types';
                 strictStateSerializability: !environment.production
             }
         }),
-        EffectsModule.forRoot([
-            InstrumentsEffects,
-            LocalStorageEffects,
-            MidiConnectionsEffects,
-            MidiOutputsEffects
-        ]),
-        (environment.production)
-            ? [ ]
-            : StoreDevtoolsModule.instrument({ maxAge: 50 })
+        EffectsModule.forRoot([InstrumentsEffects, LocalStorageEffects, MidiConnectionsEffects, MidiOutputsEffects]),
+        environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 50 })
     ],
     providers: [
         {
-            deps: [ Store ],
+            deps: [Store],
             multi: true,
             provide: APP_INITIALIZER,
             useFactory: (store: Store<TAppState>) => () => store.dispatch(watchMidiOutputs())
         },
         {
-            deps: [ Store, WindowService ],
+            deps: [Store, WindowService],
             multi: true,
             provide: APP_INITIALIZER,
             useFactory: (store: Store<TAppState>, windowService: WindowService) => () => {
-                const stringifiedMidiConnections = (windowService.nativeWindow === null)
-                    ? null
-                    : windowService.nativeWindow.localStorage.getItem('midiConnections');
+                const stringifiedMidiConnections =
+                    windowService.nativeWindow === null ? null : windowService.nativeWindow.localStorage.getItem('midiConnections');
 
                 if (stringifiedMidiConnections !== null) {
                     const midiConnections: ICacheableMidiConnection[] = JSON.parse(stringifiedMidiConnections);
-                    const unconnectedMidiConnections = midiConnections
-                        .map((midiConnection) => ({ ...midiConnection, isConnected: false }));
+                    const unconnectedMidiConnections = midiConnections.map((midiConnection) => ({ ...midiConnection, isConnected: false }));
 
                     // @todo Validate midiConnections.
 
@@ -62,4 +53,4 @@ import { TAppState } from './types';
         }
     ]
 })
-export class StoreModule { }
+export class StoreModule {}

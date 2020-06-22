@@ -3,7 +3,6 @@ import { browser, logging } from 'protractor';
 import { HomePage } from './home.po';
 
 describe('/', () => {
-
     let page: HomePage;
 
     afterEach(async () => {
@@ -11,9 +10,11 @@ describe('/', () => {
             // Assert that there are no errors emitted from the browser
             const logs = await browser.manage().logs().get(logging.Type.BROWSER);
 
-            expect(logs).not.toContain(jasmine.objectContaining(<Partial<logging.Entry>> {
-                level: logging.Level.SEVERE
-            }));
+            expect(logs).not.toContain(
+                jasmine.objectContaining(<Partial<logging.Entry>>{
+                    level: logging.Level.SEVERE
+                })
+            );
         } catch (err) {
             // @todo The driver for Safari does not support to retrieve the logs.
             if (err.name === 'UnsupportedOperationError') {
@@ -35,7 +36,6 @@ describe('/', () => {
     });
 
     describe('without any MIDI devices', () => {
-
         let browserName: string;
 
         beforeEach(async () => {
@@ -53,13 +53,11 @@ describe('/', () => {
                 expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
             }
         });
-
     });
 
     describe('with a MIDI device (at least locally)', () => {
-
         let browserName: string;
-        let virtualMidiInput: { closePort (): void; openVirtualPort (name: string): void };
+        let virtualMidiInput: { closePort(): void; openVirtualPort(name: string): void };
 
         afterEach(() => {
             if (env.TRAVIS === undefined) {
@@ -95,7 +93,5 @@ describe('/', () => {
                 expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
             }
         });
-
     });
-
 });

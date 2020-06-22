@@ -10,32 +10,27 @@ import { first } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class WaitingService {
-
-    public wait (dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Promise<void> { // tslint:disable-line:max-line-length no-null-undefined-union
+    public wait(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Promise<void> {
+        // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
             const waitingChannelSubject = mask({ type: 'waiting' }, dataChannelSubject); // tslint:disable-line:no-null-undefined-union
 
-            const waitingChannelSubscription = waitingChannelSubject
-                .pipe(
-                    first<any>()
-                )
-                .subscribe({
-                    complete (): void {
-                        reject(new Error('The underlying channel was closed before any value could be received.'));
-                    },
-                    error (err: any): void {
-                        reject(err);
-                    },
-                    next (): void {
-                        waitingChannelSubscription.unsubscribe();
-                        dataChannelSubject.next({ type: 'ready' });
+            const waitingChannelSubscription = waitingChannelSubject.pipe(first<any>()).subscribe({
+                complete(): void {
+                    reject(new Error('The underlying channel was closed before any value could be received.'));
+                },
+                error(err: any): void {
+                    reject(err);
+                },
+                next(): void {
+                    waitingChannelSubscription.unsubscribe();
+                    dataChannelSubject.next({ type: 'ready' });
 
-                        resolve();
-                    }
-                });
+                    resolve();
+                }
+            });
 
             waitingChannelSubject.next(undefined);
         });
     }
-
 }

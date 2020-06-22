@@ -13,38 +13,31 @@ import { TAppState } from '../types';
     providedIn: 'root'
 })
 export class MidiOutputsEffects {
+    constructor(private _actions$: Actions, private _midiOutputsService: MidiOutputsService, private _store: Store<TAppState>) {}
 
-    constructor (
-        private _actions$: Actions,
-        private _midiOutputsService: MidiOutputsService,
-        private _store: Store<TAppState>
-    ) { }
+    @Effect() get mergeMidiConnections$(): Observable<IMergeMidiConnectionsAction> {
+        return this._actions$.pipe(
+            ofType(watchMidiOutputs),
+            mergeMap(() => this._midiOutputsService.watch()),
+            withLatestFrom(createMidiConnectionsSelector(this._store)),
+            map(([midiOutputs, midiConnections]) =>
+                mergeMidiConnections([
+                    ...midiOutputs.map(({ id, name }) => {
+                        const midiConnection = midiConnections.find(({ midiOutputId }) => id === midiOutputId);
 
-    @Effect() get mergeMidiConnections$ (): Observable<IMergeMidiConnectionsAction> {
-        return this._actions$
-            .pipe(
-                ofType(watchMidiOutputs),
-                mergeMap(() => this._midiOutputsService.watch()),
-                withLatestFrom(createMidiConnectionsSelector(this._store)),
-                map(([ midiOutputs, midiConnections ]) => mergeMidiConnections([
-                    ...midiOutputs
-                        .map(({ id, name }) => {
-                            const midiConnection = midiConnections.find(({ midiOutputId }) => id === midiOutputId);
-
-                            return {
-                                isConnected: true,
-                                midiOutputId: id,
-                                midiOutputName: (name === undefined) ? '' : name,
-                                name: (midiConnection === undefined) ? null : midiConnection.name,
-                                sourceId: (midiConnection === undefined) ? 'default' : midiConnection.sourceId
-                            };
-                        }),
+                        return {
+                            isConnected: true,
+                            midiOutputId: id,
+                            midiOutputName: name === undefined ? '' : name,
+                            name: midiConnection === undefined ? null : midiConnection.name,
+                            sourceId: midiConnection === undefined ? 'default' : midiConnection.sourceId
+                        };
+                    }),
                     ...midiConnections
-                        .filter(({ midiOutputId }) => midiOutputs
-                            .every(({ id }) => midiOutputId !== id))
+                        .filter(({ midiOutputId }) => midiOutputs.every(({ id }) => midiOutputId !== id))
                         .map((midiConnection) => ({ ...midiConnection, isConnected: false }))
-                ]))
-            );
+                ])
+            )
+        );
     }
-
 }

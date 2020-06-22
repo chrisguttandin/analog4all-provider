@@ -6,10 +6,9 @@ import { WindowService } from './window.service';
     providedIn: 'root'
 })
 export class PermissionStateService {
-
     private _window: null | Window;
 
-    constructor (windowService: WindowService) {
+    constructor(windowService: WindowService) {
         this._window = windowService.nativeWindow;
     }
 
@@ -17,29 +16,27 @@ export class PermissionStateService {
      * This property is true if the browser supports all the required APIs to use the
      * PermissionStateService.
      */
-    get isSupported (): boolean {
-        return (this._window !== null && 'permissions' in this._window.navigator && 'query' in this._window.navigator.permissions);
+    get isSupported(): boolean {
+        return this._window !== null && 'permissions' in this._window.navigator && 'query' in this._window.navigator.permissions;
     }
 
-    public watch (name: 'microphone' | 'midi'): Observable<PermissionState> {
+    public watch(name: 'microphone' | 'midi'): Observable<PermissionState> {
         return new Observable<PermissionState>((observer) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
                 let removeOnChangeListener: null | (() => void) = null;
 
-                (<Window> this._window).navigator.permissions
-                    .query({ name })
-                    .then((status) => {
-                        if (!isUnsubscribed) {
-                            observer.next(status.state);
+                (<Window>this._window).navigator.permissions.query({ name }).then((status) => {
+                    if (!isUnsubscribed) {
+                        observer.next(status.state);
 
-                            const onChangeListener = () => observer.next(status.state);
+                        const onChangeListener = () => observer.next(status.state);
 
-                            status.addEventListener('change', onChangeListener);
+                        status.addEventListener('change', onChangeListener);
 
-                            removeOnChangeListener = () => status.removeEventListener('change', onChangeListener);
-                        }
-                    });
+                        removeOnChangeListener = () => status.removeEventListener('change', onChangeListener);
+                    }
+                });
 
                 return () => {
                     isUnsubscribed = true;
@@ -56,5 +53,4 @@ export class PermissionStateService {
             return;
         });
     }
-
 }

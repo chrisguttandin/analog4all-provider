@@ -4,9 +4,8 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class DownloadingService {
-
-    public download (fileName: string, blob: Blob): void {
-        const file = new File([ blob ], fileName, { type: 'audio/wav' });
+    public download(fileName: string, blob: Blob): void {
+        const file = new File([blob], fileName, { type: 'audio/wav' });
 
         const link$ = document.createElement('a');
 
@@ -17,5 +16,4 @@ export class DownloadingService {
         link$.click();
         document.body.removeChild(link$);
     }
-
 }

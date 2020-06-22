@@ -9,6 +9,7 @@ export const mergeMidiConnections = createAction(MERGE_MIDI_CONNECTIONS, (midiCo
     payload: midiConnections
 }));
 
-export const updateMidiConnection = createAction(UPDATE_MIDI_CONNECTION, (
-    midiConnection: TIdentifiable<TMidiConnection, 'midiOutputId'>
-) => ({ payload: midiConnection }));
+export const updateMidiConnection = createAction(
+    UPDATE_MIDI_CONNECTION,
+    (midiConnection: TIdentifiable<TMidiConnection, 'midiOutputId'>) => ({ payload: midiConnection })
+);

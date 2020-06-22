@@ -1,7 +1,7 @@
 // @todo Define the complete type declarations as defined by the MediaStream Recording specification.
 
-interface MediaRecorderOptions { // tslint:disable-line:interface-name
-
+// tslint:disable-next-line:interface-name
+interface MediaRecorderOptions {
     audioBitsPerSecond?: number;
 
     bitsPerSecond?: number;
@@ -9,29 +9,24 @@ interface MediaRecorderOptions { // tslint:disable-line:interface-name
     mimeType?: string;
 
     videoBitsPerSecond?: number;
-
 }
 
-interface MediaRecorder extends EventTarget { // tslint:disable-line:interface-name
+// tslint:disable-next-line:interface-name
+interface MediaRecorder extends EventTarget {
+    start(timeslice?: number): void;
 
-    start (timeslice?: number): void;
-
-    stop (): void;
-
+    stop(): void;
 }
 
 declare var MediaRecorder: {
-
     prototype: MediaRecorder;
 
     new (stream: MediaStream, options: MediaRecorderOptions): MediaRecorder;
 
-    isTypeSupported (mimeType: string): boolean;
-
+    isTypeSupported(mimeType: string): boolean;
 };
 
-interface Window { // tslint:disable-line:interface-name
-
+// tslint:disable-next-line:interface-name
+interface Window {
     MediaRecorder: typeof MediaRecorder;
-
 }

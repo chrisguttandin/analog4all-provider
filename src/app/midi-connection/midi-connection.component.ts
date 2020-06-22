@@ -19,11 +19,10 @@ import { TAppState, TInstrument, TMidiConnection, createInstrumentByIdSelector, 
 
 @Component({
     selector: 'anp-midi-connection',
-    styleUrls: [ './midi-connection.component.css' ],
+    styleUrls: ['./midi-connection.component.css'],
     templateUrl: './midi-connection.component.html'
 })
 export class MidiConnectionComponent implements OnChanges {
-
     public audioInputs$!: Observable<MediaDeviceInfo[]>;
 
     public instrumentName$!: Observable<string>;
@@ -38,7 +37,7 @@ export class MidiConnectionComponent implements OnChanges {
 
     private _scaleMidiJson: IMidiFile;
 
-    constructor (
+    constructor(
         private _downloadingService: DownloadingService,
         middleCMidiJsonService: MiddleCMidiJsonService,
         private _midiOutputsService: MidiOutputsService,
@@ -55,40 +54,41 @@ export class MidiConnectionComponent implements OnChanges {
         this.virtualInstrumentName = '';
     }
 
-    public deregister (): void {
+    public deregister(): void {
         this._store.dispatch(updateMidiConnection({ instrumentId: undefined, midiOutputId: this.midiConnection.midiOutputId }));
     }
 
-    public ngOnChanges (changes: SimpleChanges): void {
+    public ngOnChanges(changes: SimpleChanges): void {
         if (changes.midiConnection !== undefined) {
             const midiConnection = this.midiConnection;
 
-            this.isRegistered = (midiConnection.instrumentId !== undefined);
-            this.virtualInstrumentName = (midiConnection.name === null) ? midiConnection.midiOutputName : midiConnection.name;
+            this.isRegistered = midiConnection.instrumentId !== undefined;
+            this.virtualInstrumentName = midiConnection.name === null ? midiConnection.midiOutputName : midiConnection.name;
         }
     }
 
-    public register (): void {
-        this._registeringService
-            .register(this.midiConnection, this.virtualInstrumentName)
-            .then(({ connection, instrument }) => {
-                this._store.dispatch(updateMidiConnection({ instrumentId: instrument.id, midiOutputId: this.midiConnection.midiOutputId }));
+    public register(): void {
+        this._registeringService.register(this.midiConnection, this.virtualInstrumentName).then(({ connection, instrument }) => {
+            this._store.dispatch(updateMidiConnection({ instrumentId: instrument.id, midiOutputId: this.midiConnection.midiOutputId }));
 
-                connection
-                    .pipe(
-                        concatMap((dataChannel) => this._renderingService.render(
+            connection
+                .pipe(
+                    concatMap((dataChannel) =>
+                        this._renderingService.render(
                             wrap(dataChannel),
                             this._midiOutputsService.get(this.midiConnection.midiOutputId),
                             this.midiConnection.sourceId
-                        ))
+                        )
                     )
-                    .subscribe(() => { // tslint:disable-line:no-empty rxjs-prefer-async-pipe
-                        // @todo
-                    });
-            });
+                )
+                .subscribe(() => {
+                    // tslint:disable-line:no-empty rxjs-prefer-async-pipe
+                    // @todo
+                });
+        });
     }
 
-    public sample (): void {
+    public sample(): void {
         this._recordingService
             .start(this.midiConnection.sourceId)
             .then(() => {
@@ -100,31 +100,37 @@ export class MidiConnectionComponent implements OnChanges {
                 return midiPlayer.play();
             })
             .then(() => this._recordingService.stop())
-            .then((blob) => new Promise<{ id: string }>((resolve) => this._samplesService
-                .create({ file: blob })
-                .subscribe((sample) => resolve(sample)))) // tslint:disable-line:rxjs-prefer-async-pipe
-            .then((sample) => new Promise((resolve) => {
-                const instrumentId = this.midiConnection.instrumentId;
-
-                if (instrumentId === undefined) {
-                    resolve();
-
-                    return;
-                }
-
-                return createInstrumentByIdSelector(this._store, instrumentId)
-                    .pipe(
-                        filter((instrument): instrument is TInstrument => instrument !== null),
-                        first(),
-                        map(() => {
-                            this._store.dispatch(patchInstrument({ id: instrumentId, sample: { id: sample.id } }));
-                        })
+            .then(
+                (blob) =>
+                    new Promise<{ id: string }>((resolve) =>
+                        this._samplesService.create({ file: blob }).subscribe((sample) => resolve(sample))
                     )
-                    .subscribe(() => resolve()); // tslint:disable-line:rxjs-prefer-async-pipe
-            }));
+            ) // tslint:disable-line:rxjs-prefer-async-pipe
+            .then(
+                (sample) =>
+                    new Promise((resolve) => {
+                        const instrumentId = this.midiConnection.instrumentId;
+
+                        if (instrumentId === undefined) {
+                            resolve();
+
+                            return;
+                        }
+
+                        return createInstrumentByIdSelector(this._store, instrumentId)
+                            .pipe(
+                                filter((instrument): instrument is TInstrument => instrument !== null),
+                                first(),
+                                map(() => {
+                                    this._store.dispatch(patchInstrument({ id: instrumentId, sample: { id: sample.id } }));
+                                })
+                            )
+                            .subscribe(() => resolve()); // tslint:disable-line:rxjs-prefer-async-pipe
+                    })
+            );
     }
 
-    public test (): void {
+    public test(): void {
         this._recordingService
             .start(this.midiConnection.sourceId)
             .then(() => {
@@ -139,66 +145,73 @@ export class MidiConnectionComponent implements OnChanges {
             .then((blob) => this._downloadingService.download('sample.wav', blob));
     }
 
-    public updateDescription (event: Event): void {
+    public updateDescription(event: Event): void {
         if (event.target === null) {
             return;
         }
 
-        const description = (<HTMLInputElement> event.target).value.trim();
+        const description = (<HTMLInputElement>event.target).value.trim();
 
-        this._store.dispatch(updateMidiConnection({
-            description: (description === '') ? undefined : description,
-            midiOutputId: this.midiConnection.midiOutputId
-        }));
+        this._store.dispatch(
+            updateMidiConnection({
+                description: description === '' ? undefined : description,
+                midiOutputId: this.midiConnection.midiOutputId
+            })
+        );
     }
 
-    public updateGearogsSlug (event: Event): void {
+    public updateGearogsSlug(event: Event): void {
         if (event.target === null) {
             return;
         }
 
-        const description = (<HTMLInputElement> event.target).value.trim();
+        const description = (<HTMLInputElement>event.target).value.trim();
 
-        this._store.dispatch(updateMidiConnection({
-            gearogsSlug: (description === '') ? undefined : description,
-            midiOutputId: this.midiConnection.midiOutputId
-        }));
+        this._store.dispatch(
+            updateMidiConnection({
+                gearogsSlug: description === '' ? undefined : description,
+                midiOutputId: this.midiConnection.midiOutputId
+            })
+        );
     }
 
-    public updateInstrumentName (event: Event): void {
+    public updateInstrumentName(event: Event): void {
         if (event.target === null) {
             return;
         }
 
-        const name = (<HTMLInputElement> event.target).value.trim();
+        const name = (<HTMLInputElement>event.target).value.trim();
 
-        this._store.dispatch(updateMidiConnection({
-            midiOutputId: this.midiConnection.midiOutputId,
-            name: (name === '') ? null : name
-        }));
+        this._store.dispatch(
+            updateMidiConnection({
+                midiOutputId: this.midiConnection.midiOutputId,
+                name: name === '' ? null : name
+            })
+        );
     }
 
-    public updateSoundCloudUsername (event: Event): void {
+    public updateSoundCloudUsername(event: Event): void {
         if (event.target === null) {
             return;
         }
 
-        const soundCloudUsername = (<HTMLInputElement> event.target).value.trim();
+        const soundCloudUsername = (<HTMLInputElement>event.target).value.trim();
 
-        this._store.dispatch(updateMidiConnection({
-            midiOutputId: this.midiConnection.midiOutputId,
-            soundCloudUsername: (soundCloudUsername === '') ? undefined : soundCloudUsername
-        }));
+        this._store.dispatch(
+            updateMidiConnection({
+                midiOutputId: this.midiConnection.midiOutputId,
+                soundCloudUsername: soundCloudUsername === '' ? undefined : soundCloudUsername
+            })
+        );
     }
 
-    public updateSourceId (event: Event): void {
+    public updateSourceId(event: Event): void {
         if (event.target === null) {
             return;
         }
 
-        const sourceId = (<HTMLInputElement> event.target).value;
+        const sourceId = (<HTMLInputElement>event.target).value;
 
         this._store.dispatch(updateMidiConnection({ midiOutputId: this.midiConnection.midiOutputId, sourceId }));
     }
-
 }

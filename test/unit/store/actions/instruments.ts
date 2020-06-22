@@ -20,9 +20,7 @@ import {
 } from '../../../../src/app/store/actions';
 
 describe('instruments actions', () => {
-
     describe('addInstrument()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 created: 1518284684850,
@@ -38,11 +36,9 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: ADD_INSTRUMENT });
         });
-
     });
 
     describe('deleteInstrument()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 created: 1518284684850,
@@ -58,11 +54,9 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: DELETE_INSTRUMENT });
         });
-
     });
 
     describe('deleteInstrumentFail()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 created: 1518284684850,
@@ -78,11 +72,9 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: DELETE_INSTRUMENT_FAIL });
         });
-
     });
 
     describe('deleteInstrumentSuccess()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 created: 1518284684850,
@@ -98,11 +90,9 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: DELETE_INSTRUMENT_SUCCESS });
         });
-
     });
 
     describe('patchInstrument()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 created: 1518284684850,
@@ -118,22 +108,18 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: PATCH_INSTRUMENT });
         });
-
     });
 
     describe('patchInstrumentFail()', () => {
-
         it('should create an action', () => {
             const id = 'a fake id';
             const action = patchInstrumentFail(id);
 
             expect(action).toEqual({ payload: id, type: PATCH_INSTRUMENT_FAIL });
         });
-
     });
 
     describe('patchInstrumentSuccess()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 created: 1518284684850,
@@ -149,11 +135,9 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: PATCH_INSTRUMENT_SUCCESS });
         });
-
     });
 
     describe('removeInstrument()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 created: 1518284684850,
@@ -169,11 +153,9 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: REMOVE_INSTRUMENT });
         });
-
     });
 
     describe('updateInstrument()', () => {
-
         it('should create an action', () => {
             const instrument = {
                 id: 'a fake id',
@@ -183,7 +165,5 @@ describe('instruments actions', () => {
 
             expect(action).toEqual({ payload: instrument, type: UPDATE_INSTRUMENT });
         });
-
     });
-
 });

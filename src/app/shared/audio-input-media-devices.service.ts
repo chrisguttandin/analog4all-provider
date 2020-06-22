@@ -8,13 +8,9 @@ import { WindowService } from './window.service';
     providedIn: 'root'
 })
 export class AudioInputMediaDevicesService {
-
     private _window: null | Window;
 
-    constructor (
-        private _permissionStateService: PermissionStateService,
-        windowService: WindowService
-    ) {
+    constructor(private _permissionStateService: PermissionStateService, windowService: WindowService) {
         this._window = windowService.nativeWindow;
     }
 
@@ -22,26 +18,27 @@ export class AudioInputMediaDevicesService {
      * This property is true if the browser supports all the required APIs to use the
      * AudioInputMediaDevicesService.
      */
-    get isSupported (): boolean {
-        return (this._window !== null &&
-            'mediaDevices' in this._window.navigator &&
-            'enumerateDevices' in this._window.navigator.mediaDevices);
+    get isSupported(): boolean {
+        return (
+            this._window !== null && 'mediaDevices' in this._window.navigator && 'enumerateDevices' in this._window.navigator.mediaDevices
+        );
     }
 
-    public watch (): Observable<MediaDeviceInfo[]> {
+    public watch(): Observable<MediaDeviceInfo[]> {
         const mediaDevices$ = new Observable<MediaDeviceInfo[]>((observer) => {
             if (this.isSupported) {
                 let isUnsubscribed = false;
 
-                const mediaDevices = (<Window> this._window).navigator.mediaDevices;
+                const mediaDevices = (<Window>this._window).navigator.mediaDevices;
 
-                const enumerateDevices = () => mediaDevices
-                    .enumerateDevices()
-                    .then((mediaDeviceInfos) => {
+                const enumerateDevices = () =>
+                    mediaDevices.enumerateDevices().then((mediaDeviceInfos) => {
                         if (!isUnsubscribed) {
-                            observer.next(mediaDeviceInfos.filter(({ kind, label }) => {
-                                return (kind === 'audioinput' && label !== '');
-                            }));
+                            observer.next(
+                                mediaDeviceInfos.filter(({ kind, label }) => {
+                                    return kind === 'audioinput' && label !== '';
+                                })
+                            );
                         }
                     });
 
@@ -65,17 +62,14 @@ export class AudioInputMediaDevicesService {
             return;
         });
 
-        return this._permissionStateService
-            .watch('microphone')
-            .pipe(
-                switchMap((permissionState) => {
-                    if (permissionState === 'granted') {
-                        return mediaDevices$;
-                    }
+        return this._permissionStateService.watch('microphone').pipe(
+            switchMap((permissionState) => {
+                if (permissionState === 'granted') {
+                    return mediaDevices$;
+                }
 
-                    return of([ ]);
-                })
-            );
+                return of([]);
+            })
+        );
     }
-
 }

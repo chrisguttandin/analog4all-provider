@@ -1,24 +1,13 @@
 {
-  "compilerOptions": {
-    "declaration": false,
-    "declarationMap": false,
-    "module": "esnext",
-    "outDir": "../../out-tsc/spec",
-    "target": "es2015",
-    "types": [
-      "deep-freeze-strict",
-      "jasmine",
-      "node",
-      "webmidi",
-      "../../src/media-recorder"
-    ]
-  },
-  "extends": "tsconfig-holy-grail/src/tsconfig-browser",
-  "files": [
-    "../../config/karma/test.ts",
-    "../../src/polyfills.ts"
-  ],
-  "include": [
-    "**/*.ts"
-  ]
+    "compilerOptions": {
+        "declaration": false,
+        "declarationMap": false,
+        "module": "esnext",
+        "outDir": "../../out-tsc/spec",
+        "target": "es2015",
+        "types": ["deep-freeze-strict", "jasmine", "node", "webmidi", "../../src/media-recorder"]
+    },
+    "extends": "tsconfig-holy-grail/src/tsconfig-browser",
+    "files": ["../../config/karma/test.ts", "../../src/polyfills.ts"],
+    "include": ["**/*.ts"]
 }

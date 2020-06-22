@@ -16,30 +16,22 @@ import { TIdentifiable, TInstrument } from '../types';
     providedIn: 'root'
 })
 export class InstrumentService {
+    constructor(@Inject(ENDPOINT) private _endpoint: string, private _httpClient: HttpClient) {}
 
-    constructor (
-        @Inject(ENDPOINT) private _endpoint: string,
-        private _httpClient: HttpClient
-    ) { }
-
-    public delete (instrument: TInstrument): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
-        return this._httpClient
-            .delete(`https${ this._endpoint }instruments/${ instrument.id }`)
-            .pipe(
-                map(() => deleteInstrumentSuccess(instrument)),
-                catchError(() => of(deleteInstrumentFail(instrument)))
-            );
+    public delete(instrument: TInstrument): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
+        return this._httpClient.delete(`https${this._endpoint}instruments/${instrument.id}`).pipe(
+            map(() => deleteInstrumentSuccess(instrument)),
+            catchError(() => of(deleteInstrumentFail(instrument)))
+        );
     }
 
-    public patch (
-        { id, ...delta }: TIdentifiable<TInstrument, 'id'>
-    ): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
-        return this._httpClient
-            .patch(`https${ this._endpoint }instruments/${ id }`, delta)
-            .pipe(
-                map(() => patchInstrumentSuccess({ id, ...delta })),
-                catchError(() => of(patchInstrumentFail(id)))
-            );
+    public patch({
+        id,
+        ...delta
+    }: TIdentifiable<TInstrument, 'id'>): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
+        return this._httpClient.patch(`https${this._endpoint}instruments/${id}`, delta).pipe(
+            map(() => patchInstrumentSuccess({ id, ...delta })),
+            catchError(() => of(patchInstrumentFail(id)))
+        );
     }
-
 }

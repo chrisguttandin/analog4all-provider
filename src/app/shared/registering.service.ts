@@ -8,13 +8,9 @@ import { UserMediaService } from './user-media.service';
     providedIn: 'root'
 })
 export class RegisteringService {
+    constructor(private _instrumentsService: InstrumentsService, private _userMediaService: UserMediaService) {}
 
-    constructor (
-        private _instrumentsService: InstrumentsService,
-        private _userMediaService: UserMediaService
-    ) { }
-
-    public register (
+    public register(
         midiConnection: TMidiConnection,
         name: string
     ): Promise<{ connection: Observable<RTCDataChannel>; instrument: TInstrument }> {
@@ -49,9 +45,7 @@ export class RegisteringService {
                         }
                     }
 
-                    this._instrumentsService
-                        .create(data)
-                        .subscribe((instrument) => resolve(instrument));
+                    this._instrumentsService.create(data).subscribe((instrument) => resolve(instrument));
                 });
             })
             .then((instrument) => {
@@ -60,5 +54,4 @@ export class RegisteringService {
                 return { connection, instrument };
             });
     }
-
 }

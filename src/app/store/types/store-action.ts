@@ -6,8 +6,9 @@ import {
     IUpdateMidiConnectionAction
 } from '../interfaces';
 
-export type TStoreAction = IAddInstrumentAction |
-    IMergeMidiConnectionsAction |
-    IRemoveInstrumentAction |
-    IUpdateInstrumentAction |
-    IUpdateMidiConnectionAction;
+export type TStoreAction =
+    | IAddInstrumentAction
+    | IMergeMidiConnectionsAction
+    | IRemoveInstrumentAction
+    | IUpdateInstrumentAction
+    | IUpdateMidiConnectionAction;

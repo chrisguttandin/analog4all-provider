@@ -16,9 +16,7 @@ import { SourceIdSelectComponent } from './source-id-select/source-id-select.com
 import { StoreModule } from './store';
 
 @NgModule({
-    bootstrap: [
-        AppComponent
-    ],
+    bootstrap: [AppComponent],
     declarations: [
         AppComponent,
         DescriptionInputComponent,
@@ -36,8 +34,6 @@ import { StoreModule } from './store';
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: !!environment.production }),
         StoreModule
     ],
-    providers: [
-        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }
-    ]
+    providers: [{ provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }]
 })
-export class AppModule { }
+export class AppModule {}

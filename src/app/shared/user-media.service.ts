@@ -5,12 +5,11 @@ import { WindowService } from './window.service';
     providedIn: 'root'
 })
 export class UserMediaService {
-
     private _mediaStream: null | MediaStream;
 
     private _window: null | Window;
 
-    constructor (windowService: WindowService) {
+    constructor(windowService: WindowService) {
         this._mediaStream = null;
         this._window = windowService.nativeWindow;
     }
@@ -19,13 +18,11 @@ export class UserMediaService {
      * This property is true if the browser supports all the required APIs to use the
      * UserMediaService.
      */
-    get isSupported (): boolean {
-        return (this._window !== null &&
-            'mediaDevices' in this._window.navigator &&
-            'getUserMedia' in this._window.navigator.mediaDevices);
+    get isSupported(): boolean {
+        return this._window !== null && 'mediaDevices' in this._window.navigator && 'getUserMedia' in this._window.navigator.mediaDevices;
     }
 
-    public getAudioOnlyMediaStream (sourceId: string): Promise<MediaStream> {
+    public getAudioOnlyMediaStream(sourceId: string): Promise<MediaStream> {
         if (this._mediaStream !== null) {
             const audioTracks = this._mediaStream.getAudioTracks();
 
@@ -35,7 +32,7 @@ export class UserMediaService {
         }
 
         if (this.isSupported) {
-            return (<Window> this._window).navigator.mediaDevices
+            return (<Window>this._window).navigator.mediaDevices
                 .getUserMedia({
                     audio: {
                         // @todo Theoretically that should be 'sourceId' and not 'deviceId'.
@@ -54,5 +51,4 @@ export class UserMediaService {
 
         return Promise.reject(new Error('Media Capture and Streams are not supported by the current browser.'));
     }
-
 }

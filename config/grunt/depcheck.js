@@ -2,9 +2,7 @@ module.exports = {
     default: {
         options: {
             failOnUnusedDeps: true,
-            ignoreDirs: [
-                'build'
-            ],
+            ignoreDirs: ['build'],
             ignoreMatches: [
                 '@angular/router',
                 // @todo midi-json-parser-worker is actually used but gets detected as unused for some reason.

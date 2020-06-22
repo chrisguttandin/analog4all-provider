@@ -6,33 +6,27 @@ import { TAppState, TMidiConnection, createMidiConnectionsSelector } from '../st
 
 @Component({
     selector: 'anp-local-registry',
-    styleUrls: [ './local-registry.component.css' ],
+    styleUrls: ['./local-registry.component.css'],
     templateUrl: './local-registry.component.html'
 })
 export class LocalRegistryComponent implements OnInit {
-
     public connectedMidiConnections$!: Observable<TMidiConnection[]>;
 
     public hasConnectedMidiConnections$!: Observable<boolean>;
 
-    constructor (
-        private _store: Store<TAppState>
-    ) { }
+    constructor(private _store: Store<TAppState>) {}
 
-    public identifyMidiConnection (_: number, { midiOutputId }: TMidiConnection): string {
+    public identifyMidiConnection(_: number, { midiOutputId }: TMidiConnection): string {
         return midiOutputId;
     }
 
-    public ngOnInit (): void {
-        this.connectedMidiConnections$ = createMidiConnectionsSelector(this._store)
-            .pipe(
-                map((midiConnections) => midiConnections.filter(({ isConnected }) => isConnected))
-            );
+    public ngOnInit(): void {
+        this.connectedMidiConnections$ = createMidiConnectionsSelector(this._store).pipe(
+            map((midiConnections) => midiConnections.filter(({ isConnected }) => isConnected))
+        );
 
-        this.hasConnectedMidiConnections$ = this.connectedMidiConnections$
-            .pipe(
-                map((connectedMidiConnections) => (connectedMidiConnections.length > 0))
-            );
+        this.hasConnectedMidiConnections$ = this.connectedMidiConnections$.pipe(
+            map((connectedMidiConnections) => connectedMidiConnections.length > 0)
+        );
     }
-
 }

@@ -1,5 +1,4 @@
 export interface ISampleResponse {
-
     created: number;
 
     id: string;
@@ -7,5 +6,4 @@ export interface ISampleResponse {
     modified: number;
 
     url: string;
-
 }
