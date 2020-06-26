@@ -1,12 +1,12 @@
 import deepFreeze from 'deep-freeze-strict';
 import { midiConnectionsReducer } from '../../../../src/app/store/reducers';
-import { TMidiConnection } from '../../../../src/app/store/types';
+import { TMidiConnection, TStoreAction } from '../../../../src/app/store/types';
 
 describe('midiConnections reducer', () => {
     describe('with an undefined state', () => {
         describe('with an empty action', () => {
             it('should return the default state', () => {
-                const state = midiConnectionsReducer(undefined, <any>deepFreeze({}));
+                const state = midiConnectionsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual([]);
             });
@@ -46,7 +46,7 @@ describe('midiConnections reducer', () => {
 
         describe('with an empty action', () => {
             it('should return the previous state', () => {
-                const state = midiConnectionsReducer(previousState, <any>deepFreeze({}));
+                const state = midiConnectionsReducer(previousState, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual(previousState);
             });

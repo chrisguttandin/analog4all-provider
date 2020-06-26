@@ -1,12 +1,12 @@
 import deepFreeze from 'deep-freeze-strict';
 import { instrumentsReducer } from '../../../../src/app/store/reducers';
-import { TInstrument } from '../../../../src/app/store/types';
+import { TInstrument, TStoreAction } from '../../../../src/app/store/types';
 
 describe('instruments reducer', () => {
     describe('with an undefined state', () => {
         describe('with an empty action', () => {
             it('should return the default state', () => {
-                const state = instrumentsReducer(undefined, <any>deepFreeze({}));
+                const state = instrumentsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual([]);
             });
@@ -42,7 +42,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT' }));
 
                 expect(state).toEqual([]);
             });
@@ -60,7 +60,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT_FAIL' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT_FAIL' }));
 
                 expect(state).toEqual([]);
             });
@@ -78,7 +78,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT_SUCCESS' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT_SUCCESS' }));
 
                 expect(state).toEqual([]);
             });
@@ -96,7 +96,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: instrument, type: 'PATCH_INSTRUMENT' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: instrument, type: 'PATCH_INSTRUMENT' }));
 
                 expect(state).toEqual([]);
             });
@@ -105,7 +105,7 @@ describe('instruments reducer', () => {
         describe('with an action of type PATCH_INSTRUMENT_FAIL', () => {
             it('should return the default state', () => {
                 const id = 'a fake id';
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: id, type: 'PATCH_INSTRUMENT_FAIL' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: id, type: 'PATCH_INSTRUMENT_FAIL' }));
 
                 expect(state).toEqual([]);
             });
@@ -123,7 +123,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(undefined, <any>deepFreeze({ payload: instrument, type: 'PATCH_INSTRUMENT_SUCCESS' }));
+                const state = instrumentsReducer(undefined, deepFreeze({ payload: instrument, type: 'PATCH_INSTRUMENT_SUCCESS' }));
 
                 expect(state).toEqual([]);
             });
@@ -181,7 +181,7 @@ describe('instruments reducer', () => {
 
         describe('with an empty action', () => {
             it('should return the previous state', () => {
-                const state = instrumentsReducer(previousState, <any>deepFreeze({}));
+                const state = instrumentsReducer(previousState, deepFreeze(<TStoreAction>{}));
 
                 expect(state).toEqual(previousState);
             });
@@ -218,7 +218,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(previousState, <any>deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT' }));
+                const state = instrumentsReducer(previousState, deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT' }));
 
                 expect(state).toEqual(previousState);
             });
@@ -236,7 +236,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(previousState, <any>deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT_FAIL' }));
+                const state = instrumentsReducer(previousState, deepFreeze({ payload: instrument, type: 'DELETE_INSTRUMENT_FAIL' }));
 
                 expect(state).toEqual(previousState);
             });
@@ -256,7 +256,7 @@ describe('instruments reducer', () => {
                 };
                 const state = instrumentsReducer(
                     previousState,
-                    <any>deepFreeze({
+                    deepFreeze({
                         payload: instrument,
                         type: 'DELETE_INSTRUMENT_SUCCESS'
                     })
@@ -278,7 +278,7 @@ describe('instruments reducer', () => {
                         url: 'a fake socket url'
                     }
                 };
-                const state = instrumentsReducer(previousState, <any>deepFreeze({ payload: instrument, type: 'PATCH_INSTRUMENT' }));
+                const state = instrumentsReducer(previousState, deepFreeze({ payload: instrument, type: 'PATCH_INSTRUMENT' }));
 
                 expect(state).toEqual(previousState);
             });
@@ -287,7 +287,7 @@ describe('instruments reducer', () => {
         describe('with an action of type PATCH_INSTRUMENT_FAIL', () => {
             it('should return the previous state', () => {
                 const id = 'a fake id';
-                const state = instrumentsReducer(previousState, <any>deepFreeze({ payload: id, type: 'PATCH_INSTRUMENT_FAIL' }));
+                const state = instrumentsReducer(previousState, deepFreeze({ payload: id, type: 'PATCH_INSTRUMENT_FAIL' }));
 
                 expect(state).toEqual(previousState);
             });
@@ -307,7 +307,7 @@ describe('instruments reducer', () => {
                 };
                 const state = instrumentsReducer(
                     previousState,
-                    <any>deepFreeze({
+                    deepFreeze({
                         payload: instrument,
                         type: 'PATCH_INSTRUMENT_SUCCESS'
                     })
