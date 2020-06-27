@@ -1,2 +1,2 @@
-export * from './instruments';
-export * from './midi-connections';
+export { instrumentsReducer } from './instruments';
+export { midiConnectionsReducer } from './midi-connections';

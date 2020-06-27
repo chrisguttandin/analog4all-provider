@@ -1,14 +1,14 @@
 import deepFreeze from 'deep-freeze-strict';
-import { midiConnectionsReducer } from '../../../../src/app/store/reducers';
+import { INITIAL_STATE, midiConnectionsReducer } from '../../../../src/app/store/reducers/midi-connections';
 import { TMidiConnection, TStoreAction } from '../../../../src/app/store/types';
 
 describe('midiConnections reducer', () => {
     describe('with an undefined state', () => {
         describe('with an empty action', () => {
-            it('should return the default state', () => {
+            it('should return the initial state', () => {
                 const state = midiConnectionsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
-                expect(state).toEqual([]);
+                expect(state).toEqual(INITIAL_STATE);
             });
         });
 
