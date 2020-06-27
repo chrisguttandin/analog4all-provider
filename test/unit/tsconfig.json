@@ -5,7 +5,7 @@
         "module": "es2020",
         "outDir": "../../out-tsc/spec",
         "target": "es2015",
-        "types": ["deep-freeze-strict", "jasmine", "node", "webmidi", "../../src/media-recorder"]
+        "types": ["deep-freeze-strict", "jasmine", "node", "webmidi", "../../src/media-recorder", "../../src/ng-dev-mode"]
     },
     "extends": "tsconfig-holy-grail/src/tsconfig-browser",
     "files": ["../../config/karma/test.ts", "../../src/polyfills.ts"],
