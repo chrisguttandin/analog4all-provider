@@ -4,7 +4,7 @@ import { TInstrument, TStoreAction } from '../../../../src/app/store/types';
 
 describe('instruments reducer', () => {
     describe('with an undefined state', () => {
-        describe('with an empty action', () => {
+        describe('with an unknown action', () => {
             it('should return the initial state', () => {
                 const state = instrumentsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
@@ -179,7 +179,7 @@ describe('instruments reducer', () => {
             ]);
         });
 
-        describe('with an empty action', () => {
+        describe('with an unknown action', () => {
             it('should return the previous state', () => {
                 const state = instrumentsReducer(previousState, deepFreeze(<TStoreAction>{}));
 

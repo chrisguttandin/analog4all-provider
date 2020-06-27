@@ -4,7 +4,7 @@ import { TMidiConnection, TStoreAction } from '../../../../src/app/store/types';
 
 describe('midiConnections reducer', () => {
     describe('with an undefined state', () => {
-        describe('with an empty action', () => {
+        describe('with an unknown action', () => {
             it('should return the initial state', () => {
                 const state = midiConnectionsReducer(undefined, deepFreeze(<TStoreAction>{}));
 
@@ -44,7 +44,7 @@ describe('midiConnections reducer', () => {
             ]);
         });
 
-        describe('with an empty action', () => {
+        describe('with an unknown action', () => {
             it('should return the previous state', () => {
                 const state = midiConnectionsReducer(previousState, deepFreeze(<TStoreAction>{}));
 
