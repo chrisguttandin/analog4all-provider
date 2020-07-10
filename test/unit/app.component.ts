@@ -9,7 +9,7 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             imports: [AppModule, RouterTestingModule],
             providers: [
-                // Replace the StoreModule because it would otherwise dispatch events right away.
+                // The StoreModule needs to be replaced because it would otherwise dispatch actions right away.
                 { provide: StoreModule, useValue: null }
             ]
         });
