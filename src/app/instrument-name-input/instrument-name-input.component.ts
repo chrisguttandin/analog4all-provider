@@ -6,9 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     templateUrl: './instrument-name-input.component.html'
 })
 export class InstrumentNameInputComponent {
-    @Input() public readonly defaultName!: string;
+    @Input() public defaultName!: string;
 
-    @Input() public readonly name!: null | string;
+    @Input() public name!: null | string;
 
     @Output() public readonly nameChange: EventEmitter<Event>;
 

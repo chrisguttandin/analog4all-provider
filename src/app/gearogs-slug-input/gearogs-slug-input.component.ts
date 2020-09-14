@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     templateUrl: './gearogs-slug-input.component.html'
 })
 export class GearogsSlugInputComponent {
-    @Input() public readonly gearogsSlug!: string | undefined;
+    @Input() public gearogsSlug!: string | undefined;
 
     @Output() public readonly gearogsSlugChange: EventEmitter<Event>;
 

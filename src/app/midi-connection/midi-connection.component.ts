@@ -29,7 +29,7 @@ export class MidiConnectionComponent implements OnChanges {
 
     public isRegistered: boolean;
 
-    @Input() public readonly midiConnection!: TMidiConnection;
+    @Input() public midiConnection!: TMidiConnection;
 
     public virtualInstrumentName: string;
 

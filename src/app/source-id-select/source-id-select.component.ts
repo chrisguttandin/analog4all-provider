@@ -10,7 +10,7 @@ import { AudioInputMediaDevicesService } from '../shared';
 export class SourceIdSelectComponent implements OnInit {
     public audioInputs$!: Observable<MediaDeviceInfo[]>;
 
-    @Input() public readonly sourceId!: string;
+    @Input() public sourceId!: string;
 
     @Output() public readonly sourceIdChange: EventEmitter<Event>;
 
