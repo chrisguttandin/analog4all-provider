@@ -46,7 +46,7 @@
         "@hint/connector-puppeteer": "^2.5.5",
         "@hint/formatter-stylish": "^3.1.19",
         "@hint/hint-apple-touch-icons": "^4.0.3",
-        "@hint/hint-axe": "^4.4.0",
+        "@hint/hint-axe": "^4.4.1",
         "@hint/hint-button-type": "^3.0.2",
         "@hint/hint-content-type": "^4.2.6",
         "@hint/hint-disown-opener": "^4.0.2",
