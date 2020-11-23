@@ -82,7 +82,6 @@
         "@nrwl/nx": "^7.8.7",
         "@types/deep-freeze-strict": "^1.1.0",
         "@types/jasmine": "~3.6.2",
-        "@types/jasminewd2": "~2.0.8",
         "@types/node": "^12.19.6",
         "@types/webmidi": "^2.0.4",
         "axe-core": "^4.1.1",
