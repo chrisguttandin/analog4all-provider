@@ -5,6 +5,10 @@ module.exports = {
             ignoreDirs: ['build'],
             ignoreMatches: [
                 '@angular/router',
+                // @todo extendable-media-recorder is actually used but gets detected as unused for some reason.
+                'extendable-media-recorder',
+                // @todo extendable-media-recorder-wav-encoder is actually used but gets detected as unused for some reason.
+                'extendable-media-recorder-wav-encoder',
                 // @todo midi-json-parser-worker is actually used but gets detected as unused for some reason.
                 'midi-json-parser-worker',
                 'tslib',
@@ -16,6 +20,7 @@ module.exports = {
                 '@commitlint/config-angular',
                 '@hint/*',
                 '@ngrx/store-devtools',
+                '@nrwl/nx',
                 '@types/*',
                 'axe-core',
                 'bundle-buddy',
@@ -29,8 +34,12 @@ module.exports = {
                 'htmlhint',
                 'husky',
                 'jasmine-core',
+                'jasmine-marbles',
                 'karma*',
+                'midi',
                 'ngrx-store-freeze',
+                'prettier',
+                'pretty-quick',
                 'stylelint-config-holy-grail',
                 'tsconfig-holy-grail',
                 'tslint',
