@@ -29,10 +29,10 @@ describe('/', () => {
         page = new HomePage();
     });
 
-    it('should display the correct headline', () => {
-        page.navigateTo();
+    it('should display the correct headline', async () => {
+        await page.navigateTo();
 
-        expect(page.getHeadline()).toEqual('Analog4All Provider');
+        expect(await page.getHeadline()).toEqual('Analog4All Provider');
     });
 
     describe('without any MIDI devices', () => {
@@ -44,13 +44,13 @@ describe('/', () => {
             browserName = capabilities.get('browserName');
         });
 
-        it('should display the correct sub headline', () => {
-            page.navigateTo();
+        it('should display the correct sub headline', async () => {
+            await page.navigateTo();
 
             if (browserName === 'Safari') {
-                expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
+                expect(await page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
             } else {
-                expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
+                expect(await page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
             }
         });
     });
@@ -82,15 +82,15 @@ describe('/', () => {
             return new Promise((resolve) => setTimeout(resolve, 1000));
         });
 
-        it('should display the correct sub headline', () => {
-            page.navigateTo();
+        it('should display the correct sub headline', async () => {
+            await page.navigateTo();
 
             if (browserName === 'Safari') {
-                expect(page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
+                expect(await page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
             } else if (env.TRAVIS === 'true') {
-                expect(page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
+                expect(await page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
             } else {
-                expect(page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
+                expect(await page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
             }
         });
     });
