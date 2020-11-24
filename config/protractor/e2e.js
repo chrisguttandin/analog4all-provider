@@ -39,7 +39,7 @@ exports.config = {
     allScriptsTimeout: 60000,
 
     baseUrl: env.IS_SMOKE_TEST
-        ? 'https://chrisguttandin.github.io'
+        ? 'https://chrisguttandin.github.io/analog4all-provider'
         : `http://localhost:${projects[defaultProject].architect.serve.options.port}`,
 
     directConnect: !!env.TRAVIS,
