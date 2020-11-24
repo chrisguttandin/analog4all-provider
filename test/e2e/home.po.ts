@@ -14,7 +14,7 @@ export class HomePage {
         return element(by.css('anp-app h2')).getText();
     }
 
-    public async navigateTo(): Promise<any> {
+    public async navigateTo(): Promise<unknown> {
         return browser.get(env.IS_SMOKE_TEST === 'true' ? '/analog4all-provider' : '/');
     }
 }
