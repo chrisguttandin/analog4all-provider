@@ -36,10 +36,10 @@ module.exports = (grunt) => {
             cmd: 'ng lint analog4all-provider --configuration test'
         },
         'monitor': {
-            cmd: 'ng serve --aot'
+            cmd: 'ng serve'
         },
         'preview': {
-            cmd: 'ng serve --aot --prod'
+            cmd: 'ng serve --prod'
         },
         'smoke': {
             cmd: env.TRAVIS
