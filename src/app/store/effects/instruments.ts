@@ -42,16 +42,10 @@ export class InstrumentsEffects {
     }
 
     @Effect() get removeInstrument$(): Observable<IRemoveInstrumentAction> {
-        return this._actions$.pipe(
-            pluckPayloadOfType(deleteInstrumentSuccess),
-            map((instrument) => removeInstrument(instrument))
-        );
+        return this._actions$.pipe(pluckPayloadOfType(deleteInstrumentSuccess), map(removeInstrument));
     }
 
     @Effect() get updateInstrument$(): Observable<IUpdateInstrumentAction> {
-        return this._actions$.pipe(
-            pluckPayloadOfType(patchInstrumentSuccess),
-            map((instrument) => updateInstrument(instrument))
-        );
+        return this._actions$.pipe(pluckPayloadOfType(patchInstrumentSuccess), map(updateInstrument));
     }
 }

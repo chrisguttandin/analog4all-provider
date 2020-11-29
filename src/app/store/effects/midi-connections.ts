@@ -39,7 +39,7 @@ export class MidiConnectionsEffects {
                     first()
                 )
             ),
-            map((instrument) => deleteInstrument(instrument))
+            map(deleteInstrument)
         );
     }
 
