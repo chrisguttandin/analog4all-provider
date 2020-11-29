@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, mapTo } from 'rxjs/operators';
 import { ENDPOINT } from '../../shared';
 import { deleteInstrumentFail, deleteInstrumentSuccess, patchInstrumentFail, patchInstrumentSuccess } from '../actions';
 import {
@@ -20,7 +20,7 @@ export class InstrumentService {
 
     public delete(instrument: TInstrument): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
         return this._httpClient.delete(`https${this._endpoint}instruments/${instrument.id}`).pipe(
-            map(() => deleteInstrumentSuccess(instrument)),
+            mapTo(deleteInstrumentSuccess(instrument)),
             catchError(() => of(deleteInstrumentFail(instrument)))
         );
     }
@@ -30,7 +30,7 @@ export class InstrumentService {
         ...delta
     }: TIdentifiable<TInstrument, 'id'>): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
         return this._httpClient.patch(`https${this._endpoint}instruments/${id}`, delta).pipe(
-            map(() => patchInstrumentSuccess({ id, ...delta })),
+            mapTo(patchInstrumentSuccess({ id, ...delta })),
             catchError(() => of(patchInstrumentFail(id)))
         );
     }
