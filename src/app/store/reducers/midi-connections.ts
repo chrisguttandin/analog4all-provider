@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { mergeMidiConnections, updateMidiConnection } from '../actions';
-import { TIdentifiable, TMidiConnection, TStoreAction } from '../types';
+import { TAppState, TIdentifiable, TMidiConnection, TStoreAction } from '../types';
 
-export const INITIAL_STATE: readonly TMidiConnection[] = [];
+export const INITIAL_STATE: TAppState['midiConnections'] = [];
 
 const mergeMidiConnectionsFunction = (oldMidiConnections: readonly TMidiConnection[], newMidiConnections: readonly TMidiConnection[]) => {
     const intersectingMidiConnections = oldMidiConnections
@@ -39,13 +39,13 @@ const updateMidiConnectionFunction = (
     return [...midiConnections.slice(0, index), { ...midiConnections[index], ...midiConnection }, ...midiConnections.slice(index + 1)];
 };
 
-const reducer = createReducer<readonly TMidiConnection[]>(
+const reducer = createReducer(
     INITIAL_STATE,
     on(mergeMidiConnections, (state, { payload }) => mergeMidiConnectionsFunction(state, payload)),
     on(updateMidiConnection, (state, { payload }) => updateMidiConnectionFunction(state, payload))
 );
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function midiConnectionsReducer(state = INITIAL_STATE, action: TStoreAction): readonly TMidiConnection[] {
+export function midiConnectionsReducer(state = INITIAL_STATE, action: TStoreAction): TAppState['midiConnections'] {
     return reducer(state, action);
 }

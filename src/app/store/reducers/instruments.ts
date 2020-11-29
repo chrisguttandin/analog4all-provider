@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { addInstrument, removeInstrument, updateInstrument } from '../actions';
-import { TIdentifiable, TInstrument, TStoreAction } from '../types';
+import { TAppState, TIdentifiable, TInstrument, TStoreAction } from '../types';
 
-export const INITIAL_STATE: readonly TInstrument[] = [];
+export const INITIAL_STATE: TAppState['instruments'] = [];
 
 const addInstrumentFunction = (instruments: readonly TInstrument[], instrument: TInstrument) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
@@ -34,7 +34,7 @@ const updateInstrumentFunction = (instruments: readonly TInstrument[], instrumen
     return [...instruments.slice(0, index), { ...instruments[index], ...instrument }, ...instruments.slice(index + 1)];
 };
 
-const reducer = createReducer<readonly TInstrument[]>(
+const reducer = createReducer(
     INITIAL_STATE,
     on(addInstrument, (state, { payload }) => addInstrumentFunction(state, payload)),
     on(removeInstrument, (state, { payload }) => removeInstrumentFunction(state, payload)),
@@ -42,6 +42,6 @@ const reducer = createReducer<readonly TInstrument[]>(
 );
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function instrumentsReducer(state = INITIAL_STATE, action: TStoreAction): readonly TInstrument[] {
+export function instrumentsReducer(state = INITIAL_STATE, action: TStoreAction): TAppState['instruments'] {
     return reducer(state, action);
 }
