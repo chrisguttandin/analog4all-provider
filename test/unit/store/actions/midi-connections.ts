@@ -1,9 +1,4 @@
-import {
-    MERGE_MIDI_CONNECTIONS,
-    UPDATE_MIDI_CONNECTION,
-    mergeMidiConnections,
-    updateMidiConnection
-} from '../../../../src/app/store/actions';
+import { mergeMidiConnections, updateMidiConnection } from '../../../../src/app/store/actions';
 
 describe('midiConnections actions', () => {
     describe('mergeMidiConnections()', () => {
@@ -19,7 +14,7 @@ describe('midiConnections actions', () => {
             ];
             const action = mergeMidiConnections(midiConnections);
 
-            expect(action).toEqual({ payload: midiConnections, type: MERGE_MIDI_CONNECTIONS });
+            expect(action).toEqual({ payload: midiConnections, type: 'MERGE_MIDI_CONNECTIONS' });
         });
     });
 
@@ -31,7 +26,7 @@ describe('midiConnections actions', () => {
             };
             const action = updateMidiConnection(midiConnection);
 
-            expect(action).toEqual({ payload: midiConnection, type: UPDATE_MIDI_CONNECTION });
+            expect(action).toEqual({ payload: midiConnection, type: 'UPDATE_MIDI_CONNECTION' });
         });
     });
 });

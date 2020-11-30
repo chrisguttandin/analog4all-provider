@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { Actions, createEffect } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { pluckPayloadOfType } from '../../operators';
 import {
@@ -11,41 +10,28 @@ import {
     removeInstrument,
     updateInstrument
 } from '../actions';
-import {
-    IDeleteInstrumentFailAction,
-    IDeleteInstrumentSuccessAction,
-    IPatchInstrumentFailAction,
-    IPatchInstrumentSuccessAction,
-    IRemoveInstrumentAction,
-    IUpdateInstrumentAction
-} from '../interfaces';
 import { InstrumentService } from '../services';
 
 @Injectable({
     providedIn: 'root'
 })
 export class InstrumentsEffects {
-    constructor(private _actions$: Actions, private _instrumentService: InstrumentService) {}
-
-    @Effect() get deleteInstrument$(): Observable<IDeleteInstrumentFailAction | IDeleteInstrumentSuccessAction> {
-        return this._actions$.pipe(
+    public deleteInstrument$ = createEffect(() =>
+        this._actions$.pipe(
             pluckPayloadOfType(deleteInstrument),
             mergeMap((instrument) => this._instrumentService.delete(instrument))
-        );
-    }
+        )
+    );
 
-    @Effect() get patchInstrument$(): Observable<IPatchInstrumentFailAction | IPatchInstrumentSuccessAction> {
-        return this._actions$.pipe(
+    public patchInstrument$ = createEffect(() =>
+        this._actions$.pipe(
             pluckPayloadOfType(patchInstrument),
             mergeMap((instrument) => this._instrumentService.patch(instrument))
-        );
-    }
+        )
+    );
 
-    @Effect() get removeInstrument$(): Observable<IRemoveInstrumentAction> {
-        return this._actions$.pipe(pluckPayloadOfType(deleteInstrumentSuccess), map(removeInstrument));
-    }
+    public removeInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(deleteInstrumentSuccess), map(removeInstrument)));
 
-    @Effect() get updateInstrument$(): Observable<IUpdateInstrumentAction> {
-        return this._actions$.pipe(pluckPayloadOfType(patchInstrumentSuccess), map(updateInstrument));
-    }
+    public updateInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(patchInstrumentSuccess), map(updateInstrument)));
+    constructor(private _actions$: Actions, private _instrumentService: InstrumentService) {}
 }

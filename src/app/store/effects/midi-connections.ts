@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable, from } from 'rxjs';
+import { from } from 'rxjs';
 import { debounceTime, filter, first, map, mergeMap, pairwise, withLatestFrom } from 'rxjs/operators';
 import { pluckPayloadOfType } from '../../operators';
 import { deleteInstrument, patchInstrument, updateMidiConnection } from '../actions';
-import { IDeleteInstrumentAction, IPatchInstrumentAction } from '../interfaces';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../selectors';
 import { TAppState, TInstrument, TMidiConnection } from '../types';
 
@@ -13,10 +12,8 @@ import { TAppState, TInstrument, TMidiConnection } from '../types';
     providedIn: 'root'
 })
 export class MidiConnectionsEffects {
-    constructor(private _actions$: Actions, private _store: Store<TAppState>) {}
-
-    @Effect() get deleteInstruments$(): Observable<IDeleteInstrumentAction> {
-        return this._actions$.pipe(
+    public deleteInstruments$ = createEffect(() =>
+        this._actions$.pipe(
             ofType(updateMidiConnection),
             withLatestFrom(createMidiConnectionsSelector(this._store).pipe(pairwise())),
             map(([, [previousMidiConnections, currentMidiConnections]]) =>
@@ -40,11 +37,11 @@ export class MidiConnectionsEffects {
                 )
             ),
             map(deleteInstrument)
-        );
-    }
+        )
+    );
 
-    @Effect() get patchInstrument$(): Observable<IPatchInstrumentAction> {
-        return this._actions$.pipe(
+    public patchInstrument$ = createEffect(() =>
+        this._actions$.pipe(
             pluckPayloadOfType(updateMidiConnection),
             debounceTime(500),
             filter((midiConnection) => !('instrumentId' in midiConnection)),
@@ -70,6 +67,7 @@ export class MidiConnectionsEffects {
 
                 return patchInstrument({ id: instrumentId, ...instrument });
             })
-        );
-    }
+        )
+    );
+    constructor(private _actions$: Actions, private _store: Store<TAppState>) {}
 }

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { MidiOutputsService } from '../../shared/midi-outputs.service';
 import { mergeMidiConnections, watchMidiOutputs } from '../actions';
-import { IMergeMidiConnectionsAction } from '../interfaces';
 import { createMidiConnectionsSelector } from '../selectors';
 import { TAppState } from '../types';
 
@@ -13,10 +11,8 @@ import { TAppState } from '../types';
     providedIn: 'root'
 })
 export class MidiOutputsEffects {
-    constructor(private _actions$: Actions, private _midiOutputsService: MidiOutputsService, private _store: Store<TAppState>) {}
-
-    @Effect() get mergeMidiConnections$(): Observable<IMergeMidiConnectionsAction> {
-        return this._actions$.pipe(
+    public mergeMidiConnections$ = createEffect(() =>
+        this._actions$.pipe(
             ofType(watchMidiOutputs),
             mergeMap(() => this._midiOutputsService.watch()),
             withLatestFrom(createMidiConnectionsSelector(this._store)),
@@ -38,6 +34,8 @@ export class MidiOutputsEffects {
                         .map((midiConnection) => ({ ...midiConnection, isConnected: false }))
                 ])
             )
-        );
-    }
+        )
+    );
+
+    constructor(private _actions$: Actions, private _midiOutputsService: MidiOutputsService, private _store: Store<TAppState>) {}
 }

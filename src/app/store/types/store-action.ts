@@ -1,28 +1,4 @@
-import {
-    IAddInstrumentAction,
-    IDeleteInstrumentAction,
-    IDeleteInstrumentFailAction,
-    IDeleteInstrumentSuccessAction,
-    IMergeMidiConnectionsAction,
-    IPatchInstrumentAction,
-    IPatchInstrumentFailAction,
-    IPatchInstrumentSuccessAction,
-    IRemoveInstrumentAction,
-    IUpdateInstrumentAction,
-    IUpdateMidiConnectionAction,
-    IWatchMidiOutputsAction
-} from '../interfaces';
+import { ActionType, INIT } from '@ngrx/store';
+import * as actions from '../actions';
 
-export type TStoreAction =
-    | IAddInstrumentAction
-    | IDeleteInstrumentAction
-    | IDeleteInstrumentFailAction
-    | IDeleteInstrumentSuccessAction
-    | IMergeMidiConnectionsAction
-    | IPatchInstrumentAction
-    | IPatchInstrumentFailAction
-    | IPatchInstrumentSuccessAction
-    | IRemoveInstrumentAction
-    | IUpdateInstrumentAction
-    | IUpdateMidiConnectionAction
-    | IWatchMidiOutputsAction;
+export type TStoreAction = ActionType<typeof actions[keyof typeof actions]> | Readonly<{ readonly type: typeof INIT }>;

@@ -1,13 +1,4 @@
 import {
-    ADD_INSTRUMENT,
-    DELETE_INSTRUMENT,
-    DELETE_INSTRUMENT_FAIL,
-    DELETE_INSTRUMENT_SUCCESS,
-    PATCH_INSTRUMENT,
-    PATCH_INSTRUMENT_FAIL,
-    PATCH_INSTRUMENT_SUCCESS,
-    REMOVE_INSTRUMENT,
-    UPDATE_INSTRUMENT,
     addInstrument,
     deleteInstrument,
     deleteInstrumentFail,
@@ -34,7 +25,7 @@ describe('instruments actions', () => {
             };
             const action = addInstrument(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: ADD_INSTRUMENT });
+            expect(action).toEqual({ payload: instrument, type: 'ADD_INSTRUMENT' });
         });
     });
 
@@ -52,7 +43,7 @@ describe('instruments actions', () => {
             };
             const action = deleteInstrument(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: DELETE_INSTRUMENT });
+            expect(action).toEqual({ payload: instrument, type: 'DELETE_INSTRUMENT' });
         });
     });
 
@@ -70,7 +61,7 @@ describe('instruments actions', () => {
             };
             const action = deleteInstrumentFail(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: DELETE_INSTRUMENT_FAIL });
+            expect(action).toEqual({ payload: instrument, type: 'DELETE_INSTRUMENT_FAIL' });
         });
     });
 
@@ -88,7 +79,7 @@ describe('instruments actions', () => {
             };
             const action = deleteInstrumentSuccess(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: DELETE_INSTRUMENT_SUCCESS });
+            expect(action).toEqual({ payload: instrument, type: 'DELETE_INSTRUMENT_SUCCESS' });
         });
     });
 
@@ -106,7 +97,7 @@ describe('instruments actions', () => {
             };
             const action = patchInstrument(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: PATCH_INSTRUMENT });
+            expect(action).toEqual({ payload: instrument, type: 'PATCH_INSTRUMENT' });
         });
     });
 
@@ -115,7 +106,7 @@ describe('instruments actions', () => {
             const id = 'a fake id';
             const action = patchInstrumentFail(id);
 
-            expect(action).toEqual({ payload: id, type: PATCH_INSTRUMENT_FAIL });
+            expect(action).toEqual({ payload: id, type: 'PATCH_INSTRUMENT_FAIL' });
         });
     });
 
@@ -133,7 +124,7 @@ describe('instruments actions', () => {
             };
             const action = patchInstrumentSuccess(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: PATCH_INSTRUMENT_SUCCESS });
+            expect(action).toEqual({ payload: instrument, type: 'PATCH_INSTRUMENT_SUCCESS' });
         });
     });
 
@@ -151,7 +142,7 @@ describe('instruments actions', () => {
             };
             const action = removeInstrument(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: REMOVE_INSTRUMENT });
+            expect(action).toEqual({ payload: instrument, type: 'REMOVE_INSTRUMENT' });
         });
     });
 
@@ -163,7 +154,7 @@ describe('instruments actions', () => {
             };
             const action = updateInstrument(instrument);
 
-            expect(action).toEqual({ payload: instrument, type: UPDATE_INSTRUMENT });
+            expect(action).toEqual({ payload: instrument, type: 'UPDATE_INSTRUMENT' });
         });
     });
 });
