@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mapTo } from 'rxjs/operators';
+import { catchError, mapTo } from 'rxjs/operators';
 import { ENDPOINT } from '../../shared';
 import { deleteInstrumentFail, deleteInstrumentSuccess, patchInstrumentFail, patchInstrumentSuccess } from '../actions';
 import {
