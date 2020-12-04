@@ -28,9 +28,9 @@ module.exports = (grunt) => {
             cmd: `eslint --config config/eslint/config.json --ext .js ${fix ? '--fix ' : ''}--report-unused-disable-directives *.js config/`
         },
         'lint-src': {
-            cmd: `htmlhint --rules ${convertConfig(documentConfig)} 'src/**/index.html' && htmlhint --rules ${convertConfig(
-                templateConfig
-            )} 'src/app/**/*.component.html' && ng lint analog4all-provider --type-check`
+            cmd: `htmlhint --rules ${convertConfig(documentConfig)} 'src/**/index.html' && \
+                htmlhint --rules ${convertConfig(templateConfig)} 'src/app/**/*.component.html' && \
+                ng lint analog4all-provider --type-check`
         },
         'lint-test': {
             cmd: 'ng lint analog4all-provider --configuration test'
@@ -50,8 +50,8 @@ module.exports = (grunt) => {
             cmd: 'ng test --watch false'
         },
         'verify': {
-            cmd:
-                "bundle-buddy build/analog4all-provider/*.js.map && grep -r build/**/*.map -e '/environments/environment.ts'; test $? -eq 1"
+            cmd: `bundle-buddy build//analog4all-provider/*.js.map && \
+                grep -r build/**/*.map -e '/environments/environment.ts'; test $? -eq 1`
         }
     };
 };
