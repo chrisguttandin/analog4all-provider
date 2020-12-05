@@ -50,7 +50,7 @@ module.exports = (grunt) => {
             cmd: 'ng test --watch false'
         },
         'verify': {
-            cmd: `bundle-buddy build//analog4all-provider/*.js.map && \
+            cmd: `bundle-buddy build/analog4all-provider/*.js.map && \
                 grep -r build/**/*.map -e '/environments/environment.ts'; test $? -eq 1`
         }
     };
