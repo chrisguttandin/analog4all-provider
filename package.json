@@ -130,32 +130,6 @@
         "webpack-bundle-analyzer": "^4.3.0",
         "webpack-stats-duplicates": "^2.1.0"
     },
-    "greenkeeper": {
-        "ignore": [
-            "@angular-devkit/build-angular",
-            "@angular/common",
-            "@angular/compiler",
-            "@angular/compiler-cli",
-            "@angular/core",
-            "@angular/forms",
-            "@angular/platform-browser",
-            "@angular/platform-browser-dynamic",
-            "@angular/router",
-            "@types/jasmine",
-            "jasmine-core",
-            "jasmine-spec-reporter",
-            "karma",
-            "karma-chrome-launcher",
-            "karma-coverage",
-            "karma-jasmine",
-            "protractor",
-            "rxjs",
-            "ts-node",
-            "tslint",
-            "typescript",
-            "zone.js"
-        ]
-    },
     "homepage": "https://chrisguttandin.github.io/analog4all-provider",
     "husky": {
         "hooks": {
