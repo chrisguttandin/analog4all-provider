@@ -9,7 +9,7 @@ const chromeCapabilities = {
     browserName: 'chrome',
     chromeOptions: {
         // @todo Running the tests in headless mode seems to disable the Web MIDI API.
-        args: env.TRAVIS
+        args: env.CI
             ? [
                   '--device-scale-factor=2',
                   '--disable-gpu',
@@ -42,7 +42,7 @@ exports.config = {
         ? 'https://chrisguttandin.github.io/analog4all-provider'
         : `http://localhost:${projects[defaultProject].architect.serve.options.port}`,
 
-    directConnect: !!env.TRAVIS,
+    directConnect: !!env.CI,
 
     framework: 'jasmine',
 
@@ -52,7 +52,7 @@ exports.config = {
         showColors: true
     },
 
-    multiCapabilities: env.TRAVIS ? [chromeCapabilities] : [chromeCapabilities, { browserName: 'safari' }],
+    multiCapabilities: env.CI ? [chromeCapabilities] : [chromeCapabilities, { browserName: 'safari' }],
 
     onPrepare() {
         // @ts-ignore
