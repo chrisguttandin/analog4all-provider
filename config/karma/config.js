@@ -14,7 +14,7 @@ module.exports = (config) => {
         },
 
         coverageReporter: {
-            dir: join(__dirname, '../../coverage/web-audio-conference-2018'),
+            dir: join(__dirname, '../../coverage/analog4all-provider'),
             reporters: [{ type: 'html' }, { type: 'text-summary' }],
             subdir: '.'
         },
