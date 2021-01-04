@@ -13,7 +13,8 @@ module.exports = (grunt) => {
 
     return {
         'analyze': {
-            cmd: 'npx ng build --prod --source-map --stats-json && webpack-bundle-analyzer build/analog4all-provider/stats.json'
+            cmd: `npx ng build --prod --source-map --stats-json && \
+                webpack-bundle-analyzer build/analog4all-provider/stats.json`
         },
         'build': {
             cmd: 'npx ng build --base-href /analog4all-provider/ --prod --subresource-integrity'
