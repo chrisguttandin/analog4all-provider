@@ -12,7 +12,7 @@ on:
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
 
         steps:
             - name: Checkout repository
@@ -32,9 +32,7 @@ jobs:
                       ${{ runner.os }}-node-
 
             - name: Install dependencies
-              run: |
-                  sudo apt-get install -y libasound2-dev
-                  npm ci
+              run: npm ci
 
             - env:
                   SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
