@@ -1,4 +1,4 @@
-import { env } from 'process';
+import { MidiDst } from 'midi-test';
 import { browser, logging } from 'protractor';
 import { HomePage } from './home.po';
 
@@ -57,12 +57,10 @@ describe('/', () => {
 
     describe('with a MIDI device (at least locally)', () => {
         let browserName: string;
-        let virtualMidiInput: { closePort(): void; openVirtualPort(name: string): void };
+        let virtualOutputDevice: { connect(): boolean; disconnect(): boolean };
 
         afterEach(() => {
-            if (env.TRAVIS === undefined) {
-                virtualMidiInput.closePort();
-            }
+            virtualOutputDevice.disconnect();
         });
 
         beforeEach(async () => {
@@ -70,14 +68,8 @@ describe('/', () => {
 
             browserName = capabilities.get('browserName');
 
-            if (env.TRAVIS === 'true') {
-                return;
-            }
-
-            const { input } = await import('midi');
-
-            virtualMidiInput = new input();
-            virtualMidiInput.openVirtualPort('VirtualSynth');
+            virtualOutputDevice = new MidiDst('VirtualSynth');
+            virtualOutputDevice.connect();
 
             return new Promise((resolve) => setTimeout(resolve, 1000));
         });
@@ -87,8 +79,6 @@ describe('/', () => {
 
             if (browserName === 'Safari') {
                 expect(await page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
-            } else if (env.TRAVIS === 'true') {
-                expect(await page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
             } else {
                 expect(await page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
             }
