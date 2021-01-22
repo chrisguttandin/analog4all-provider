@@ -108,7 +108,7 @@ export class MidiConnectionComponent implements OnChanges {
             ) // tslint:disable-line:rxjs-prefer-async-pipe
             .then(
                 (sample) =>
-                    new Promise((resolve) => {
+                    new Promise<void>((resolve) => {
                         const instrumentId = this.midiConnection.instrumentId;
 
                         if (instrumentId === undefined) {
