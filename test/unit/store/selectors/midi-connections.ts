@@ -1,4 +1,4 @@
-import { readFirst } from '@nrwl/nx/testing';
+import { readFirst } from '@nrwl/angular/testing';
 import { BehaviorSubject } from 'rxjs';
 import { createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../../../../src/app/store/selectors';
 import { TAppState, TMidiConnection } from '../../../../src/app/store/types';

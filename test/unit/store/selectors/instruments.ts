@@ -1,4 +1,4 @@
-import { readFirst } from '@nrwl/nx/testing';
+import { readFirst } from '@nrwl/angular/testing';
 import { BehaviorSubject } from 'rxjs';
 import { createInstrumentByIdSelector } from '../../../../src/app/store/selectors';
 import { TAppState, TInstrument } from '../../../../src/app/store/types';
