@@ -31,7 +31,8 @@ module.exports = (grunt) => {
         'lint-src': {
             cmd: `htmlhint --rules ${convertConfig(documentConfig)} 'src/**/index.html' && \
                 htmlhint --rules ${convertConfig(templateConfig)} 'src/app/**/*.component.html' && \
-                npx ng lint analog4all-provider --type-check`
+                npx ng lint analog4all-provider --type-check && \
+                npx stylelint src/**/*.css --config config/stylelint/config.json`
         },
         'lint-test': {
             cmd: 'npx ng lint analog4all-provider --configuration test'
