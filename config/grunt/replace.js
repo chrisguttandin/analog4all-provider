@@ -5,6 +5,9 @@ const { dirname, relative } = require('path');
 const fs = require('fs');
 
 // eslint-disable-next-line padding-line-between-statements
+const ENABLE_STYLES_SCRIPT = "document.head.querySelectorAll('link[media=print]').forEach(l=>l.onload=()=>l.media='all')";
+
+// eslint-disable-next-line padding-line-between-statements
 const computeHashOfFile = (filename, algorithm, encoding) => {
     const content = fs.readFileSync(filename, 'utf8'); // eslint-disable-line node/no-sync
 
@@ -103,8 +106,12 @@ module.exports = (grunt) => {
             options: {
                 patterns: [
                     {
-                        match: /""\+\({[^}]*}\[e]\|\|e\)\+"(?:-es(?:2015|5))?\."\+{(?:\d+:"[\da-f]{20}",?)+}/g,
-                        replacement: (match) => match.replace(/^""/g, '"scripts/"')
+                        match: /(?<character>[a-z]+)\.u=e=>e\+"(?:-es(?:2015|5))?\.[\da-f]{20}.js"/g,
+                        replacement: (match, character) => match.replace(/[a-z]+.u=e=>e/g, `${character}.u=e=>"scripts/"+e`)
+                    },
+                    {
+                        match: /(?<character>[a-z]+)\.u=e=>e\+"(?:-es(?:2015|5))?\."\+{(?:\d+:"[\da-f]{20}",?)+}/g,
+                        replacement: (match, character) => match.replace(/[a-z]+.u=e=>e/g, `${character}.u=e=>"scripts/"+e`)
                     },
                     {
                         match: /{(?:[1-9]\d*:"sha384-[\d+/A-Za-z]{64}",?)+}/g,
@@ -114,7 +121,7 @@ module.exports = (grunt) => {
                             const matches = match.match(/[1-9]\d*:"sha384-[\d+/A-Za-z]{64}"/g);
 
                             for (const chunk of matches) {
-                                const index = parseInt(chunk[0].split(':')[0], 10);
+                                const index = parseInt(chunk.split(':')[0], 10);
 
                                 updatedMatch = replaceHashInMatch(grunt, updatedMatch, `${index}`, index);
                             }
@@ -136,7 +143,7 @@ module.exports = (grunt) => {
                         replacement: () => {
                             const html = fs.readFileSync('build/analog4all-provider/index.html', 'utf8'); // eslint-disable-line node/no-sync
                             const regex = /<script[^>]*?>(?<script>.*?)<\/script>/gm;
-                            const scriptHashes = [];
+                            const scriptHashes = [`'sha256-${computeHashOfString(ENABLE_STYLES_SCRIPT, 'sha256', 'base64')}'`];
 
                             let result = regex.exec(html);
 
@@ -293,8 +300,20 @@ module.exports = (grunt) => {
             options: {
                 patterns: [
                     {
-                        match: /<link\srel="stylesheet"\shref="(?<filename>styles\.[\da-z]+\.css)"\scrossorigin="anonymous"\sintegrity="sha384-[\d+/A-Za-z]+=*">/g,
-                        replacement: (match, filename) => {
+                        match: /,a\.miniCssF=e=>"(?<filename>styles\.[\da-z]+\.css)",/,
+                        replacement: (match, filename) => match.replace(filename, `styles/${filename}`)
+                    },
+                    {
+                        match: /<link\srel="stylesheet"\shref="(?<filename>styles\.[\da-z]+\.css)"\scrossorigin="anonymous"\sintegrity="sha384-[\d+/A-Za-z]+=*"(?<media>\smedia="print")?[^>]*>/g,
+                        replacement: (_, filename, media) => {
+                            const hash = `sha384-${computeHashOfFile(`build/analog4all-provider/styles/${filename}`, 'sha384', 'base64')}`;
+
+                            return `<link href="styles/${filename}" rel="stylesheet" crossorigin="anonymous" integrity="${hash}"${media}><script>${ENABLE_STYLES_SCRIPT}</script>`;
+                        }
+                    },
+                    {
+                        match: /<link\srel="stylesheet"\shref="(?<filename>styles\.[\da-z]+\.css)">/g,
+                        replacement: (_, filename) => {
                             const hash = `sha384-${computeHashOfFile(`build/analog4all-provider/styles/${filename}`, 'sha384', 'base64')}`;
 
                             return `<link href="styles/${filename}" rel="stylesheet" crossorigin="anonymous" integrity="${hash}">`;
