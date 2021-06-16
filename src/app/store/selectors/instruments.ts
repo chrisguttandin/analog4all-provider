@@ -19,4 +19,6 @@ const instrumentByIdSelector = (instruments: TAppState['instruments'], id: TInst
 const instrumentsSelector = (state: TAppState) => state.instruments;
 
 export const createInstrumentByIdSelector = (store: Observable<TAppState>, id: TInstrument['id']) =>
-    store.pipe(select(createSelector(instrumentsSelector, instrumentByIdSelector), id));
+    store.pipe(
+        select(createSelector(instrumentsSelector, (instruments: TAppState['instruments']) => instrumentByIdSelector(instruments, id)))
+    );

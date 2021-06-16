@@ -25,7 +25,13 @@ const midiConnectionByMidiOutputIdSelector = (
 const midiConnectionsSelector = (state: TAppState) => state.midiConnections;
 
 export const createMidiConnectionByMidiOutputIdSelector = (store: Observable<TAppState>, midiOutputId: TMidiConnection['midiOutputId']) => {
-    return store.pipe(select(createSelector(midiConnectionsSelector, midiConnectionByMidiOutputIdSelector), midiOutputId));
+    return store.pipe(
+        select(
+            createSelector(midiConnectionsSelector, (midiConnections: TAppState['midiConnections']) =>
+                midiConnectionByMidiOutputIdSelector(midiConnections, midiOutputId)
+            )
+        )
+    );
 };
 
 export const createMidiConnectionsSelector = (store: Observable<TAppState>) => store.pipe(select(midiConnectionsSelector));
