@@ -10,9 +10,10 @@
         "baseUrl": "./",
         "declaration": false,
         "declarationMap": false,
+        "downlevelIteration": true,
         "module": "es2020",
         "outDir": "../out-tsc/app",
-        "target": "es2015",
+        "target": "es2017",
         "types": ["webmidi"]
     },
     "extends": "tsconfig-holy-grail/src/tsconfig-browser",
