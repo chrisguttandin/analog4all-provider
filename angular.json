@@ -35,9 +35,7 @@
                                     "with": "src/environments/environment.prod.ts"
                                 }
                             ],
-                            "ngswConfigPath": "src/ngsw-config.json",
                             "outputHashing": "all",
-                            "serviceWorker": true,
                             "sourceMap": {
                                 "hidden": true,
                                 "scripts": true,
@@ -51,9 +49,11 @@
                         "i18nMissingTranslation": "error",
                         "index": "src/index.html",
                         "main": "src/main.ts",
+                        "ngswConfigPath": "src/ngsw-config.json",
                         "outputPath": "build/analog4all-provider",
                         "polyfills": "src/polyfills.ts",
                         "scripts": [],
+                        "serviceWorker": true,
                         "styles": ["src/styles/styles.css"],
                         "tsConfig": "src/tsconfig.json"
                     }
