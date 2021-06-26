@@ -16,6 +16,6 @@
     "style-disabled": true,
     "tag-pair": true,
     "tag-self-close": true,
-    "tagname-lowercase": true,
+    "tagname-lowercase": ["linearGradient"],
     "title-require": true
 }
