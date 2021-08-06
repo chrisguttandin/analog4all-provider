@@ -25,7 +25,7 @@
         "@angular/service-worker": "~12.1.5",
         "@ngrx/effects": "^12.3.0",
         "@ngrx/store": "^12.3.0",
-        "extendable-media-recorder": "^6.3.4",
+        "extendable-media-recorder": "^6.5.0",
         "extendable-media-recorder-wav-encoder": "^7.0.56",
         "midi-json-parser": "^8.0.42",
         "midi-json-parser-worker": "^8.0.37",
