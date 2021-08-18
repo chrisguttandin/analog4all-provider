@@ -23,7 +23,7 @@ module.exports = (grunt) => {
         'lint-src': {
             cmd: `htmlhint --config config/htmlhint/document.json 'src/**/index.html' && \
                 htmlhint --config config/htmlhint/template.json 'src/app/**/*.component.html' && \
-                npx ng lint analog4all-provider --type-check && \
+                npx ng lint analog4all-provider && \
                 npx stylelint src/**/*.css --config config/stylelint/config.json`
         },
         'lint-test': {
