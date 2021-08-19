@@ -16,6 +16,7 @@ export class LocalRegistryComponent implements OnInit {
 
     constructor(private _store: Store<TAppState>) {}
 
+    // eslint-disable-next-line class-methods-use-this
     public identifyMidiConnection(_: number, { midiOutputId }: TMidiConnection): string {
         return midiOutputId;
     }

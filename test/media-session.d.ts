@@ -13,17 +13,18 @@ type TMediaSessionActionHandler = () => void;
 type TMediaSessionPlaybackState = 'none' | 'paused' | 'playing';
 
 declare class MediaMetadata {
-    album: string;
+    album: string; // eslint-disable-line @typescript-eslint/explicit-member-accessibility
 
-    artist: string;
+    artist: string; // eslint-disable-line @typescript-eslint/explicit-member-accessibility
 
-    artwork: IMediaImage[];
+    artwork: IMediaImage[]; // eslint-disable-line @typescript-eslint/explicit-member-accessibility
 
-    title: string;
+    title: string; // eslint-disable-line @typescript-eslint/explicit-member-accessibility
 
     constructor(options?: { album?: string; artist?: string; artwork?: IMediaImage[]; title?: string });
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention, no-unused-vars
 interface Navigator {
     mediaSession: {
         metadata?: MediaMetadata;

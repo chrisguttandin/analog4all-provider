@@ -5,7 +5,8 @@ import { IMidiFile } from 'midi-json-parser-worker';
     providedIn: 'root'
 })
 export class ScaleMidiJsonService {
-    get midiJson(): IMidiFile {
+    // eslint-disable-next-line class-methods-use-this
+    public get midiJson(): IMidiFile {
         return {
             division: 480,
             format: 1,

@@ -17,37 +17,38 @@ export class RegisteringService {
         // Get the mediaStream first to make sure the user granted access.
         return this._userMediaService
             .getAudioOnlyMediaStream(midiConnection.sourceId)
-            .then(() => {
-                return new Promise<TInstrument>((resolve) => {
-                    const data: { description?: string; gearogsSlug?: string; name: string; soundCloudUsername?: string } = { name };
+            .then(
+                () =>
+                    new Promise<TInstrument>((resolve) => {
+                        const data: { description?: string; gearogsSlug?: string; name: string; soundCloudUsername?: string } = { name };
 
-                    if (midiConnection.description !== undefined) {
-                        const description = midiConnection.description.trim();
+                        if (midiConnection.description !== undefined) {
+                            const description = midiConnection.description.trim();
 
-                        if (description !== '') {
-                            data.description = description;
+                            if (description !== '') {
+                                data.description = description;
+                            }
                         }
-                    }
 
-                    if (midiConnection.gearogsSlug !== undefined) {
-                        const gearogsSlug = midiConnection.gearogsSlug.trim();
+                        if (midiConnection.gearogsSlug !== undefined) {
+                            const gearogsSlug = midiConnection.gearogsSlug.trim();
 
-                        if (gearogsSlug !== '') {
-                            data.gearogsSlug = gearogsSlug;
+                            if (gearogsSlug !== '') {
+                                data.gearogsSlug = gearogsSlug;
+                            }
                         }
-                    }
 
-                    if (midiConnection.soundCloudUsername !== undefined) {
-                        const soundCloudUsername = midiConnection.soundCloudUsername.trim();
+                        if (midiConnection.soundCloudUsername !== undefined) {
+                            const soundCloudUsername = midiConnection.soundCloudUsername.trim();
 
-                        if (soundCloudUsername !== '') {
-                            data.soundCloudUsername = soundCloudUsername;
+                            if (soundCloudUsername !== '') {
+                                data.soundCloudUsername = soundCloudUsername;
+                            }
                         }
-                    }
 
-                    this._instrumentsService.create(data).subscribe((instrument) => resolve(instrument));
-                });
-            })
+                        this._instrumentsService.create(data).subscribe((instrument) => resolve(instrument));
+                    })
+            )
             .then((instrument) => {
                 const connection = this._instrumentsService.connect(instrument);
 

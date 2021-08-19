@@ -4,13 +4,13 @@ export class ResponseError extends Error {
     public code: string;
 
     constructor(response: HttpErrorResponse) {
-        super();
-
         const {
             error: { code, message }
         } = response.error;
 
+        super(message);
+
         this.code = code;
-        this.message = message;
+        this.name = 'ResponseError';
     }
 }

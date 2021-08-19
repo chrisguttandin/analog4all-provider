@@ -7,8 +7,8 @@ const CHUNK_SIZE = 1024;
     providedIn: 'root'
 })
 export class FileSendingService {
+    // eslint-disable-next-line class-methods-use-this
     public send(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, file: Blob): Promise<void> {
-        // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
 

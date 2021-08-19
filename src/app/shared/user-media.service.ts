@@ -18,7 +18,7 @@ export class UserMediaService {
      * This property is true if the browser supports all the required APIs to use the
      * UserMediaService.
      */
-    get isSupported(): boolean {
+    public get isSupported(): boolean {
         return this._window !== null && 'mediaDevices' in this._window.navigator && 'getUserMedia' in this._window.navigator.mediaDevices;
     }
 

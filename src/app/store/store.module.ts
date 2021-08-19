@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { Store, StoreModule as NgRxStoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'; // tslint:disable-line:no-implicit-dependencies
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { WindowService } from '../shared/window.service';
 import { mergeMidiConnections, watchMidiOutputs } from './actions';
 import { InstrumentsEffects, LocalStorageEffects, MidiConnectionsEffects, MidiOutputsEffects } from './effects';

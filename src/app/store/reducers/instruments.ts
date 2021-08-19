@@ -13,7 +13,6 @@ const addInstrumentFunction = (instruments: readonly TInstrument[], instrument: 
 
     return [...instruments, instrument];
 };
-
 const removeInstrumentFunction = (instruments: readonly TInstrument[], instrument: TInstrument) => {
     const index = instruments.indexOf(instrument);
 
@@ -23,7 +22,6 @@ const removeInstrumentFunction = (instruments: readonly TInstrument[], instrumen
 
     return [...instruments.slice(0, index), ...instruments.slice(index + 1)];
 };
-
 const updateInstrumentFunction = (instruments: readonly TInstrument[], instrument: TIdentifiable<TInstrument, 'id'>) => {
     const index = instruments.findIndex(({ id }) => id === instrument.id);
 
@@ -33,7 +31,6 @@ const updateInstrumentFunction = (instruments: readonly TInstrument[], instrumen
 
     return [...instruments.slice(0, index), { ...instruments[index], ...instrument }, ...instruments.slice(index + 1)];
 };
-
 const reducer = createReducer(
     INITIAL_STATE,
     on(addInstrument, (state, { payload }) => addInstrumentFunction(state, payload)),
@@ -42,6 +39,6 @@ const reducer = createReducer(
 );
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function instrumentsReducer(state = INITIAL_STATE, action: TStoreAction): TAppState['instruments'] {
+export function instrumentsReducer(state: undefined | TAppState['instruments'], action: TStoreAction): TAppState['instruments'] {
     return reducer(state, action);
 }

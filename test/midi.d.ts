@@ -8,8 +8,8 @@ declare module 'midi' {
     }
 
     export class input implements IMidiInput {
-        closePort(): void;
+        closePort(): void; // eslint-disable-line @typescript-eslint/explicit-member-accessibility
 
-        openVirtualPort(name: string): void;
+        openVirtualPort(name: string): void; // eslint-disable-line @typescript-eslint/explicit-member-accessibility
     }
 }

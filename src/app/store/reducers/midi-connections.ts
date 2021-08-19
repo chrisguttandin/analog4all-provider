@@ -10,22 +10,20 @@ const mergeMidiConnectionsFunction = (oldMidiConnections: readonly TMidiConnecti
             midiConnection,
             newMidiConnections.find(({ midiOutputId }) => midiConnection.midiOutputId === midiOutputId)
         ])
-        .filter((oldAndNewMidiConnection): oldAndNewMidiConnection is [TMidiConnection, TMidiConnection] => {
-            return oldAndNewMidiConnection[1] !== undefined;
-        })
+        .filter(
+            (oldAndNewMidiConnection): oldAndNewMidiConnection is [TMidiConnection, TMidiConnection] =>
+                oldAndNewMidiConnection[1] !== undefined
+        )
         .map(([oldMidiConnection, newMidiConnection]) => ({ ...oldMidiConnection, ...newMidiConnection }));
-
     const remainingMidiConnections = oldMidiConnections.filter(({ midiOutputId }) =>
         intersectingMidiConnections.every(({ midiOutputId: mdTptD }) => midiOutputId !== mdTptD)
     );
-
     const additionalMidiConnections = newMidiConnections.filter(({ midiOutputId }) =>
         intersectingMidiConnections.every(({ midiOutputId: mdTptD }) => midiOutputId !== mdTptD)
     );
 
     return [...remainingMidiConnections, ...intersectingMidiConnections, ...additionalMidiConnections];
 };
-
 const updateMidiConnectionFunction = (
     midiConnections: readonly TMidiConnection[],
     midiConnection: TIdentifiable<TMidiConnection, 'midiOutputId'>
@@ -38,7 +36,6 @@ const updateMidiConnectionFunction = (
 
     return [...midiConnections.slice(0, index), { ...midiConnections[index], ...midiConnection }, ...midiConnections.slice(index + 1)];
 };
-
 const reducer = createReducer(
     INITIAL_STATE,
     on(mergeMidiConnections, (state, { payload }) => mergeMidiConnectionsFunction(state, payload)),
@@ -46,6 +43,9 @@ const reducer = createReducer(
 );
 
 // @todo Defining this as a function was necessary to enable AoT with TypeScript 2.0.X.
-export function midiConnectionsReducer(state = INITIAL_STATE, action: TStoreAction): TAppState['midiConnections'] {
+export function midiConnectionsReducer(
+    state: undefined | TAppState['midiConnections'],
+    action: TStoreAction
+): TAppState['midiConnections'] {
     return reducer(state, action);
 }

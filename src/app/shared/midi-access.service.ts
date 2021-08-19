@@ -5,7 +5,7 @@ import { WindowService } from './window.service';
     providedIn: 'root'
 })
 export class MidiAccessService {
-    private _midiAccess: null | WebMidi.MIDIAccess;
+    private _midiAccess: null | WebMidi.MIDIAccess; // eslint-disable-line no-undef
 
     private _window: null | Window;
 
@@ -18,10 +18,11 @@ export class MidiAccessService {
      * This property is true if the browser supports all the required APIs to use the
      * MidiAccessService.
      */
-    get isSupported(): boolean {
+    public get isSupported(): boolean {
         return this._window !== null && 'requestMIDIAccess' in this._window.navigator;
     }
 
+    // eslint-disable-next-line no-undef
     public request(): Promise<WebMidi.MIDIAccess> {
         if (this._midiAccess !== null) {
             return Promise.resolve(this._midiAccess);

@@ -10,11 +10,10 @@ import { first } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class WaitingService {
+    // eslint-disable-next-line class-methods-use-this
     public wait(dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>): Promise<void> {
-        // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
-            const waitingChannelSubject = mask({ type: 'waiting' }, dataChannelSubject); // tslint:disable-line:no-null-undefined-union
-
+            const waitingChannelSubject = mask({ type: 'waiting' }, dataChannelSubject);
             const waitingChannelSubscription = waitingChannelSubject.pipe(first<any>()).subscribe({
                 complete(): void {
                     reject(new Error('The underlying channel was closed before any value could be received.'));

@@ -6,22 +6,20 @@ import { IStringifyableJsonObject, TStringifyableJsonValue } from 'rxjs-broker';
     providedIn: 'root'
 })
 export class FileReceivingService {
+    // eslint-disable-next-line class-methods-use-this
     public receive(dataChannelSubject: Observable<TStringifyableJsonValue>): Promise<ArrayBuffer> {
-        // tslint:disable-line:max-line-length no-null-undefined-union
         return new Promise((resolve, reject) => {
             let buffer: ArrayBuffer;
-
             let byteIndex = 0;
 
             const dataChannelSubscription = dataChannelSubject.subscribe({
                 complete(): void {
-                    reject();
+                    reject(new Error('no data'));
                 },
                 error(err): void {
                     reject(err);
                 },
                 next(message): void {
-                    // tslint:disable-line:no-null-undefined-union
                     if (typeof message === 'object' && !Array.isArray(message)) {
                         const { type } = <IStringifyableJsonObject>message;
 
@@ -39,9 +37,7 @@ export class FileReceivingService {
                         }
                     } else {
                         const destination = new Uint8Array(buffer);
-
                         const source = atob(<string>message);
-
                         const length = byteIndex + source.length;
 
                         for (let i = byteIndex; i < length; i += 1) {

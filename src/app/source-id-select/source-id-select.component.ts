@@ -8,11 +8,11 @@ import { AudioInputMediaDevicesService } from '../shared';
     templateUrl: './source-id-select.component.html'
 })
 export class SourceIdSelectComponent implements OnInit {
-    public audioInputs$!: Observable<MediaDeviceInfo[]>;
-
     @Input() public sourceId!: string;
 
     @Output() public readonly sourceIdChange: EventEmitter<Event>;
+
+    public audioInputs$!: Observable<MediaDeviceInfo[]>;
 
     constructor(private _audioInputMediaDevicesService: AudioInputMediaDevicesService) {
         this.sourceIdChange = new EventEmitter();

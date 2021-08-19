@@ -23,13 +23,13 @@ import { TAppState, TInstrument, TMidiConnection, createInstrumentByIdSelector, 
     templateUrl: './midi-connection.component.html'
 })
 export class MidiConnectionComponent implements OnChanges {
+    @Input() public midiConnection!: TMidiConnection;
+
     public audioInputs$!: Observable<MediaDeviceInfo[]>;
 
     public instrumentName$!: Observable<string>;
 
     public isRegistered: boolean;
-
-    @Input() public midiConnection!: TMidiConnection;
 
     public virtualInstrumentName: string;
 
@@ -81,8 +81,8 @@ export class MidiConnectionComponent implements OnChanges {
                         )
                     )
                 )
+                // eslint-disable-next-line rxjs-angular/prefer-async-pipe
                 .subscribe(() => {
-                    // tslint:disable-line:no-empty rxjs-prefer-async-pipe
                     // @todo
                 });
         });
@@ -102,10 +102,11 @@ export class MidiConnectionComponent implements OnChanges {
             .then(() => this._recordingService.stop())
             .then(
                 (blob) =>
-                    new Promise<{ id: string }>((resolve) =>
-                        this._samplesService.create({ file: blob }).subscribe((sample) => resolve(sample))
-                    )
-            ) // tslint:disable-line:rxjs-prefer-async-pipe
+                    new Promise<{ id: string }>((resolve) => {
+                        // eslint-disable-next-line rxjs-angular/prefer-async-pipe
+                        this._samplesService.create({ file: blob }).subscribe((sample) => resolve(sample));
+                    })
+            )
             .then(
                 (sample) =>
                     new Promise<void>((resolve) => {
@@ -117,7 +118,7 @@ export class MidiConnectionComponent implements OnChanges {
                             return;
                         }
 
-                        return createInstrumentByIdSelector(this._store, instrumentId)
+                        createInstrumentByIdSelector(this._store, instrumentId)
                             .pipe(
                                 filter((instrument): instrument is TInstrument => instrument !== null),
                                 first(),
@@ -125,7 +126,8 @@ export class MidiConnectionComponent implements OnChanges {
                                     this._store.dispatch(patchInstrument({ id: instrumentId, sample: { id: sample.id } }));
                                 })
                             )
-                            .subscribe(() => resolve()); // tslint:disable-line:rxjs-prefer-async-pipe
+                            // eslint-disable-next-line rxjs-angular/prefer-async-pipe
+                            .subscribe(() => resolve());
                     })
             );
     }

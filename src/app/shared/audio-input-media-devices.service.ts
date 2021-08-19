@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { PermissionStateService } from './permission-state';
 import { WindowService } from './window.service';
@@ -18,49 +18,38 @@ export class AudioInputMediaDevicesService {
      * This property is true if the browser supports all the required APIs to use the
      * AudioInputMediaDevicesService.
      */
-    get isSupported(): boolean {
+    public get isSupported(): boolean {
         return (
             this._window !== null && 'mediaDevices' in this._window.navigator && 'enumerateDevices' in this._window.navigator.mediaDevices
         );
     }
 
     public watch(): Observable<MediaDeviceInfo[]> {
-        const mediaDevices$ = new Observable<MediaDeviceInfo[]>((observer) => {
-            if (this.isSupported) {
-                let isUnsubscribed = false;
+        const mediaDevices$ = this.isSupported
+            ? new Observable<MediaDeviceInfo[]>((observer) => {
+                  let isUnsubscribed = false;
 
-                const mediaDevices = (<Window>this._window).navigator.mediaDevices;
+                  const mediaDevices = (<Window>this._window).navigator.mediaDevices;
+                  const enumerateDevices = () =>
+                      mediaDevices.enumerateDevices().then((mediaDeviceInfos) => {
+                          if (!isUnsubscribed) {
+                              observer.next(mediaDeviceInfos.filter(({ kind, label }) => kind === 'audioinput' && label !== ''));
+                          }
+                      });
+                  const onStateChangeListener = () => enumerateDevices();
 
-                const enumerateDevices = () =>
-                    mediaDevices.enumerateDevices().then((mediaDeviceInfos) => {
-                        if (!isUnsubscribed) {
-                            observer.next(
-                                mediaDeviceInfos.filter(({ kind, label }) => {
-                                    return kind === 'audioinput' && label !== '';
-                                })
-                            );
-                        }
-                    });
+                  mediaDevices.addEventListener('devicechange', onStateChangeListener);
 
-                const onStateChangeListener = () => enumerateDevices();
+                  enumerateDevices();
 
-                mediaDevices.addEventListener('devicechange', onStateChangeListener);
-
-                enumerateDevices();
-
-                return () => {
-                    if (mediaDevices !== null) {
-                        isUnsubscribed = true;
-                        mediaDevices.removeEventListener('devicechange', onStateChangeListener);
-                    }
-                };
-            }
-
-            observer.complete();
-
-            // @todo The return statement is necessary to keep TypeScript happy.
-            return;
-        });
+                  return () => {
+                      if (mediaDevices !== null) {
+                          isUnsubscribed = true;
+                          mediaDevices.removeEventListener('devicechange', onStateChangeListener);
+                      }
+                  };
+              })
+            : EMPTY;
 
         return this._permissionStateService.watch('microphone').pipe(
             switchMap((permissionState) => {

@@ -13,14 +13,17 @@ import { TAppState, TInstrument, TMidiConnection } from '../types';
 })
 export class MidiConnectionsEffects {
     public deleteInstruments$ = createEffect(() =>
+        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             ofType(updateMidiConnection),
+            // eslint-disable-next-line no-invalid-this
             withLatestFrom(createMidiConnectionsSelector(this._store).pipe(pairwise())),
             map(([, [previousMidiConnections, currentMidiConnections]]) =>
                 previousMidiConnections
-                    .filter((midiConnection): midiConnection is { instrumentId: string } & TMidiConnection => {
-                        return midiConnection.instrumentId !== undefined;
-                    })
+                    .filter(
+                        (midiConnection): midiConnection is { instrumentId: string } & TMidiConnection =>
+                            midiConnection.instrumentId !== undefined
+                    )
                     .filter(({ midiOutputId }) =>
                         currentMidiConnections.some(
                             ({ instrumentId, midiOutputId: mdTptD }) => midiOutputId === mdTptD && instrumentId === undefined
@@ -31,6 +34,7 @@ export class MidiConnectionsEffects {
             filter((instrumentIds) => instrumentIds.length > 0),
             mergeMap((instrumentIds) => from(instrumentIds)),
             mergeMap((instrumentId) =>
+                // eslint-disable-next-line no-invalid-this
                 createInstrumentByIdSelector(this._store, instrumentId).pipe(
                     filter((instrument): instrument is TInstrument => instrument !== null),
                     first()
@@ -41,11 +45,13 @@ export class MidiConnectionsEffects {
     );
 
     public patchInstrument$ = createEffect(() =>
+        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             pluckPayloadOfType(updateMidiConnection),
             debounceTime(500),
             filter((midiConnection) => !('instrumentId' in midiConnection)),
             mergeMap((midiConnection) =>
+                // eslint-disable-next-line no-invalid-this
                 createMidiConnectionByMidiOutputIdSelector(this._store, midiConnection.midiOutputId).pipe(
                     filter((mdCnnctn): mdCnnctn is TMidiConnection => mdCnnctn !== null),
                     first(),
@@ -54,9 +60,10 @@ export class MidiConnectionsEffects {
                     map(([instrumentId, midiOutputName]) => ({ instrumentId, midiConnection, midiOutputName }))
                 )
             ),
-            filter(({ midiConnection: { description, gearogsSlug, name, soundCloudUsername } }) => {
-                return description !== undefined || gearogsSlug !== undefined || name !== undefined || soundCloudUsername !== undefined;
-            }),
+            filter(
+                ({ midiConnection: { description, gearogsSlug, name, soundCloudUsername } }) =>
+                    description !== undefined || gearogsSlug !== undefined || name !== undefined || soundCloudUsername !== undefined
+            ),
             map(({ instrumentId, midiConnection, midiOutputName }) => {
                 const { description, gearogsSlug, name, soundCloudUsername } = midiConnection;
                 const instrument = { description, gearogsSlug, soundCloudUsername };
@@ -69,5 +76,6 @@ export class MidiConnectionsEffects {
             })
         )
     );
+
     constructor(private _actions$: Actions, private _store: Store<TAppState>) {}
 }

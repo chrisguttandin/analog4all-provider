@@ -5,10 +5,7 @@ import { TAppState, TMidiConnection } from '../types';
 const findMidiConnectionByMidiOutputIdSelector = (
     midiConnections: TAppState['midiConnections'],
     midiOutputId: TMidiConnection['midiOutputId']
-) => {
-    return midiConnections.find((midiConnection) => midiConnection.midiOutputId === midiOutputId);
-};
-
+) => midiConnections.find((midiConnection) => midiConnection.midiOutputId === midiOutputId);
 const midiConnectionByMidiOutputIdSelector = (
     midiConnections: TAppState['midiConnections'],
     midiOutputId: TMidiConnection['midiOutputId']
@@ -21,17 +18,15 @@ const midiConnectionByMidiOutputIdSelector = (
 
     return midiConnection;
 };
-
 const midiConnectionsSelector = (state: TAppState) => state.midiConnections;
 
-export const createMidiConnectionByMidiOutputIdSelector = (store: Observable<TAppState>, midiOutputId: TMidiConnection['midiOutputId']) => {
-    return store.pipe(
+export const createMidiConnectionByMidiOutputIdSelector = (store: Observable<TAppState>, midiOutputId: TMidiConnection['midiOutputId']) =>
+    store.pipe(
         select(
             createSelector(midiConnectionsSelector, (midiConnections: TAppState['midiConnections']) =>
                 midiConnectionByMidiOutputIdSelector(midiConnections, midiOutputId)
             )
         )
     );
-};
 
 export const createMidiConnectionsSelector = (store: Observable<TAppState>) => store.pipe(select(midiConnectionsSelector));

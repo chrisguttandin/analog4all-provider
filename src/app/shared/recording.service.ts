@@ -6,7 +6,6 @@ import { UserMediaService } from './user-media.service';
 connect().then((port) => register(port));
 
 const FADE_OUT_OFFSET = 5;
-
 const FADE_OUT_TICKS = 20;
 
 @Injectable({
@@ -44,19 +43,20 @@ export class RecordingService {
     }
 
     public stop(): Promise<Blob> {
-        return this._waitForSilence().then(() => {
-            return new Promise<Blob>((resolve) => {
-                if (this._mediaRecorder === null) {
-                    throw new Error('Expected a MediaRecorder.');
-                }
+        return this._waitForSilence().then(
+            () =>
+                new Promise<Blob>((resolve) => {
+                    if (this._mediaRecorder === null) {
+                        throw new Error('Expected a MediaRecorder.');
+                    }
 
-                this._mediaRecorder.addEventListener('dataavailable', ({ data }: any) => resolve(data));
-                this._mediaRecorder.stop();
-            });
-        });
+                    this._mediaRecorder.addEventListener('dataavailable', ({ data }: any) => resolve(data));
+                    this._mediaRecorder.stop();
+                })
+        );
     }
 
-    private _detectSilence(currentTime: number, done: Function, attempt: number): void {
+    private _detectSilence(currentTime: number, done: () => void, attempt: number): void {
         if (this._analyserNode === null) {
             throw new Error('Expected an AnalyserNode.');
         }
@@ -70,7 +70,6 @@ export class RecordingService {
         }
 
         const fftSize = this._analyserNode.fftSize;
-
         const tickLength = fftSize / this._audioContext.sampleRate;
 
         if (this._audioContext.currentTime < currentTime + FADE_OUT_OFFSET) {
@@ -92,7 +91,7 @@ export class RecordingService {
         if (sum === 0) {
             done();
         } else {
-            const gain = attempt > FADE_OUT_TICKS ? 0 : 1 - Math.pow(attempt / FADE_OUT_TICKS, 2);
+            const gain = attempt > FADE_OUT_TICKS ? 0 : 1 - (attempt / FADE_OUT_TICKS) ** 2;
 
             this._gainNode.gain.linearRampToValueAtTime(gain, this._audioContext.currentTime + tickLength);
 

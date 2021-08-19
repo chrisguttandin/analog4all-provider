@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { WindowService } from './window.service';
 
 @Injectable({
@@ -16,13 +16,13 @@ export class PermissionStateService {
      * This property is true if the browser supports all the required APIs to use the
      * PermissionStateService.
      */
-    get isSupported(): boolean {
+    public get isSupported(): boolean {
         return this._window !== null && 'permissions' in this._window.navigator && 'query' in this._window.navigator.permissions;
     }
 
     public watch(name: 'microphone' | 'midi'): Observable<PermissionState> {
-        return new Observable<PermissionState>((observer) => {
-            if (this.isSupported) {
+        if (this.isSupported) {
+            return new Observable<PermissionState>((observer) => {
                 let isUnsubscribed = false;
                 let removeOnChangeListener: null | (() => void) = null;
 
@@ -45,12 +45,9 @@ export class PermissionStateService {
                         removeOnChangeListener();
                     }
                 };
-            }
+            });
+        }
 
-            observer.complete();
-
-            // @todo The return statement is necessary to keep TypeScript happy.
-            return;
-        });
+        return EMPTY;
     }
 }

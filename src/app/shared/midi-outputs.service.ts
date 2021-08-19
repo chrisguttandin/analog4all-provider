@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { MidiAccessService } from './midi-access.service';
 import { PermissionStateService } from './permission-state';
@@ -8,12 +8,13 @@ import { PermissionStateService } from './permission-state';
     providedIn: 'root'
 })
 export class MidiOutputsService {
-    private _midiAccess: null | WebMidi.MIDIAccess;
+    private _midiAccess: null | WebMidi.MIDIAccess; // eslint-disable-line no-undef
 
     constructor(private _midiAccessService: MidiAccessService, private _permissionStateService: PermissionStateService) {
         this._midiAccess = null;
     }
 
+    // eslint-disable-next-line no-undef
     public get(id: string): WebMidi.MIDIOutput {
         if (this._midiAccess === null) {
             throw new Error('Expected an exisiting MIDIAccess object.');
@@ -28,38 +29,36 @@ export class MidiOutputsService {
         return midiOutput;
     }
 
+    // eslint-disable-next-line no-undef
     public watch(): Observable<WebMidi.MIDIOutput[]> {
-        const midiOutputs$ = new Observable<WebMidi.MIDIOutput[]>((observer) => {
-            if (this._midiAccessService.isSupported && this._permissionStateService.isSupported) {
-                let onStateChangeListener: null | EventListener = null;
+        const midiOutputs$ =
+            this._midiAccessService.isSupported && this._permissionStateService.isSupported
+                ? // eslint-disable-next-line no-undef
+                  new Observable<WebMidi.MIDIOutput[]>((observer) => {
+                      let onStateChangeListener: null | EventListener = null;
 
-                this._midiAccessService.request().then((midiAccess) => {
-                    this._midiAccess = midiAccess;
+                      this._midiAccessService.request().then((midiAccess) => {
+                          this._midiAccess = midiAccess;
 
-                    observer.next(Array.from(midiAccess.outputs.values()));
+                          observer.next(Array.from(midiAccess.outputs.values()));
 
-                    onStateChangeListener = () => {
-                        if (midiAccess !== null) {
-                            observer.next(Array.from(midiAccess.outputs.values()));
-                        }
-                    };
+                          onStateChangeListener = () => {
+                              if (midiAccess !== null) {
+                                  observer.next(Array.from(midiAccess.outputs.values()));
+                              }
+                          };
 
-                    midiAccess.addEventListener('statechange', onStateChangeListener);
-                });
+                          midiAccess.addEventListener('statechange', onStateChangeListener);
+                      });
 
-                return () => {
-                    if (this._midiAccess !== null && onStateChangeListener !== null) {
-                        this._midiAccess.removeEventListener('statechange', onStateChangeListener);
-                        this._midiAccess = null;
-                    }
-                };
-            }
-
-            observer.complete();
-
-            // @todo The return statement is necessary to keep TypeScript happy.
-            return;
-        });
+                      return () => {
+                          if (this._midiAccess !== null && onStateChangeListener !== null) {
+                              this._midiAccess.removeEventListener('statechange', onStateChangeListener);
+                              this._midiAccess = null;
+                          }
+                      };
+                  })
+                : EMPTY;
 
         return this._permissionStateService.watch('midi').pipe(
             switchMap((permissionState) => {

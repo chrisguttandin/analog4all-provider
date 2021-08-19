@@ -19,22 +19,14 @@ export class RenderingService {
     ) {}
 
     public render(
-        dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>, // tslint:disable-line:no-null-undefined-union
-        midiOutput: WebMidi.MIDIOutput,
+        dataChannelSubject: IRemoteSubject<IStringifyableJsonObject>,
+        midiOutput: WebMidi.MIDIOutput, // eslint-disable-line no-undef
         sourceId: string
     ): Promise<void> {
         return this._waitingService
             .wait(dataChannelSubject)
-            .then(() => {
-                // @todo console.log('receive');
-
-                return this._fileReceivingService.receive(dataChannelSubject);
-            })
-            .then((arrayBuffer: ArrayBuffer) => {
-                // @todo console.log('parse');
-
-                return parseArrayBuffer(arrayBuffer);
-            })
+            .then(() => this._fileReceivingService.receive(dataChannelSubject))
+            .then((arrayBuffer: ArrayBuffer) => parseArrayBuffer(arrayBuffer))
             .then((midiJson) => {
                 midiJson.tracks = midiJson.tracks.map((events) => {
                     const allowedEvents = [];
@@ -72,20 +64,8 @@ export class RenderingService {
 
                 return midiPlayer.play();
             })
-            .then(() => {
-                // @todo console.log('stop');
-
-                return this._recordingService.stop();
-            })
-            .then((arrayBuffer) => {
-                // @todo console.log('send');
-
-                return this._fileSendingService.send(dataChannelSubject, new Blob([arrayBuffer]));
-            })
-            .then(() => {
-                // @todo console.log('done');
-
-                dataChannelSubject.close();
-            });
+            .then(() => this._recordingService.stop())
+            .then((arrayBuffer) => this._fileSendingService.send(dataChannelSubject, new Blob([arrayBuffer])))
+            .then(() => dataChannelSubject.close());
     }
 }
