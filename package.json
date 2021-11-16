@@ -117,7 +117,7 @@
         "load-grunt-config": "^4.0.1",
         "midi-test": "^1.1.9",
         "prettier": "^2.4.1",
-        "pretty-quick": "^3.1.1",
+        "pretty-quick": "^3.1.2",
         "protractor": "~7.0.0",
         "puppeteer": "^10.4.0",
         "stylelint": "^14.0.1",
