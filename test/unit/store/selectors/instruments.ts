@@ -1,5 +1,4 @@
-import { readFirst } from '@nrwl/angular/testing';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { createInstrumentByIdSelector } from '../../../../src/app/store/selectors';
 import { TAppState, TInstrument } from '../../../../src/app/store/types';
 
@@ -16,7 +15,7 @@ describe('instruments selectors', () => {
         describe('createInstrumentByIdSelector()', () => {
             it('should select the value of null', async () => {
                 const id = 'a fake id';
-                const slice = await readFirst(createInstrumentByIdSelector(store, id));
+                const slice = await firstValueFrom(createInstrumentByIdSelector(store, id));
 
                 expect(slice).toEqual(null);
             });
@@ -45,7 +44,7 @@ describe('instruments selectors', () => {
 
         describe('createInstrumentByIdSelector()', () => {
             it('should select the instrument with the given id', async () => {
-                const slice = await readFirst(createInstrumentByIdSelector(store, instruments[0].id));
+                const slice = await firstValueFrom(createInstrumentByIdSelector(store, instruments[0].id));
 
                 expect(slice).toEqual(instruments[0]);
             });

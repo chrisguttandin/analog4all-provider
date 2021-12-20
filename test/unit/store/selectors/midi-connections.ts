@@ -1,5 +1,4 @@
-import { readFirst } from '@nrwl/angular/testing';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../../../../src/app/store/selectors';
 import { TAppState, TMidiConnection } from '../../../../src/app/store/types';
 
@@ -16,7 +15,7 @@ describe('midiConnections selectors', () => {
         describe('createMidiConnectionByMidiOutputIdSelector()', () => {
             it('should select the value of null', async () => {
                 const id = 'a fake id';
-                const slice = await readFirst(createMidiConnectionByMidiOutputIdSelector(store, id));
+                const slice = await firstValueFrom(createMidiConnectionByMidiOutputIdSelector(store, id));
 
                 expect(slice).toEqual(null);
             });
@@ -24,7 +23,7 @@ describe('midiConnections selectors', () => {
 
         describe('createMidiConnectionsSelector()', () => {
             it('should select the value of midiConnections', async () => {
-                const slice = await readFirst(createMidiConnectionsSelector(store));
+                const slice = await firstValueFrom(createMidiConnectionsSelector(store));
 
                 expect(slice).toEqual(midiConnections);
             });
@@ -50,7 +49,7 @@ describe('midiConnections selectors', () => {
 
         describe('createMidiConnectionByMidiOutputIdSelector()', () => {
             it('should select the midiConnection with the given midiOutputId', async () => {
-                const slice = await readFirst(createMidiConnectionByMidiOutputIdSelector(store, midiConnections[0].midiOutputId));
+                const slice = await firstValueFrom(createMidiConnectionByMidiOutputIdSelector(store, midiConnections[0].midiOutputId));
 
                 expect(slice).toEqual(midiConnections[0]);
             });
@@ -58,7 +57,7 @@ describe('midiConnections selectors', () => {
 
         describe('createMidiConnectionsSelector()', () => {
             it('should select the value of midiConnections', async () => {
-                const slice = await readFirst(createMidiConnectionsSelector(store));
+                const slice = await firstValueFrom(createMidiConnectionsSelector(store));
 
                 expect(slice).toEqual(midiConnections);
             });
