@@ -5,11 +5,11 @@ module.exports = (grunt) => {
 
     return {
         'analyze': {
-            cmd: `npx ng build --prod --source-map --stats-json && \
+            cmd: `npx ng build --configuration production --source-map --stats-json && \
                 webpack-bundle-analyzer build/analog4all-provider/stats.json`
         },
         'build': {
-            cmd: 'npx ng build --base-href /analog4all-provider/ --prod --subresource-integrity'
+            cmd: 'npx ng build --base-href /analog4all-provider/ --configuration production --subresource-integrity'
         },
         'continuous': {
             cmd: 'npx ng test'
@@ -33,7 +33,7 @@ module.exports = (grunt) => {
             cmd: 'npx ng serve'
         },
         'preview': {
-            cmd: 'npx ng serve --prod'
+            cmd: 'npx ng serve --configuration production'
         },
         'smoke': {
             cmd: env.CI
