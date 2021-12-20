@@ -1,7 +1,6 @@
 {
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
-        "fullTemplateTypeCheck": true,
         "strictInjectionParameters": true,
         "strictInputAccessModifiers": true,
         "strictTemplates": true
@@ -11,6 +10,7 @@
         "declaration": false,
         "declarationMap": false,
         "downlevelIteration": true,
+        "lib": ["dom", "es2020"],
         "module": "es2020",
         "outDir": "../out-tsc/app",
         "target": "es2017",
