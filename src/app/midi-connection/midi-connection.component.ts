@@ -2,9 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { IMidiFile } from 'midi-json-parser-worker';
 import { create as createMidiPlayer } from 'midi-player';
-import { Observable } from 'rxjs';
+import { Observable, concatMap, filter, first, map } from 'rxjs';
 import { wrap } from 'rxjs-broker';
-import { concatMap, filter, first, map } from 'rxjs/operators';
 import {
     DownloadingService,
     MiddleCMidiJsonService,

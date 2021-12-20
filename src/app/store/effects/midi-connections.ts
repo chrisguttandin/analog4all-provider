@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { from } from 'rxjs';
-import { debounceTime, filter, first, map, mergeMap, pairwise, withLatestFrom } from 'rxjs/operators';
+import { debounceTime, filter, first, from, map, mergeMap, pairwise, withLatestFrom } from 'rxjs';
 import { pluckPayloadOfType } from '../../operators';
 import { deleteInstrument, patchInstrument, updateMidiConnection } from '../actions';
 import { createInstrumentByIdSelector, createMidiConnectionByMidiOutputIdSelector, createMidiConnectionsSelector } from '../selectors';

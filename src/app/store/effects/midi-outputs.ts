@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { map, mergeMap, withLatestFrom } from 'rxjs';
 import { MidiOutputsService } from '../../shared/midi-outputs.service';
 import { mergeMidiConnections, watchMidiOutputs } from '../actions';
 import { createMidiConnectionsSelector } from '../selectors';

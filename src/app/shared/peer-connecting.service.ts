@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, mergeMap } from 'rxjs';
 import { IRemoteSubject, mask } from 'rxjs-broker';
-import { mergeMap } from 'rxjs/operators';
 import {
     ICandidateEvent,
     ICandidateMessage,

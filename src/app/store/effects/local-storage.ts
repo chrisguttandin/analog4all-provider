@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs';
 import { WindowService } from '../../shared/window.service';
 import { mergeMidiConnections, updateMidiConnection } from '../actions';
 import { ICacheableMidiConnection } from '../interfaces';

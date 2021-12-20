@@ -1,7 +1,6 @@
 import { ofType } from '@ngrx/effects';
 import { Action, ActionCreator, Creator } from '@ngrx/store';
-import { OperatorFunction } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { OperatorFunction, pluck } from 'rxjs';
 
 export const pluckPayloadOfType =
     <T extends ActionCreator<string, Creator>, U = ReturnType<T>>(

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, mapTo, mergeMap } from 'rxjs/operators';
+import { Observable, catchError, mapTo, mergeMap, throwError } from 'rxjs';
 import { ISampleResponse } from '../interfaces';
 import { ENDPOINT } from './endpoint-token';
 import { ResponseError } from './response-error';

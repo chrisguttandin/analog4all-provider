@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { EMPTY, Observable, of, switchMap } from 'rxjs';
 import { MidiAccessService } from './midi-access.service';
 import { PermissionStateService } from './permission-state';
 
