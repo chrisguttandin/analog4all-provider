@@ -12,7 +12,7 @@
         "module": "es2020",
         "outDir": "../../out-tsc/spec",
         "target": "es2017",
-        "types": ["deep-freeze-strict", "jasmine", "node", "webmidi", "../../src/ng-dev-mode"]
+        "types": ["deep-freeze-strict", "jasmine", "node", "webmidi", "../../src/ng-dev-mode", "../../src/permissions"]
     },
     "extends": "tsconfig-holy-grail/src/tsconfig-browser",
     "files": ["../../config/karma/test.ts", "../../src/polyfills.ts"],
