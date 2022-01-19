@@ -11,13 +11,11 @@ import { TAppState } from '../types';
     providedIn: 'root'
 })
 export class MidiOutputsEffects {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public mergeMidiConnections$ = createEffect(() =>
-        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             ofType(watchMidiOutputs),
-            // eslint-disable-next-line no-invalid-this
             mergeMap(() => this._midiOutputsService.watch()),
-            // eslint-disable-next-line no-invalid-this
             withLatestFrom(createMidiConnectionsSelector(this._store)),
             map(([midiOutputs, midiConnections]) =>
                 mergeMidiConnections([

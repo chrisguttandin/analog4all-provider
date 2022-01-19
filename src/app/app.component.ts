@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { InstrumentsService, MidiAccessService, PeerConnectingService, UserMediaService } from './shared';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-app',
     styleUrls: ['./app.component.css'],

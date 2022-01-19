@@ -16,28 +16,26 @@ import { InstrumentService } from '../services';
     providedIn: 'root'
 })
 export class InstrumentsEffects {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public deleteInstrument$ = createEffect(() =>
-        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             pluckPayloadOfType(deleteInstrument),
-            // eslint-disable-next-line no-invalid-this
             mergeMap((instrument) => this._instrumentService.delete(instrument))
         )
     );
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public patchInstrument$ = createEffect(() =>
-        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             pluckPayloadOfType(patchInstrument),
-            // eslint-disable-next-line no-invalid-this
             mergeMap((instrument) => this._instrumentService.patch(instrument))
         )
     );
 
-    // eslint-disable-next-line no-invalid-this
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public removeInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(deleteInstrumentSuccess), map(removeInstrument)));
 
-    // eslint-disable-next-line no-invalid-this
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public updateInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(patchInstrumentSuccess), map(updateInstrument)));
 
     constructor(private _actions$: Actions, private _instrumentService: InstrumentService) {}

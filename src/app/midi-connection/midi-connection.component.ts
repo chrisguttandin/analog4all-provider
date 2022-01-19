@@ -16,6 +16,7 @@ import {
 } from '../shared';
 import { TAppState, TInstrument, TMidiConnection, createInstrumentByIdSelector, patchInstrument, updateMidiConnection } from '../store';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-midi-connection',
     styleUrls: ['./midi-connection.component.css'],

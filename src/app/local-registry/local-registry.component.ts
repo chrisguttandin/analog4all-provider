@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { TAppState, TMidiConnection, createMidiConnectionsSelector } from '../store';
 
+// eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-local-registry',
     styleUrls: ['./local-registry.component.css'],

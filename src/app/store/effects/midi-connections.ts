@@ -11,11 +11,10 @@ import { TAppState, TInstrument, TMidiConnection } from '../types';
     providedIn: 'root'
 })
 export class MidiConnectionsEffects {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public deleteInstruments$ = createEffect(() =>
-        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             ofType(updateMidiConnection),
-            // eslint-disable-next-line no-invalid-this
             withLatestFrom(createMidiConnectionsSelector(this._store).pipe(pairwise())),
             map(([, [previousMidiConnections, currentMidiConnections]]) =>
                 previousMidiConnections
@@ -33,7 +32,6 @@ export class MidiConnectionsEffects {
             filter((instrumentIds) => instrumentIds.length > 0),
             mergeMap((instrumentIds) => from(instrumentIds)),
             mergeMap((instrumentId) =>
-                // eslint-disable-next-line no-invalid-this
                 createInstrumentByIdSelector(this._store, instrumentId).pipe(
                     filter((instrument): instrument is TInstrument => instrument !== null),
                     first()
@@ -43,14 +41,13 @@ export class MidiConnectionsEffects {
         )
     );
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     public patchInstrument$ = createEffect(() =>
-        // eslint-disable-next-line no-invalid-this
         this._actions$.pipe(
             pluckPayloadOfType(updateMidiConnection),
             debounceTime(500),
             filter((midiConnection) => !('instrumentId' in midiConnection)),
             mergeMap((midiConnection) =>
-                // eslint-disable-next-line no-invalid-this
                 createMidiConnectionByMidiOutputIdSelector(this._store, midiConnection.midiOutputId).pipe(
                     filter((mdCnnctn): mdCnnctn is TMidiConnection => mdCnnctn !== null),
                     first(),

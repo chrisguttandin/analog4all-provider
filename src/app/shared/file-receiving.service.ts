@@ -41,7 +41,7 @@ export class FileReceivingService {
                         const length = byteIndex + source.length;
 
                         for (let i = byteIndex; i < length; i += 1) {
-                            destination[i] = source.charCodeAt(i - byteIndex);
+                            destination[i] = <number>source.codePointAt(i - byteIndex);
                         }
 
                         byteIndex += source.length;

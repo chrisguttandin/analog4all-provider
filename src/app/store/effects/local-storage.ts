@@ -13,21 +13,18 @@ import { TAppState } from '../types';
 })
 export class LocalStorageEffects {
     public setMidiConnections$ = createEffect(
+        // eslint-disable-next-line unicorn/consistent-function-scoping
         () =>
-            // eslint-disable-next-line no-invalid-this
             this._actions$.pipe(
                 ofType(mergeMidiConnections, updateMidiConnection),
-                // eslint-disable-next-line no-invalid-this
                 withLatestFrom(createMidiConnectionsSelector(this._store), (_, midiConnections) => midiConnections),
                 map((midiConnections) => {
-                    // eslint-disable-next-line no-invalid-this
                     if (this._window !== null) {
                         const strippedMidiConnections: ICacheableMidiConnection[] = midiConnections.map(
                             // eslint-disable-next-line no-unused-vars
                             ({ instrumentId, isConnected, ...properties }) => properties
                         );
 
-                        // eslint-disable-next-line no-invalid-this
                         this._window.localStorage.setItem('midiConnections', JSON.stringify(strippedMidiConnections));
                     }
                 })
