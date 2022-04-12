@@ -92,7 +92,7 @@
         "deep-freeze-strict": "^1.1.1",
         "eslint": "^8.13.0",
         "eslint-config-holy-grail": "^52.0.5",
-        "grunt": "^1.5.1",
+        "grunt": "^1.5.2",
         "grunt-axe-webdriver": "^1.1.0",
         "grunt-cli": "^1.4.3",
         "grunt-contrib-clean": "^2.0.0",
