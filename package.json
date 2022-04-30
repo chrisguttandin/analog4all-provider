@@ -76,7 +76,7 @@
         "@hint/hint-strict-transport-security": "^3.0.12",
         "@hint/hint-stylesheet-limits": "^3.3.16",
         "@hint/hint-validate-set-cookie-header": "^3.0.12",
-        "@hint/hint-x-content-type-options": "^4.0.11",
+        "@hint/hint-x-content-type-options": "^4.0.12",
         "@hint/parser-javascript": "^3.1.15",
         "@hint/parser-manifest": "^2.3.8",
         "@ngrx/store-devtools": "^13.1.0",
