@@ -43,7 +43,7 @@
         "@angular/compiler-cli": "~13.3.9",
         "@angular/language-service": "~13.3.9",
         "@commitlint/cli": "^17.0.0",
-        "@commitlint/config-angular": "^16.2.4",
+        "@commitlint/config-angular": "^17.0.0",
         "@hint/connector-puppeteer": "^2.5.15",
         "@hint/formatter-stylish": "^3.1.28",
         "@hint/hint-apple-touch-icons": "^4.0.13",
