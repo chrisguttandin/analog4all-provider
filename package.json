@@ -91,7 +91,7 @@
         "cz-conventional-changelog": "^3.3.0",
         "deep-freeze-strict": "^1.1.1",
         "eslint": "^8.22.0",
-        "eslint-config-holy-grail": "^52.0.27",
+        "eslint-config-holy-grail": "^52.0.28",
         "grunt": "^1.5.3",
         "grunt-axe-webdriver": "^1.1.0",
         "grunt-cli": "^1.4.3",
