@@ -77,7 +77,7 @@
         "@hint/hint-stylesheet-limits": "^3.3.22",
         "@hint/hint-validate-set-cookie-header": "^3.0.18",
         "@hint/hint-x-content-type-options": "^4.0.18",
-        "@hint/parser-javascript": "^3.1.20",
+        "@hint/parser-javascript": "^3.1.21",
         "@hint/parser-manifest": "^2.3.14",
         "@ngrx/store-devtools": "^13.2.0",
         "@types/deep-freeze-strict": "^1.1.0",
