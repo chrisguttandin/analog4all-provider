@@ -26,17 +26,22 @@ export class PermissionStateService {
                 let isUnsubscribed = false;
                 let removeOnChangeListener: null | (() => void) = null;
 
-                (<Window>this._window).navigator.permissions.query({ name }).then((status) => {
-                    if (!isUnsubscribed) {
-                        observer.next(status.state);
+                (<Window>this._window).navigator.permissions.query({ name }).then(
+                    (status) => {
+                        if (!isUnsubscribed) {
+                            observer.next(status.state);
 
-                        const onChangeListener = () => observer.next(status.state);
+                            const onChangeListener = () => observer.next(status.state);
 
-                        status.addEventListener('change', onChangeListener);
+                            status.addEventListener('change', onChangeListener);
 
-                        removeOnChangeListener = () => status.removeEventListener('change', onChangeListener);
+                            removeOnChangeListener = () => status.removeEventListener('change', onChangeListener);
+                        }
+                    },
+                    () => {
+                        observer.next('denied');
                     }
-                });
+                );
 
                 return () => {
                     isUnsubscribed = true;
