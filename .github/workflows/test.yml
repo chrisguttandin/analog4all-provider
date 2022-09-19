@@ -73,3 +73,13 @@ jobs:
                   GIT_HUB_USER_NAME: ${{ secrets.GIT_HUB_USER_NAME }}
               name: Deploy website
               run: npx grunt deploy
+
+            - if: failure()
+              name: Upload report and results
+              uses: 'actions/upload-artifact@v2'
+              with:
+                  name: playwright-report-and-results
+                  path: |
+                      playwright-report/
+                      playwright-results/
+                      test/screenshots/

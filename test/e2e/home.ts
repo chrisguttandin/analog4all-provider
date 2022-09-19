@@ -1,89 +1,76 @@
+import { test, expect, ConsoleMessage } from '@playwright/test';
 import { MidiDst } from 'midi-test';
-import { browser, logging } from 'protractor';
-import { HomePage } from './home.po';
+import { Home } from './home.po';
 
-describe('/', () => {
-    let page: HomePage;
+let home: Home;
+let removeListener: () => ConsoleMessage[];
 
-    afterEach(async () => {
-        try {
-            // Assert that there are no errors emitted from the browser
-            const logs = await browser.manage().logs().get(logging.Type.BROWSER);
+test.afterEach(() => {
+    const consoleMessages = removeListener();
+    const severeConsoleMessages = consoleMessages.filter((consoleMessage) => !['info', 'log', 'warning'].includes(consoleMessage.type()));
 
-            expect(logs).not.toContain(
-                jasmine.objectContaining(<Partial<logging.Entry>>{
-                    level: logging.Level.SEVERE
-                })
-            );
-        } catch (err) {
-            // @todo The driver for Safari does not support to retrieve the logs.
-            if (err.name === 'UnsupportedOperationError') {
-                console.warn('The driver for Safari does not support to retrieve the logs.'); // eslint-disable-line no-console
-            } else {
-                throw err;
-            }
+    // eslint-disable-next-line no-console
+    severeConsoleMessages.forEach((consoleMessage) => console.log(`${consoleMessage.type()}: ${consoleMessage.text()}`));
+
+    expect(severeConsoleMessages).toEqual([]);
+});
+
+test.beforeEach(async ({ page }) => {
+    const consoleMessages: ConsoleMessage[] = [];
+    const listener = (consoleMessage) => consoleMessages.push(consoleMessage);
+
+    page.addListener('console', listener);
+
+    removeListener = () => {
+        page.addListener('console', listener);
+
+        return consoleMessages;
+    };
+
+    home = new Home(page);
+
+    await home.navigateTo();
+});
+
+test('should display the correct headline', async () => {
+    await expect(home.getHeadline()).toHaveText('Analog4All Provider');
+});
+
+test('should go to the home page', async ({ page }) => {
+    await expect(page).toHaveURL(/\/$/);
+});
+
+test.describe('without any MIDI devices', () => {
+    test('should display the correct sub headline', async ({ browserName }) => {
+        if (browserName === 'chromium') {
+            await expect(home.getSubHeadline()).toHaveText('There is currently no instrument connected via MIDI');
+        } else {
+            await expect(home.getParagraph()).toHaveText('Sorry, your browser is not supported. :-(');
         }
     });
+});
 
-    beforeEach(() => {
-        page = new HomePage();
+test.describe('with a MIDI device (at least locally)', () => {
+    let virtualOutputDevice: { connect(): boolean; disconnect(): boolean };
+
+    test.afterEach(() => virtualOutputDevice.disconnect());
+
+    test.beforeEach(({ browser, browserName }) => {
+        if (browserName === 'chromium') {
+            const [context] = browser.contexts();
+
+            context.grantPermissions(['midi']);
+        }
+
+        virtualOutputDevice = new MidiDst('VirtualSynth');
+        virtualOutputDevice.connect();
     });
 
-    it('should display the correct headline', async () => {
-        await page.navigateTo();
-
-        expect(await page.getHeadline()).toEqual('Analog4All Provider');
-    });
-
-    describe('without any MIDI devices', () => {
-        let browserName: string;
-
-        beforeEach(async () => {
-            const capabilities = await browser.getCapabilities();
-
-            browserName = capabilities.get('browserName');
-        });
-
-        it('should display the correct sub headline', async () => {
-            await page.navigateTo();
-
-            if (browserName === 'Safari') {
-                expect(await page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
-            } else {
-                expect(await page.getSubHeadline()).toEqual('There is currently no instrument connected via MIDI');
-            }
-        });
-    });
-
-    describe('with a MIDI device (at least locally)', () => {
-        let browserName: string;
-        let virtualOutputDevice: { connect(): boolean; disconnect(): boolean };
-
-        afterEach(() => {
-            virtualOutputDevice.disconnect();
-        });
-
-        beforeEach(async () => {
-            const capabilities = await browser.getCapabilities();
-
-            browserName = capabilities.get('browserName');
-
-            virtualOutputDevice = new MidiDst('VirtualSynth');
-            virtualOutputDevice.connect();
-
-            return new Promise((resolve) => {
-                setTimeout(resolve, 1000);
-            });
-        });
-
-        it('should display the correct sub headline', async () => {
-            await page.navigateTo();
-
-            if (browserName === 'Safari') {
-                expect(await page.getParagraph()).toEqual('Sorry, your browser is not supported. :-(');
-            } else {
-                expect(await page.getSubHeadline()).toEqual('Currently connected MIDI instruments');
-            }
-        });
+    test('should display the correct sub headline', async ({ browserName }) => {
+        if (browserName === 'chromium') {
+            await expect(home.getSubHeadline()).toHaveText('Currently connected MIDI instruments');
+        } else {
+            await expect(home.getParagraph()).toHaveText('Sorry, your browser is not supported. :-(');
+        }
     });
 });

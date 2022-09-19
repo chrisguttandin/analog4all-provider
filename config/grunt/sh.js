@@ -15,7 +15,7 @@ module.exports = (grunt) => {
             cmd: 'npx ng test'
         },
         'e2e': {
-            cmd: env.CI ? 'npx ng e2e' : 'webdriver-manager update && npx ng e2e --no-webdriver-update'
+            cmd: 'npx playwright test --config config/playwright/config.ts'
         },
         'lint-config': {
             cmd: `eslint --config config/eslint/config.json --ext .js ${fix ? '--fix ' : ''}--report-unused-disable-directives *.js config/`
@@ -37,10 +37,10 @@ module.exports = (grunt) => {
         },
         'smoke': {
             cmd: env.CI
-                ? `IS_SMOKE_TEST=true npx ng e2e --dev-server-target '' && \
+                ? `npx playwright install --with-deps && \
+                    IS_SMOKE_TEST=true npx playwright test --config config/playwright/config.ts && \
                     npx hint --telemetry=off https://chrisguttandin.github.io/analog4all-provider`
-                : `webdriver-manager update && \
-                    IS_SMOKE_TEST=true npx ng e2e --dev-server-target '' --no-webdriver-update && \
+                : `IS_SMOKE_TEST=true npx playwright test --config config/playwright/config.ts && \
                     npx hint --telemetry=off https://chrisguttandin.github.io/analog4all-provider`
         },
         'test': {
