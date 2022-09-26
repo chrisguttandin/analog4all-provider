@@ -64,18 +64,6 @@
                         "tsConfig": "src/tsconfig.json"
                     }
                 },
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "analog4all-provider:serve:production"
-                        }
-                    },
-                    "options": {
-                        "devServerTarget": "analog4all-provider:serve",
-                        "protractorConfig": "config/protractor/e2e.js"
-                    }
-                },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
