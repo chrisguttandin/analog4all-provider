@@ -55,10 +55,8 @@ test.describe('with a MIDI device (at least locally)', () => {
 
     test.afterEach(() => virtualOutputDevice.disconnect());
 
-    test.beforeEach(({ browser, browserName }) => {
+    test.beforeEach(({ browserName, context }) => {
         if (browserName === 'chromium') {
-            const [context] = browser.contexts();
-
             context.grantPermissions(['midi']);
         }
 
