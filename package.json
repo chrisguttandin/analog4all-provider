@@ -39,7 +39,7 @@
     "devDependencies": {
         "@angular-devkit/build-angular": "~13.3.10",
         "@angular-eslint/builder": "^13.5.0",
-        "@angular/cli": "^13.3.10",
+        "@angular/cli": "^14.2.10",
         "@angular/compiler-cli": "~13.3.12",
         "@angular/language-service": "~13.3.12",
         "@commitlint/cli": "^17.3.0",
