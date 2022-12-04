@@ -12,10 +12,6 @@ describe('midiConnections reducer', () => {
             });
         });
 
-        describe('with an action of type MERGE_MIDI_CONNECTIONS', () => {
-            // @todo
-        });
-
         describe('with an action of type UPDATE_MIDI_CONNECTION', () => {
             it('should throw an error', () => {
                 const midiConnection = {
@@ -50,10 +46,6 @@ describe('midiConnections reducer', () => {
 
                 expect(state).toEqual(previousState);
             });
-        });
-
-        describe('with an action of type MERGE_MIDI_CONNECTIONS', () => {
-            // @todo
         });
 
         describe('with an action of type UPDATE_MIDI_CONNECTION', () => {
