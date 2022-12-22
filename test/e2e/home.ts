@@ -51,7 +51,7 @@ test.describe('without any MIDI devices', () => {
 });
 
 test.describe('with a MIDI device (at least locally)', () => {
-    let virtualOutputDevice: { connect(): boolean; disconnect(): boolean };
+    let virtualOutputDevice: InstanceType<typeof MidiDst>;
 
     test.afterEach(() => virtualOutputDevice.disconnect());
 
