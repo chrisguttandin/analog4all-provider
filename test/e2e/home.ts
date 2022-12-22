@@ -55,9 +55,9 @@ test.describe('with a MIDI device (at least locally)', () => {
 
     test.afterEach(() => virtualOutputDevice.disconnect());
 
-    test.beforeEach(({ browserName, context }) => {
+    test.beforeEach(async ({ browserName, context }) => {
         if (browserName === 'chromium') {
-            context.grantPermissions(['midi']);
+            await context.grantPermissions(['midi']);
         }
 
         virtualOutputDevice = new MidiDst('VirtualSynth');
