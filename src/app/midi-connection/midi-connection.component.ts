@@ -59,7 +59,8 @@ export class MidiConnectionComponent implements OnChanges {
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
-        if (changes.midiConnection !== undefined) {
+        // eslint-disable-next-line dot-notation
+        if (changes['midiConnection'] !== undefined) {
             const midiConnection = this.midiConnection;
 
             this.isRegistered = midiConnection.instrumentId !== undefined;

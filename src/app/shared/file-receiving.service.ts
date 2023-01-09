@@ -29,7 +29,8 @@ export class FileReceivingService {
                         }
 
                         if (type === 'bof') {
-                            buffer = new ArrayBuffer(<number>(<IStringifyableJsonObject>message).byteLength);
+                            // eslint-disable-next-line dot-notation
+                            buffer = new ArrayBuffer(<number>(<IStringifyableJsonObject>message)['byteLength']);
                         } else if (type === 'eof') {
                             dataChannelSubscription.unsubscribe();
 
