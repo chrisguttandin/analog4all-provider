@@ -29,12 +29,13 @@ export class AudioInputMediaDevicesService {
                   let isUnsubscribed = false;
 
                   const mediaDevices = (<Window>this._window).navigator.mediaDevices;
-                  const enumerateDevices = () =>
+                  const enumerateDevices = () => {
                       mediaDevices.enumerateDevices().then((mediaDeviceInfos) => {
                           if (!isUnsubscribed) {
                               observer.next(mediaDeviceInfos.filter(({ kind, label }) => kind === 'audioinput' && label !== ''));
                           }
                       });
+                  };
                   const onStateChangeListener = () => enumerateDevices();
 
                   mediaDevices.addEventListener('devicechange', onStateChangeListener);
