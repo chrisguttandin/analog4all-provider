@@ -38,7 +38,7 @@
     "description": "This is the provider for analog4all.",
     "devDependencies": {
         "@angular-devkit/build-angular": "^15.1.1",
-        "@angular-eslint/builder": "^15.1.0",
+        "@angular-eslint/builder": "^15.2.0",
         "@angular/cli": "^15.1.1",
         "@angular/compiler-cli": "^15.1.0",
         "@commitlint/cli": "^17.4.2",
