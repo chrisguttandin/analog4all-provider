@@ -42,7 +42,7 @@ test('should go to the home page', async ({ page }) => {
 
 test.describe('without any MIDI devices', () => {
     test('should display the correct sub headline', async ({ browserName }) => {
-        if (browserName === 'chromium') {
+        if (browserName === 'chromium' || browserName === 'firefox') {
             await expect(home.getSubHeadline()).toHaveText('There is currently no instrument connected via MIDI');
         } else {
             await expect(home.getParagraph()).toHaveText('Sorry, your browser is not supported. :-(');
@@ -67,6 +67,8 @@ test.describe('with a MIDI device (at least locally)', () => {
     test('should display the correct sub headline', async ({ browserName }) => {
         if (browserName === 'chromium') {
             await expect(home.getSubHeadline()).toHaveText('Currently connected MIDI instruments');
+        } else if (browserName === 'firefox') {
+            await expect(home.getSubHeadline()).toHaveText('There is currently no instrument connected via MIDI');
         } else {
             await expect(home.getParagraph()).toHaveText('Sorry, your browser is not supported. :-(');
         }
