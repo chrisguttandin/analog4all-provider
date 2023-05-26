@@ -12,12 +12,12 @@ input {
 }
 
 label {
-    background-color: #DDD;
+    background-color: #ddd;
     width: 30%;
 }
 
 input {
-    background-color: #FFF;
+    background-color: #fff;
     border: none;
     outline: none;
     width: 70%;
@@ -30,10 +30,8 @@ p {
 }
 
 @media (max-width: 500px) {
-
     label,
     input {
         width: 100%;
     }
-
 }

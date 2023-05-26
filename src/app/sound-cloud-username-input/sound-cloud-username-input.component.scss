@@ -3,7 +3,7 @@
 }
 
 label,
-textarea {
+input {
     box-sizing: border-box;
     display: block;
     float: left;
@@ -12,16 +12,14 @@ textarea {
 }
 
 label {
-    background-color: #DDD;
+    background-color: #ddd;
     width: 30%;
 }
 
-textarea {
-    background-color: #FFF;
+input {
+    background-color: #fff;
     border: none;
-    height: 70px;
     outline: none;
-    resize: vertical;
     width: 70%;
 }
 
@@ -32,10 +30,8 @@ p {
 }
 
 @media (max-width: 500px) {
-
     label,
-    textarea {
+    input {
         width: 100%;
     }
-
 }

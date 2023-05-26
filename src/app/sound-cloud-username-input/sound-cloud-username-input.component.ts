@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-sound-cloud-username-input',
-    styleUrls: ['./sound-cloud-username-input.component.css'],
+    styleUrls: ['./sound-cloud-username-input.component.scss'],
     templateUrl: './sound-cloud-username-input.component.html'
 })
 export class SoundCloudUsernameInputComponent {

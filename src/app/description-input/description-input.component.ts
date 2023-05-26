@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-description-input',
-    styleUrls: ['./description-input.component.css'],
+    styleUrls: ['./description-input.component.scss'],
     templateUrl: './description-input.component.html'
 })
 export class DescriptionInputComponent {

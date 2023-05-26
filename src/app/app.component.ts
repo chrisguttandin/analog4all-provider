@@ -4,7 +4,7 @@ import { InstrumentsService, MidiAccessService, PeerConnectingService, UserMedia
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-app',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['./app.component.scss'],
     templateUrl: './app.component.html'
 })
 export class AppComponent {

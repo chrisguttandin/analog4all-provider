@@ -5,7 +5,7 @@ import { AudioInputMediaDevicesService } from '../shared';
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-source-id-select',
-    styleUrls: ['./source-id-select.component.css'],
+    styleUrls: ['./source-id-select.component.scss'],
     templateUrl: './source-id-select.component.html'
 })
 export class SourceIdSelectComponent implements OnInit {

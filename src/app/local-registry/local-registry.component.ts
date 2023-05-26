@@ -6,7 +6,7 @@ import { TAppState, TMidiConnection, createMidiConnectionsSelector } from '../st
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-local-registry',
-    styleUrls: ['./local-registry.component.css'],
+    styleUrls: ['./local-registry.component.scss'],
     templateUrl: './local-registry.component.html'
 })
 export class LocalRegistryComponent implements OnInit {
