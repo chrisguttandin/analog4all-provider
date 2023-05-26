@@ -11,10 +11,10 @@ module.exports = {
             'wss://sock.cat'
         ],
         'default-src': "'none'",
-        'font-src': 'https://fonts.gstatic.com',
+        'font-src': "'self'",
         'img-src': "'self'",
         'script-src': ['blob:', "'self'", "'unsafe-eval'"],
-        'style-src': ['https://fonts.googleapis.com', "'self'", "'unsafe-inline'"],
+        'style-src': ["'self'", "'unsafe-inline'"],
         'worker-src': ['blob:', "'self'"]
     }
 };
