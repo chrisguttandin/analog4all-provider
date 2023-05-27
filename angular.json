@@ -1,6 +1,5 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "defaultProject": "analog4all-provider",
     "newProjectRoot": "projects",
     "projects": {
         "analog4all-provider": {
