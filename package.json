@@ -28,7 +28,7 @@
         "@ngrx/store": "^16.0.0",
         "extendable-media-recorder": "^7.1.16",
         "extendable-media-recorder-wav-encoder": "^7.0.89",
-        "midi-json-parser": "^8.1.24",
+        "midi-json-parser": "^8.1.25",
         "midi-json-parser-worker": "^8.1.21",
         "midi-player": "^7.1.4",
         "rxjs": "~7.8.1",
