@@ -32,7 +32,7 @@
         "midi-json-parser-worker": "^8.1.26",
         "midi-player": "^7.1.9",
         "rxjs": "~7.8.1",
-        "rxjs-broker": "^7.1.31",
+        "rxjs-broker": "^7.1.32",
         "tslib": "^2.6.0",
         "zone.js": "~0.13.1"
     },
