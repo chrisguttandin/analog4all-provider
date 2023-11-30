@@ -61,6 +61,9 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v3
 
+            - name: Install Python dependencies
+              run: python -m pip install --upgrade packaging pip setuptools
+
             - name: Install Node.js 18.x
               uses: actions/setup-node@v3
               with:
