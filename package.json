@@ -84,7 +84,7 @@
         "@types/deep-freeze-strict": "^1.1.2",
         "@types/jasmine": "~4.3.6",
         "@types/webmidi": "^2.0.10",
-        "axe-core": "^4.8.3",
+        "axe-core": "^4.8.4",
         "bundle-buddy": "^0.2.2",
         "commitizen": "^4.3.0",
         "content-security-policy-builder": "^2.1.1",
