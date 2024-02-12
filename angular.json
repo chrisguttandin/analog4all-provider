@@ -60,7 +60,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "analog4all-provider:build"
+                        "buildTarget": "analog4all-provider:build"
                     }
                 },
                 "lint": {
@@ -80,10 +80,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "development": {
-                            "browserTarget": "analog4all-provider:build:development"
+                            "buildTarget": "analog4all-provider:build:development"
                         },
                         "production": {
-                            "browserTarget": "analog4all-provider:build:production"
+                            "buildTarget": "analog4all-provider:build:production"
                         }
                     },
                     "defaultConfiguration": "development",
