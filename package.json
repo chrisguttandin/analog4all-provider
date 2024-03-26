@@ -114,7 +114,7 @@
         "midi-test": "^1.2.9",
         "prettier": "^3.2.5",
         "puppeteer": "^22.6.1",
-        "stylelint": "^16.3.0",
+        "stylelint": "^16.3.1",
         "stylelint-config-holy-grail": "^12.0.5",
         "tsconfig-holy-grail": "^15.0.0",
         "typescript": "~5.3.3",
