@@ -118,7 +118,7 @@
         "stylelint-config-holy-grail": "^12.0.6",
         "tsconfig-holy-grail": "^15.0.1",
         "typescript": "~5.4.5",
-        "webpack-bundle-analyzer": "^4.10.1"
+        "webpack-bundle-analyzer": "^4.10.2"
     },
     "homepage": "https://chrisguttandin.github.io/analog4all-provider",
     "license": "AGPL-3.0-or-later",
