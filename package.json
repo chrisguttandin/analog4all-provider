@@ -83,7 +83,7 @@
         "@playwright/test": "^1.44.1",
         "@types/deep-freeze-strict": "^1.1.2",
         "@types/jasmine": "~5.1.4",
-        "@types/webmidi": "^2.0.10",
+        "@types/webmidi": "^2.1.0",
         "axe-core": "^4.9.1",
         "bundle-buddy": "^0.2.2",
         "commitizen": "^4.3.0",
