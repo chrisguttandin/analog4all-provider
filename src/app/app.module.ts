@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,13 +26,10 @@ import { StoreModule } from './store';
         SoundCloudUsernameInputComponent,
         SourceIdSelectComponent
     ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: !ngDevMode }),
-        StoreModule
-    ],
-    providers: [{ provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' }]
+    imports: [BrowserModule, FormsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: !ngDevMode }), StoreModule],
+    providers: [
+        { provide: ENDPOINT, useValue: '://jbnw79pt56.execute-api.eu-west-1.amazonaws.com/dev/' },
+        provideHttpClient(withInterceptorsFromDi())
+    ]
 })
 export class AppModule {}
