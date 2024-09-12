@@ -23,7 +23,7 @@
         "@angular/platform-browser-dynamic": "^18.2.4",
         "@angular/router": "^18.2.4",
         "@angular/service-worker": "^18.2.4",
-        "@fontsource/roboto": "^5.0.15",
+        "@fontsource/roboto": "^5.1.0",
         "@ngrx/effects": "^18.0.2",
         "@ngrx/store": "^18.0.2",
         "extendable-media-recorder": "^9.2.11",
