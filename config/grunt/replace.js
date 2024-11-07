@@ -21,7 +21,11 @@ module.exports = (grunt) => {
     return {
         'assets': {
             files: {
-                './': ['build/analog4all-provider/index.html', 'build/analog4all-provider/*.css', 'build/analog4all-provider/*.js']
+                './': [
+                    'build/analog4all-provider/browser/index.html',
+                    'build/analog4all-provider/browser/*.css',
+                    'build/analog4all-provider/browser/*.js'
+                ]
             },
             options: {
                 patterns: [
@@ -58,14 +62,14 @@ module.exports = (grunt) => {
         },
         'csp-production': {
             files: {
-                'build/analog4all-provider/index.html': ['build/analog4all-provider/index.html']
+                'build/analog4all-provider/browser/index.html': ['build/analog4all-provider/browser/index.html']
             },
             options: {
                 patterns: [
                     {
                         match: /<meta\shttp-equiv="content-security-policy"\s*\/?>/,
                         replacement: () => {
-                            const html = fs.readFileSync('build/analog4all-provider/index.html', 'utf8'); // eslint-disable-line node/no-sync
+                            const html = fs.readFileSync('build/analog4all-provider/browser/index.html', 'utf8'); // eslint-disable-line node/no-sync
                             const regex = /<script[^>]*?>(?<script>.*?)<\/script>/gm;
                             const scriptHashes = [`'sha256-${computeHashOfString(ENABLE_STYLES_SCRIPT, 'sha256', 'base64')}'`];
 
@@ -114,7 +118,7 @@ module.exports = (grunt) => {
                         }
                     },
                     {
-                        match: /<link\srel="stylesheet"\shref="(?<filename>styles\.[\da-z]+\.css)"\scrossorigin="anonymous"\sintegrity="(?<hash>sha384-[\d+/A-Za-z]+=*)"(?<media>\smedia="print")?[^>]*>/g,
+                        match: /<link\srel="stylesheet"\shref="(?<filename>styles-[\dA-Z]+\.css)"\scrossorigin="anonymous"\sintegrity="(?<hash>sha384-[\d+/A-Za-z]+=*)"(?<media>\smedia="print")?[^>]*>/g,
                         replacement: (_, filename, hash, media) =>
                             `<link crossorigin="anonymous" href="${filename}" rel="stylesheet" integrity="${hash}"${media}>`
                     },
@@ -127,7 +131,7 @@ module.exports = (grunt) => {
         },
         'manifest': {
             files: {
-                './': ['build/analog4all-provider/ngsw.json']
+                './': ['build/analog4all-provider/browser/ngsw.json']
             },
             options: {
                 patterns: [
@@ -148,8 +152,8 @@ module.exports = (grunt) => {
                         // Replace the hash value inside of the hashTable for "/(index|start).html" because it was modified before.
                         match: /"\/analog4all-provider\/(?<filename>index|start)\.html":\s*"[\da-z]+"/g,
                         replacement: (_, filename) => {
-                            return `"/analog4all-provider/${filename}.html": "${computeHashOfFile(
-                                `build/analog4all-provider/${filename}.html`,
+                            return `"/analog4all-provider/browser/${filename}.html": "${computeHashOfFile(
+                                `build/analog4all-provider/browser/${filename}.html`,
                                 'sha1',
                                 'hex'
                             )}"`;
@@ -160,7 +164,7 @@ module.exports = (grunt) => {
         },
         'runtime': {
             files: {
-                './': ['build/analog4all-provider/index.html']
+                './': ['build/analog4all-provider/browser/index.html']
             },
             options: {
                 patterns: [
@@ -168,10 +172,10 @@ module.exports = (grunt) => {
                         match: /<script\ssrc="(?<filename>runtime(?:-es(?:2015|5))?.[\da-z]*\.js)"(?<moduleAttribute>\s(?:nomodule|type="module"))?\scrossorigin="anonymous"\sintegrity="sha384-[\d+/A-Za-z]+=*"><\/script>/g,
                         replacement: (_, filename, moduleAttribute) => {
                             if (moduleAttribute === undefined) {
-                                return `<script>${fs.readFileSync(`build/analog4all-provider/${filename}`)}</script>`; // eslint-disable-line node/no-sync
+                                return `<script>${fs.readFileSync(`build/analog4all-provider/browser/${filename}`)}</script>`; // eslint-disable-line node/no-sync
                             }
 
-                            return `<script${moduleAttribute}>${fs.readFileSync(`build/analog4all-provider/${filename}`)}</script>`; // eslint-disable-line node/no-sync
+                            return `<script${moduleAttribute}>${fs.readFileSync(`build/analog4all-provider/browser/${filename}`)}</script>`; // eslint-disable-line node/no-sync
                         }
                     }
                 ]

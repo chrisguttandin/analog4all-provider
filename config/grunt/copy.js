@@ -3,7 +3,7 @@ module.exports = {
         files: [
             {
                 cwd: 'src/',
-                dest: 'build/analog4all-provider/',
+                dest: 'build/analog4all-provider/browser',
                 expand: true,
                 src: ['404.html']
             }

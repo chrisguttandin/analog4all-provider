@@ -5,15 +5,13 @@
         "analog4all-provider": {
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:application",
                     "configurations": {
                         "development": {
-                            "buildOptimizer": false,
                             "extractLicenses": false,
                             "namedChunks": true,
                             "optimization": false,
-                            "sourceMap": true,
-                            "vendorChunk": true
+                            "sourceMap": true
                         },
                         "production": {
                             "budgets": [
@@ -44,15 +42,14 @@
                     },
                     "defaultConfiguration": "production",
                     "options": {
-                        "assets": ["src/assets"],
+                        "assets": ["src/favicon.ico", "src/assets"],
+                        "browser": "src/main.ts",
                         "i18nMissingTranslation": "error",
                         "index": "src/index.html",
-                        "main": "src/main.ts",
-                        "ngswConfigPath": "src/ngsw-config.json",
                         "outputPath": "build/analog4all-provider",
                         "polyfills": ["zone.js"],
                         "scripts": [],
-                        "serviceWorker": true,
+                        "serviceWorker": "src/ngsw-config.json",
                         "styles": ["src/styles/styles.scss"],
                         "tsConfig": "src/tsconfig.json"
                     }
@@ -94,12 +91,11 @@
                 "test": {
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
-                        "assets": ["src/assets"],
+                        "assets": ["src/favicon.ico", "src/assets"],
                         "include": ["../test/unit/**/*.ts"],
                         "karmaConfig": "config/karma/config.js",
                         "polyfills": ["zone.js", "zone.js/testing"],
                         "scripts": [],
-                        "styles": ["src/styles/styles.scss"],
                         "tsConfig": "test/unit/tsconfig.json"
                     }
                 }

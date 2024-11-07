@@ -2,8 +2,8 @@ module.exports = {
     default: {
         files: [
             {
-                cwd: 'build/analog4all-provider',
-                dest: 'build/analog4all-provider',
+                cwd: 'build/analog4all-provider/browser',
+                dest: 'build/analog4all-provider/browser',
                 expand: true,
                 src: ['**/*.html']
             }

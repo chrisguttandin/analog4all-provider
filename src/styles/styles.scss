@@ -1,6 +1,6 @@
 @use '@fontsource/roboto/scss/mixins' as roboto;
 
-@include roboto.faces($subsets: latin latin-ext, $weights: 100);
+@include roboto.faces($directory: '@fontsource/roboto/files/', $subsets: latin latin-ext, $weights: 100);
 
 html {
     min-height: 100%;
