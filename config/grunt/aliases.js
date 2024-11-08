@@ -3,7 +3,7 @@ module.exports = {
     build: [
         'sh:build',
         'sh:verify',
-        'clean:source-maps',
+        'sh:rimraf-source-maps',
         'copy:404',
         'replace:runtime',
         'replace:assets',
