@@ -6,7 +6,6 @@ module.exports = {
         'clean:source-maps',
         'copy:404',
         'replace:runtime',
-        'clean:runtime',
         'replace:assets',
         'replace:csp-production',
         'htmlmin',
