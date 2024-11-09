@@ -5,7 +5,6 @@ module.exports = {
         'sh:verify',
         'sh:rimraf-source-maps',
         'copy:404',
-        'replace:runtime',
         'replace:assets',
         'replace:csp-production',
         'htmlmin',

@@ -141,14 +141,6 @@ module.exports = (grunt) => {
                             grunt.file.expand({ cwd: 'build/analog4all-provider', ext: extension }, `assets/${filename}.*`)[0]
                     },
                     {
-                        match: /\s*"\/analog4all-provider(?:\/scripts)?\/runtime(?:-es(?:2015|5))?.[\da-z]*\.js",/g,
-                        replacement: ''
-                    },
-                    {
-                        match: /\s*"\/analog4all-provider(?:\/scripts)?\/runtime(?:-es(?:2015|5))?.[\da-z]*\.js":\s*"[\da-z]+",/g,
-                        replacement: ''
-                    },
-                    {
                         // Replace the hash value inside of the hashTable for "/(index|start).html" because it was modified before.
                         match: /"\/analog4all-provider\/(?<filename>index|start)\.html":\s*"[\da-z]+"/g,
                         replacement: (_, filename) => {
@@ -157,25 +149,6 @@ module.exports = (grunt) => {
                                 'sha1',
                                 'hex'
                             )}"`;
-                        }
-                    }
-                ]
-            }
-        },
-        'runtime': {
-            files: {
-                './': ['build/analog4all-provider/browser/index.html']
-            },
-            options: {
-                patterns: [
-                    {
-                        match: /<script\ssrc="(?<filename>runtime(?:-es(?:2015|5))?.[\da-z]*\.js)"(?<moduleAttribute>\s(?:nomodule|type="module"))?\scrossorigin="anonymous"\sintegrity="sha384-[\d+/A-Za-z]+=*"><\/script>/g,
-                        replacement: (_, filename, moduleAttribute) => {
-                            if (moduleAttribute === undefined) {
-                                return `<script>${fs.readFileSync(`build/analog4all-provider/browser/${filename}`)}</script>`; // eslint-disable-line node/no-sync
-                            }
-
-                            return `<script${moduleAttribute}>${fs.readFileSync(`build/analog4all-provider/browser/${filename}`)}</script>`; // eslint-disable-line node/no-sync
                         }
                     }
                 ]
