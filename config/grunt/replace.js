@@ -1,7 +1,6 @@
 const cspBuilder = require('content-security-policy-builder');
 const cspProductionConfig = require('../csp/production');
 const crypto = require('crypto');
-const { dirname, relative } = require('path');
 const fs = require('fs');
 
 // eslint-disable-next-line padding-line-between-statements
@@ -19,47 +18,6 @@ const computeHashOfString = (string, algorithm, encoding) => {
 
 module.exports = (grunt) => {
     return {
-        'assets': {
-            files: {
-                './': [
-                    'build/analog4all-provider/browser/index.html',
-                    'build/analog4all-provider/browser/*.css',
-                    'build/analog4all-provider/browser/*.js'
-                ]
-            },
-            options: {
-                patterns: [
-                    {
-                        match: /assets\/(?<filename>[\da-z-]+)\.(?<extension>ico|jpg|png)/g,
-                        replacement: (_1, filename, extension, _2, _3, _4, source) => {
-                            const cwd = 'build/analog4all-provider';
-
-                            if (grunt.file.exists(`${cwd}/assets/${filename}.${extension}`)) {
-                                const hash = computeHashOfFile(`${cwd}/assets/${filename}.${extension}`, 'sha1', 'hex').slice(0, 16);
-
-                                grunt.file.copy(`${cwd}/assets/${filename}.${extension}`, `${cwd}/assets/${filename}.${hash}.${extension}`);
-                                grunt.file.delete(`${cwd}/assets/${filename}.${extension}`);
-
-                                if (source.endsWith('.css')) {
-                                    return relative(dirname(source), `${cwd}/assets/${filename}.${hash}.${extension}`);
-                                }
-
-                                return `assets/${filename}.${hash}.${extension}`;
-                            }
-
-                            if (source.endsWith('.css')) {
-                                return relative(
-                                    dirname(source),
-                                    `${cwd}/${grunt.file.expand({ cwd, ext: extension }, `assets/${filename}.*`)[0]}`
-                                );
-                            }
-
-                            return `${grunt.file.expand({ cwd, ext: extension }, `assets/${filename}.*`)[0]}`;
-                        }
-                    }
-                ]
-            }
-        },
         'csp-production': {
             files: {
                 'build/analog4all-provider/browser/index.html': ['build/analog4all-provider/browser/index.html']
