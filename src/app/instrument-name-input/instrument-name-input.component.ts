@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-instrument-name-input',
+    standalone: false,
     styleUrls: ['./instrument-name-input.component.scss'],
     templateUrl: './instrument-name-input.component.html'
 })

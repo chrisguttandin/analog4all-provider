@@ -19,6 +19,7 @@ import { TAppState, TInstrument, TMidiConnection, createInstrumentByIdSelector, 
 // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
 @Component({
     selector: 'anp-midi-connection',
+    standalone: false,
     styleUrls: ['./midi-connection.component.scss'],
     templateUrl: './midi-connection.component.html'
 })
