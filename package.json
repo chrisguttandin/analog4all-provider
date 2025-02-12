@@ -40,7 +40,7 @@
     "devDependencies": {
         "@angular-devkit/build-angular": "^19.1.5",
         "@angular-eslint/builder": "^19.0.2",
-        "@angular/cli": "^19.1.5",
+        "@angular/cli": "^19.1.6",
         "@angular/compiler-cli": "^19.1.4",
         "@commitlint/cli": "^19.7.1",
         "@commitlint/config-angular": "^19.7.1",
