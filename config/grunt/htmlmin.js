@@ -5,13 +5,14 @@ module.exports = {
                 cwd: 'build/analog4all-provider/browser',
                 dest: 'build/analog4all-provider/browser',
                 expand: true,
-                src: ['**/*.html']
+                src: ['**/404.html']
             }
         ],
         options: {
             caseSensitive: true,
             collapseBooleanAttributes: true,
             collapseWhitespace: true,
+            minifyCSS: true,
             removeComments: true
         }
     }
