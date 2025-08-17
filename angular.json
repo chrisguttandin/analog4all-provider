@@ -124,23 +124,37 @@
             "inlineTemplate": false,
             "prefix": "anp",
             "skipTests": true,
-            "style": "scss"
+            "style": "scss",
+            "type": "component"
         },
         "@schematics/angular:directive": {
             "prefix": "anp",
-            "skipTests": true
+            "skipTests": true,
+            "type": "directive"
+        },
+        "@schematics/angular:guard": {
+            "typeSeparator": "."
+        },
+        "@schematics/angular:interceptor": {
+            "typeSeparator": "."
         },
         "@schematics/angular:interface": {
             "prefix": "I"
         },
         "@schematics/angular:module": {
-            "skipTests": true
+            "skipTests": true,
+            "typeSeparator": "."
         },
         "@schematics/angular:pipe": {
-            "skipTests": true
+            "skipTests": true,
+            "typeSeparator": "."
+        },
+        "@schematics/angular:resolver": {
+            "typeSeparator": "."
         },
         "@schematics/angular:service": {
-            "skipTests": true
+            "skipTests": true,
+            "type": "service"
         }
     },
     "version": 1
