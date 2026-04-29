@@ -4,23 +4,19 @@
     [name]="midiConnection.name"
     (nameChange)="updateInstrumentName($event)"
 ></anp-instrument-name-input>
-<anp-source-id-select
-    [sourceId]="midiConnection.sourceId"
-    (sourceIdChange)="updateSourceId($event)"
-></anp-source-id-select>
-<anp-description-input
-    [description]="midiConnection.description"
-    (descriptionChange)="updateDescription($event)"
-></anp-description-input>
+<anp-source-id-select [sourceId]="midiConnection.sourceId" (sourceIdChange)="updateSourceId($event)"></anp-source-id-select>
+<anp-description-input [description]="midiConnection.description" (descriptionChange)="updateDescription($event)"></anp-description-input>
 <anp-sound-cloud-username-input
     [soundCloudUsername]="midiConnection.soundCloudUsername"
     (soundCloudUsernameChange)="updateSoundCloudUsername($event)"
 ></anp-sound-cloud-username-input>
-<anp-gearogs-slug-input
-    [gearogsSlug]="midiConnection.gearogsSlug"
-    (gearogsSlugChange)="updateGearogsSlug($event)"
-></anp-gearogs-slug-input>
-<button *ngIf="!isRegistered" (click)="register()" type="button">register device</button>
-<button *ngIf="isRegistered" (click)="deregister()" type="button">deregister device</button>
+<anp-gearogs-slug-input [gearogsSlug]="midiConnection.gearogsSlug" (gearogsSlugChange)="updateGearogsSlug($event)"></anp-gearogs-slug-input>
+@if (isRegistered) {
+    <button (click)="deregister()" type="button">deregister device</button>
+} @else {
+    <button (click)="register()" type="button">register device</button>
+}
 <button (click)="test()" type="button">test device by recording a scale</button>
-<button *ngIf="isRegistered" (click)="sample()" type="button">record a middle c (#60/C3)</button>
+@if (isRegistered) {
+    <button (click)="sample()" type="button">record a middle c (#60/C3)</button>
+}

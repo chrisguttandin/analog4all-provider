@@ -3,6 +3,9 @@
     <hr />
 </header>
 <main>
-    <anp-local-registry *ngIf="isSupported"></anp-local-registry>
-    <p *ngIf="!isSupported">Sorry, your browser is not supported. :-(</p>
+    @if (isSupported) {
+        <anp-local-registry></anp-local-registry>
+    } @else {
+        <p>Sorry, your browser is not supported. :-(</p>
+    }
 </main>
