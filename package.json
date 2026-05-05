@@ -102,7 +102,6 @@
         "hint": "^7.1.13",
         "htmlhint": "^1.9.2",
         "husky": "^9.1.7",
-        "karma-jasmine-html-reporter": "~2.2.0",
         "karma-sauce-launcher": "^4.3.6",
         "lint-staged": "^16.4.0",
         "load-grunt-config": "^4.0.1",
