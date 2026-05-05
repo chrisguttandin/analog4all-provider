@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { watchMidiOutputs } from '../../../../src/app/store/actions';
 
 describe('midiOutputs actions', () => {

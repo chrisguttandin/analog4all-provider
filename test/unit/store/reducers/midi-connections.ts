@@ -1,4 +1,5 @@
 import deepFreeze from 'deep-freeze-strict';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { INITIAL_STATE, midiConnectionsReducer } from '../../../../src/app/store/reducers/midi-connections';
 import { TMidiConnection, TStoreAction } from '../../../../src/app/store/types';
 

@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { mergeMidiConnections, updateMidiConnection } from '../../../../src/app/store/actions';
 
 describe('midiConnections actions', () => {
