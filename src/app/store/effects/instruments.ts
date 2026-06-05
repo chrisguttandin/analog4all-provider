@@ -16,7 +16,6 @@ import { InstrumentService } from '../services';
     providedIn: 'root'
 })
 export class InstrumentsEffects {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public deleteInstrument$ = createEffect(() =>
         this._actions$.pipe(
             pluckPayloadOfType(deleteInstrument),
@@ -24,7 +23,6 @@ export class InstrumentsEffects {
         )
     );
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public patchInstrument$ = createEffect(() =>
         this._actions$.pipe(
             pluckPayloadOfType(patchInstrument),
@@ -32,11 +30,12 @@ export class InstrumentsEffects {
         )
     );
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public removeInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(deleteInstrumentSuccess), map(removeInstrument)));
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public updateInstrument$ = createEffect(() => this._actions$.pipe(pluckPayloadOfType(patchInstrumentSuccess), map(updateInstrument)));
 
-    constructor(private _actions$: Actions, private _instrumentService: InstrumentService) {}
+    constructor(
+        private _actions$: Actions,
+        private _instrumentService: InstrumentService
+    ) {}
 }

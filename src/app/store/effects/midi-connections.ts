@@ -11,7 +11,6 @@ import { TAppState, TInstrument, TMidiConnection } from '../types';
     providedIn: 'root'
 })
 export class MidiConnectionsEffects {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public deleteInstruments$ = createEffect(() =>
         this._actions$.pipe(
             ofType(updateMidiConnection),
@@ -41,7 +40,6 @@ export class MidiConnectionsEffects {
         )
     );
 
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public patchInstrument$ = createEffect(() =>
         this._actions$.pipe(
             pluckPayloadOfType(updateMidiConnection),
@@ -73,5 +71,8 @@ export class MidiConnectionsEffects {
         )
     );
 
-    constructor(private _actions$: Actions, private _store: Store<TAppState>) {}
+    constructor(
+        private _actions$: Actions,
+        private _store: Store<TAppState>
+    ) {}
 }

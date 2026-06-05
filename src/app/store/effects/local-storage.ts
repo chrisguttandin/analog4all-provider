@@ -13,7 +13,6 @@ import { TAppState } from '../types';
 })
 export class LocalStorageEffects {
     public setMidiConnections$ = createEffect(
-        // eslint-disable-next-line unicorn/consistent-function-scoping
         () =>
             this._actions$.pipe(
                 ofType(mergeMidiConnections, updateMidiConnection),
@@ -34,7 +33,11 @@ export class LocalStorageEffects {
 
     private _window: null | Window;
 
-    constructor(private _actions$: Actions, private _store: Store<TAppState>, windowService: WindowService) {
+    constructor(
+        private _actions$: Actions,
+        private _store: Store<TAppState>,
+        windowService: WindowService
+    ) {
         this._window = windowService.nativeWindow;
     }
 }

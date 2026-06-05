@@ -14,6 +14,6 @@ export class DownloadingService {
 
         document.body.appendChild($link);
         $link.click();
-        document.body.removeChild($link);
+        $link.remove();
     }
 }

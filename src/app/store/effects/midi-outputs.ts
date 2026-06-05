@@ -11,7 +11,6 @@ import { TAppState } from '../types';
     providedIn: 'root'
 })
 export class MidiOutputsEffects {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     public mergeMidiConnections$ = createEffect(() =>
         this._actions$.pipe(
             ofType(watchMidiOutputs),
@@ -38,5 +37,9 @@ export class MidiOutputsEffects {
         )
     );
 
-    constructor(private _actions$: Actions, private _midiOutputsService: MidiOutputsService, private _store: Store<TAppState>) {}
+    constructor(
+        private _actions$: Actions,
+        private _midiOutputsService: MidiOutputsService,
+        private _store: Store<TAppState>
+    ) {}
 }
