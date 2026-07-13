@@ -81,7 +81,7 @@
         "@hint/parser-javascript": "^3.1.25",
         "@hint/parser-manifest": "^2.3.20",
         "@ngrx/store-devtools": "^21.1.1",
-        "@playwright/test": "^1.61.0",
+        "@playwright/test": "^1.61.1",
         "@types/deep-freeze-strict": "^1.1.2",
         "@types/webmidi": "^2.1.0",
         "@vitest/browser-webdriverio": "^4.1.9",
