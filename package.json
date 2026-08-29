@@ -87,7 +87,7 @@
         "@playwright/test": "^1.62.1",
         "@types/deep-freeze-strict": "^1.1.2",
         "@types/webmidi": "^2.1.0",
-        "@vitest/browser-webdriverio": "^4.1.10",
+        "@vitest/browser-webdriverio": "^4.1.11",
         "angular-eslint": "^21.4.0",
         "axe-core": "^4.13.0",
         "bundle-buddy": "^0.2.2",
